@@ -1,0 +1,34 @@
+{
+  "name": "agentforge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-native SaaS boilerplate for multi-tenant AI applications",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "type-check": "pnpm -r type-check",
+    "go:build": "cd packages/worker && go build ./cmd/worker",
+    "go:test": "cd packages/worker && go test ./...",
+    "go:dev": "cd packages/worker && air -c .air.toml",
+    "go:lint": "cd packages/worker && go vet ./...",
+    "db:generate": "supabase gen types typescript --local > packages/shared/types/database.ts",
+    "db:reset": "supabase db reset"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "keywords": [
+    "ai",
+    "mcp",
+    "multi-tenant",
+    "saas",
+    "boilerplate",
+    "nextjs",
+    "go"
+  ],
+  "license": "MIT"
+}
