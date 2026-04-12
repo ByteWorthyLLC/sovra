@@ -23,6 +23,14 @@
 
 **Goal:** Set up project structure, database, and local development environment
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Fix scaffold extensions + monorepo setup (shared package, Makefile, env)
+- [ ] 01-02-PLAN.md — Go worker service (Gin health, gRPC stub, pgxpool, Docker)
+- [ ] 01-03-PLAN.md — Supabase schema + migrations (14 tables, RLS, pgvector, indexes)
+- [ ] 01-04-PLAN.md — Docker Compose (dev + prod) + Vitest testing setup + quality gate
+
 **Requirements:**
 - FOUN-01: Monorepo structure with pnpm workspaces
 - FOUN-02: Next.js 15 with App Router, TypeScript, Tailwind
@@ -244,4 +252,4 @@
 
 ---
 *Roadmap created: 2026-04-11*
-*Last updated: 2026-04-11 after initial creation*
+*Last updated: 2026-04-11 after Phase 1 planning*
