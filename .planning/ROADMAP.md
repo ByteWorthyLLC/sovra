@@ -184,6 +184,17 @@ Plans:
 
 **Goal:** Build workspace collaboration and advanced memory
 
+**Plans:** 7 plans
+
+Plans:
+- [ ] 05-01-PLAN.md - DB migration (workspace_agents, memory_strategy, sequential mode) + workspace types/actions/queries + shared memory
+- [ ] 05-02-PLAN.md - Socket.IO server in Go worker + broadcast HTTP endpoint + room management
+- [ ] 05-03-PLAN.md - Memory strategies (conversation, summary, vector, hybrid) + context compression
+- [ ] 05-04-PLAN.md - Workspace orchestrator (5 collaboration modes) + conflict resolution + run API route
+- [ ] 05-05-PLAN.md - Socket.IO client hook + zustand store + sidebar nav + workspace list page + create dialog
+- [ ] 05-06-PLAN.md - Workspace detail page + activity feed + agent panel + shared memory panel + settings sheet
+- [ ] 05-07-PLAN.md - Schema push + full test suite + build verification + human UI checkpoint
+
 **Requirements:**
 - MUL-01: Workspace creation and management
 - MUL-02: Agent collaboration modes
@@ -275,4 +286,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-04-11*
-*Last updated: 2026-04-12 after Phase 4 planning*
+*Last updated: 2026-04-12 after Phase 5 planning*
