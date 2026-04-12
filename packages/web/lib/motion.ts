@@ -35,4 +35,21 @@ export const VARIANTS = {
     exit: { opacity: 0, scale: 0.95, y: -4 },
     transition: TRANSITIONS.springFast,
   },
+  messageEnter: {
+    initial: { opacity: 0, y: 8 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.18, ease },
+  },
+  slideInRight: {
+    initial: { x: '100%', opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    exit: { x: '100%', opacity: 0 },
+    transition: TRANSITIONS.spring,
+  },
+  jumpToLatest: {
+    initial: { opacity: 0, y: 8, scale: 0.95 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: 8, scale: 0.95 },
+    transition: TRANSITIONS.springFast,
+  },
 }

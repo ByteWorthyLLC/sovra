@@ -92,3 +92,19 @@
     border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.streaming-cursor {
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+.agent-status-running {
+  animation: statusPulse 2s ease-in-out infinite;
+}
