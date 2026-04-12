@@ -1,6 +1,6 @@
-# Pitfalls Research — ByteSwarm
+# Pitfalls Research - ByteSwarm
 
-**Research Type:** Project Research — Pitfalls dimension
+**Research Type:** Project Research - Pitfalls dimension
 **Date:** 2026-04-11
 
 ## Common Mistakes and How to Avoid Them

@@ -28,10 +28,10 @@ key_files:
     - .gitignore
     - packages/web/package.json
 decisions:
-  - "@vercel/ai does not exist on npm — correct package is `ai` (Vercel AI SDK). Fixed during Task 2."
+  - "@vercel/ai does not exist on npm - correct package is `ai` (Vercel AI SDK). Fixed during Task 2."
   - "pnpm-workspace.yaml uses explicit package listing (not glob) to exclude packages/worker Go module"
   - "next.config.ts uses ESM export default instead of CommonJS module.exports"
-  - "database.ts is a stub — will be replaced by supabase gen types in Plan 03"
+  - "database.ts is a stub - will be replaced by supabase gen types in Plan 03"
 metrics:
   duration: "~8 minutes"
   completed: "2026-04-11"
@@ -43,7 +43,7 @@ metrics:
 
 # Phase 1 Plan 1: Fix Scaffold Extensions and Set Up Shared Package Summary
 
-pnpm monorepo with corrected .tsx extensions, @byteswarm/shared types package, Go Makefile, and env template — TypeScript compiles clean.
+pnpm monorepo with corrected .tsx extensions, @byteswarm/shared types package, Go Makefile, and env template - TypeScript compiles clean.
 
 ## What Was Built
 
@@ -69,21 +69,21 @@ Transformed a broken scaffold (`.cts`/`.ctsx` extensions incompatible with JSX) 
 
 **2. [Rule 1 - Bug] badge.tsx had CSS typo `border--transparent`**
 - **Found during:** Task 1 (reviewing scaffold content)
-- **Issue:** Original `badge.ctsx` had `border--transparent` (double dash) in the default variant — invalid CSS class.
+- **Issue:** Original `badge.ctsx` had `border--transparent` (double dash) in the default variant - invalid CSS class.
 - **Fix:** Corrected to `border-transparent`
 - **Files modified:** `packages/web/components/ui/badge.tsx`
 - **Commit:** a0893bc
 
 **3. [Rule 1 - Bug] page.tsx had unescaped apostrophe in JSX**
 - **Found during:** Task 1 (reviewing scaffold content)
-- **Issue:** `What's Included` heading used a raw apostrophe in JSX text — causes React ESLint warning and potential build issues.
+- **Issue:** `What's Included` heading used a raw apostrophe in JSX text - causes React ESLint warning and potential build issues.
 - **Fix:** Replaced with `What&apos;s Included`
 - **Files modified:** `packages/web/app/page.tsx`
 - **Commit:** a0893bc
 
 **4. [Rule 1 - Bug] page.tsx had `' components'` directory with leading space**
 - **Found during:** Task 1
-- **Issue:** Main repo had spurious `' components'` directory alongside `components/`. In the worktree, this was never created — the correct `components/` structure was created directly.
+- **Issue:** Main repo had spurious `' components'` directory alongside `components/`. In the worktree, this was never created - the correct `components/` structure was created directly.
 - **Fix:** Directory never created in worktree; only correct paths used.
 - **Commit:** a0893bc
 
@@ -91,7 +91,7 @@ Transformed a broken scaffold (`.cts`/`.ctsx` extensions incompatible with JSX) 
 
 | File | Stub | Reason |
 |------|------|--------|
-| `packages/shared/types/database.ts` | `Tables: Record<string, never>` | Intentional — replaced by `supabase gen types` in Plan 03 after migrations are applied |
+| `packages/shared/types/database.ts` | `Tables: Record<string, never>` | Intentional - replaced by `supabase gen types` in Plan 03 after migrations are applied |
 
 ## Threat Surface
 

@@ -22,20 +22,20 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
-**Core value:** Zero-to-Production AI Apps in Hours — Pre-configured with MCP, vector DB, multi-tenant, and multi-agent collaboration. Self-hosted with multi-cloud deploy.
+**Core value:** Zero-to-Production AI Apps in Hours - Pre-configured with MCP, vector DB, multi-tenant, and multi-agent collaboration. Self-hosted with multi-cloud deploy.
 
-**Current focus:** Phase 01 — foundation
+**Current focus:** Phase 01 - foundation
 
 ## Phase Status
 
 | Phase | Status | Start | End |
 |-------|--------|-------|-----|
-| 1: Foundation | Pending | — | — |
-| 2: Core Infrastructure | Pending | — | — |
-| 3: Agent Core | Pending | — | — |
-| 4: AI Features | Pending | — | — |
-| 5: Multi-Agent | Pending | — | — |
-| 6: Production Ready | Pending | — | — |
+| 1: Foundation | Pending | - | - |
+| 2: Core Infrastructure | Pending | - | - |
+| 3: Agent Core | Pending | - | - |
+| 4: AI Features | Pending | - | - |
+| 5: Multi-Agent | Pending | - | - |
+| 6: Production Ready | Pending | - | - |
 
 ## Active Work
 
@@ -45,7 +45,7 @@ Currently initializing. First phase not yet started.
 
 - **Cloud targets:** Railway, AWS, GCP (all equal priority)
 - **Self-hosted:** Yes, with all-in-one Docker
-- **Security:** Extremely hardened — no shortcuts
+- **Security:** Extremely hardened - no shortcuts
 - **License:** MIT (open source)
 
 ## Links

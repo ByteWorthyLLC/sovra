@@ -1,4 +1,4 @@
-# Phase 2: Core Infrastructure — Research
+# Phase 2: Core Infrastructure - Research
 
 **Researched:** 2026-04-11
 **Domain:** Supabase Auth, Next.js middleware, multi-tenant RLS, RBAC schema design
@@ -11,7 +11,7 @@
 
 ### Locked Decisions
 
-1. **Auth Provider:** Supabase Auth native behind `AuthAdapter` interface (swappable). No custom JWT hooks — keeps free-tier compatible.
+1. **Auth Provider:** Supabase Auth native behind `AuthAdapter` interface (swappable). No custom JWT hooks - keeps free-tier compatible.
 2. **Routing Strategy:** All three via config (`TENANT_RESOLUTION_STRATEGY` env var). Default: `path`. Subdomain and header are opt-in.
    - Path: `/t/{slug}/dashboard`
    - Subdomain: `{slug}.byteswarm.dev`
@@ -22,7 +22,7 @@
 
 ### Claude's Discretion
 
-None specified — all major decisions are locked.
+None specified - all major decisions are locked.
 
 ### Deferred Ideas (OUT OF SCOPE)
 
@@ -37,13 +37,13 @@ None specified for this phase.
 | ID | Description | Research Support |
 |----|-------------|------------------|
 | AUTH-01 | Email/password signup and login | Supabase `signUp`/`signInWithPassword` via `AuthAdapter` |
-| AUTH-02 | Magic link authentication | Supabase `signInWithOtp` with `type: 'magiclink'` — PKCE callback route required |
-| AUTH-03 | OAuth providers (Google, GitHub) | Supabase `signInWithOAuth` — dashboard config + callback route |
+| AUTH-02 | Magic link authentication | Supabase `signInWithOtp` with `type: 'magiclink'` - PKCE callback route required |
+| AUTH-03 | OAuth providers (Google, GitHub) | Supabase `signInWithOAuth` - dashboard config + callback route |
 | AUTH-04 | Session management with JWT | `@supabase/ssr` cookies, `getClaims()` in middleware, refresh handled automatically |
 | AUTH-05 | Password reset flow | Supabase `resetPasswordForEmail` + `updateUser` in callback |
 | AUTH-06 | Email verification | Supabase auto-sends on signup; callback route at `/auth/callback` handles code exchange |
 | TEN-01 | Tenant creation and management | `tenants` table exists from Phase 1; need tenant creation flow + `TenantResolver` interface |
-| TEN-02 | Tenant-level RLS policies | Phase 1 RLS uses `get_current_tenant_id()` helper — needs migration to RBAC-aware version |
+| TEN-02 | Tenant-level RLS policies | Phase 1 RLS uses `get_current_tenant_id()` helper - needs migration to RBAC-aware version |
 | TEN-03 | Tenant context in all queries | `TenantContext` React context + server-side tenant resolution in middleware |
 | TEN-04 | Subdomain-based tenant identification | `SubdomainResolver` implementation using `request.headers.get('host')` in middleware |
 | RBAC-01 | Role definitions (owner, admin, member, viewer) | New `roles` table migration with seeded defaults |
@@ -56,11 +56,11 @@ None specified for this phase.
 
 ## Summary
 
-This phase builds auth, multi-tenancy, and RBAC on top of the Phase 1 schema foundation. The Phase 1 migration already created `tenants`, `users`, `tenant_users` (with a text `role` column), and `get_current_tenant_id()` — these need to be extended, not replaced.
+This phase builds auth, multi-tenancy, and RBAC on top of the Phase 1 schema foundation. The Phase 1 migration already created `tenants`, `users`, `tenant_users` (with a text `role` column), and `get_current_tenant_id()` - these need to be extended, not replaced.
 
 The core challenge is that `@supabase/ssr` is at `0.10.2` (published 2026-04-09) while the project pins `^0.5.2`. The API changed: `getClaims()` now replaces `getUser()` for server-side auth checks, and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is the new env var name alongside the legacy `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Both are supported but new projects should use the publishable key form.
 
-Multi-tenant routing in middleware must run before auth checks, so the middleware has two responsibilities: (1) resolve tenant from request, (2) refresh auth session. The `TenantResolver` interface abstracts all three strategies (path/subdomain/header). The RBAC system must be fully DB-driven per-tenant — no hardcoded permission enums.
+Multi-tenant routing in middleware must run before auth checks, so the middleware has two responsibilities: (1) resolve tenant from request, (2) refresh auth session. The `TenantResolver` interface abstracts all three strategies (path/subdomain/header). The RBAC system must be fully DB-driven per-tenant - no hardcoded permission enums.
 
 **Primary recommendation:** Upgrade `@supabase/ssr` to `^0.10.2` in the migration and use `getClaims()` everywhere server-side. The custom access token hook (for embedding tenant_id in JWT) is available on free tier but is explicitly excluded by the locked decision (no custom JWT hooks). Use the existing `get_current_tenant_id()` DB function approach instead.
 
@@ -72,9 +72,9 @@ Multi-tenant routing in middleware must run before auth checks, so the middlewar
 | Library | Version | Purpose | Why Standard |
 |---------|---------|---------|--------------|
 | `@supabase/ssr` | `0.10.2` | Server-side Supabase client for Next.js | Official Supabase SSR package, replaces deprecated auth-helpers |
-| `@supabase/supabase-js` | `2.103.0` | Supabase JS client | Core client — already in project |
-| `next` | `15.x` (project pinned) | App Router, middleware, Server Actions | Already in project — do NOT upgrade mid-phase |
-| `zod` | `3.x` (project pinned) | Input validation for auth forms | Already installed. Zod 4.x is latest but breaking — stay on v3 |
+| `@supabase/supabase-js` | `2.103.0` | Supabase JS client | Core client - already in project |
+| `next` | `15.x` (project pinned) | App Router, middleware, Server Actions | Already in project - do NOT upgrade mid-phase |
+| `zod` | `3.x` (project pinned) | Input validation for auth forms | Already installed. Zod 4.x is latest but breaking - stay on v3 |
 
 **Version verification:** [VERIFIED: npm registry, 2026-04-09]
 
@@ -84,12 +84,12 @@ Multi-tenant routing in middleware must run before auth checks, so the middlewar
 | Library | Version | Purpose | When to Use |
 |---------|---------|---------|-------------|
 | `zod` | `^3.24.1` | Form validation schemas | Auth forms (signup, login, invite) |
-| `crypto` (Node built-in) | — | Invite token generation | `randomBytes(32).toString('hex')` for secure invite tokens |
+| `crypto` (Node built-in) | - | Invite token generation | `randomBytes(32).toString('hex')` for secure invite tokens |
 
 ### Alternatives Considered
 | Instead of | Could Use | Tradeoff |
 |------------|-----------|----------|
-| Supabase Auth (behind AuthAdapter) | NextAuth.js, Clerk | AuthAdapter interface makes these swappable — default is Supabase because zero config with existing setup |
+| Supabase Auth (behind AuthAdapter) | NextAuth.js, Clerk | AuthAdapter interface makes these swappable - default is Supabase because zero config with existing setup |
 | DB-based permission check | JWT custom claims | Custom access token hook adds tenant_id to JWT (free tier), but locked decision forbids it to stay free-tier safe without assumptions |
 | Path-based routing (default) | Subdomain routing | Subdomain requires DNS + wildcard certs for self-hosters; path works on any host |
 
@@ -160,7 +160,7 @@ packages/shared/types/
 
 **What:** A 5-method interface wrapping any auth provider so the implementation is swappable.
 
-**When to use:** All auth operations go through this interface — never call Supabase directly from components.
+**When to use:** All auth operations go through this interface - never call Supabase directly from components.
 
 ```typescript
 // Source: CONTEXT.md architecture decision + standard adapter pattern
@@ -200,7 +200,7 @@ export interface TenantResolver {
 
 **Matcher config:**
 ```typescript
-// Source: [ASSUMED] — standard Next.js middleware matcher pattern
+// Source: [ASSUMED] - standard Next.js middleware matcher pattern
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
@@ -210,12 +210,12 @@ export const config = {
 
 ### Pattern 3: Supabase SSR Client Factories
 
-**What:** Two factories — one for browser (singleton), one for server (per-request).
+**What:** Two factories - one for browser (singleton), one for server (per-request).
 
 ```typescript
 // Source: [CITED: supabase.com/docs/guides/auth/server-side/creating-a-client]
 
-// lib/auth/client.ts — browser singleton
+// lib/auth/client.ts - browser singleton
 import { createBrowserClient } from '@supabase/ssr'
 export function createSupabaseBrowserClient() {
   return createBrowserClient(
@@ -224,7 +224,7 @@ export function createSupabaseBrowserClient() {
   )
 }
 
-// lib/auth/server.ts — per-request factory
+// lib/auth/server.ts - per-request factory
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 export async function createSupabaseServerClient() {
@@ -330,14 +330,14 @@ const token = randomBytes(32).toString('hex')  // 64-char hex string
 | Form validation | Custom validators | `zod` schemas | Type-safe, composable, reusable across client/server |
 | Secure token generation | `Math.random()` | Node `crypto.randomBytes(32)` | Cryptographically secure, 256-bit entropy |
 
-**Key insight:** Supabase Auth handles the entire auth lifecycle. The `AuthAdapter` wraps it — never bypass it to call Supabase directly.
+**Key insight:** Supabase Auth handles the entire auth lifecycle. The `AuthAdapter` wraps it - never bypass it to call Supabase directly.
 
 ---
 
 ## Common Pitfalls
 
 ### Pitfall 1: `getSession()` vs `getClaims()` on Server
-**What goes wrong:** Using `supabase.auth.getSession()` in Server Components or middleware returns an unvalidated session from cookies — can be forged.
+**What goes wrong:** Using `supabase.auth.getSession()` in Server Components or middleware returns an unvalidated session from cookies - can be forged.
 **Why it happens:** Old tutorials and pre-`@supabase/ssr` 0.6 code used `getSession()`.
 **How to avoid:** Always use `supabase.auth.getClaims()` for server-side auth checks. It validates JWT signature against Supabase's published public keys.
 **Warning signs:** Any server-side code calling `getSession()` is a security bug. [CITED: supabase.com/docs/guides/auth/server-side/creating-a-client]
@@ -385,7 +385,7 @@ const token = randomBytes(32).toString('hex')  // 64-char hex string
 
 ### Middleware (combined tenant + auth)
 ```typescript
-// Source: [ASSUMED from official patterns — see Supabase SSR + Next.js middleware docs]
+// Source: [ASSUMED from official patterns - see Supabase SSR + Next.js middleware docs]
 // packages/web/middleware.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
@@ -443,7 +443,7 @@ export const config = {
 
 ### Path-Based Tenant Resolver
 ```typescript
-// Source: [ASSUMED] — CONTEXT.md spec for path routing
+// Source: [ASSUMED] - CONTEXT.md spec for path routing
 // lib/tenant/path-resolver.ts
 export class PathTenantResolver implements TenantResolver {
   resolve(request: NextRequest): string | null {
@@ -529,7 +529,7 @@ alter table tenant_users add column role_id uuid references roles(id);
 
 ### Default Role/Permission Seed Data
 ```typescript
-// Source: [ASSUMED from CONTEXT.md spec] — constants.ts
+// Source: [ASSUMED from CONTEXT.md spec] - constants.ts
 export const DEFAULT_ROLES = ['owner', 'admin', 'member', 'viewer'] as const
 
 export const DEFAULT_PERMISSIONS = [
@@ -574,7 +574,7 @@ export const DEFAULT_PERMISSIONS = [
 **Deprecated/outdated:**
 - `@supabase/auth-helpers-nextjs`: Do NOT install. Use `@supabase/ssr`.
 - `createMiddlewareClient` (from auth-helpers): Does not exist in `@supabase/ssr`. Use `createServerClient` with manual cookie wiring.
-- `getSession()` in server code: Security risk — use `getClaims()`. [CITED: Supabase docs]
+- `getSession()` in server code: Security risk - use `getClaims()`. [CITED: Supabase docs]
 
 ---
 
@@ -583,11 +583,11 @@ export const DEFAULT_PERMISSIONS = [
 | # | Claim | Section | Risk if Wrong |
 |---|-------|---------|---------------|
 | A1 | `getClaims()` API exists in `@supabase/ssr` ^0.10.2 | Standard Stack, Code Examples | If API doesn't exist, fall back to `getUser()` (makes network call to Supabase on each request) |
-| A2 | `crypto.randomBytes` available in Next.js API routes without polyfill | Code Examples (invite tokens) | May need `import { randomBytes } from 'crypto'` — works in Node runtime but not Edge |
+| A2 | `crypto.randomBytes` available in Next.js API routes without polyfill | Code Examples (invite tokens) | May need `import { randomBytes } from 'crypto'` - works in Node runtime but not Edge |
 | A3 | `roles` table `unique(tenant_id, name)` constraint sufficient | Architecture Patterns | If tenants need case-insensitive uniqueness, add a lowercase check constraint |
-| A4 | Invite token route at `/invite/[token]` works without tenant context in URL | File Structure | Path-based tenants require `/t/[slug]/invite/[token]` instead — but invitation flow should work pre-tenant-context |
+| A4 | Invite token route at `/invite/[token]` works without tenant context in URL | File Structure | Path-based tenants require `/t/[slug]/invite/[token]` instead - but invitation flow should work pre-tenant-context |
 | A5 | `tenant_users.role` text column can be kept alongside new `role_id` FK temporarily | Common Pitfalls | If DB has production data before Phase 2, migration must backfill `role_id` before adding NOT NULL |
-| A6 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` (not new publishable key) is correct for self-hosted Supabase | Standard Stack | Self-hosted Supabase may not support publishable key format yet — verify against Supabase CLI version `2.84.2` |
+| A6 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` (not new publishable key) is correct for self-hosted Supabase | Standard Stack | Self-hosted Supabase may not support publishable key format yet - verify against Supabase CLI version `2.84.2` |
 
 ---
 
@@ -596,7 +596,7 @@ export const DEFAULT_PERMISSIONS = [
 1. **`getClaims()` exact API signature in `@supabase/ssr` 0.10.2**
    - What we know: Documented as replacement for `getUser()`, validates JWT locally
    - What's unclear: Returns `{ data: { claims }, error }` or different shape? Middleware example above may need adjustment.
-   - Recommendation: Check TypeScript types after `npm install @supabase/ssr@^0.10.2` — the planner should add a Wave 0 task to verify the API shape.
+   - Recommendation: Check TypeScript types after `npm install @supabase/ssr@^0.10.2` - the planner should add a Wave 0 task to verify the API shape.
 
 2. **Self-hosted Supabase and publishable key format**
    - What we know: Supabase is redesigning keys; new format is `sb_publishable_xxx`
@@ -604,7 +604,7 @@ export const DEFAULT_PERMISSIONS = [
    - Recommendation: Use `NEXT_PUBLIC_SUPABASE_ANON_KEY` for now. Document that `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` may be needed for hosted Supabase projects.
 
 3. **`get_current_tenant_id()` with multi-tenant users**
-   - What we know: The Phase 1 helper returns `limit 1` — a user belonging to multiple tenants gets an arbitrary tenant
+   - What we know: The Phase 1 helper returns `limit 1` - a user belonging to multiple tenants gets an arbitrary tenant
    - What's unclear: Should the function accept a `tenant_id` parameter, or should RLS be bypassed via explicit `tenant_id` in queries?
    - Recommendation: The middleware-resolved `tenant_id` should be used in app queries explicitly. The `get_current_tenant_id()` function is a fallback for RLS policies only.
 
@@ -614,12 +614,12 @@ export const DEFAULT_PERMISSIONS = [
 
 | Dependency | Required By | Available | Version | Fallback |
 |------------|------------|-----------|---------|----------|
-| Supabase CLI | Migrations, local dev | ✓ | 2.84.2 | — |
+| Supabase CLI | Migrations, local dev | ✓ | 2.84.2 | - |
 | Node.js crypto | Invite token generation | ✓ | Built-in | `webcrypto` if Edge runtime |
-| `@supabase/ssr` 0.10.2 | Auth, session management | Needs upgrade (pinned 0.5.2) | Must install | — |
-| Google OAuth app | AUTH-03 (Google login) | Unknown — config in Google Cloud | — | Skip in local dev; docs explain setup |
-| GitHub OAuth app | AUTH-03 (GitHub login) | Unknown — config in GitHub | — | Skip in local dev; docs explain setup |
-| SMTP / email | AUTH-02, AUTH-05, AUTH-06, RBAC-04 (email invites) | Unknown — Supabase project config | — | Magic link + invites work via invite links without SMTP |
+| `@supabase/ssr` 0.10.2 | Auth, session management | Needs upgrade (pinned 0.5.2) | Must install | - |
+| Google OAuth app | AUTH-03 (Google login) | Unknown - config in Google Cloud | - | Skip in local dev; docs explain setup |
+| GitHub OAuth app | AUTH-03 (GitHub login) | Unknown - config in GitHub | - | Skip in local dev; docs explain setup |
+| SMTP / email | AUTH-02, AUTH-05, AUTH-06, RBAC-04 (email invites) | Unknown - Supabase project config | - | Magic link + invites work via invite links without SMTP |
 
 **Missing dependencies with no fallback:**
 - None that block core implementation. OAuth providers require external dashboard config but don't block local dev.
@@ -657,7 +657,7 @@ export const DEFAULT_PERMISSIONS = [
 | RBAC-03 | Route returns 403 without permission | unit (middleware mock) | `npm test -- middleware` | ❌ Wave 0 |
 | RBAC-04 | Invite token accepted, user added to tenant | unit | `npm test -- rbac/invitation` | ❌ Wave 0 |
 
-**Note:** Supabase DB calls must be mocked in unit tests — never hit real DB in test suite.
+**Note:** Supabase DB calls must be mocked in unit tests - never hit real DB in test suite.
 
 ### Sampling Rate
 - **Per task commit:** `cd packages/web && npm test`
@@ -665,16 +665,16 @@ export const DEFAULT_PERMISSIONS = [
 - **Phase gate:** Full suite green before `/gsd-verify-work`
 
 ### Wave 0 Gaps
-- [ ] `packages/web/src/__tests__/auth/adapter.test.ts` — covers AUTH-01..05
-- [ ] `packages/web/src/__tests__/auth/server.test.ts` — covers AUTH-04
-- [ ] `packages/web/src/__tests__/auth/callback.test.ts` — covers AUTH-06
-- [ ] `packages/web/src/__tests__/tenant/path-resolver.test.ts` — covers TEN-03 (path)
-- [ ] `packages/web/src/__tests__/tenant/subdomain-resolver.test.ts` — covers TEN-04
-- [ ] `packages/web/src/__tests__/tenant/context.test.tsx` — covers TEN-03
-- [ ] `packages/web/src/__tests__/rbac/checker.test.ts` — covers RBAC-01, RBAC-02
-- [ ] `packages/web/src/__tests__/rbac/invitation.test.ts` — covers RBAC-04
-- [ ] `packages/web/src/__tests__/middleware.test.ts` — covers AUTH-04, RBAC-03
-- [ ] Shared mock: `packages/web/src/__tests__/mocks/supabase.ts` — Supabase client mock
+- [ ] `packages/web/src/__tests__/auth/adapter.test.ts` - covers AUTH-01..05
+- [ ] `packages/web/src/__tests__/auth/server.test.ts` - covers AUTH-04
+- [ ] `packages/web/src/__tests__/auth/callback.test.ts` - covers AUTH-06
+- [ ] `packages/web/src/__tests__/tenant/path-resolver.test.ts` - covers TEN-03 (path)
+- [ ] `packages/web/src/__tests__/tenant/subdomain-resolver.test.ts` - covers TEN-04
+- [ ] `packages/web/src/__tests__/tenant/context.test.tsx` - covers TEN-03
+- [ ] `packages/web/src/__tests__/rbac/checker.test.ts` - covers RBAC-01, RBAC-02
+- [ ] `packages/web/src/__tests__/rbac/invitation.test.ts` - covers RBAC-04
+- [ ] `packages/web/src/__tests__/middleware.test.ts` - covers AUTH-04, RBAC-03
+- [ ] Shared mock: `packages/web/src/__tests__/mocks/supabase.ts` - Supabase client mock
 
 ---
 
@@ -688,7 +688,7 @@ export const DEFAULT_PERMISSIONS = [
 | V3 Session Management | yes | `@supabase/ssr` cookie-based sessions; `getClaims()` for validation; `Cache-Control: private, no-store` |
 | V4 Access Control | yes | `PermissionChecker` interface; RLS enforces tenant isolation at DB layer |
 | V5 Input Validation | yes | `zod` schemas on all auth forms and invite endpoints |
-| V6 Cryptography | yes | Supabase JWT (RS256); invite tokens via `crypto.randomBytes(32)` — never `Math.random()` |
+| V6 Cryptography | yes | Supabase JWT (RS256); invite tokens via `crypto.randomBytes(32)` - never `Math.random()` |
 
 ### Known Threat Patterns
 
@@ -707,15 +707,15 @@ export const DEFAULT_PERMISSIONS = [
 ## Sources
 
 ### Primary (HIGH confidence)
-- [supabase.com/docs/guides/auth/server-side/creating-a-client](https://supabase.com/docs/guides/auth/server-side/creating-a-client) — `createBrowserClient`, `createServerClient`, `getClaims()` vs `getSession()`
-- [supabase.com/docs/guides/auth/server-side/advanced-guide](https://supabase.com/docs/guides/auth/server-side/advanced-guide) — `Cache-Control: private, no-store` requirement
-- [supabase.com/docs/guides/auth/auth-hooks](https://supabase.com/docs/guides/auth/auth-hooks) — custom access token hook free tier availability
-- npm registry — `@supabase/ssr` 0.10.2 (2026-04-09), `@supabase/supabase-js` 2.103.0 (2026-04-09)
-- Existing Phase 1 migration `20260412004330_initial_schema.sql` — schema baseline verified
+- [supabase.com/docs/guides/auth/server-side/creating-a-client](https://supabase.com/docs/guides/auth/server-side/creating-a-client) - `createBrowserClient`, `createServerClient`, `getClaims()` vs `getSession()`
+- [supabase.com/docs/guides/auth/server-side/advanced-guide](https://supabase.com/docs/guides/auth/server-side/advanced-guide) - `Cache-Control: private, no-store` requirement
+- [supabase.com/docs/guides/auth/auth-hooks](https://supabase.com/docs/guides/auth/auth-hooks) - custom access token hook free tier availability
+- npm registry - `@supabase/ssr` 0.10.2 (2026-04-09), `@supabase/supabase-js` 2.103.0 (2026-04-09)
+- Existing Phase 1 migration `20260412004330_initial_schema.sql` - schema baseline verified
 
 ### Secondary (MEDIUM confidence)
-- [supabase.com/docs/guides/auth/social-login/auth-google](https://supabase.com/docs/guides/auth/social-login/auth-google) — Google OAuth callback URL pattern
-- [makerkit.dev/courses/nextjs-app-router/authentication](https://makerkit.dev/courses/nextjs-app-router/authentication) — callback route `exchangeCodeForSession` pattern
+- [supabase.com/docs/guides/auth/social-login/auth-google](https://supabase.com/docs/guides/auth/social-login/auth-google) - Google OAuth callback URL pattern
+- [makerkit.dev/courses/nextjs-app-router/authentication](https://makerkit.dev/courses/nextjs-app-router/authentication) - callback route `exchangeCodeForSession` pattern
 - WebSearch: Next.js 15 middleware patterns, subdomain routing patterns (multiple sources)
 
 ### Tertiary (LOW confidence)
@@ -726,10 +726,10 @@ export const DEFAULT_PERMISSIONS = [
 ## Metadata
 
 **Confidence breakdown:**
-- Standard stack: HIGH — verified against npm registry 2026-04-09
-- Architecture: HIGH — locked decisions from CONTEXT.md + verified Supabase SSR patterns
-- Pitfalls: HIGH — version mismatch verified (registry), security items cited from official docs
-- Code examples: MEDIUM — patterns verified from docs/community, exact API shapes flagged as open questions
+- Standard stack: HIGH - verified against npm registry 2026-04-09
+- Architecture: HIGH - locked decisions from CONTEXT.md + verified Supabase SSR patterns
+- Pitfalls: HIGH - version mismatch verified (registry), security items cited from official docs
+- Code examples: MEDIUM - patterns verified from docs/community, exact API shapes flagged as open questions
 
 **Research date:** 2026-04-11
-**Valid until:** 2026-05-11 (stable — Supabase SSR, Next.js 15 are stable releases)
+**Valid until:** 2026-05-11 (stable - Supabase SSR, Next.js 15 are stable releases)

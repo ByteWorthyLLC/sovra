@@ -20,33 +20,33 @@ export default function HomePage() {
   const features = [
     {
       icon: Bot,
-      title: 'MCP-Native',
-      description: 'Full Model Context Protocol client and server implementation with extensible tool registry.',
+      title: 'MCP-Native Agents',
+      description: 'Full Model Context Protocol client and server. Your agents use tools the way the ecosystem intended. Not a wrapper. Native.',
     },
     {
       icon: Database,
-      title: 'Vector Storage',
-      description: 'Built-in pgvector support for semantic search and AI-powered memory retrieval.',
+      title: 'Vector Search Built In',
+      description: 'pgvector inside your existing Postgres. Semantic search, hybrid search, tenant-scoped. No separate Pinecone bill.',
     },
     {
       icon: Lock,
-      title: 'Multi-Tenant Security',
-      description: 'Row-level security, RBAC, and tenant isolation enforced at the database level.',
+      title: 'Tenant Isolation at the Database',
+      description: 'Row-level security enforced by Postgres. Not middleware. Not application logic. User A cannot see User B\'s data. Period.',
     },
     {
       icon: Users,
-      title: 'Multi-Agent',
-      description: 'Real-time collaboration with Socket.IO and shared workspace memory.',
+      title: 'Multi-Agent Workspaces',
+      description: 'Agents collaborate in real-time. Shared memory, conflict resolution, parallel execution. One workspace, many agents.',
     },
     {
       icon: Cloud,
-      title: 'Deploy Anywhere',
-      description: 'Railway, AWS, and GCP deployment configs included. Self-hosted only.',
+      title: 'Self-Hosted. Your Data.',
+      description: 'Docker, Railway, AWS, GCP. Deploy wherever you want. Your infrastructure, your rules, your data.',
     },
     {
       icon: Zap,
-      title: 'Production Ready',
-      description: 'Sentry, PostHog, billing, API keys, and audit logging out of the box.',
+      title: 'Production on Day One',
+      description: 'Auth, billing, API keys, monitoring, audit logs. The boring stuff that takes months. Already done.',
     },
   ];
 
@@ -84,13 +84,13 @@ export default function HomePage() {
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4">Open Source • MIT License</Badge>
             <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Build AI Apps in Hours,<br />
-              <span className="text-primary">Not Weeks</span>
+              Ship AI products.<br />
+              <span className="text-primary">Not infrastructure.</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Production-ready AI-native SaaS boilerplate with native MCP integration,
-              vector database support, multi-tenant isolation, and real-time multi-agent
-              collaboration. Self-hosted with deploy-anywhere flexibility.
+              The open-source platform that gives you multi-tenant auth, MCP-native agents,
+              vector search, and real-time collaboration in one repo. Self-hosted. MIT licensed.
+              Clone it, run it, build on it.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
@@ -131,9 +131,9 @@ export default function HomePage() {
       {/* Features */}
       <section id="features" className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-4">Everything You Need</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">What You Get on Day One</h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Pre-configured with all the essentials for building production AI applications.
+            Every feature that takes teams months to build. Already wired up. Already tested. Already working.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature) => (
@@ -205,9 +205,9 @@ export default function HomePage() {
       {/* CTA */}
       <section id="get-started" className="py-24">
         <div className="container mx-auto px-4 max-w-6xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
+          <h2 className="text-3xl font-bold mb-4">Stop building plumbing. Start building product.</h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Clone the repo, run docker-compose up, and start building your AI application in minutes.
+            One command. Full AI agent platform. Running locally in under 2 minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="https://github.com/byteswarm/byteswarm" target="_blank">

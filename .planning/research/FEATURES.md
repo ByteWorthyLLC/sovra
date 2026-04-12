@@ -1,6 +1,6 @@
-# Features Research — ByteSwarm
+# Features Research - ByteSwarm
 
-**Research Type:** Project Research — Features dimension
+**Research Type:** Project Research - Features dimension
 **Date:** 2026-04-11
 
 ## Feature Categories

@@ -6,7 +6,7 @@ ByteSwarm is a production-ready, open-source AI-native SaaS boilerplate for buil
 
 ## Core Value
 
-**Zero-to-Production AI Apps in Hours** — Not weeks. Pre-configured with all AI essentials: MCP-native tool ecosystem, pgvector for semantic search, multi-tenant isolation, and real-time multi-agent workspaces. Self-hosted with deploy-anywhere flexibility (Railway, AWS, GCP).
+**Zero-to-Production AI Apps in Hours** - Not weeks. Pre-configured with all AI essentials: MCP-native tool ecosystem, pgvector for semantic search, multi-tenant isolation, and real-time multi-agent workspaces. Self-hosted with deploy-anywhere flexibility (Railway, AWS, GCP).
 
 ## Requirements
 
@@ -33,9 +33,9 @@ ByteSwarm is a production-ready, open-source AI-native SaaS boilerplate for buil
 
 ### Out of Scope
 
-- [Managed cloud service] — Self-hosted only, no SaaS offering
-- [Pre-trained models] — Bring your own API keys (OpenAI, Anthropic, Google)
-- [Mobile app] — Web-first, React Native/Expo at a later phase
+- [Managed cloud service] - Self-hosted only, no SaaS offering
+- [Pre-trained models] - Bring your own API keys (OpenAI, Anthropic, Google)
+- [Mobile app] - Web-first, React Native/Expo at a later phase
 
 ## Context
 
@@ -57,7 +57,7 @@ ByteSwarm is a production-ready, open-source AI-native SaaS boilerplate for buil
 
 ## Constraints
 
-- **Security**: Extremely hardened and secure — no shortcuts on auth, RLS, encryption, audit trails
+- **Security**: Extremely hardened and secure - no shortcuts on auth, RLS, encryption, audit trails
 - **Self-Hosted**: Must work without external SaaS dependencies beyond API keys
 - **Multi-Platform Deploy**: Railway, AWS, GCP equally supported from start
 - **All-in-One Docker**: Single docker-compose up for immediate use
@@ -66,11 +66,11 @@ ByteSwarm is a production-ready, open-source AI-native SaaS boilerplate for buil
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Next.js + Go hybrid | Max DX with production power — Next.js for web/API, Go for long-running agent tasks | — Pending |
-| Supabase + pgvector | Built-in vector storage, no separate vector DB required | — Pending |
-| MCP-native | Full client/server implementation for extensible tool ecosystem | — Pending |
-| Multi-cloud deploy | No vendor lock-in, user choice | — Pending |
-| MIT License | True open source for community | — Pending |
+| Next.js + Go hybrid | Max DX with production power - Next.js for web/API, Go for long-running agent tasks | - Pending |
+| Supabase + pgvector | Built-in vector storage, no separate vector DB required | - Pending |
+| MCP-native | Full client/server implementation for extensible tool ecosystem | - Pending |
+| Multi-cloud deploy | No vendor lock-in, user choice | - Pending |
+| MIT License | True open source for community | - Pending |
 
 ## Evolution
 
@@ -85,8 +85,8 @@ This document evolves at phase transitions and milestone boundaries.
 
 **After each milestone:**
 1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
+2. Core Value check - still the right priority?
+3. Audit Out of Scope - reasons still valid?
 4. Update Context with current state
 
 ---

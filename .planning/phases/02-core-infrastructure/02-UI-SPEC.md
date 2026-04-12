@@ -7,7 +7,7 @@ preset: none
 created: 2026-04-11
 ---
 
-# Phase 2 — UI Design Contract
+# Phase 2 - UI Design Contract
 
 > Visual and interaction contract for auth, multi-tenancy, and RBAC pages.
 > Target aesthetic: Linear / Vercel / Raycast level polish.
@@ -19,17 +19,17 @@ created: 2026-04-11
 
 | Property | Value |
 |----------|-------|
-| Tool | Manual shadcn-compatible (no components.json — hand-rolled to match existing pattern) |
+| Tool | Manual shadcn-compatible (no components.json - hand-rolled to match existing pattern) |
 | Preset | not applicable |
 | Component library | Radix UI (already installed: dialog, dropdown-menu, select, slot, tabs, toast) |
 | Animation library | Framer Motion (add: `npm install framer-motion`) |
 | Icon library | lucide-react (already installed: ^0.469.0) |
-| Font | Geist Sans (add via `next/font/local` or `geist` npm package — modern dev-tool aesthetic) |
+| Font | Geist Sans (add via `next/font/local` or `geist` npm package - modern dev-tool aesthetic) |
 | Font fallback | system-ui, -apple-system, sans-serif |
 
-**Design philosophy:** Dark mode first. Zinc-900/950 base (not pure black — avoids harshness, adds depth). Subtle glass morphism on auth cards. Blue accent (#3B82F6 / `blue-500`) for primary actions. Every state transition animated. Developer-tool aesthetic matching Linear, Vercel dashboard, Raycast.
+**Design philosophy:** Dark mode first. Zinc-900/950 base (not pure black - avoids harshness, adds depth). Subtle glass morphism on auth cards. Blue accent (#3B82F6 / `blue-500`) for primary actions. Every state transition animated. Developer-tool aesthetic matching Linear, Vercel dashboard, Raycast.
 
-**Note on existing setup:** The project already has CSS variables and hand-rolled Button/Card/Badge components. This spec EXTENDS that system — do not overwrite existing components, do not install shadcn CLI over the top.
+**Note on existing setup:** The project already has CSS variables and hand-rolled Button/Card/Badge components. This spec EXTENDS that system - do not overwrite existing components, do not install shadcn CLI over the top.
 
 ---
 
@@ -37,7 +37,7 @@ created: 2026-04-11
 
 **Source of truth: `app/globals.css` CSS variables. Override dark mode values to match elevated palette.**
 
-### Dark Mode (default — apply `dark` class to `<html>` on initial render)
+### Dark Mode (default - apply `dark` class to `<html>` on initial render)
 
 | Token | CSS Variable | Hex Equivalent | Usage |
 |-------|-------------|----------------|-------|
@@ -49,8 +49,8 @@ created: 2026-04-11
 | Foreground | `--foreground` | `#FAFAFA` (zinc-50) | Primary text |
 | Muted fg | `--muted-foreground` | `#71717A` (zinc-500) | Supporting text, placeholders |
 | Primary | `--primary` | `#3B82F6` (blue-500) | Primary buttons, active states |
-| Primary hover | — | `#2563EB` (blue-600) | Primary button hover |
-| Primary glow | — | `rgba(59,130,246,0.15)` | Focus rings, active glow |
+| Primary hover | - | `#2563EB` (blue-600) | Primary button hover |
+| Primary glow | - | `rgba(59,130,246,0.15)` | Focus rings, active glow |
 | Destructive | `--destructive` | `#EF4444` (red-500) | Destructive actions |
 | Success | custom `--success` | `#22C55E` (green-500) | Success toasts, verification confirmed |
 | Ring | `--ring` | `#3B82F6` | Focus outline |
@@ -69,13 +69,13 @@ created: 2026-04-11
 | Foreground | `--foreground` | `#09090B` | Primary text |
 | Muted fg | `--muted-foreground` | `#71717A` | Supporting text |
 | Primary | `--primary` | `#2563EB` (blue-600) | Primary buttons (slightly darker for light) |
-| Primary hover | — | `#1D4ED8` (blue-700) | Hover |
+| Primary hover | - | `#1D4ED8` (blue-700) | Hover |
 
 ### 60/30/10 Distribution
 
-- 60% dominant: `--background` — all page backgrounds, main content area
-- 30% secondary: `--card` / `--surface-elevated` — auth cards, sidebar, member rows, dropdowns
-- 10% accent: `--primary` (blue) — reserved exclusively for:
+- 60% dominant: `--background` - all page backgrounds, main content area
+- 30% secondary: `--card` / `--surface-elevated` - auth cards, sidebar, member rows, dropdowns
+- 10% accent: `--primary` (blue) - reserved exclusively for:
   1. Primary CTA buttons
   2. Active sidebar nav item (left border + text color)
   3. Focus rings (`focus-visible:ring-ring`)
@@ -98,10 +98,10 @@ box-shadow:
   0 20px 25px -5px rgba(0, 0, 0, 0.3);
 ```
 
-### Gradient accents (decorative only — auth pages)
+### Gradient accents (decorative only - auth pages)
 
 ```css
-/* Background radial gradient behind auth card — dark mode */
+/* Background radial gradient behind auth card - dark mode */
 .auth-bg-gradient {
   background:
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.12), transparent),
@@ -135,7 +135,7 @@ box-shadow:
 - Auth form card max-width: `max-w-[420px]`
 - Brand panel (split-screen): 45% viewport width on desktop
 - Member list row height: `h-12` (48px) for comfortable click target
-- Auth page CTA buttons: `h-11` (44px) — overrides default `h-9` for accessibility
+- Auth page CTA buttons: `h-11` (44px) - overrides default `h-9` for accessibility
 
 ---
 
@@ -165,21 +165,21 @@ body {
 ```
 
 **Page-specific assignments:**
-- Auth card heading ("Sign in to ByteSwarm"): Heading lg — `text-2xl font-semibold tracking-tight`
-- Auth card sub-copy: Body — `text-sm text-muted-foreground`
-- Brand panel headline: Display — `text-3xl font-semibold tracking-tighter`
-- Form labels: Label — `text-sm font-semibold`
-- Input placeholder: Body — `text-sm` with `text-muted-foreground` on the input element
-- Error messages: Supporting — `text-xs text-destructive`
-- Nav items (sidebar): Label — `text-sm font-semibold`
-- Member name: Label — `text-sm font-semibold`
-- Member email: Supporting — `text-xs text-muted-foreground`
+- Auth card heading ("Sign in to ByteSwarm"): Heading lg - `text-2xl font-semibold tracking-tight`
+- Auth card sub-copy: Body - `text-sm text-muted-foreground`
+- Brand panel headline: Display - `text-3xl font-semibold tracking-tighter`
+- Form labels: Label - `text-sm font-semibold`
+- Input placeholder: Body - `text-sm` with `text-muted-foreground` on the input element
+- Error messages: Supporting - `text-xs text-destructive`
+- Nav items (sidebar): Label - `text-sm font-semibold`
+- Member name: Label - `text-sm font-semibold`
+- Member email: Supporting - `text-xs text-muted-foreground`
 
 ---
 
 ## Layout Contracts
 
-### Auth Pages — Split-Screen Layout (desktop)
+### Auth Pages - Split-Screen Layout (desktop)
 
 ```
 ┌─────────────────────────────┬──────────────────────────────┐
@@ -196,15 +196,18 @@ body {
 └─────────────────────────────┴──────────────────────────────┘
 
 Mobile (< 768px): Brand panel hidden. Form panel full-width.
-Mobile auth card: no glass — solid bg-card, rounded-xl, no horizontal padding (edge-to-edge card)
+Mobile auth card: no glass - solid bg-card, rounded-xl, no horizontal padding (edge-to-edge card)
 ```
 
 **Brand panel details:**
 - Background: `bg-zinc-900` with subtle dot grid overlay (CSS `background-image: radial-gradient(circle, #27272A 1px, transparent 1px); background-size: 24px 24px;`)
 - Top-left: Logo (`Bot` icon + "ByteSwarm" wordmark, white)
-- Center: Headline "Build AI Apps in Hours, Not Weeks" at Display size
-- Below headline: 3 feature bullets with check icons in `text-primary`
-- Bottom-left: "Open Source • MIT License" in `text-xs text-muted-foreground`
+- Center: Headline "Ship AI products. Not infrastructure." at Display size
+- Below headline: 3 feature bullets with check icons in `text-primary`:
+  1. "Multi-tenant auth and RBAC out of the box"
+  2. "MCP-native agents with vector search built in"
+  3. "Self-hosted. Your data never leaves your servers."
+- Bottom-left: "Open Source · MIT License" in `text-xs text-muted-foreground`
 - Right edge: subtle vertical gradient fade to match form panel
 
 **Form panel details:**
@@ -259,9 +262,9 @@ Mobile (< 768px): Sidebar slides in as sheet overlay. Hamburger in main header.
 
 **Dashboard home page focal point:**
 Primary visual anchor is a welcome card spanning full content width (`max-w-5xl`):
-- Heading lg: `Welcome to {tenant_name}` — primary focal point
-- Supporting: `Get started by creating your first agent or inviting your team.`
-- Two ghost CTAs: `Create an agent →` (links to Phase 3 — disabled in Phase 2, shows tooltip "Coming in next release") and `Invite team members →` (links to `/t/{slug}/members`)
+- Heading lg: `Welcome to {tenant_name}` - primary focal point
+- Supporting: `Your AI workspace is live. Create your first agent or bring your team in.`
+- Two ghost CTAs: `Create an agent →` (links to Phase 3 - disabled in Phase 2, shows tooltip "Coming in next release") and `Invite your team →` (links to `/t/{slug}/members`)
 - Card uses `bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-border/50 rounded-xl p-8`
 - Entrance: `fadeInUp` (400ms, 100ms delay after layout mount)
 
@@ -276,7 +279,7 @@ Primary visual anchor is a welcome card spanning full content width (`max-w-5xl`
 Page header: "Team members" (Heading lg) + badge showing count
 Action bar: "Invite member" button (primary, right-aligned)
 ─────────────────────────────────────────────────────────
-Invite form (collapsible — shown when "Invite member" clicked):
+Invite form (collapsible - shown when "Invite member" clicked):
   Card with: Email input (flex-1) + Role select (w-40) + "Send invite" button
   Below: "Or share invite link" row with copy button
 
@@ -296,7 +299,7 @@ Member table (below invite form):
 ### Framer Motion Configuration
 
 ```typescript
-// lib/motion.ts — shared animation presets
+// lib/motion.ts - shared animation presets
 export const TRANSITIONS = {
   default: { duration: 0.2, ease: [0.32, 0.72, 0, 1] },
   spring: { type: 'spring', stiffness: 400, damping: 30 },
@@ -346,11 +349,11 @@ export const VARIANTS = {
 
 | Component | Animation | Timing |
 |-----------|-----------|--------|
-| Auth page load | `cardEnter` — fade + scale + translateY | 350ms ease [0.32,0.72,0,1] |
-| Page transition | `pageEnter` — fade + translateY(8px) | 200ms ease |
+| Auth page load | `cardEnter` - fade + scale + translateY | 350ms ease [0.32,0.72,0,1] |
+| Page transition | `pageEnter` - fade + translateY(8px) | 200ms ease |
 | Form error state | Card `shake` animation on submit fail | 350ms |
 | Error message appear | `{ opacity: 0→1, y: -4→0 }` | 150ms |
-| Success state (button) | Checkmark swap — scale 0→1 spring | spring stiffness 400 |
+| Success state (button) | Checkmark swap - scale 0→1 spring | spring stiffness 400 |
 | Member list items | Stagger 0.05s between items, `listItem` | 200ms per item |
 | Tenant switcher dropdown | `dropdownEnter` with AnimatePresence | spring 500/35 |
 | Skeleton to content | Crossfade opacity 0.3s | 300ms ease |
@@ -362,8 +365,8 @@ export const VARIANTS = {
 ### Auth card brand panel entrance (desktop)
 
 ```
-Brand panel: slides in from left — translateX(-100%→0), opacity 0→1, duration 500ms, ease [0.32,0.72,0,1]
-Form panel: fades in — opacity 0→1, translateY(16→0), duration 400ms, delay 100ms
+Brand panel: slides in from left - translateX(-100%→0), opacity 0→1, duration 500ms, ease [0.32,0.72,0,1]
+Form panel: fades in - opacity 0→1, translateY(16→0), duration 400ms, delay 100ms
 Auth card: cardEnter animation, delay 200ms
 ```
 
@@ -371,7 +374,7 @@ Auth card: cardEnter animation, delay 200ms
 
 ## Component States
 
-### Button — All States
+### Button - All States
 
 ```tsx
 // Size override for auth CTAs (h-11 instead of default h-9)
@@ -381,11 +384,11 @@ hover:     bg-primary/90 shadow-md transition-all duration-150
 focus:     ring-2 ring-ring ring-offset-2 ring-offset-background
 active:    scale-[0.98] transition-transform duration-75
 disabled:  opacity-50 cursor-not-allowed pointer-events-none
-loading:   opacity-100 cursor-wait — spinner (Loader2 animate-spin h-4 w-4) + label hidden or "..." text
-success:   brief CheckCircle2 swap, bg-primary (no color change — motion is the signal)
+loading:   opacity-100 cursor-wait - spinner (Loader2 animate-spin h-4 w-4) + label hidden or "..." text
+success:   brief CheckCircle2 swap, bg-primary (no color change - motion is the signal)
 ```
 
-### Input — All States
+### Input - All States
 
 ```tsx
 default:   h-10 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm
@@ -417,7 +420,7 @@ disabled:  opacity-50 cursor-not-allowed bg-muted/30
 </div>
 ```
 
-### OAuth Button — All States
+### OAuth Button - All States
 
 ```tsx
 default:   h-10 variant="outline" flex items-center gap-2 text-sm font-semibold
@@ -428,13 +431,13 @@ loading:   Loader2 spinner replaces logo, text becomes "Connecting..." opacity-6
 disabled during loading: pointer-events-none opacity-70
 ```
 
-### Avatar — All States
+### Avatar - All States
 
 ```tsx
 // Sizes: sm=24px, md=32px, lg=40px
 // Initials generated from name: "Kevin Richards" → "KR"
 // Image: circular, object-cover
-// Fallback background: derived from name hash — one of 6 muted colors
+// Fallback background: derived from name hash - one of 6 muted colors
 //   ['bg-blue-500/20 text-blue-400', 'bg-violet-500/20 text-violet-400',
 //    'bg-emerald-500/20 text-emerald-400', 'bg-amber-500/20 text-amber-400',
 //    'bg-rose-500/20 text-rose-400', 'bg-cyan-500/20 text-cyan-400']
@@ -443,12 +446,12 @@ disabled during loading: pointer-events-none opacity-70
 ### Skeleton Loader
 
 ```tsx
-// Base class — apply to any placeholder element
+// Base class - apply to any placeholder element
 className="animate-pulse rounded-md bg-zinc-800/60"
 
 // Auth card skeleton (shown while checking session on page load)
-// — NOT used on auth pages themselves (they show immediately)
-// — Used in dashboard while tenant data loads
+// - NOT used on auth pages themselves (they show immediately)
+// - Used in dashboard while tenant data loads
 
 // Member list skeleton: 3 rows, each h-14, full width
 // Each row: flex gap-3 items-center px-4
@@ -478,7 +481,7 @@ className="animate-pulse rounded-md bg-zinc-800/60"
 //   - "Member removed"
 //   - "Role updated"
 //   - "Password reset email sent"
-// Do NOT use toast for auth errors — those stay inline on the form
+// Do NOT use toast for auth errors - those stay inline on the form
 ```
 
 ---
@@ -508,7 +511,7 @@ Step 3: You're ready
   └── "Open your dashboard →" CTA (primary)
 ```
 
-**Wizard layout:** Same split-screen as auth pages — brand panel left, wizard card right. Step indicator: 3 dots at top of card, filled dot = current step. Transition between steps: slide left (current out) + slide right (next in), `translateX(100%→0)` with AnimatePresence mode="wait".
+**Wizard layout:** Same split-screen as auth pages - brand panel left, wizard card right. Step indicator: 3 dots at top of card, filled dot = current step. Transition between steps: slide left (current out) + slide right (next in), `translateX(100%→0)` with AnimatePresence mode="wait".
 
 **Progress bar:** thin 2px line at very top of card, width animated from 33%→66%→100% with spring transition.
 
@@ -520,15 +523,15 @@ Step 3: You're ready
 
 ```
 Container: flex flex-col items-center justify-center py-16 text-center
-Visual: SVG illustration (inline, ~120px) — 3 abstract person-shapes with plus icon
+Visual: SVG illustration (inline, ~120px) - 3 abstract person-shapes with plus icon
          Use zinc-700 as fill, primary blue accent on the plus icon
-Heading: "Just you here" — text-lg font-semibold
+Heading: "Just you here" - text-lg font-semibold
 Body:    "Invite teammates to collaborate on AI agents. You can set roles and manage access."
          text-sm text-muted-foreground max-w-xs
-CTA:     "Invite your first member" — Button default, mt-4
+CTA:     "Invite your first member" - Button default, mt-4
 ```
 
-### No tenants yet (impossible in normal flow — handled by onboarding wizard)
+### No tenants yet (impossible in normal flow - handled by onboarding wizard)
 
 ```
 Shown only if user lands on /t/ with no tenants:
@@ -536,7 +539,7 @@ Container: Same centered layout
 Visual:    Building/workspace icon in bg-zinc-800 rounded-2xl p-4, text-primary
 Heading:   "No workspaces yet"
 Body:      "Create a workspace to start building with AI agents."
-CTA:       "Create workspace" — Button default
+CTA:       "Create workspace" - Button default
 ```
 
 ---
@@ -566,7 +569,7 @@ CTA:       "Create workspace" — Button default
 2. User fills form, submits
 3. Loading state on button
 4. If success → redirect to onboarding wizard step 1
-   (NOT dashboard — always wizard for new users)
+   (NOT dashboard - always wizard for new users)
 5. If error (email exists) → inline alert, "Sign in instead" link in alert body
 ```
 
@@ -575,7 +578,7 @@ CTA:       "Create workspace" — Button default
 ```
 1. User enters email
 2. Submit → loading
-3. Success (regardless of whether email exists — security):
+3. Success (regardless of whether email exists - security):
    → Button changes to "Email sent" with CheckCircle2 icon
    → Button disabled for 60s (resend countdown shown below)
    → Alert (info variant): "Check {email} for a reset link"
@@ -636,7 +639,7 @@ CTA:       "Create workspace" — Button default
 2. Dropdown closes
 3. Row expands inline: "Remove {name}? They'll lose access immediately."
    Two buttons appear: "Remove" (destructive, h-8 text-xs) + "Cancel" (ghost, h-8 text-xs)
-   No modal — keeps context
+   No modal - keeps context
 4. "Remove" clicked:
    a. Row fades out (opacity 1→0, height 0, 250ms)
    b. Member count badge decrements
@@ -651,73 +654,73 @@ CTA:       "Create workspace" — Button default
 | Element | Copy |
 |---------|------|
 | Login page heading | Sign in |
-| Login page subheading | Welcome back to ByteSwarm |
+| Login page subheading | Pick up where you left off |
 | Login primary CTA | Sign in |
 | Login Google OAuth | Sign in with Google |
 | Login GitHub OAuth | Sign in with GitHub |
-| Login OAuth separator | or |
-| Login footer link | Don't have an account? **Sign up** |
-| Signup page heading | Create your account |
-| Signup page subheading | Start building production AI apps today |
-| Signup primary CTA | Create account |
+| Login OAuth separator | or continue with |
+| Login footer link | New here? **Create a free account** |
+| Signup page heading | Start building in minutes |
+| Signup page subheading | Multi-tenant auth, vector search, and agent orchestration. One repo. Zero config. |
+| Signup primary CTA | Create your free account |
 | Signup footer link | Already have an account? **Sign in** |
-| Forgot password heading | Forgot your password? |
-| Forgot password subheading | Enter your email and we'll send you a reset link |
+| Forgot password heading | Reset your password |
+| Forgot password subheading | We'll send a reset link to your email |
 | Forgot password CTA | Send reset link |
-| Forgot password sent state | Check your email |
+| Forgot password sent state | Check your inbox |
 | Forgot password resend countdown | Resend in 0:{ss} |
-| Forgot password resend ready | Resend reset email |
+| Forgot password resend ready | Resend reset link |
 | Forgot password back link | Back to sign in |
-| Verify email heading | Verify your email |
+| Verify email heading | One last step |
 | Verify email body | We sent a verification link to **{email}**. Click it to activate your account. |
 | Verify email resend | Resend verification email |
-| Verify email confirmed | Email verified — redirecting... |
+| Verify email confirmed | Verified. Taking you in... |
 | Reset password heading | Set a new password |
 | Reset password CTA | Update password |
-| Reset password success toast | Password updated. Sign in with your new password. |
+| Reset password success toast | Password updated. You're good to sign in. |
 | Onboarding step 1 heading | Name your workspace |
-| Onboarding step 1 subheading | This is where your team and AI agents will live |
+| Onboarding step 1 subheading | Your team and AI agents operate from here. Pick a name you'll recognize. |
 | Onboarding step 1 CTA | Create workspace |
-| Onboarding step 2 heading | Invite your team |
-| Onboarding step 2 subheading | Add teammates so you can build together. You can always do this later. |
+| Onboarding step 2 heading | Bring your team in |
+| Onboarding step 2 subheading | Ship faster together. Add anyone by email. Takes 10 seconds. |
 | Onboarding step 2 CTA | Send invites |
 | Onboarding step 2 skip | Skip invites for now |
-| Onboarding step 3 heading | You're all set |
-| Onboarding step 3 body | **{workspace name}** is ready. Start by creating your first AI agent. |
+| Onboarding step 3 heading | You're ready to build |
+| Onboarding step 3 body | **{workspace name}** is live. Create your first AI agent and see what ByteSwarm can do. |
 | Onboarding step 3 CTA | Open your dashboard |
-| Tenant creation dialog heading | Create a workspace |
+| Tenant creation dialog heading | New workspace |
 | Tenant creation CTA | Create workspace |
-| Invite members heading | Team members |
+| Invite members heading | Your team |
 | Invite send CTA | Send invitation |
 | Copy invite link CTA | Copy invite link |
-| Invite link copied toast | Invite link copied to clipboard |
-| Invitation accepted heading | Welcome to {tenant name} |
-| Invitation accepted body | You now have access as **{role}** |
+| Invite link copied toast | Link copied. Share it with your team. |
+| Invitation accepted heading | You're in |
+| Invitation accepted body | You now have **{role}** access to **{tenant name}** |
 | Invitation accepted CTA | Open your dashboard |
-| Invitation expired heading | This invitation has expired |
-| Invitation expired body | Ask the workspace owner to send you a new invitation. |
-| Invitation invalid heading | Invitation not found |
-| Invitation invalid body | This link may have already been used or is no longer valid. |
-| Empty members heading | Just you here |
-| Empty members body | Invite teammates to collaborate on AI agents. |
-| Empty members CTA | Invite your first member |
-| Error: invalid credentials | Incorrect email or password |
-| Error: invalid credentials sub | Check your details or **reset your password** |
-| Error: email already exists | An account with this email already exists |
+| Invitation expired heading | This invite has expired |
+| Invitation expired body | Ask the workspace owner to send a new one. |
+| Invitation invalid heading | Invite not found |
+| Invitation invalid body | This link may have been used already or is no longer valid. |
+| Empty members heading | You're the only one here |
+| Empty members body | AI agents work better with a team behind them. Add your first teammate. |
+| Empty members CTA | Invite a teammate |
+| Error: invalid credentials | Wrong email or password |
+| Error: invalid credentials sub | Double-check your details or **reset your password** |
+| Error: email already exists | That email is already registered |
 | Error: email already exists sub | **Sign in instead** |
-| Error: weak password | Password must be at least 8 characters |
+| Error: weak password | Use at least 8 characters |
 | Error: passwords don't match | Passwords don't match |
 | Error: invalid email | Enter a valid email address |
-| Error: rate limit | Too many attempts — wait a moment before trying again |
-| Error: network | Something went wrong. Check your connection and try again. |
-| Error: server | Something went wrong on our end. Try refreshing the page. |
-| Remove member confirm | Remove **{name}**? They'll lose all access to this workspace immediately. |
-| Remove member CTA | Remove |
+| Error: rate limit | Too many attempts. Wait a moment and try again. |
+| Error: network | Connection lost. Check your network and try again. |
+| Error: server | Something broke on our end. Refresh and try again. |
+| Remove member confirm | Remove **{name}**? They lose all workspace access immediately. |
+| Remove member CTA | Remove member |
 | Leave workspace confirm heading | Leave **{workspace name}**? |
-| Leave workspace confirm body | You'll lose all access immediately. This cannot be undone. |
+| Leave workspace confirm body | You lose all access immediately. This can't be undone. |
 | Leave workspace CTA | Leave workspace |
-| Revoke invite confirm | Revoke this invitation? The link will stop working immediately. |
-| Revoke invite CTA | Revoke |
+| Revoke invite confirm | Revoke this invite? The link stops working immediately. |
+| Revoke invite CTA | Revoke invite |
 
 ---
 
@@ -739,7 +742,7 @@ CTA:       "Create workspace" — Button default
 | Label | `components/ui/label.tsx` | Radix Label primitive wrapper |
 | FormField | `components/ui/form-field.tsx` | Compound: Label + Input + animated error message |
 | Separator | `components/ui/separator.tsx` | Horizontal line with optional centered text |
-| Alert | `components/ui/alert.tsx` | Variants: destructive, success, info — with icon slot |
+| Alert | `components/ui/alert.tsx` | Variants: destructive, success, info - with icon slot |
 | Avatar | `components/ui/avatar.tsx` | Image + initials fallback, 3 sizes, color-hashed bg |
 | Skeleton | `components/ui/skeleton.tsx` | `animate-pulse bg-zinc-800/60 rounded-md` |
 | Spinner | `components/ui/spinner.tsx` | Loader2 with animate-spin, sm/md/lg size prop |
@@ -768,7 +771,7 @@ CTA:       "Create workspace" — Button default
 
 ## Accessibility Contract
 
-- All form inputs: `<label>` with `htmlFor` — no placeholder-only labels
+- All form inputs: `<label>` with `htmlFor` - no placeholder-only labels
 - All icon-only buttons: `aria-label` required
 - Auth form wrapper: `role="main"` on page wrapper
 - Auth card: `aria-label="Sign in form"` on the card element
@@ -777,8 +780,8 @@ CTA:       "Create workspace" — Button default
 - Focus order (auth): logo (skip link) → email → password → primary CTA → secondary link
 - Focus order (dashboard): sidebar nav items → main content
 - Skip navigation: `<a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>` at top of dashboard layout
-- Minimum touch target: 44px for all interactive elements. Auth CTA buttons use `h-11`. Sidebar nav items use `h-10` (acceptable — mouse-primary tool).
-- Color contrast: all text must meet WCAG AA. Muted foreground (`#71717A`) on dark background (`#09090B`) = 4.6:1 ratio — passes AA for normal text.
+- Minimum touch target: 44px for all interactive elements. Auth CTA buttons use `h-11`. Sidebar nav items use `h-10` (acceptable - mouse-primary tool).
+- Color contrast: all text must meet WCAG AA. Muted foreground (`#71717A`) on dark background (`#09090B`) = 4.6:1 ratio - passes AA for normal text.
 - Keyboard navigation: tenant switcher, member dropdown, all dialogs must be fully keyboard-navigable (Radix handles this)
 - Password field: `autocomplete="current-password"` (login), `autocomplete="new-password"` (signup)
 - Email field: `autocomplete="email"`, `type="email"`, `inputMode="email"`
@@ -791,9 +794,9 @@ CTA:       "Create workspace" — Button default
 |----------|-------------|-------------|
 | shadcn official | none (hand-rolling) | not required |
 | third-party | none | not applicable |
-| npm: framer-motion | ^11.x (latest stable) | standard npm audit — no shadcn registry |
+| npm: framer-motion | ^11.x (latest stable) | standard npm audit - no shadcn registry |
 
-No third-party shadcn registries. `framer-motion` is a standard npm package, not a shadcn block — registry vetting gate not applicable.
+No third-party shadcn registries. `framer-motion` is a standard npm package, not a shadcn block - registry vetting gate not applicable.
 
 **framer-motion install:**
 ```bash

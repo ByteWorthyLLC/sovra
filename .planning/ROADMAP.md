@@ -26,10 +26,10 @@
 **Plans:** 4 plans
 
 Plans:
-- [x] 01-01-PLAN.md — Fix scaffold extensions + monorepo setup (shared package, Makefile, env)
-- [x] 01-02-PLAN.md — Go worker service (Gin health, gRPC stub, pgxpool, Docker)
-- [x] 01-03-PLAN.md — Supabase schema + migrations (14 tables, RLS, pgvector, indexes)
-- [x] 01-04-PLAN.md — Docker Compose (dev + prod) + Vitest testing setup + quality gate
+- [x] 01-01-PLAN.md - Fix scaffold extensions + monorepo setup (shared package, Makefile, env)
+- [x] 01-02-PLAN.md - Go worker service (Gin health, gRPC stub, pgxpool, Docker)
+- [x] 01-03-PLAN.md - Supabase schema + migrations (14 tables, RLS, pgvector, indexes)
+- [x] 01-04-PLAN.md - Docker Compose (dev + prod) + Vitest testing setup + quality gate
 
 **Requirements:**
 - FOUN-01: Monorepo structure with pnpm workspaces
@@ -65,11 +65,11 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Auth types + AuthAdapter interface + Supabase adapter + client/server factories + PKCE callback
-- [ ] 02-02-PLAN.md — RBAC migration (roles, permissions, invitations) + TenantResolver implementations + TenantContext
-- [ ] 02-03-PLAN.md — RBAC permission checker + root middleware + tenant creation + invitation system
-- [ ] 02-04-PLAN.md — Schema push + motion utilities + UI primitives + auth pages (split-screen, glass morphism, all states)
-- [ ] 02-05-PLAN.md — Tenant layout + sidebar + tenant switcher + member management + onboarding wizard + toasts
+- [ ] 02-01-PLAN.md - Auth types + AuthAdapter interface + Supabase adapter + client/server factories + PKCE callback
+- [ ] 02-02-PLAN.md - RBAC migration (roles, permissions, invitations) + TenantResolver implementations + TenantContext
+- [ ] 02-03-PLAN.md - RBAC permission checker + root middleware + tenant creation + invitation system
+- [ ] 02-04-PLAN.md - Schema push + motion utilities + UI primitives + auth pages (split-screen, glass morphism, all states)
+- [ ] 02-05-PLAN.md - Tenant layout + sidebar + tenant switcher + member management + onboarding wizard + toasts
 
 **Requirements:**
 - AUTH-01: Email/password signup and login
@@ -253,8 +253,8 @@ Plans:
 
 ## Notes
 
-- Phase 1 is most critical — foundation determines everything else
-- Phase 2 (auth/multi-tenancy) must be rock-solid — security implications
+- Phase 1 is most critical - foundation determines everything else
+- Phase 2 (auth/multi-tenancy) must be rock-solid - security implications
 - Phase 3-4 build the core AI functionality
 - Phase 5 adds multi-agent which differentiates ByteSwarm
 - Phase 6 makes it production-ready for self-hosted deployment

@@ -7,7 +7,7 @@ wave_0_complete: false
 created: 2026-04-11
 ---
 
-# Phase 1 — Validation Strategy
+# Phase 1 - Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
 
@@ -18,7 +18,7 @@ created: 2026-04-11
 | Property | Value |
 |----------|-------|
 | **Framework** | {pytest 7.x / jest 29.x / vitest / go test / other} |
-| **Config file** | {path or "none — Wave 0 installs"} |
+| **Config file** | {path or "none - Wave 0 installs"} |
 | **Quick run command** | `{quick command}` |
 | **Full suite command** | `{full command}` |
 | **Estimated runtime** | ~1 seconds |
@@ -38,7 +38,7 @@ created: 2026-04-11
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 1 | REQ-{XX} | T-1-01 / — | {expected secure behavior or "N/A"} | unit | `{command}` | ✅ / ❌ W0 | ⬜ pending |
+| 1-01-01 | 01 | 1 | REQ-{XX} | T-1-01 / - | {expected secure behavior or "N/A"} | unit | `{command}` | ✅ / ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -46,9 +46,9 @@ created: 2026-04-11
 
 ## Wave 0 Requirements
 
-- [ ] `{tests/test_file.py}` — stubs for REQ-{XX}
-- [ ] `{tests/conftest.py}` — shared fixtures
-- [ ] `{framework install}` — if no framework detected
+- [ ] `{tests/test_file.py}` - stubs for REQ-{XX}
+- [ ] `{tests/conftest.py}` - shared fixtures
+- [ ] `{framework install}` - if no framework detected
 
 *If none: "Existing infrastructure covers all phase requirements."*
 

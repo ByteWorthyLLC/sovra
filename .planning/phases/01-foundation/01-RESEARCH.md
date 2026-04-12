@@ -10,13 +10,13 @@
 ## User Constraints (from CONTEXT.md)
 
 ### Locked Decisions
-None — all implementation choices are at Claude's discretion. Pure infrastructure phase.
+None - all implementation choices are at Claude's discretion. Pure infrastructure phase.
 
 ### Claude's Discretion
 All implementation choices. Use established best practices for monorepo setup, Docker configuration, and database schema design.
 
 ### Deferred Ideas (OUT OF SCOPE)
-None — infrastructure phase.
+None - infrastructure phase.
 </user_constraints>
 
 <phase_requirements>
@@ -40,7 +40,7 @@ None — infrastructure phase.
 
 ## Summary
 
-ByteSwarm Phase 1 sets up a hybrid monorepo: pnpm workspaces manage the TypeScript/JavaScript side (Next.js web app, shared types), while the Go worker lives at `packages/worker/` as a Go module with its own `go.mod`. pnpm workspaces do not manage Go modules — the Go service is invoked via a `Makefile` or shell commands called from pnpm scripts.
+ByteSwarm Phase 1 sets up a hybrid monorepo: pnpm workspaces manage the TypeScript/JavaScript side (Next.js web app, shared types), while the Go worker lives at `packages/worker/` as a Go module with its own `go.mod`. pnpm workspaces do not manage Go modules - the Go service is invoked via a `Makefile` or shell commands called from pnpm scripts.
 
 The project already has `packages/web/` scaffolded with Next.js 15 and Tailwind. However, there are three critical issues to fix: (1) `.cts`/`.ctsx` file extensions on React components (should be `.tsx`/`.ts`), (2) the `next.config.cts` file (should be `next.config.ts`), and (3) the `packages/shared/` and `packages/worker/` packages are missing. Supabase CLI is not installed on the dev machine but is available via Homebrew (`brew install supabase`). Go is not installed.
 
@@ -56,7 +56,7 @@ Directives from `CLAUDE.md` that the planner must honor:
 
 - Directory structure is prescribed: `packages/web/`, `packages/worker/`, `packages/shared/`, `supabase/migrations/`, `docker/`, `platform/`
 - After every coding task: `npm run test && npm run lint && npm run type-check` + `go build ./... && go test ./...` + commit + push
-- Security: "Extremely hardened — no shortcuts." All API routes must check authentication, all DB queries must be tenant-scoped.
+- Security: "Extremely hardened - no shortcuts." All API routes must check authentication, all DB queries must be tenant-scoped.
 - Always use tenant-scoped queries. Test RLS policies with multiple tenants. Never bypass RLS in application code.
 - Multi-tenancy is a core constraint from day one, not added later.
 - Quality gates before claiming work complete: tests pass, lint clean, TypeScript/Go compile clean, build succeeds.
@@ -66,27 +66,27 @@ Directives from `CLAUDE.md` that the planner must honor:
 ## Existing Codebase State
 
 **What already exists (DO NOT recreate):**
-- `package.json` (root) — pnpm workspace config, scripts wired [VERIFIED: codebase grep]
-- `pnpm-workspace.yaml` — `packages: ['packages/*']` [VERIFIED: codebase grep]
-- `packages/web/` — Next.js 15 app skeleton with App Router [VERIFIED: codebase grep]
-- `packages/web/package.json` — deps including next@^15.1.0, react@^19, tailwindcss@^3.4.17, @supabase/supabase-js@^2.47.0 [VERIFIED: codebase grep]
-- `packages/web/tailwind.config.ts` — CSS variable-based design tokens, shadcn/ui compatible [VERIFIED: codebase grep]
-- `packages/web/tsconfig.json` — strict, bundler module resolution, paths for `@/*` and `@byteswarm/shared/*` [VERIFIED: codebase grep]
-- `packages/web/components/ui/` — button.tsx, badge.tsx, card.ctsx (note wrong extension) [VERIFIED: codebase grep]
-- `platform/railway/`, `platform/aws/`, `platform/gcp/` — directories exist (contents unknown)
-- `supabase/migrations/` — directory exists but empty [VERIFIED: codebase grep]
+- `package.json` (root) - pnpm workspace config, scripts wired [VERIFIED: codebase grep]
+- `pnpm-workspace.yaml` - `packages: ['packages/*']` [VERIFIED: codebase grep]
+- `packages/web/` - Next.js 15 app skeleton with App Router [VERIFIED: codebase grep]
+- `packages/web/package.json` - deps including next@^15.1.0, react@^19, tailwindcss@^3.4.17, @supabase/supabase-js@^2.47.0 [VERIFIED: codebase grep]
+- `packages/web/tailwind.config.ts` - CSS variable-based design tokens, shadcn/ui compatible [VERIFIED: codebase grep]
+- `packages/web/tsconfig.json` - strict, bundler module resolution, paths for `@/*` and `@byteswarm/shared/*` [VERIFIED: codebase grep]
+- `packages/web/components/ui/` - button.tsx, badge.tsx, card.ctsx (note wrong extension) [VERIFIED: codebase grep]
+- `platform/railway/`, `platform/aws/`, `platform/gcp/` - directories exist (contents unknown)
+- `supabase/migrations/` - directory exists but empty [VERIFIED: codebase grep]
 
 **What needs to be created:**
-- `packages/worker/` — Go worker service (missing entirely)
-- `packages/shared/` — Shared TypeScript types package (missing)
-- `supabase/config.toml` — Supabase project config (missing)
-- `docker/` files — Docker Compose configs (directory exists but empty)
+- `packages/worker/` - Go worker service (missing entirely)
+- `packages/shared/` - Shared TypeScript types package (missing)
+- `supabase/config.toml` - Supabase project config (missing)
+- `docker/` files - Docker Compose configs (directory exists but empty)
 - Migration SQL files in `supabase/migrations/`
 
 **Critical bugs in existing scaffold to fix:**
-- `packages/web/app/layout.cts` and `page.cts` — must be renamed to `.tsx`
-- `packages/web/components/ui/card.ctsx` — must be renamed to `.tsx`
-- `packages/web/next.config.cts` — must be renamed to `next.config.ts`
+- `packages/web/app/layout.cts` and `page.cts` - must be renamed to `.tsx`
+- `packages/web/components/ui/card.ctsx` - must be renamed to `.tsx`
+- `packages/web/next.config.cts` - must be renamed to `next.config.ts`
 - The `.cts` extension means CommonJS TypeScript module, incompatible with Next.js App Router JSX components
 
 ---
@@ -117,7 +117,7 @@ Directives from `CLAUDE.md` that the planner must honor:
 | vite-tsconfig-paths | latest | Path alias resolution in tests | Resolves @/* imports in tests |
 | golang-migrate/migrate | v4.19.1 | DB migration runner in Go | If Go service needs to run migrations |
 
-**Note on Tailwind:** Package.json has `tailwindcss@^3.4.17`. The current npm latest is 4.2.2 (Tailwind v4). v4 uses a completely different config format (no tailwind.config.ts, CSS-based config). The existing scaffold is wired for **Tailwind v3**. Do NOT upgrade to v4 — it would require complete config rewrite. [VERIFIED: npm registry]
+**Note on Tailwind:** Package.json has `tailwindcss@^3.4.17`. The current npm latest is 4.2.2 (Tailwind v4). v4 uses a completely different config format (no tailwind.config.ts, CSS-based config). The existing scaffold is wired for **Tailwind v3**. Do NOT upgrade to v4 - it would require complete config rewrite. [VERIFIED: npm registry]
 
 **Note on Next.js version:** The existing `package.json` pins `next@^15.1.0`. The npm `latest` tag is now 16.2.3 (Next.js 16), but the project specifies 15. Stick with 15.x (currently 15.3.9 is `next-15-3` tag). [VERIFIED: npm registry]
 
@@ -219,7 +219,7 @@ byteswarm/
 }
 ```
 ```yaml
-# pnpm-workspace.yaml — JS/TS packages only
+# pnpm-workspace.yaml - JS/TS packages only
 packages:
   - 'packages/web'
   - 'packages/shared'
@@ -228,7 +228,7 @@ packages:
 [VERIFIED: pnpm workspace docs pattern + community practice]
 
 ### Pattern 2: Next.js 15 Supabase Client Setup
-**What:** Two Supabase clients required — one for browser (components), one for server (Server Components, Route Handlers, Server Actions). `@supabase/ssr` handles cookie-based session management.
+**What:** Two Supabase clients required - one for browser (components), one for server (Server Components, Route Handlers, Server Actions). `@supabase/ssr` handles cookie-based session management.
 **When to use:** All Next.js 15 App Router projects using Supabase Auth.
 **Example:**
 ```typescript
@@ -298,7 +298,7 @@ func main() {
     log.Println("shutting down")
 }
 ```
-[ASSUMED — standard Go service entrypoint pattern]
+[ASSUMED - standard Go service entrypoint pattern]
 
 ### Pattern 4: Air Hot Reload in Docker
 ```toml
@@ -344,7 +344,7 @@ tmp_dir = "/tmp/air"
 | Tenant context in RLS | Custom session variable | Supabase JWT claims (app_metadata) | Built into every query automatically via auth.jwt() |
 | Docker health check polling | Bash sleep loops | Docker native healthcheck + `depends_on: condition: service_healthy` | Correct startup ordering, visible in `docker ps` |
 
-**Key insight:** The entire Supabase local stack (Postgres, Auth, Storage, Studio, Realtime) is managed by `supabase start` — no custom Postgres container needed. This saves 100+ lines of Docker Compose complexity.
+**Key insight:** The entire Supabase local stack (Postgres, Auth, Storage, Studio, Realtime) is managed by `supabase start` - no custom Postgres container needed. This saves 100+ lines of Docker Compose complexity.
 
 ---
 
@@ -452,7 +452,7 @@ create table tenant_users (
   unique(tenant_id, user_id)
 );
 
--- Subscriptions (Lemon Squeezy — Phase 6, but table created now)
+-- Subscriptions (Lemon Squeezy - Phase 6, but table created now)
 create table subscriptions (
   id                    uuid primary key default gen_random_uuid(),
   tenant_id             uuid not null references tenants(id) on delete cascade,
@@ -611,11 +611,11 @@ create table feature_flags (
   unique(tenant_id, flag_name)
 );
 ```
-[ASSUMED — derived from REQUIREMENTS.md table list + standard SaaS patterns. Specific field choices are discretionary.]
+[ASSUMED - derived from REQUIREMENTS.md table list + standard SaaS patterns. Specific field choices are discretionary.]
 
 ### Database Indexes (DB-05)
 ```sql
--- Tenant isolation (most critical — used in every RLS policy)
+-- Tenant isolation (most critical - used in every RLS policy)
 create index idx_agents_tenant_id on agents(tenant_id);
 create index idx_conversations_tenant_id on conversations(tenant_id);
 create index idx_messages_tenant_id on messages(tenant_id);
@@ -634,12 +634,12 @@ create index idx_tool_executions_agent_id on tool_executions(agent_id);
 create index idx_messages_created_at on messages(created_at desc);
 create index idx_audit_logs_created_at on audit_logs(created_at desc);
 
--- Vector similarity (HNSW — builds on empty table, unlike IVFFlat)
+-- Vector similarity (HNSW - builds on empty table, unlike IVFFlat)
 create index idx_vector_documents_embedding on vector_documents
   using hnsw (embedding extensions.vector_cosine_ops)
   with (m = 16, ef_construction = 64);
 ```
-[ASSUMED — standard indexing patterns for the access patterns described in REQUIREMENTS.md]
+[ASSUMED - standard indexing patterns for the access patterns described in REQUIREMENTS.md]
 
 ---
 
@@ -706,7 +706,7 @@ create policy "tenant_audit_select" on audit_logs
   using (tenant_id = (select get_current_tenant_id()));
 
 -- Insert allowed (service role inserts audit entries)
--- No UPDATE or DELETE policy — append-only enforcement
+-- No UPDATE or DELETE policy - append-only enforcement
 create policy "tenant_audit_insert" on audit_logs
   for insert to authenticated
   with check (tenant_id = (select get_current_tenant_id()));
@@ -716,7 +716,7 @@ create policy "tenant_audit_insert" on audit_logs
 1. **Missing `(select ...)` wrapper on auth functions**: `auth.uid()` called without `(select auth.uid())` re-evaluates per row (O(n) not O(1)). Always wrap: `(select auth.uid())`. [CITED: Supabase RLS performance docs]
 2. **Using `user_metadata` for tenant ID**: `user_metadata` is client-writable. Only `app_metadata` is server-controlled. Tenant ID must come from `app_metadata` or from a DB lookup via `tenant_users`. [CITED: makerkit.dev RLS guide]
 3. **Forgetting `to authenticated`**: Without specifying the role, the policy applies to all roles including `anon`, causing potential leaks. Always specify `to authenticated` for tenant-scoped data.
-4. **Service role bypasses all RLS**: Go worker connecting with `DATABASE_URL` (direct DB URL) bypasses RLS entirely. Use the pooler URL + set the tenant context in the connection when reading tenant data from Go. [ASSUMED — known Supabase pattern]
+4. **Service role bypasses all RLS**: Go worker connecting with `DATABASE_URL` (direct DB URL) bypasses RLS entirely. Use the pooler URL + set the tenant context in the connection when reading tenant data from Go. [ASSUMED - known Supabase pattern]
 
 ---
 
@@ -772,7 +772,7 @@ volumes:
 
 ### Production Pattern (`docker/compose.prod.yaml`)
 ```yaml
-# docker/compose.prod.yaml — expects external DB, Auth, etc.
+# docker/compose.prod.yaml - expects external DB, Auth, etc.
 name: byteswarm-prod
 
 services:
@@ -819,12 +819,12 @@ services:
       retries: 3
       start_period: 20s
 ```
-[ASSUMED — standard Docker Compose v2 patterns, verified compose v2 uses `compose.yaml` not `docker-compose.yml`]
+[ASSUMED - standard Docker Compose v2 patterns, verified compose v2 uses `compose.yaml` not `docker-compose.yml`]
 
 ### Key Docker Compose v2 Notes
 - Filename: `compose.yaml` (canonical) or `compose.dev.yaml` / `compose.prod.yaml`. Both work. `docker-compose.yml` still accepted for backward compat. [VERIFIED: Docker docs]
 - `depends_on: condition: service_healthy` requires a healthcheck to be defined on the dependency. [VERIFIED: Docker docs]
-- Go multi-stage Dockerfile: use `golang:1.22-alpine` as builder, `alpine:3.20` as runtime. Binary-only final image. [ASSUMED — standard Go Docker pattern]
+- Go multi-stage Dockerfile: use `golang:1.22-alpine` as builder, `alpine:3.20` as runtime. Binary-only final image. [ASSUMED - standard Go Docker pattern]
 
 ---
 
@@ -839,7 +839,7 @@ services:
 |----------|-------|
 | Framework | Vitest 4.1.4 + @testing-library/react 16.3.2 (to be installed) |
 | Go testing | Built-in `go test ./...` |
-| Config file | `packages/web/vitest.config.ts` (to be created — Wave 0) |
+| Config file | `packages/web/vitest.config.ts` (to be created - Wave 0) |
 | Quick run (web) | `pnpm --filter @byteswarm/web test --run` |
 | Full suite (web) | `pnpm --filter @byteswarm/web test` |
 | Quick run (worker) | `cd packages/worker && go test ./...` |
@@ -875,10 +875,10 @@ export default defineConfig({
 | FOUN-04 | Docker Compose starts | smoke | `docker compose -f docker/compose.dev.yaml up --wait` | ❌ Wave 0 |
 
 #### Wave 0 Gaps
-- [ ] `packages/web/vitest.config.ts` — Vitest configuration
-- [ ] `packages/web/vitest.setup.ts` — Test setup (jest-dom matchers)
-- [ ] `packages/web/__tests__/layout.test.tsx` — Root layout smoke test
-- [ ] `packages/worker/internal/db/db_test.go` — DB connection test
+- [ ] `packages/web/vitest.config.ts` - Vitest configuration
+- [ ] `packages/web/vitest.setup.ts` - Test setup (jest-dom matchers)
+- [ ] `packages/web/__tests__/layout.test.tsx` - Root layout smoke test
+- [ ] `packages/worker/internal/db/db_test.go` - DB connection test
 - [ ] Vitest install: `pnpm --filter @byteswarm/web add -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/dom vite-tsconfig-paths`
 
 #### Sampling Rate
@@ -917,7 +917,7 @@ export default defineConfig({
 ### Pitfall 5: RLS Blocks Service Role Connections
 **What goes wrong:** Go worker queries return no rows even when data exists.
 **Why it happens:** Go worker connecting to Supabase with a non-service-role key gets RLS applied. Worker has no `auth.uid()` so all tenant-scoped policies return false.
-**How to avoid:** Go worker uses `DATABASE_URL` (direct connection bypassing PostgREST) which uses the `postgres` superuser role — RLS is **bypassed** for direct connections. Ensure `DATABASE_URL` uses the direct connection string, not the PostgREST URL. For operations that need tenant scoping from Go, set `SET app.current_tenant_id = '...'` before the query.
+**How to avoid:** Go worker uses `DATABASE_URL` (direct connection bypassing PostgREST) which uses the `postgres` superuser role - RLS is **bypassed** for direct connections. Ensure `DATABASE_URL` uses the direct connection string, not the PostgREST URL. For operations that need tenant scoping from Go, set `SET app.current_tenant_id = '...'` before the query.
 **Warning signs:** Empty result sets from Go, works fine from browser.
 
 ### Pitfall 6: pgvector `extensions.vector` vs `public.vector`
@@ -948,7 +948,7 @@ export default defineConfig({
 | Docker secrets | Environment variables via `.env` file, never baked into images |
 | DB passwords | Strong random values; Supabase local uses `postgres` (dev only) |
 | API key storage | `key_hash` column stores bcrypt hash; `key_prefix` for display only (table pre-created in Phase 1, used in Phase 6) |
-| Audit trail | `audit_logs` table created Phase 1 — insert-only RLS policy |
+| Audit trail | `audit_logs` table created Phase 1 - insert-only RLS policy |
 
 ### .gitignore Must Cover (Phase 1)
 ```
@@ -968,7 +968,7 @@ supabase/.env
 |--------------|------------------|--------------|--------|
 | `next.config.js` | `next.config.ts` (TypeScript config) | Next.js 15.0 | Type-safe config; native TS support |
 | `pages/` directory | `app/` directory (App Router) | Next.js 13+ | Server Components, layouts, async components |
-| `tailwind.config.js` | v3: still `.ts`; v4: `@import "tailwindcss"` in CSS | Tailwind v4 (2025) | Project uses v3 — do NOT upgrade |
+| `tailwind.config.js` | v3: still `.ts`; v4: `@import "tailwindcss"` in CSS | Tailwind v4 (2025) | Project uses v3 - do NOT upgrade |
 | `gin` v1.9 | `gin` v1.12 (2026-02-28) | Feb 2026 | Go 1.25 module requirement |
 | `google.golang.org/grpc` v1.6x | v1.80.0 | Apr 2026 | Latest stable |
 | `pgx` v4 | `pgx` v5.9.1 | Stable major v5 | API changes; v5 is current |
@@ -981,19 +981,19 @@ supabase/.env
 
 | Dependency | Required By | Available | Version | Fallback |
 |------------|------------|-----------|---------|----------|
-| Docker | All services, Supabase local | ✓ | 28.5.2 | — |
-| pnpm | JS package management | ✓ | 9.0.0 | — |
-| Node.js | Next.js dev, pnpm scripts | ✓ | v22.22.0 | — |
-| Go | packages/worker build | ✗ | — | Install via `brew install go` |
-| Supabase CLI | DB migrations, local dev | ✗ | — | Install via `brew install supabase` (2.84.2 available) |
-| Air (Go hot reload) | Dev workflow for worker | ✗ | — | Install via `go install github.com/air-verse/air@latest` after Go installed |
+| Docker | All services, Supabase local | ✓ | 28.5.2 | - |
+| pnpm | JS package management | ✓ | 9.0.0 | - |
+| Node.js | Next.js dev, pnpm scripts | ✓ | v22.22.0 | - |
+| Go | packages/worker build | ✗ | - | Install via `brew install go` |
+| Supabase CLI | DB migrations, local dev | ✗ | - | Install via `brew install supabase` (2.84.2 available) |
+| Air (Go hot reload) | Dev workflow for worker | ✗ | - | Install via `go install github.com/air-verse/air@latest` after Go installed |
 
 **Missing dependencies with no fallback:**
-- Go runtime — required to build/run the worker service. Must be installed before worker tasks.
-- Supabase CLI — required for `supabase init`, `supabase start`, and migration workflow. Must be installed before DB tasks.
+- Go runtime - required to build/run the worker service. Must be installed before worker tasks.
+- Supabase CLI - required for `supabase init`, `supabase start`, and migration workflow. Must be installed before DB tasks.
 
 **Missing dependencies with fallback:**
-- Air (hot reload) — dev convenience only. Can develop without it by rebuilding the Go binary manually. Not a blocker for phase 1.
+- Air (hot reload) - dev convenience only. Can develop without it by rebuilding the Go binary manually. Not a blocker for phase 1.
 
 ---
 
@@ -1021,9 +1021,9 @@ supabase/.env
 | # | Claim | Section | Risk if Wrong |
 |---|-------|---------|---------------|
 | A1 | 14-table schema field types and column names are correct for Phase 1 | Database Schema | Need to adjust schema in migration; low risk since no data exists yet |
-| A2 | Go worker can use `network_mode: host` in dev Docker Compose to reach Supabase CLI ports | Docker Compose | Docker compose dev won't work on macOS — need `host.docker.internal` fallback |
-| A3 | pnpm-workspace.yaml currently causes `pnpm install` to fail due to Go module directory | Monorepo Setup | May actually work if Go module directory doesn't have conflicting files — test during execution |
-| A4 | Go worker uses direct DB connection bypassing RLS | RLS Policies, Pitfall 5 | Worker queries might be unexpectedly scoped — verify during integration |
+| A2 | Go worker can use `network_mode: host` in dev Docker Compose to reach Supabase CLI ports | Docker Compose | Docker compose dev won't work on macOS - need `host.docker.internal` fallback |
+| A3 | pnpm-workspace.yaml currently causes `pnpm install` to fail due to Go module directory | Monorepo Setup | May actually work if Go module directory doesn't have conflicting files - test during execution |
+| A4 | Go worker uses direct DB connection bypassing RLS | RLS Policies, Pitfall 5 | Worker queries might be unexpectedly scoped - verify during integration |
 | A5 | `extensions.vector` schema prefix required for pgvector | Database Schema | Schema resolution may work without prefix if search_path is set in supabase config |
 
 ---
@@ -1031,34 +1031,34 @@ supabase/.env
 ## Sources
 
 ### Primary (HIGH confidence)
-- npm registry — verified package versions: next@15.1.0, tailwindcss@3.4.17, @supabase/supabase-js@2.103.0, vitest@4.1.4, @vitejs/plugin-react@6.0.1, @testing-library/react@16.3.2
-- Go module proxy (proxy.golang.org) — verified: gin@v1.12.0 (2026-02-28), grpc@v1.80.0 (2026-04-01), pgx/v5@v5.9.1 (2026-03-22), air@v1.65.0 (2026-04-05)
-- Existing codebase files — verified: package.json, pnpm-workspace.yaml, tsconfig.json, tailwind.config.ts, next.config.cts (with bug), components/
-- Docker version — Docker 28.5.2 confirmed installed
-- Supabase brew info — version 2.84.2 available, not installed
+- npm registry - verified package versions: next@15.1.0, tailwindcss@3.4.17, @supabase/supabase-js@2.103.0, vitest@4.1.4, @vitejs/plugin-react@6.0.1, @testing-library/react@16.3.2
+- Go module proxy (proxy.golang.org) - verified: gin@v1.12.0 (2026-02-28), grpc@v1.80.0 (2026-04-01), pgx/v5@v5.9.1 (2026-03-22), air@v1.65.0 (2026-04-05)
+- Existing codebase files - verified: package.json, pnpm-workspace.yaml, tsconfig.json, tailwind.config.ts, next.config.cts (with bug), components/
+- Docker version - Docker 28.5.2 confirmed installed
+- Supabase brew info - version 2.84.2 available, not installed
 - Go: not installed (confirmed not in PATH)
 
 ### Secondary (MEDIUM confidence)
-- [supabase.com/docs/guides/local-development/overview](https://supabase.com/docs/guides/local-development/overview) — CLI workflow, migration commands
-- [supabase.com/docs/guides/database/extensions/pgvector](https://supabase.com/docs/guides/database/extensions/pgvector) — pgvector extension setup
-- [makerkit.dev/blog/tutorials/supabase-rls-best-practices](https://makerkit.dev/blog/tutorials/supabase-rls-best-practices) — RLS patterns for multi-tenant apps
-- [nextjs.org/docs/app/guides/testing/vitest](https://nextjs.org/docs/app/guides/testing/vitest) — Vitest setup for Next.js
-- [github.com/air-verse/air](https://github.com/air-verse/air) — Air configuration reference
+- [supabase.com/docs/guides/local-development/overview](https://supabase.com/docs/guides/local-development/overview) - CLI workflow, migration commands
+- [supabase.com/docs/guides/database/extensions/pgvector](https://supabase.com/docs/guides/database/extensions/pgvector) - pgvector extension setup
+- [makerkit.dev/blog/tutorials/supabase-rls-best-practices](https://makerkit.dev/blog/tutorials/supabase-rls-best-practices) - RLS patterns for multi-tenant apps
+- [nextjs.org/docs/app/guides/testing/vitest](https://nextjs.org/docs/app/guides/testing/vitest) - Vitest setup for Next.js
+- [github.com/air-verse/air](https://github.com/air-verse/air) - Air configuration reference
 - WebSearch: Next.js 15 pnpm best practices, Docker Compose patterns, RLS patterns
 
 ### Tertiary (LOW confidence)
-- Go worker internal structure (cmd/internal layout) — standard Go pattern, widely adopted
+- Go worker internal structure (cmd/internal layout) - standard Go pattern, widely adopted
 
 ---
 
 ## Metadata
 
 **Confidence breakdown:**
-- Standard stack: HIGH — versions verified against npm registry and Go module proxy
-- Architecture patterns: MEDIUM — standard patterns, some specific to this hybrid stack
-- Database schema: MEDIUM — table names from REQUIREMENTS.md, field choices assumed
-- Pitfalls: HIGH — bugs (`.cts` extensions, missing tools) verified against existing codebase
-- RLS patterns: MEDIUM — cited from Supabase official docs and respected community source
+- Standard stack: HIGH - versions verified against npm registry and Go module proxy
+- Architecture patterns: MEDIUM - standard patterns, some specific to this hybrid stack
+- Database schema: MEDIUM - table names from REQUIREMENTS.md, field choices assumed
+- Pitfalls: HIGH - bugs (`.cts` extensions, missing tools) verified against existing codebase
+- RLS patterns: MEDIUM - cited from Supabase official docs and respected community source
 
 **Research date:** 2026-04-11
 **Valid until:** 2026-05-11 (stable ecosystem; Go modules, Supabase CLI change slowly)

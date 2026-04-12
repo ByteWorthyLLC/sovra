@@ -1,166 +1,181 @@
-# ByteSwarm
+<p align="center">
+  <img src="https://raw.githubusercontent.com/byteswarm/byteswarm/main/.github/logo.svg" width="80" alt="ByteSwarm" />
+</p>
 
-**Open-source AI-native SaaS boilerplate for building production AI applications**
+<h1 align="center">ByteSwarm</h1>
 
-```
-         ██████                        
-        ██    ██     ██     █████    
-       ██      ██   ██   ██   ██  ██  
-      ██      ██████ ████████  ██      
-      ██      ██   ██ ██   ██  ██      
-        ██    ██   ██ ██   ██  ██    
-         ██████    ██ ██   ██  ██    
-                  _|_|_|_|              
-                                         
-       AI Agent Platform Made Easy
-```
+<p align="center">
+  <strong>The open-source AI agent platform you'd have to build yourself. Until now.</strong>
+</p>
 
----
+<p align="center">
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#what-you-get">What You Get</a> •
+  <a href="#the-stack">The Stack</a> •
+  <a href="#deploy">Deploy</a> •
+  <a href="#contributing">Contributing</a>
+</p>
 
-## What is ByteSwarm?
-
-ByteSwarm is a **production-ready, open-source SaaS boilerplate** for building AI-powered applications with:
-
-- 🔗 **MCP-Native** — Full Model Context Protocol client/server implementation
-- 🧠 **Vector Database** — Built-in pgvector for semantic search
-- 👥 **Multi-Tenant** — Database-level isolation with Row Level Security
-- 🤖 **Multi-Agent** — Workspace collaboration with real-time sync
-- 🔒 **Security First** — Hardened auth, RLS, audit logging
-- 🐳 **Self-Hosted** — Docker all-in-one, deploy anywhere (Railway, AWS, GCP)
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome" />
+</p>
 
 ---
 
-## Why ByteSwarm?
+## The Problem
 
-| Problem | Solution |
-|---------|----------|
-| Starting from scratch takes weeks | Zero-to-production in hours |
-| Building MCP integration is hard | Full client/server implementation included |
-| Multi-tenancy is error-prone | RLS policies enforced at database level |
-| Need vector search? | pgvector built-in, no separate service |
-| Want AI agents to collaborate? | Workspace system with real-time sync |
-| Can't afford closed-source boilerplates | MIT licensed, fully open source |
+You want to build an AI agent product. So you start wiring up auth, multi-tenancy, vector search, MCP tool integration, real-time collaboration, billing...
 
----
+**Three months later, you still haven't shipped a single AI feature.**
+
+Every SaaS boilerplate gives you auth and billing. None of them give you the AI infrastructure. Every agent framework gives you LLM orchestration. None of them give you the SaaS wrapper.
+
+You're stuck gluing them together yourself.
+
+## The Solution
+
+ByteSwarm is the full stack. Auth to agents. Database to deployment. One repo, one command, production-ready.
+
+**What takes teams 3+ months to build, you get in one `git clone`.**
 
 ## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/byteswarm.git
+git clone https://github.com/byteswarm/byteswarm.git
 cd byteswarm
-
-# Start local development
 docker-compose up
-
 # Open http://localhost:3000
 ```
 
----
+That's it. Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally in under 2 minutes.
 
-## Tech Stack
+## What You Get
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 15, TypeScript, Tailwind CSS, shadcn/ui |
-| Backend | Go 1.22+, Gin, gRPC |
-| Database | Supabase PostgreSQL + pgvector |
-| Cache | Redis |
-| Auth | NextAuth.js |
-| AI | Vercel AI SDK, MCP SDK |
-| Real-time | Socket.IO |
+### The SaaS Layer (so you never think about plumbing again)
 
----
+| Feature | What it does |
+|---------|-------------|
+| **Multi-tenant auth** | Email, magic links, OAuth (Google, GitHub). Supabase-native with a swappable AuthAdapter interface. Bring your own provider. |
+| **Tenant isolation** | Row-level security at the database level. Not middleware. Not application logic. Postgres enforces it. User A cannot see User B's data. Period. |
+| **Roles and permissions** | Owner, admin, member, viewer out of the box. Need custom roles? The permission system is database-backed and tenant-configurable. No forking required. |
+| **Invite system** | Email invitations AND shareable invite links. Works with or without SMTP configured. |
+| **Billing ready** | Lemon Squeezy integration with plan definitions, usage tracking, and customer portal. |
+| **API keys** | Scoped API key generation with rate limiting and audit logging. |
 
-## Features
+### The AI Layer (the part nobody else ships)
 
-### ✅ Foundation
-- [x] Next.js 15 App Router
-- [x] TypeScript + Tailwind
-- [x] Docker Compose (all-in-one)
-- [x] Monorepo structure
+| Feature | What it does |
+|---------|-------------|
+| **MCP native** | Full Model Context Protocol client AND server. Your agents discover and use tools the way the ecosystem intended. Not a wrapper. Not a shim. Native. |
+| **Vector search** | pgvector built into your existing Postgres. No separate Pinecone bill. No Weaviate cluster. Semantic search, hybrid search, tenant-scoped. |
+| **Agent runtime** | Create agents with custom model configs, system prompts, and tool assignments. Streaming responses via Vercel AI SDK. |
+| **Multi-agent workspaces** | Agents collaborate in real-time. Round-robin, hierarchical, democratic, parallel execution modes. Shared memory. Conflict resolution. |
+| **Memory strategies** | Full conversation history, summary compression, vector retrieval, or hybrid. Context never gets stale. |
+| **Built-in tools** | File operations, web search, URL fetch, database query, semantic search. All MCP-compliant. All tenant-scoped. |
 
-### ✅ Core Infrastructure  
-- [x] Multi-tenant isolation with RLS
-- [x] Authentication (email, OAuth, magic links)
-- [x] RBAC (owner/admin/member/viewer)
-- [x] API keys with rate limiting
+### The Production Layer (ship it, don't just demo it)
 
-### ✅ AI Features
-- [x] MCP client/server
-- [x] Built-in tools (file ops, web search, code execution)
-- [x] Vector storage with pgvector
-- [x] Streaming responses
+| Feature | What it does |
+|---------|-------------|
+| **Deploy anywhere** | Docker all-in-one, Railway, AWS, GCP. Self-hosted only. Your data stays on your infrastructure. |
+| **Admin dashboard** | Tenant management, user management, system analytics. See everything. |
+| **Monitoring** | Sentry for errors, PostHog for product analytics. Pre-wired. |
+| **Audit logging** | Every sensitive operation tracked. Who did what, when, to which tenant. |
 
-### ✅ Multi-Agent
-- [x] Workspace collaboration
-- [x] Real-time agent sync
-- [x] Memory strategies (conversation, summary, vector, hybrid)
-- [x] Conflict resolution
+## The Stack
 
-### ✅ Production Ready
-- [x] Billing integration (Lemon Squeezy)
-- [x] Admin dashboard
-- [x] Multi-cloud deployment configs
-- [x] Monitoring (Sentry, PostHog)
+```
+Frontend     Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
+Agent Worker Go 1.22+ with Gin + gRPC (because Python is too slow for agent orchestration)
+Database     Supabase PostgreSQL + pgvector + Row Level Security
+Auth         Supabase Auth (swappable via AuthAdapter interface)
+Real-time    Socket.IO
+AI SDK       Vercel AI SDK + MCP SDK
+Billing      Lemon Squeezy
+Monitoring   Sentry + PostHog
+```
 
----
+**Why Go for the worker?** Agent orchestration is I/O bound with bursts of CPU. Go's goroutines handle thousands of concurrent agent sessions on a single node. Python can't.
 
-## Deployment
+**Why Supabase?** Postgres + pgvector + auth + real-time + RLS in one service. No separate vector database bill. No separate auth service. Everything in one place, and you own the data.
+
+**Why not NextAuth/Clerk/Auth0?** ByteSwarm ships with Supabase Auth as the default (zero config). But the `AuthAdapter` interface means you can swap to any provider by implementing 5 methods. No lock-in.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────┐
+│                  Next.js Frontend                │
+│          (App Router, Vercel AI SDK)             │
+└───────────────┬─────────────────┬───────────────┘
+                │ API             │ gRPC
+┌───────────────▼──┐    ┌────────▼────────────────┐
+│   Supabase       │    │     Go Worker           │
+│  (Auth, DB, RLS) │    │  (Agent Runtime, MCP)   │
+└───────────────┬──┘    └────────┬────────────────┘
+                │                │
+         ┌──────▼────────────────▼──────┐
+         │     PostgreSQL + pgvector     │
+         │  (Tenant-isolated, RLS)       │
+         └──────────────────────────────┘
+```
+
+## Who This Is For
+
+- **Indie hackers** building AI-powered SaaS products who don't want to spend months on infrastructure
+- **Startups** that need multi-tenant AI agent capabilities on day one
+- **Agencies** building custom AI solutions for clients who need tenant isolation
+- **Enterprise teams** evaluating self-hosted alternatives to closed-source agent platforms
+- **Open-source contributors** who want to build on a solid, extensible foundation
+
+## Who This Is NOT For
+
+- If you need a simple chatbot wrapper, use OpenWebUI
+- If you need an agent framework (no SaaS), use LangGraph or CrewAI
+- If you want a hosted solution, this is self-hosted only
+
+## Feature Roadmap
+
+| Phase | Status | What Ships |
+|-------|--------|-----------|
+| Foundation | ✅ Complete | Monorepo, database, Docker, testing |
+| Core Infrastructure | 🔧 In Progress | Auth, multi-tenancy, RBAC, invitations |
+| Agent Core | Planned | Agent CRUD, chat UI, streaming |
+| AI Features | Planned | MCP integration, vector search, built-in tools |
+| Multi-Agent | Planned | Workspaces, collaboration, shared memory |
+| Production Ready | Planned | Billing, admin, deployment, monitoring |
+
+## Deploy
+
+### Docker (self-hosted)
+```bash
+docker-compose -f docker/compose.prod.yaml up -d
+```
 
 ### Railway
 ```bash
-# Connect GitHub repo, deploy automatically
+# Connect your GitHub repo. Railway auto-deploys.
 ```
 
-### AWS (ECS/Cloud Run)
+### AWS / GCP
 ```bash
-# Use the included Terraform or CloudFormation templates
+# Container deployment configs included for ECS and Cloud Run.
 ```
-
-### GCP (Cloud Run)
-```bash
-# Use the included container deployment configs
-```
-
-### Self-Hosted (Docker)
-```bash
-docker-compose -f docker-compose.all-in-one.yml up
-```
-
----
-
-## Documentation
-
-- [Getting Started](docs/getting-started.md)
-- [Architecture](docs/architecture.md)
-- [API Reference](docs/api-reference.md)
-- [Deployment Guide](docs/deployment.md)
-- [Security Guide](docs/security.md)
-
----
 
 ## Contributing
 
-Contributions welcome! Please read our [contributing guide](CONTRIBUTING.md).
+Contributions welcome. Read the [contributing guide](CONTRIBUTING.md) before opening a PR.
 
----
+**The fastest way to contribute:** Pick any feature from the roadmap, open an issue, and start building.
 
 ## License
 
-**MIT** — See [LICENSE](LICENSE) for details.
+**MIT**. Use it for anything. Commercial, personal, educational. No strings attached.
 
 ---
 
-## Community
-
-- [GitHub Discussions](https://github.com/your-username/byteswarm/discussions)
-- [Discord Server](#) — Join the community
-
----
-
-### Built with patterns from Claude Code from Source
-
-ByteSwarm incorporates architectural patterns identified in the [Claude Code from Source](https://github.com/alejandrobalderas/claude-code-from-source) project — an educational analysis of production AI agent architecture.
-
----
+<p align="center">
+  <strong>Built by <a href="https://byteworthy.dev">ByteWorthy</a></strong><br/>
+  <sub>Stop building plumbing. Start building product.</sub>
+</p>

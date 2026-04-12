@@ -1,4 +1,4 @@
-# Phase 2: Core Infrastructure — Context
+# Phase 2: Core Infrastructure - Context
 
 **Phase:** 2 of 6
 **Goal:** Implement authentication, multi-tenancy, and RBAC
@@ -7,18 +7,18 @@
 ## Grey Area Decisions
 
 ### 1. Auth Provider Strategy
-**Decision:** Supabase Auth native — behind an `AuthAdapter` interface
-**Rationale:** Open-source boilerplate must not lock users into one auth provider. Supabase Auth is the default (zero config with existing Supabase setup). An `AuthAdapter` interface allows swapping to NextAuth, Clerk, Auth0, or custom providers by implementing ~5 methods (signUp, signIn, signOut, getSession, getUser). No custom JWT hooks — keeps it working on Supabase free tier.
+**Decision:** Supabase Auth native - behind an `AuthAdapter` interface
+**Rationale:** Open-source boilerplate must not lock users into one auth provider. Supabase Auth is the default (zero config with existing Supabase setup). An `AuthAdapter` interface allows swapping to NextAuth, Clerk, Auth0, or custom providers by implementing ~5 methods (signUp, signIn, signOut, getSession, getUser). No custom JWT hooks - keeps it working on Supabase free tier.
 
 ### 2. Multi-Tenant Routing
-**Decision:** All three strategies via config — subdomain, path, header
+**Decision:** All three strategies via config - subdomain, path, header
 **Implementation:** A `TenantResolver` interface with 3 implementations. `TENANT_RESOLUTION_STRATEGY` env var selects one. Default: `path` (simplest for local dev and self-hosters). Subdomain for SaaS deployments. Header for API-first/headless usage.
 - Path: `/t/{slug}/dashboard`
 - Subdomain: `{slug}.byteswarm.dev`
 - Header: `X-Tenant-ID` or `X-Tenant-Slug`
 
 ### 3. Permission Model
-**Decision:** Role + permissions table — customizable per tenant
+**Decision:** Role + permissions table - customizable per tenant
 **Rationale:** Hardcoded permission enums force forks. Open-source users need custom roles ("billing admin", "analyst", "agent operator"). Schema: `roles` table (tenant-scoped, seeded with owner/admin/member/viewer), `permissions` table (action strings), `role_permissions` junction. A `hasPermission(userId, tenantId, action)` utility checks via DB. Permission strings follow `resource:action` format (e.g., `agent:create`, `workspace:manage`, `billing:read`).
 
 ### 4. Invitation Flow
@@ -31,11 +31,11 @@
 
 ## Architecture Principles (Open-Source Optimized)
 
-1. **Interfaces at every boundary** — AuthAdapter, TenantResolver, PermissionChecker
-2. **Sensible defaults, zero mandatory config** — Works with just Supabase URL + anon key
-3. **No vendor lock-in** — Every external dependency is behind an abstraction
-4. **Progressive complexity** — Simple path routing + role-only permissions work out of the box. Subdomain routing + custom permissions are opt-in.
-5. **Self-hostable** — No features that require paid tiers of any service
+1. **Interfaces at every boundary** - AuthAdapter, TenantResolver, PermissionChecker
+2. **Sensible defaults, zero mandatory config** - Works with just Supabase URL + anon key
+3. **No vendor lock-in** - Every external dependency is behind an abstraction
+4. **Progressive complexity** - Simple path routing + role-only permissions work out of the box. Subdomain routing + custom permissions are opt-in.
+5. **Self-hostable** - No features that require paid tiers of any service
 
 ## Schema Changes Required
 
@@ -101,10 +101,10 @@ packages/shared/
 
 ## Dependencies to Add
 
-- `@supabase/ssr` — Server-side Supabase client for Next.js
-- `@supabase/supabase-js` — Already likely present, verify version
-- `zod` — Input validation for auth forms
-- No additional auth libraries — Supabase Auth handles email, magic link, OAuth natively
+- `@supabase/ssr` - Server-side Supabase client for Next.js
+- `@supabase/supabase-js` - Already likely present, verify version
+- `zod` - Input validation for auth forms
+- No additional auth libraries - Supabase Auth handles email, magic link, OAuth natively
 
 ## Success Criteria (from ROADMAP.md)
 

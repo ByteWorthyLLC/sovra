@@ -15,14 +15,14 @@ Set up project structure, database, and local development environment
 ## Implementation Decisions
 
 ### Claude's Discretion
-All implementation choices are at Claude's discretion — pure infrastructure phase. Use established best practices for monorepo setup, Docker configuration, and database schema design.
+All implementation choices are at Claude's discretion - pure infrastructure phase. Use established best practices for monorepo setup, Docker configuration, and database schema design.
 
 </decisions>
 
 <code_context>
 ## Existing Code Insights
 
-No existing codebase — this is the foundation phase. Will create:
+No existing codebase - this is the foundation phase. Will create:
 - Monorepo structure with pnpm workspaces
 - Next.js 15 app with App Router
 - Go worker service with Gin + gRPC
@@ -34,7 +34,7 @@ No existing codebase — this is the foundation phase. Will create:
 <specifics>
 ## Specific Ideas
 
-No specific requirements — infrastructure phase. Reference:
+No specific requirements - infrastructure phase. Reference:
 - ROADMAP.md for full requirements list
 - Agency best practices for monorepo and Docker setup
 
@@ -43,6 +43,6 @@ No specific requirements — infrastructure phase. Reference:
 <deferred>
 ## Deferred Ideas
 
-None — infrastructure phase.
+None - infrastructure phase.
 
 </deferred>

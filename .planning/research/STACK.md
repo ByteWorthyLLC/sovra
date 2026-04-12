@@ -1,6 +1,6 @@
-# Stack Research — ByteSwarm
+# Stack Research - ByteSwarm
 
-**Research Type:** Project Research — Stack dimension
+**Research Type:** Project Research - Stack dimension
 **Date:** 2026-04-11
 
 ## Technology Stack

@@ -1,4 +1,4 @@
-# ByteSwarm — Claude Code Instructions
+# ByteSwarm - Claude Code Instructions
 
 This file provides project-specific guidance for Claude Code when working on ByteSwarm.
 
@@ -59,10 +59,10 @@ byteswarm/
 
 ### From Claude Code from Source
 
-1. **AsyncGenerator agent loop** — Streams responses naturally
-2. **Speculative tool execution** — Start read-only tools during streaming
-3. **4-layer context compression** — snip → microcompact → collapse → autocompact
-4. **Fork agents** — Cache sharing saves ~95% tokens
+1. **AsyncGenerator agent loop** - Streams responses naturally
+2. **Speculative tool execution** - Start read-only tools during streaming
+3. **4-layer context compression** - snip → microcompact → collapse → autocompact
+4. **Fork agents** - Cache sharing saves ~95% tokens
 
 ### Multi-Tenancy
 
@@ -72,7 +72,7 @@ byteswarm/
 
 ### Security Requirements
 
-- 🔒 Extremely hardened — no shortcuts
+- 🔒 Extremely hardened - no shortcuts
 - All API routes must check authentication
 - All database queries must be tenant-scoped
 - Audit log all sensitive operations
@@ -80,19 +80,19 @@ byteswarm/
 ## Reading Before Work
 
 Always read before making changes:
-- `.planning/PROJECT.md` — Current project context
-- `.planning/REQUIREMENTS.md` — v1 requirements
-- `.planning/ROADMAP.md` — Current phase details
+- `.planning/PROJECT.md` - Current project context
+- `.planning/REQUIREMENTS.md` - v1 requirements
+- `.planning/ROADMAP.md` - Current phase details
 
 ## Quality Gates
 
 Before claiming any work complete:
 
-1. **Test** — Tests pass
-2. **Lint** — ESLint/ruff clean
-3. **Type Check** — TypeScript/Go compilation clean
-4. **Security** — NoSecrets check
-5. **Build** — Production build succeeds
+1. **Test** - Tests pass
+2. **Lint** - ESLint/ruff clean
+3. **Type Check** - TypeScript/Go compilation clean
+4. **Security** - NoSecrets check
+5. **Build** - Production build succeeds
 
 ## Shipping
 

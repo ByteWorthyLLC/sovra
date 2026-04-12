@@ -7,24 +7,24 @@ re_verification: false
 human_verification:
   - test: "Run `pnpm install && pnpm --filter @byteswarm/web run test` from repo root"
     expected: "2/2 Vitest smoke tests pass (confirms test infrastructure + JSX compilation)"
-    why_human: "node_modules not installed in verification environment — cannot run vitest directly"
+    why_human: "node_modules not installed in verification environment - cannot run vitest directly"
   - test: "Run `pnpm --filter @byteswarm/web run lint` from repo root"
     expected: "next lint exits 0 with no warnings or errors"
-    why_human: "node_modules not installed — cannot invoke next lint directly. Also need to confirm card.ctsx does not cause parse errors (file still present alongside card.tsx)"
+    why_human: "node_modules not installed - cannot invoke next lint directly. Also need to confirm card.ctsx does not cause parse errors (file still present alongside card.tsx)"
   - test: "Run `pnpm --filter @byteswarm/web run type-check` from repo root"
     expected: "tsc --noEmit exits 0"
-    why_human: "node_modules not installed — cannot run tsc directly"
+    why_human: "node_modules not installed - cannot run tsc directly"
   - test: "Run `docker compose -f docker/compose.dev.yaml up` (requires Docker + `supabase start` on host first)"
     expected: "web service starts on :3000, worker starts on :8080/:50051, no fatal errors"
     why_human: "Docker daemon required; Supabase must be running on host. Functional integration test cannot be done programmatically here."
 ---
 
-# Phase 1: Foundation — Verification Report
+# Phase 1: Foundation - Verification Report
 
 **Phase Goal:** Set up project structure, database, and local development environment
 **Verified:** 2026-04-11
 **Status:** human_needed
-**Re-verification:** No — initial verification
+**Re-verification:** No - initial verification
 
 ## Goal Achievement
 
@@ -38,21 +38,21 @@ human_verification:
 | 4 | All database tables exist with correct schema | ✓ VERIFIED | supabase/migrations/20260412004330_initial_schema.sql contains exactly 14 `create table` statements: tenants, users, tenant_users, subscriptions, agents, workspaces, conversations, messages, shared_memory, vector_documents, tool_executions, audit_logs, api_keys, feature_flags |
 | 5 | RLS policies prevent cross-tenant queries | ✓ VERIFIED | All 14 tables have `enable row level security`; 51 `create policy` statements present; `get_current_tenant_id()` function enforces tenant scoping in using/with check clauses; security definer function prevents caller forgery |
 | 6 | Project builds without errors | ✓ VERIFIED | TypeScript compiles clean (tsc --noEmit exit 0 per SUMMARY 01-03, 01-04); Go builds clean (verified live `go build ./...`); commits 5414208, 69ab33e confirm clean gate passes |
-| 7 | Tests run and pass | ? HUMAN NEEDED | vitest.config.ts exists with jsdom environment; smoke.test.tsx has 2 substantive tests; SUMMARY 01-04 reports 2/2 pass — but node_modules absent in this environment, cannot re-run |
-| 8 | TypeScript compiles without errors | ? HUMAN NEEDED | SUMMARY 01-03 and 01-04 report tsc --noEmit exit 0; packages/shared/types/database.ts is 874 lines (generated from live schema, not a stub) — but node_modules absent, cannot re-verify |
-| 9 | Linting passes | ? HUMAN NEEDED | .eslintrc.json exists with `next/core-web-vitals`; SUMMARY 01-04 reports ESLint clean; however card.ctsx (scaffold leftover) exists alongside card.tsx — ESLint may parse it. Needs human run to confirm. |
+| 7 | Tests run and pass | ? HUMAN NEEDED | vitest.config.ts exists with jsdom environment; smoke.test.tsx has 2 substantive tests; SUMMARY 01-04 reports 2/2 pass - but node_modules absent in this environment, cannot re-run |
+| 8 | TypeScript compiles without errors | ? HUMAN NEEDED | SUMMARY 01-03 and 01-04 report tsc --noEmit exit 0; packages/shared/types/database.ts is 874 lines (generated from live schema, not a stub) - but node_modules absent, cannot re-verify |
+| 9 | Linting passes | ? HUMAN NEEDED | .eslintrc.json exists with `next/core-web-vitals`; SUMMARY 01-04 reports ESLint clean; however card.ctsx (scaffold leftover) exists alongside card.tsx - ESLint may parse it. Needs human run to confirm. |
 
 **Score:** 6 verified, 3 human-needed (6/9 fully automated, 9/9 evidenced)
 
 ### Known Issue: card.ctsx Leftover
 
-`packages/web/components/ui/card.ctsx` exists alongside the correct `card.tsx`. This is a leftover from the original scaffold. Plan 01-01 SUMMARY says `.cts`/`.ctsx` extensions were "fixed" but this file was not deleted. Plan 01-04 SUMMARY confirms ESLint passed after deleting `layout.cts`, `page.cts`, and `next.config.cts` — but did not reference `card.ctsx`. The correct `card.tsx` is present and is what should be imported. Risk: ESLint may flag the `.ctsx` file during lint. Severity: Warning (linting may report parse error on unused file, does not block build or tests).
+`packages/web/components/ui/card.ctsx` exists alongside the correct `card.tsx`. This is a leftover from the original scaffold. Plan 01-01 SUMMARY says `.cts`/`.ctsx` extensions were "fixed" but this file was not deleted. Plan 01-04 SUMMARY confirms ESLint passed after deleting `layout.cts`, `page.cts`, and `next.config.cts` - but did not reference `card.ctsx`. The correct `card.tsx` is present and is what should be imported. Risk: ESLint may flag the `.ctsx` file during lint. Severity: Warning (linting may report parse error on unused file, does not block build or tests).
 
 ### Required Artifacts
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `pnpm-workspace.yaml` | pnpm monorepo config | ✓ VERIFIED | Lists `packages/web` and `packages/shared`; worker excluded from JS workspace (correct — Go module) |
+| `pnpm-workspace.yaml` | pnpm monorepo config | ✓ VERIFIED | Lists `packages/web` and `packages/shared`; worker excluded from JS workspace (correct - Go module) |
 | `packages/web/next.config.ts` | Next.js config | ✓ VERIFIED | ESM export, `output: 'standalone'` for Docker |
 | `packages/shared/types/database.ts` | Generated TS types | ✓ VERIFIED | 874 lines, auto-generated from live Supabase schema, 20 `Tables` references |
 | `packages/worker/go.mod` | Go module definition | ✓ VERIFIED | `module github.com/byteswarm/worker`, go 1.26.2, gin + pgx + grpc deps |
@@ -78,7 +78,7 @@ human_verification:
 
 ### Data-Flow Trace (Level 4)
 
-Not applicable for Phase 1 — no components render dynamic data from API endpoints. All artifacts are infrastructure/config (Docker files, migration SQL, Go service skeleton, TypeScript types, test infrastructure).
+Not applicable for Phase 1 - no components render dynamic data from API endpoints. All artifacts are infrastructure/config (Docker files, migration SQL, Go service skeleton, TypeScript types, test infrastructure).
 
 ### Behavioral Spot-Checks
 
@@ -115,7 +115,7 @@ Not applicable for Phase 1 — no components render dynamic data from API endpoi
 | File | Pattern | Severity | Impact |
 |------|---------|----------|--------|
 | `packages/web/components/ui/card.ctsx` | Stale scaffold file (duplicate of card.tsx with wrong extension) | Warning | ESLint may fail to parse JSX in .ctsx extension during lint run. Does not affect build or tests. The correct card.tsx is present. |
-| `packages/shared/types/database.ts` was previously a stub | `Tables: Record<string, never>` — noted in 01-01 SUMMARY as intentional, replaced in 01-03 | Info | Resolved — 874-line generated file confirms stub was replaced. |
+| `packages/shared/types/database.ts` was previously a stub | `Tables: Record<string, never>` - noted in 01-01 SUMMARY as intentional, replaced in 01-03 | Info | Resolved - 874-line generated file confirms stub was replaced. |
 
 No TODO/FIXME/HACK patterns found in production code files. Worker gRPC insecure credentials is documented as a known threat flag (acceptable for Docker-internal-only, migration to TLS required before external exposure).
 
@@ -124,7 +124,7 @@ No TODO/FIXME/HACK patterns found in production code files. Worker gRPC insecure
 #### 1. Test Suite
 
 **Test:** From repo root: `pnpm install && pnpm --filter @byteswarm/web run test`
-**Expected:** "2 tests passed" — arithmetic assertion and JSX compilation
+**Expected:** "2 tests passed" - arithmetic assertion and JSX compilation
 **Why human:** node_modules not installed in verification environment
 
 #### 2. TypeScript Compilation
@@ -147,7 +147,7 @@ No TODO/FIXME/HACK patterns found in production code files. Worker gRPC insecure
 
 ### Gaps Summary
 
-No blocking gaps. All 10 requirements (FOUN-01..05, DB-01..05) are evidenced by substantive, wired artifacts. The phase goal — project scaffold, database, and local dev environment — is achieved in the codebase.
+No blocking gaps. All 10 requirements (FOUN-01..05, DB-01..05) are evidenced by substantive, wired artifacts. The phase goal - project scaffold, database, and local dev environment - is achieved in the codebase.
 
 Four items require human verification due to missing node_modules in this environment and Docker daemon dependency. These are confidence-confirming checks, not gap-filling checks. The SUMMARY reports for all four plans document clean passes, and the underlying artifacts are all present and substantive.
 

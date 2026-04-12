@@ -1,4 +1,4 @@
-# Research Summary — ByteSwarm
+# Research Summary - ByteSwarm
 
 **Synthesized:** 2026-04-11
 
@@ -46,16 +46,16 @@ What makes ByteSwarm unique:
 
 ### High Priority
 
-1. **Multi-tenant RLS complexity** — Test thoroughly, use service role sparingly
-2. **Tool execution security** — Sandbox tools, enforce timeouts, track costs
-3. **Deployment underestimation** — Docker from day one, validate env vars
+1. **Multi-tenant RLS complexity** - Test thoroughly, use service role sparingly
+2. **Tool execution security** - Sandbox tools, enforce timeouts, track costs
+3. **Deployment underestimation** - Docker from day one, validate env vars
 
 ### Medium Priority
 
-4. **Streaming latency** — Use speculative execution
-5. **Memory management** — Implement compression early
-6. **MCP protocol changes** — Pin versions, monitor updates
-7. **Real-time state sync** — Use established Socket.IO patterns
+4. **Streaming latency** - Use speculative execution
+5. **Memory management** - Implement compression early
+6. **MCP protocol changes** - Pin versions, monitor updates
+7. **Real-time state sync** - Use established Socket.IO patterns
 
 ### Security Musts
 
@@ -66,11 +66,11 @@ What makes ByteSwarm unique:
 
 ## Files Created
 
-- `.planning/research/STACK.md` — Technology decisions
-- `.planning/research/FEATURES.md` — Feature categories
-- `.planning/research/ARCHITECTURE.md` — System design
-- `.planning/research/PITFALLS.md` — Common mistakes
-- `.planning/research/SUMMARY.md` — This file
+- `.planning/research/STACK.md` - Technology decisions
+- `.planning/research/FEATURES.md` - Feature categories
+- `.planning/research/ARCHITECTURE.md` - System design
+- `.planning/research/PITFALLS.md` - Common mistakes
+- `.planning/research/SUMMARY.md` - This file
 
 ---
 *Synthesizer: gsd-research-synthesizer*
