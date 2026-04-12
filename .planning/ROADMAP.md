@@ -146,9 +146,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md - Go MCP server with Streamable HTTP + built-in tools (file, web, database)
-- [ ] 04-02-PLAN.md - MCP client in Next.js + tool registry + chat route tool integration
-- [ ] 04-03-PLAN.md - Vector embedding, semantic search, hybrid search + migration
+- [x] 04-01-PLAN.md - Go MCP server with Streamable HTTP + built-in tools (file, web, database)
+- [x] 04-02-PLAN.md - MCP client in Next.js + tool registry + chat route tool integration
+- [x] 04-03-PLAN.md - Vector embedding, semantic search, hybrid search + migration
 
 **Requirements:**
 - MCP-01: MCP Client in Next.js
