@@ -108,9 +108,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md - AI provider adapter + agent types/actions/queries + chat actions/queries + tests
-- [ ] 03-02-PLAN.md - Agent list page UI + create dialog + config sheet + status badge + enable sidebar
-- [ ] 03-03-PLAN.md - Chat route handler + streaming UI + message persistence + conversation sidebar
+- [x] 03-01-PLAN.md - AI provider adapter + agent types/actions/queries + chat actions/queries + tests
+- [x] 03-02-PLAN.md - Agent list page UI + create dialog + config sheet + status badge + enable sidebar
+- [x] 03-03-PLAN.md - Chat route handler + streaming UI + message persistence + conversation sidebar
 
 **Requirements:**
 - AGNT-01: Agent CRUD operations
