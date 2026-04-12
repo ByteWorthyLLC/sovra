@@ -12,6 +12,12 @@ importers:
 
   packages/web:
     dependencies:
+      '@ai-sdk/anthropic':
+        specifier: 0.0.56
+        version: 0.0.56(zod@3.25.76)
+      '@ai-sdk/openai':
+        specifier: 0.0.72
+        version: 0.0.72(zod@3.25.76)
       '@byteswarm/shared':
         specifier: workspace:*
         version: link:../shared
@@ -141,6 +147,18 @@ importers:
         version: 4.1.4(@opentelemetry/api@1.9.0)(@types/node@22.19.17)(jsdom@29.0.2)(vite@8.0.8(@types/node@22.19.17)(jiti@1.21.7))
 
 packages:
+
+  '@ai-sdk/anthropic@0.0.56':
+    resolution: {integrity: sha512-FC/XbeFANFp8rHH+zEZF34cvRu9T42rQxw9QnUzJ1LXTi1cWjxYOx2Zo4vfg0iofxxqgOe4fT94IdT2ERQ89bA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+
+  '@ai-sdk/openai@0.0.72':
+    resolution: {integrity: sha512-IKsgxIt6KJGkEHyMp975xW5VPmetwhI8g9H6dDmwvemBB41IRQa78YMNttiJqPcgmrZX2QfErOICv1gQvZ1gZg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
 
   '@ai-sdk/provider-utils@1.0.22':
     resolution: {integrity: sha512-YHK2rpj++wnLVc9vPGzGFP3Pjeld2MwhKinetA0zKXOoHAT/Jit5O8kZsxcSlJPu9wvcGT1UGZEjZrtO7PfFOQ==}
@@ -3642,6 +3660,18 @@ packages:
         optional: true
 
 snapshots:
+
+  '@ai-sdk/anthropic@0.0.56(zod@3.25.76)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.26
+      '@ai-sdk/provider-utils': 1.0.22(zod@3.25.76)
+      zod: 3.25.76
+
+  '@ai-sdk/openai@0.0.72(zod@3.25.76)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.26
+      '@ai-sdk/provider-utils': 1.0.22(zod@3.25.76)
+      zod: 3.25.76
 
   '@ai-sdk/provider-utils@1.0.22(zod@3.25.76)':
     dependencies:
