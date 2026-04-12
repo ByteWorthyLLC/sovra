@@ -128,7 +128,7 @@ describe('microcompactMessages', () => {
       { role: 'assistant', content: 'recent reply 1' },
     ]
 
-    const fakeModel = {} as Parameters<typeof microcompactMessages>[2]
+    const fakeModel = {} as Parameters<typeof microcompactMessages>[0]
     const result = await microcompactMessages(fakeModel, messages, 2, mockGenerateText)
 
     expect(mockGenerateText).toHaveBeenCalledOnce()
@@ -143,7 +143,7 @@ describe('microcompactMessages', () => {
     const messages: CoreMessage[] = [
       { role: 'user', content: 'recent' },
     ]
-    const fakeModel = {} as Parameters<typeof microcompactMessages>[2]
+    const fakeModel = {} as Parameters<typeof microcompactMessages>[0]
     const result = await microcompactMessages(fakeModel, messages, 5, mockGenerateText)
     expect(mockGenerateText).not.toHaveBeenCalled()
     expect(result).toEqual(messages)

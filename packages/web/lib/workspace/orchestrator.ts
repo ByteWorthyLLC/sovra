@@ -15,13 +15,10 @@ const MAX_PARALLEL_AGENTS = 20
 
 interface AgentRow {
   id: string
-  agent_id: string
-  role: 'leader' | 'member'
-  position: number
+  role?: string
   model_provider: string
   model_name: string
   system_prompt: string | null
-  tenant_id?: string
 }
 
 export interface AgentRunResult {
@@ -38,13 +35,17 @@ async function runSingleAgent(
   workspace: Workspace,
   tenantId: string
 ): Promise<AgentRunResult> {
-  await broadcastAgentStatus(tenantId, workspace.id, agent.agent_id, 'running')
+  await broadcastAgentStatus(tenantId, workspace.id, agent.id, 'running')
 
   const messages = await buildContextMessages({
+    supabase,
+    conversationId: workspace.id,
+    tenantId,
     workspaceId: workspace.id,
-    agentId: agent.agent_id,
-    prompt,
-    strategy: workspace.memory_strategy,
+    strategy: (workspace.memory_strategy as 'conversation' | 'summary' | 'vector' | 'hybrid') ?? 'conversation',
+    maxTokenBudget: 4000,
+    currentPrompt: prompt,
+    systemPrompt: agent.system_prompt ?? undefined,
   })
 
   initProviders()
@@ -60,18 +61,18 @@ async function runSingleAgent(
   await broadcastAgentMessage(
     tenantId,
     workspace.id,
-    agent.agent_id,
+    agent.id,
     result.text
   )
 
   await supabase
     .from('agents')
     .update({ status: 'idle' })
-    .eq('id', agent.agent_id)
+    .eq('id', agent.id)
 
-  await broadcastAgentStatus(tenantId, workspace.id, agent.agent_id, 'idle')
+  await broadcastAgentStatus(tenantId, workspace.id, agent.id, 'idle')
 
-  return { agentId: agent.agent_id, text: result.text, role: agent.role }
+  return { agentId: agent.id, text: result.text, role: (agent.role ?? 'member') as 'leader' | 'member' }
 }
 
 export async function runRoundRobin(
@@ -117,8 +118,7 @@ export async function runSequential(
   workspace: Workspace,
   tenantId: string
 ): Promise<AgentRunResult> {
-  const sorted = [...agents].sort((a, b) => a.position - b.position)
-  return runRoundRobin(supabase, sorted, prompt, workspace, tenantId)
+  return runRoundRobin(supabase, agents, prompt, workspace, tenantId)
 }
 
 export async function runHierarchical(
@@ -185,15 +185,19 @@ export async function runWorkspace(
     throw new Error(`Workspace not found: ${workspaceId}`)
   }
 
-  const { data: workspaceAgents, error: agentsError } = await supabase
-    .from('workspace_agents')
-    .select('*')
-    .eq('workspace_id', workspaceId)
-    .order('position', { ascending: true })
+  const { data: waRows, error: agentsError } = await supabase
+    .from('workspace_agents' as never)
+    .select('*, agents(*)' as never)
+    .eq('workspace_id' as never, workspaceId)
+    .order('position' as never, { ascending: true })
 
-  if (agentsError || !workspaceAgents?.length) {
+  if (agentsError || !waRows?.length) {
     throw new Error('No agents configured for workspace')
   }
+
+  const workspaceAgents = (waRows as Array<Record<string, unknown>>).map(
+    (wa) => wa.agents as AgentRow
+  ).filter(Boolean)
 
   const tenantId = workspace.tenant_id as string
   const ws = workspace as Workspace

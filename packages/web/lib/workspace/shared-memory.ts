@@ -54,9 +54,9 @@ export async function writeSharedMemory(
       tenant_id: tenantId,
       workspace_id: workspaceId,
       key,
-      value,
+      value: value as Record<string, unknown>,
       updated_by: agentId ?? null,
-    })
+    } as never)
 
   if (error) return { data: null, error: error.message }
   return { data, error: null }
@@ -90,10 +90,10 @@ export async function upsertSharedMemory(
         tenant_id: tenantId,
         workspace_id: workspaceId,
         key,
-        value,
+        value: value as Record<string, unknown>,
         updated_by: agentId ?? null,
         updated_at: new Date().toISOString(),
-      },
+      } as never,
       { onConflict: 'workspace_id,key' }
     )
 

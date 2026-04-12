@@ -845,36 +845,87 @@ export type Database = {
           },
         ]
       }
+      workspace_agents: {
+        Row: {
+          id: string
+          workspace_id: string
+          agent_id: string
+          role: string
+          position: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          workspace_id: string
+          agent_id: string
+          role?: string
+          position?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          workspace_id?: string
+          agent_id?: string
+          role?: string
+          position?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspace_agents_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "workspace_agents_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       workspaces: {
         Row: {
           collaboration_mode: string
+          compression_enabled: boolean
+          compression_threshold: number
           conflict_resolution: string
           created_at: string
           created_by: string | null
           description: string | null
           id: string
+          memory_strategy: string
           name: string
           tenant_id: string
           updated_at: string
         }
         Insert: {
           collaboration_mode?: string
+          compression_enabled?: boolean
+          compression_threshold?: number
           conflict_resolution?: string
           created_at?: string
           created_by?: string | null
           description?: string | null
           id?: string
+          memory_strategy?: string
           name: string
           tenant_id: string
           updated_at?: string
         }
         Update: {
           collaboration_mode?: string
+          compression_enabled?: boolean
+          compression_threshold?: number
           conflict_resolution?: string
           created_at?: string
           created_by?: string | null
           description?: string | null
           id?: string
+          memory_strategy?: string
           name?: string
           tenant_id?: string
           updated_at?: string

@@ -12,7 +12,8 @@ function makeSupabase(rows: Array<{ role: string; content: string }>) {
   chain.eq.mockImplementation(() => chain)
   chain.select.mockReturnValue(chain)
   chain.from.mockReturnValue(chain)
-  return chain as unknown as ReturnType<typeof makeSupabase>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return chain as any
 }
 
 vi.mock('ai', () => ({

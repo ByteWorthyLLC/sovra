@@ -276,7 +276,7 @@ describe('runRoundRobin', () => {
 
     const buildContextCalls: string[] = []
     vi.mocked(buildContextMessages).mockImplementation(async (params) => {
-      buildContextCalls.push(params.prompt)
+      buildContextCalls.push(params.currentPrompt)
       return []
     })
 
@@ -386,7 +386,7 @@ describe('runSequential', () => {
 
     const promptsUsed: string[] = []
     vi.mocked(buildContextMessages).mockImplementation(async (params) => {
-      promptsUsed.push(params.prompt)
+      promptsUsed.push(params.currentPrompt)
       return []
     })
 
@@ -425,7 +425,7 @@ describe('runWorkspace', () => {
     }
 
     const agents = [
-      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null },
+      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, agents: { id: 'agent-1', role: 'member', model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null } },
     ]
 
     const supabase = {
@@ -486,7 +486,7 @@ describe('runWorkspace', () => {
     }
 
     const agents = [
-      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null },
+      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, agents: { id: 'agent-1', role: 'member', model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null } },
     ]
 
     const supabase = {
@@ -550,7 +550,7 @@ describe('runWorkspace', () => {
     }
 
     const agents = [
-      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null },
+      { id: 'wa-1', agent_id: 'agent-1', role: 'member', position: 0, agents: { id: 'agent-1', role: 'member', model_provider: 'openai', model_name: 'gpt-4o', system_prompt: null } },
     ]
 
     const supabase = {
