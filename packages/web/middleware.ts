@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { createTenantResolver } from '@/lib/tenant/resolver'
 import { PUBLIC_ROUTES } from '@/lib/rbac/constants'
 
@@ -42,7 +43,38 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // 5. Public routes bypass auth
+  // 5. Admin path guard: /admin/* requires is_platform_admin
+  if (pathname.startsWith('/admin')) {
+    if (!user) {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = '/auth/login'
+      loginUrl.searchParams.set('next', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+
+    const adminClient = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { autoRefreshToken: false, persistSession: false } }
+    )
+
+    const { data: userRow } = await adminClient
+      .from('users')
+      .select('is_platform_admin')
+      .eq('id', user.id)
+      .single()
+
+    if (!userRow?.is_platform_admin) {
+      const dashUrl = request.nextUrl.clone()
+      dashUrl.pathname = '/dashboard'
+      return NextResponse.redirect(dashUrl)
+    }
+
+    response.headers.set('Cache-Control', 'private, no-store')
+    return response
+  }
+
+  // 6. Public routes bypass auth
   const isPublicRoute = PUBLIC_ROUTES.some((route) => pathname.startsWith(route))
 
   if (!user && !isPublicRoute) {
@@ -52,19 +84,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // 6. Redirect authenticated users away from login/signup to dashboard
+  // 7. Redirect authenticated users away from login/signup to dashboard
   if (user && (pathname === '/login' || pathname === '/signup')) {
     const dashUrl = request.nextUrl.clone()
     dashUrl.pathname = '/dashboard'
     return NextResponse.redirect(dashUrl)
   }
 
-  // 7. Forward resolved tenant slug to server components via header
+  // 8. Forward resolved tenant slug to server components via header
   if (tenantSlug) {
     response.headers.set('x-tenant-slug', tenantSlug)
   }
 
-  // 8. Prevent CDN/proxy caching of authenticated responses
+  // 9. Prevent CDN/proxy caching of authenticated responses
   if (user) {
     response.headers.set('Cache-Control', 'private, no-store')
   }
