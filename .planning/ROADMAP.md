@@ -26,10 +26,10 @@
 **Plans:** 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Fix scaffold extensions + monorepo setup (shared package, Makefile, env)
-- [ ] 01-02-PLAN.md — Go worker service (Gin health, gRPC stub, pgxpool, Docker)
-- [ ] 01-03-PLAN.md — Supabase schema + migrations (14 tables, RLS, pgvector, indexes)
-- [ ] 01-04-PLAN.md — Docker Compose (dev + prod) + Vitest testing setup + quality gate
+- [x] 01-01-PLAN.md — Fix scaffold extensions + monorepo setup (shared package, Makefile, env)
+- [x] 01-02-PLAN.md — Go worker service (Gin health, gRPC stub, pgxpool, Docker)
+- [x] 01-03-PLAN.md — Supabase schema + migrations (14 tables, RLS, pgvector, indexes)
+- [x] 01-04-PLAN.md — Docker Compose (dev + prod) + Vitest testing setup + quality gate
 
 **Requirements:**
 - FOUN-01: Monorepo structure with pnpm workspaces
@@ -61,6 +61,14 @@ Plans:
 ### Phase 2: Core Infrastructure
 
 **Goal:** Implement authentication, multi-tenancy, and RBAC
+
+**Plans:** 4 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Auth types + AuthAdapter interface + Supabase adapter + client/server factories + PKCE callback
+- [ ] 02-02-PLAN.md — RBAC migration (roles, permissions, invitations) + TenantResolver implementations + TenantContext
+- [ ] 02-03-PLAN.md — RBAC permission checker + root middleware + tenant creation + invitation system
+- [ ] 02-04-PLAN.md — Schema push + auth UI pages + tenant layout + invite page + visual verification
 
 **Requirements:**
 - AUTH-01: Email/password signup and login
@@ -252,4 +260,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-04-11*
-*Last updated: 2026-04-11 after Phase 1 planning*
+*Last updated: 2026-04-12 after Phase 2 planning*
