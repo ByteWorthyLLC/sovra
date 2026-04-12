@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import type { Json } from '@byteswarm/shared/types/database'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { embedText } from '@/lib/vector/embed'
 
@@ -70,7 +71,7 @@ export async function POST(req: Request) {
       tenant_id: tenantUser.tenant_id,
       agent_id: agentId ?? null,
       content,
-      metadata,
+      metadata: metadata as unknown as Json,
       embedding: JSON.stringify(embedding),
     })
     .select('id, content, metadata')
