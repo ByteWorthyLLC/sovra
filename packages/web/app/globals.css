@@ -138,3 +138,12 @@
 .status-pulse {
   animation: statusPulse 1.2s ease-in-out infinite;
 }
+
+/* API key reveal -- highlight copy target */
+.key-reveal-highlight {
+  animation: keyReveal 0.4s ease-out;
+}
+@keyframes keyReveal {
+  0%  { background-color: rgba(59, 130, 246, 0.2); }
+  100% { background-color: transparent; }
+}
