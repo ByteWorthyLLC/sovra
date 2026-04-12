@@ -1,4 +1,4 @@
-# Architecture Research — AgentForge
+# Architecture Research — ByteSwarm
 
 **Research Type:** Project Research — Architecture dimension
 **Date:** 2026-04-11

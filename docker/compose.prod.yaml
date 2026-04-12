@@ -1,8 +1,8 @@
-name: agentforge
+name: byteswarm
 
 services:
   web:
-    image: agentforge/web:${VERSION:-latest}
+    image: byteswarm/web:${VERSION:-latest}
     build:
       context: ../packages/web
       dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
       start_period: 40s
 
   worker:
-    image: agentforge/worker:${VERSION:-latest}
+    image: byteswarm/worker:${VERSION:-latest}
     build:
       context: ../packages/worker
       dockerfile: Dockerfile

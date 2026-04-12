@@ -12,9 +12,9 @@ progress:
   percent: 44
 ---
 
-# State: AgentForge
+# State: ByteSwarm
 
-**Project:** AgentForge
+**Project:** ByteSwarm
 **Status:** Ready to execute
 **Milestone:** 1.0
 

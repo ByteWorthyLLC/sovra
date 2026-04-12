@@ -1,4 +1,4 @@
-# Research Summary — AgentForge
+# Research Summary — ByteSwarm
 
 **Synthesized:** 2026-04-11
 
@@ -27,7 +27,7 @@ Essential features expected in any AI SaaS:
 
 ### Differentiators
 
-What makes AgentForge unique:
+What makes ByteSwarm unique:
 1. Full MCP client/server implementation
 2. Multi-agent workspaces with real-time collaboration
 3. Built-in tool ecosystem (file ops, web search, code execution)

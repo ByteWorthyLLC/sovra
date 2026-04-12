@@ -1,10 +1,10 @@
-# AgentForge — Claude Code Instructions
+# ByteSwarm — Claude Code Instructions
 
-This file provides project-specific guidance for Claude Code when working on AgentForge.
+This file provides project-specific guidance for Claude Code when working on ByteSwarm.
 
 ## Project Overview
 
-**AgentForge** is an open-source AI-native SaaS boilerplate for building multi-tenant AI applications with MCP, vector database, and multi-agent collaboration.
+**ByteSwarm** is an open-source AI-native SaaS boilerplate for building multi-tenant AI applications with MCP, vector database, and multi-agent collaboration.
 
 ## Quick Start
 
@@ -23,7 +23,7 @@ go build ./...
 ## Directory Structure
 
 ```
-agentforge/
+byteswarm/
 ├── packages/
 │   ├── web/           # Next.js frontend + API
 │   ├── worker/       # Go agent worker service

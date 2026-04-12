@@ -1,4 +1,4 @@
-# Pitfalls Research — AgentForge
+# Pitfalls Research — ByteSwarm
 
 **Research Type:** Project Research — Pitfalls dimension
 **Date:** 2026-04-11

@@ -1,4 +1,4 @@
-# Features Research — AgentForge
+# Features Research — ByteSwarm
 
 **Research Type:** Project Research — Features dimension
 **Date:** 2026-04-11
@@ -21,7 +21,7 @@ These features are expected by users building AI SaaS products. Absence = users 
 
 ### Differentiators (Competitive Advantage)
 
-These features make AgentForge stand out from other boilerplates.
+These features make ByteSwarm stand out from other boilerplates.
 
 | Feature | Description | Complexity |
 |---------|-------------|------------|

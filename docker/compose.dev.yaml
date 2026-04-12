@@ -1,4 +1,4 @@
-name: agentforge-dev
+name: byteswarm-dev
 
 services:
   web:

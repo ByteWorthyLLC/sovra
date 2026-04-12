@@ -14,7 +14,7 @@
     "skip_discuss": true
   },
   "project": {
-    "name": "AgentForge",
+    "name": "ByteSwarm",
     "type": "greenfield",
     "cloud_targets": [
       "railway",

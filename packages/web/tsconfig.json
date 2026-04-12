@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@agentforge/shared/*": ["../shared/*"]
+      "@byteswarm/shared/*": ["../shared/*"]
     },
     "baseUrl": "."
   },

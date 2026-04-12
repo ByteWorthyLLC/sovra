@@ -1,4 +1,4 @@
-# Stack Research — AgentForge
+# Stack Research — ByteSwarm
 
 **Research Type:** Project Research — Stack dimension
 **Date:** 2026-04-11
@@ -65,7 +65,7 @@
 
 | Avoid | Reason |
 |-------|--------|
-| Closed-source boilerplates | AgentForge is fully open source |
+| Closed-source boilerplates | ByteSwarm is fully open source |
 | Pinecone / Weaviate | pgvector is sufficient and built-in |
 | Firebase | Want SQL + pgvector, not NoSQL |
 | AWS Lambda for worker | Long-running agent tasks need persistent processes |

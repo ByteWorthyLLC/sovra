@@ -6,8 +6,8 @@ describe('Smoke Test', () => {
   })
 
   it('confirms JSX compilation works', () => {
-    const element = <div data-testid="test">Hello AgentForge</div>
+    const element = <div data-testid="test">Hello ByteSwarm</div>
     expect(element.props['data-testid']).toBe('test')
-    expect(element.props.children).toBe('Hello AgentForge')
+    expect(element.props.children).toBe('Hello ByteSwarm')
   })
 })

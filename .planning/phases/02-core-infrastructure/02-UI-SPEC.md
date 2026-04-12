@@ -165,7 +165,7 @@ body {
 ```
 
 **Page-specific assignments:**
-- Auth card heading ("Sign in to AgentForge"): Heading lg — `text-2xl font-semibold tracking-tight`
+- Auth card heading ("Sign in to ByteSwarm"): Heading lg — `text-2xl font-semibold tracking-tight`
 - Auth card sub-copy: Body — `text-sm text-muted-foreground`
 - Brand panel headline: Display — `text-3xl font-semibold tracking-tighter`
 - Form labels: Label — `text-sm font-semibold`
@@ -201,7 +201,7 @@ Mobile auth card: no glass — solid bg-card, rounded-xl, no horizontal padding 
 
 **Brand panel details:**
 - Background: `bg-zinc-900` with subtle dot grid overlay (CSS `background-image: radial-gradient(circle, #27272A 1px, transparent 1px); background-size: 24px 24px;`)
-- Top-left: Logo (`Bot` icon + "AgentForge" wordmark, white)
+- Top-left: Logo (`Bot` icon + "ByteSwarm" wordmark, white)
 - Center: Headline "Build AI Apps in Hours, Not Weeks" at Display size
 - Below headline: 3 feature bullets with check icons in `text-primary`
 - Bottom-left: "Open Source • MIT License" in `text-xs text-muted-foreground`
@@ -491,7 +491,7 @@ After account creation, before accessing the dashboard, show a 3-step wizard:
 Step 1: Create workspace
   ├── "Name your workspace" heading
   ├── Workspace name input (autofocused)
-  ├── Slug preview: "your-app.agentforge.dev" or "/t/your-app"
+  ├── Slug preview: "your-app.byteswarm.dev" or "/t/your-app"
   └── "Create workspace →" CTA
 
 Step 2: Invite your team (optional)
@@ -651,7 +651,7 @@ CTA:       "Create workspace" — Button default
 | Element | Copy |
 |---------|------|
 | Login page heading | Sign in |
-| Login page subheading | Welcome back to AgentForge |
+| Login page subheading | Welcome back to ByteSwarm |
 | Login primary CTA | Sign in |
 | Login Google OAuth | Sign in with Google |
 | Login GitHub OAuth | Sign in with GitHub |

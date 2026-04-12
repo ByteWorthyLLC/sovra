@@ -1,4 +1,4 @@
-module github.com/agentforge/worker
+module github.com/byteswarm/worker
 
 go 1.26.2
 

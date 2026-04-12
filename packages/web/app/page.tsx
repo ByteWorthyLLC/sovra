@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="mr-4 flex">
             <Link href="/" className="mr-6 flex items-center space-x-2">
               <Bot className="h-6 w-6" />
-              <span className="font-bold text-xl">AgentForge</span>
+              <span className="font-bold text-xl">ByteSwarm</span>
             </Link>
           </div>
           <nav className="flex items-center space-x-6 text-sm font-medium ml-auto">
@@ -93,7 +93,7 @@ export default function HomePage() {
               collaboration. Self-hosted with deploy-anywhere flexibility.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="https://github.com/agentforge/agentforge" target="_blank">
+              <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
                 <Button size="lg" className="w-full sm:w-auto">
                   View on GitHub <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -210,10 +210,10 @@ export default function HomePage() {
             Clone the repo, run docker-compose up, and start building your AI application in minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="https://github.com/agentforge/agentforge" target="_blank">
+            <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
               <Button size="lg">
                 <Terminal className="mr-2 h-4 w-4" />
-                git clone agentforge
+                git clone byteswarm
               </Button>
             </Link>
           </div>
@@ -226,7 +226,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
-              <span className="font-semibold">AgentForge</span>
+              <span className="font-semibold">ByteSwarm</span>
             </div>
             <p className="text-sm text-muted-foreground">
               MIT License • Open Source

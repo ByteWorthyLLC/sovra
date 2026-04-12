@@ -1,4 +1,4 @@
-# Roadmap: AgentForge
+# Roadmap: ByteSwarm
 
 **Created:** 2026-04-11
 **Phases:** 6
@@ -256,7 +256,7 @@ Plans:
 - Phase 1 is most critical — foundation determines everything else
 - Phase 2 (auth/multi-tenancy) must be rock-solid — security implications
 - Phase 3-4 build the core AI functionality
-- Phase 5 adds multi-agent which differentiates AgentForge
+- Phase 5 adds multi-agent which differentiates ByteSwarm
 - Phase 6 makes it production-ready for self-hosted deployment
 
 ---

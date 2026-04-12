@@ -1,4 +1,4 @@
-# AgentForge
+# ByteSwarm
 
 **Open-source AI-native SaaS boilerplate for building production AI applications**
 
@@ -17,9 +17,9 @@
 
 ---
 
-## What is AgentForge?
+## What is ByteSwarm?
 
-AgentForge is a **production-ready, open-source SaaS boilerplate** for building AI-powered applications with:
+ByteSwarm is a **production-ready, open-source SaaS boilerplate** for building AI-powered applications with:
 
 - 🔗 **MCP-Native** — Full Model Context Protocol client/server implementation
 - 🧠 **Vector Database** — Built-in pgvector for semantic search
@@ -30,7 +30,7 @@ AgentForge is a **production-ready, open-source SaaS boilerplate** for building 
 
 ---
 
-## Why AgentForge?
+## Why ByteSwarm?
 
 | Problem | Solution |
 |---------|----------|
@@ -47,8 +47,8 @@ AgentForge is a **production-ready, open-source SaaS boilerplate** for building 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/agentforge.git
-cd agentforge
+git clone https://github.com/your-username/byteswarm.git
+cd byteswarm
 
 # Start local development
 docker-compose up
@@ -154,13 +154,13 @@ Contributions welcome! Please read our [contributing guide](CONTRIBUTING.md).
 
 ## Community
 
-- [GitHub Discussions](https://github.com/your-username/agentforge/discussions)
+- [GitHub Discussions](https://github.com/your-username/byteswarm/discussions)
 - [Discord Server](#) — Join the community
 
 ---
 
 ### Built with patterns from Claude Code from Source
 
-AgentForge incorporates architectural patterns identified in the [Claude Code from Source](https://github.com/alejandrobalderas/claude-code-from-source) project — an educational analysis of production AI agent architecture.
+ByteSwarm incorporates architectural patterns identified in the [Claude Code from Source](https://github.com/alejandrobalderas/claude-code-from-source) project — an educational analysis of production AI agent architecture.
 
 ---

@@ -1,5 +1,5 @@
 {
-  "name": "@agentforge/web",
+  "name": "@byteswarm/web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@agentforge/shared": "workspace:*",
+    "@byteswarm/shared": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.2",

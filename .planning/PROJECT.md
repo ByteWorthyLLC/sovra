@@ -1,8 +1,8 @@
-# AgentForge
+# ByteSwarm
 
 ## What This Is
 
-AgentForge is a production-ready, open-source AI-native SaaS boilerplate for building multi-tenant AI applications with native Model Context Protocol (MCP) integration, vector database support, and real-time multi-agent collaboration capabilities. Target users are AI product builders, startup founders, and enterprise developers.
+ByteSwarm is a production-ready, open-source AI-native SaaS boilerplate for building multi-tenant AI applications with native Model Context Protocol (MCP) integration, vector database support, and real-time multi-agent collaboration capabilities. Target users are AI product builders, startup founders, and enterprise developers.
 
 ## Core Value
 

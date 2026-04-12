@@ -7,16 +7,16 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/agentforge/worker/internal/config"
-	"github.com/agentforge/worker/internal/db"
-	workergrpc "github.com/agentforge/worker/internal/grpc"
-	workerhttp "github.com/agentforge/worker/internal/http"
+	"github.com/byteswarm/worker/internal/config"
+	"github.com/byteswarm/worker/internal/db"
+	workergrpc "github.com/byteswarm/worker/internal/grpc"
+	workerhttp "github.com/byteswarm/worker/internal/http"
 )
 
 func main() {
 	cfg := config.Load()
 
-	log.Printf("starting agentforge worker (env=%s)", cfg.Environment)
+	log.Printf("starting byteswarm worker (env=%s)", cfg.Environment)
 
 	// Connect to database.
 	// SECURITY: Never log cfg.DatabaseURL — only log connection status.
