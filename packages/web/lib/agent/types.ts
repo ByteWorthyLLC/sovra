@@ -23,8 +23,9 @@ export type AgentFormData = z.infer<typeof agentFormSchema>
 
 export const AVAILABLE_TOOLS = [
   'web_search',
+  'web_fetch',
   'file_read',
   'file_write',
-  'database_query',
+  'file_list',
   'semantic_search',
 ] as const
