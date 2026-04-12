@@ -1,0 +1,262 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+
+// Hoisted mocks shared across vi.mock factories
+const { mockStreamText, mockGetUser, mockSupabaseFrom, mockGetMcpClient, mockBuildAiToolsFromMcp } =
+  vi.hoisted(() => ({
+    mockStreamText: vi.fn(),
+    mockGetUser: vi.fn(),
+    mockSupabaseFrom: vi.fn(),
+    mockGetMcpClient: vi.fn(),
+    mockBuildAiToolsFromMcp: vi.fn(),
+  }))
+
+vi.mock('ai', () => ({
+  streamText: mockStreamText,
+}))
+
+vi.mock('@/lib/auth/server', () => ({
+  createSupabaseServerClient: vi.fn().mockResolvedValue({
+    auth: { getUser: mockGetUser },
+    from: mockSupabaseFrom,
+  }),
+}))
+
+vi.mock('@/lib/ai/registry', () => ({
+  initProviders: vi.fn(),
+  getProvider: vi.fn().mockReturnValue({
+    getModel: vi.fn().mockReturnValue('mock-model'),
+  }),
+}))
+
+vi.mock('@/lib/mcp/client', () => ({
+  getMcpClient: mockGetMcpClient,
+}))
+
+vi.mock('@/lib/mcp/tool-registry', () => ({
+  buildAiToolsFromMcp: mockBuildAiToolsFromMcp,
+  getAgentTools: vi.fn().mockImplementation(
+    (allTools: Record<string, unknown>, names: string[]) =>
+      Object.fromEntries(names.map((n) => [n, allTools[n]]).filter(([, v]) => v != null))
+  ),
+}))
+
+import { POST } from './route'
+
+function makeRequest(body: Record<string, unknown>): Request {
+  return new Request('http://localhost/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+}
+
+const fakeAgent = {
+  id: 'agent-1',
+  tenant_id: 'tenant-1',
+  model_provider: 'openai',
+  model_name: 'gpt-4o',
+  system_prompt: 'You are helpful.',
+  temperature: 0.7,
+  max_tokens: 4096,
+  tools: ['web_search', 'file_read'],
+  status: 'idle',
+}
+
+describe('POST /api/chat', () => {
+  let insertedRows: Record<string, unknown>[] = []
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    insertedRows = []
+
+    mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } } })
+
+    // Supabase .from() chain mock
+    const mockInsert = vi.fn().mockImplementation((row: Record<string, unknown>) => {
+      insertedRows.push(row)
+      return { error: null }
+    })
+
+    mockSupabaseFrom.mockImplementation((table: string) => {
+      if (table === 'agents') {
+        return {
+          select: vi.fn().mockReturnValue({
+            eq: vi.fn().mockReturnValue({
+              single: vi.fn().mockResolvedValue({ data: fakeAgent }),
+            }),
+          }),
+          update: vi.fn().mockReturnValue({
+            eq: vi.fn().mockResolvedValue({ error: null }),
+          }),
+        }
+      }
+      if (table === 'tool_executions') {
+        return { insert: mockInsert }
+      }
+      return {}
+    })
+
+    // MCP mocks -- tools available
+    const mockMcpClient = { listTools: vi.fn(), callTool: vi.fn() }
+    mockGetMcpClient.mockResolvedValue(mockMcpClient)
+    mockBuildAiToolsFromMcp.mockResolvedValue({
+      web_search: { type: 'function', name: 'web_search' },
+      file_read: { type: 'function', name: 'file_read' },
+      file_write: { type: 'function', name: 'file_write' },
+    })
+
+    // streamText mock
+    mockStreamText.mockImplementation((opts: Record<string, unknown>) => {
+      // Call onFinish to test tool tracking
+      if (typeof opts.onFinish === 'function') {
+        opts.onFinish({ steps: [] })
+      }
+      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+    })
+  })
+
+  it('passes tools from MCP registry filtered by agent.tools to streamText', async () => {
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    await POST(req)
+
+    expect(mockStreamText).toHaveBeenCalledTimes(1)
+    const callArgs = mockStreamText.mock.calls[0][0]
+    // Should have web_search and file_read (from agent.tools), not file_write
+    expect(callArgs.tools).toBeDefined()
+    expect(Object.keys(callArgs.tools)).toContain('web_search')
+    expect(Object.keys(callArgs.tools)).toContain('file_read')
+    expect(Object.keys(callArgs.tools)).not.toContain('file_write')
+  })
+
+  it('sets maxSteps=10 in streamText call', async () => {
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    await POST(req)
+
+    const callArgs = mockStreamText.mock.calls[0][0]
+    expect(callArgs.maxSteps).toBe(10)
+  })
+
+  it('onFinish inserts tool_executions rows for each tool call in steps', async () => {
+    mockStreamText.mockImplementation((opts: Record<string, unknown>) => {
+      if (typeof opts.onFinish === 'function') {
+        opts.onFinish({
+          steps: [
+            {
+              toolCalls: [
+                { toolCallId: 'tc-1', toolName: 'web_search', args: { query: 'test' } },
+              ],
+              toolResults: [
+                { toolCallId: 'tc-1', result: 'search results' },
+              ],
+            },
+            {
+              toolCalls: [
+                { toolCallId: 'tc-2', toolName: 'file_read', args: { path: '/tmp/f.txt' } },
+              ],
+              toolResults: [
+                { toolCallId: 'tc-2', result: 'file content' },
+              ],
+            },
+          ],
+        })
+      }
+      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+    })
+
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    await POST(req)
+
+    expect(insertedRows).toHaveLength(2)
+    expect(insertedRows[0]).toMatchObject({
+      tool_name: 'web_search',
+      status: 'success',
+      agent_id: 'agent-1',
+      conversation_id: 'conv-1',
+    })
+    expect(insertedRows[1]).toMatchObject({
+      tool_name: 'file_read',
+      status: 'success',
+    })
+  })
+
+  it('tool_executions rows include tenant_id from agent record', async () => {
+    mockStreamText.mockImplementation((opts: Record<string, unknown>) => {
+      if (typeof opts.onFinish === 'function') {
+        opts.onFinish({
+          steps: [{
+            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', args: {} }],
+            toolResults: [{ toolCallId: 'tc-1', result: 'ok' }],
+          }],
+        })
+      }
+      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+    })
+
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    await POST(req)
+
+    expect(insertedRows[0]).toMatchObject({ tenant_id: 'tenant-1' })
+  })
+
+  it('tool_executions rows include cost_usd estimates', async () => {
+    mockStreamText.mockImplementation((opts: Record<string, unknown>) => {
+      if (typeof opts.onFinish === 'function') {
+        opts.onFinish({
+          steps: [{
+            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', args: {} }],
+            toolResults: [{ toolCallId: 'tc-1', result: 'ok' }],
+          }],
+        })
+      }
+      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+    })
+
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    await POST(req)
+
+    expect(insertedRows[0]).toHaveProperty('cost_usd')
+    expect(typeof insertedRows[0].cost_usd).toBe('number')
+  })
+
+  it('graceful degradation when MCP connection fails -- no tools, still streams', async () => {
+    mockGetMcpClient.mockRejectedValue(new Error('MCP connection refused'))
+
+    const req = makeRequest({
+      agentId: 'agent-1',
+      conversationId: 'conv-1',
+      messages: [{ role: 'user', content: 'hello' }],
+    })
+
+    const res = await POST(req)
+    expect(res.status).toBe(200)
+
+    // streamText should be called without tools (or tools undefined)
+    const callArgs = mockStreamText.mock.calls[0][0]
+    expect(callArgs.tools).toBeUndefined()
+  })
+})

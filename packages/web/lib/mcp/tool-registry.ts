@@ -38,29 +38,33 @@ function convertJsonSchemaToZod(
   return z.object(shape)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AiTool = ReturnType<typeof tool<any, any>>
+
 export async function buildAiToolsFromMcp(
   client: Client
-): Promise<Record<string, ReturnType<typeof tool>>> {
+): Promise<Record<string, AiTool>> {
   const { tools: mcpTools } = await client.listTools()
 
-  return Object.fromEntries(
-    mcpTools.map((t) => [
-      t.name,
-      tool({
-        description: t.description ?? '',
-        parameters: convertJsonSchemaToZod(
-          t.inputSchema as { properties?: Record<string, JsonSchemaProperty>; required?: string[] }
-        ),
-        execute: async (args) => {
-          const result = await client.callTool(
-            { name: t.name, arguments: args as Record<string, unknown> },
-            { signal: AbortSignal.timeout(30000) }
-          )
-          return result.content
-        },
-      }),
-    ])
-  )
+  const entries = mcpTools.map((t) => [
+    t.name,
+    tool({
+      description: t.description ?? '',
+      parameters: convertJsonSchemaToZod(
+        t.inputSchema as { properties?: Record<string, JsonSchemaProperty>; required?: string[] }
+      ),
+      execute: async (args) => {
+        const result = await client.callTool(
+          { name: t.name, arguments: args as Record<string, unknown> },
+          undefined,
+          { signal: AbortSignal.timeout(30000) }
+        )
+        return result.content
+      },
+    }),
+  ])
+
+  return Object.fromEntries(entries) as Record<string, AiTool>
 }
 
 export function getAgentTools(

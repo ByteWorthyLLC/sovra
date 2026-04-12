@@ -74,11 +74,12 @@ describe('Tool Registry', () => {
 
       // Access the execute function from the tool
       // The ai tool() returns an object with execute
-      const toolDef = tools.web_search as { execute: (args: Record<string, unknown>) => Promise<unknown> }
+      const toolDef = tools.web_search as unknown as { execute: (args: Record<string, unknown>) => Promise<unknown> }
       const result = await toolDef.execute({ query: 'test' })
 
       expect(mockCallTool).toHaveBeenCalledWith(
         { name: 'web_search', arguments: { query: 'test' } },
+        undefined,
         expect.objectContaining({})
       )
       expect(result).toEqual([{ type: 'text', text: 'result data' }])
@@ -105,13 +106,13 @@ describe('Tool Registry', () => {
       } as unknown as Client
 
       const tools = await buildAiToolsFromMcp(mockClient)
-      const toolDef = tools.file_read as { execute: (args: Record<string, unknown>) => Promise<unknown> }
+      const toolDef = tools.file_read as unknown as { execute: (args: Record<string, unknown>) => Promise<unknown> }
       await toolDef.execute({})
 
-      // Verify callTool was called with an options object containing signal
+      // Verify callTool was called with signal in third arg (options)
       const callArgs = mockCallTool.mock.calls[0]
-      expect(callArgs[1]).toBeDefined()
-      expect(callArgs[1].signal).toBeInstanceOf(AbortSignal)
+      expect(callArgs[2]).toBeDefined()
+      expect(callArgs[2].signal).toBeInstanceOf(AbortSignal)
     })
 
     it('handles tools with no inputSchema', async () => {
