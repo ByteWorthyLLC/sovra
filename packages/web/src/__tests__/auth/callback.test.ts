@@ -1,0 +1,79 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+
+const mockExchangeCodeForSession = vi.fn()
+
+vi.mock('@/lib/auth/server', () => ({
+  createSupabaseServerClient: vi.fn().mockResolvedValue({
+    auth: {
+      exchangeCodeForSession: mockExchangeCodeForSession,
+    },
+  }),
+}))
+
+vi.mock('next/server', () => ({
+  NextResponse: {
+    redirect: vi.fn((url: string | URL) => ({ url: url.toString(), status: 302 })),
+  },
+}))
+
+describe('GET /auth/callback', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockExchangeCodeForSession.mockResolvedValue({ error: null })
+  })
+
+  it('exchanges code and redirects to /dashboard by default', async () => {
+    const { GET } = await import('@/app/auth/callback/route')
+    const { NextResponse } = await import('next/server')
+
+    const request = new Request('https://example.com/auth/callback?code=abc123')
+    await GET(request)
+
+    expect(mockExchangeCodeForSession).toHaveBeenCalledWith('abc123')
+    expect(NextResponse.redirect).toHaveBeenCalledWith('https://example.com/dashboard')
+  })
+
+  it('redirects to /next param when provided', async () => {
+    const { GET } = await import('@/app/auth/callback/route')
+    const { NextResponse } = await import('next/server')
+
+    const request = new Request('https://example.com/auth/callback?code=abc123&next=/t/acme/settings')
+    await GET(request)
+
+    expect(NextResponse.redirect).toHaveBeenCalledWith('https://example.com/t/acme/settings')
+  })
+
+  it('redirects to /auth/reset-password when type=recovery', async () => {
+    const { GET } = await import('@/app/auth/callback/route')
+    const { NextResponse } = await import('next/server')
+
+    const request = new Request('https://example.com/auth/callback?code=abc123&type=recovery')
+    await GET(request)
+
+    expect(NextResponse.redirect).toHaveBeenCalledWith('https://example.com/auth/reset-password')
+  })
+
+  it('redirects to /login with error when error param is present', async () => {
+    const { GET } = await import('@/app/auth/callback/route')
+    const { NextResponse } = await import('next/server')
+
+    const request = new Request('https://example.com/auth/callback?error=access_denied')
+    await GET(request)
+
+    expect(NextResponse.redirect).toHaveBeenCalledWith(
+      'https://example.com/login?error=access_denied'
+    )
+    expect(mockExchangeCodeForSession).not.toHaveBeenCalled()
+  })
+
+  it('redirects to /login when no code and no error', async () => {
+    const { GET } = await import('@/app/auth/callback/route')
+    const { NextResponse } = await import('next/server')
+
+    const request = new Request('https://example.com/auth/callback')
+    await GET(request)
+
+    expect(NextResponse.redirect).toHaveBeenCalledWith('https://example.com/login')
+    expect(mockExchangeCodeForSession).not.toHaveBeenCalled()
+  })
+})
