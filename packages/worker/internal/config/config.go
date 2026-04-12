@@ -11,6 +11,7 @@ type Config struct {
 	HTTPPort           int
 	GRPCPort           int
 	MCPPort            int
+	SocketIOPort       int
 	Environment        string
 	AgentWorkspacePath string
 	BraveSearchAPIKey  string
@@ -24,6 +25,7 @@ func Load() *Config {
 		HTTPPort:           getEnvInt("HTTP_PORT", 8080),
 		GRPCPort:           getEnvInt("GRPC_PORT", 50051),
 		MCPPort:            getEnvInt("MCP_PORT", 3001),
+		SocketIOPort:       getEnvInt("SOCKETIO_PORT", 3002),
 		Environment:        getEnv("GO_ENV", "development"),
 		AgentWorkspacePath: getEnv("AGENT_WORKSPACE_PATH", "/tmp/agent-workspace"),
 		BraveSearchAPIKey:  getEnv("BRAVE_SEARCH_API_KEY", ""),
