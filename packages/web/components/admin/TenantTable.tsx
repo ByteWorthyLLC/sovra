@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { MoreHorizontal } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { VARIANTS } from '@/lib/motion'
+import { suspendTenant, deleteTenant } from '@/lib/admin/actions'
 import type { AdminTenant } from '@/lib/admin/queries'
 
 interface TenantTableProps {
@@ -65,7 +67,9 @@ function ConfirmDialog({ title, body, confirmLabel, cancelLabel, onConfirm, onCa
 }
 
 export function TenantTable({ tenants, total, page, pageSize, onPageChange }: TenantTableProps) {
+  const router = useRouter()
   const [openMenu, setOpenMenu] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
   const [confirmAction, setConfirmAction] = useState<{
     type: 'suspend' | 'delete'
     tenantId: string
@@ -87,9 +91,22 @@ export function TenantTable({ tenants, total, page, pageSize, onPageChange }: Te
   }
 
   async function handleConfirm() {
-    if (!confirmAction) return
-    // TODO: Wire to server actions for suspend/delete tenant operations
+    if (!confirmAction || loading) return
+    setLoading(true)
+
+    const result = confirmAction.type === 'suspend'
+      ? await suspendTenant(confirmAction.tenantId)
+      : await deleteTenant(confirmAction.tenantId)
+
+    setLoading(false)
     setConfirmAction(null)
+
+    if (result.error) {
+      alert(`Failed to ${confirmAction.type} tenant: ${result.error}`)
+      return
+    }
+
+    router.refresh()
   }
 
   return (

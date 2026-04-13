@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { listAgents } from '@/lib/agent/queries'
 import { AgentListClient } from './agent-list-client'
+
+export const metadata: Metadata = {
+  title: 'Agents | ByteSwarm',
+  description: 'Manage and configure your AI agents, tools, and MCP connections.',
+}
 
 interface AgentsPageProps {
   params: Promise<{ slug: string }>

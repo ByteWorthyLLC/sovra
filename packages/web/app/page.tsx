@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,6 +21,11 @@ import {
   Server,
   Github,
 } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'ByteSwarm — AI-Native SaaS Boilerplate',
+  description: 'Open-source boilerplate for building multi-tenant AI applications with MCP, vector database, and multi-agent collaboration.',
+}
 
 export default function HomePage() {
   const features = [

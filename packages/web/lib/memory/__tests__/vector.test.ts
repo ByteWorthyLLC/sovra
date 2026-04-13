@@ -10,6 +10,11 @@ vi.mock('@/lib/vector/search', () => ({
   ]),
 }))
 
+// Mock embedText to return a fake embedding vector
+vi.mock('@/lib/vector/embed', () => ({
+  embedText: vi.fn().mockResolvedValue(new Array(1536).fill(0.1)),
+}))
+
 function makeSupabase(rows: Array<{ role: string; content: string }>) {
   const chain = {
     order: vi.fn().mockResolvedValue({ data: rows, error: null }),

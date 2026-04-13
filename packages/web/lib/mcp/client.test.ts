@@ -50,7 +50,8 @@ describe('MCP Client', () => {
     process.env.WORKER_MCP_URL = 'http://custom-worker:4000/mcp'
     await getMcpClient()
     expect(StreamableHTTPClientTransport).toHaveBeenCalledWith(
-      new URL('http://custom-worker:4000/mcp')
+      new URL('http://custom-worker:4000/mcp'),
+      expect.objectContaining({ requestInit: expect.any(Object) })
     )
   })
 
@@ -58,7 +59,8 @@ describe('MCP Client', () => {
     delete process.env.WORKER_MCP_URL
     await getMcpClient()
     expect(StreamableHTTPClientTransport).toHaveBeenCalledWith(
-      new URL('http://worker:3001/mcp')
+      new URL('http://worker:3001/mcp'),
+      expect.objectContaining({ requestInit: expect.any(Object) })
     )
   })
 

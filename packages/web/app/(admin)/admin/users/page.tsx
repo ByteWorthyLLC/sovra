@@ -1,5 +1,11 @@
+import type { Metadata } from 'next'
 import { getAllUsers } from '@/lib/admin/queries'
 import { UserTableWrapper } from './UserTableWrapper'
+
+export const metadata: Metadata = {
+  title: 'Users | ByteSwarm Admin',
+  description: 'Browse and manage all users across all tenants on the platform.',
+}
 
 interface UsersPageProps {
   searchParams: Promise<{ page?: string }>

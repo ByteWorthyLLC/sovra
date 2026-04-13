@@ -1,19 +1,30 @@
 import { hybridSearch } from '@/lib/vector/search'
+import { embedText } from '@/lib/vector/embed'
 import type { CoreMessage, MemoryBuildParams } from './types'
 
 const VECTOR_KEEP_RECENT = 4
-const PLACEHOLDER_EMBEDDING: number[] = new Array(1536).fill(0)
 
 export async function buildVectorMemory(params: MemoryBuildParams): Promise<CoreMessage[]> {
   const { supabase, conversationId, tenantId, systemPrompt, currentPrompt } = params
 
+  // Generate real embedding for the current prompt for semantic search.
+  // Falls back to text-only search if embedding fails (e.g. no OpenAI key).
+  let queryEmbedding: number[]
+  try {
+    queryEmbedding = await embedText(currentPrompt)
+  } catch {
+    queryEmbedding = []
+  }
+
   const [searchResults, messagesResult] = await Promise.all([
-    hybridSearch(supabase, {
-      embedding: PLACEHOLDER_EMBEDDING,
-      queryText: currentPrompt,
-      tenantId,
-      limit: 5,
-    }),
+    queryEmbedding.length > 0
+      ? hybridSearch(supabase, {
+          embedding: queryEmbedding,
+          queryText: currentPrompt,
+          tenantId,
+          limit: 5,
+        })
+      : Promise.resolve([]),
     supabase
       .from('messages')
       .select('role, content')

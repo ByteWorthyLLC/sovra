@@ -23,7 +23,7 @@ func TestHTTPHandler_MCPEndpointResponds(t *testing.T) {
 	srv := mcpserver.NewMCPServer(nil, &config.Config{
 		AgentWorkspacePath: t.TempDir(),
 	})
-	handler := mcpserver.NewMCPHandler(srv)
+	handler := mcpserver.NewMCPHandler(srv, "")
 
 	// POST to /mcp with empty body should get a response (not 404).
 	// The MCP handler will return 400 for invalid JSON-RPC, which proves the endpoint is wired.

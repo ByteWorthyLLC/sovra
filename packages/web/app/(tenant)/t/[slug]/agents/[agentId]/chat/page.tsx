@@ -1,9 +1,15 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getAgent } from '@/lib/agent/queries'
 import { listConversations, getMessages } from '@/lib/chat/queries'
 import { ChatPageClient } from './chat-page-client'
 import type { Message } from 'ai'
+
+export const metadata: Metadata = {
+  title: 'Agent Chat | ByteSwarm',
+  description: 'Chat with your AI agent and manage conversation history.',
+}
 
 interface ChatPageProps {
   params: Promise<{ slug: string; agentId: string }>

@@ -1,5 +1,11 @@
+import type { Metadata } from 'next'
 import { getAllTenants } from '@/lib/admin/queries'
 import { TenantTableWrapper } from './TenantTableWrapper'
+
+export const metadata: Metadata = {
+  title: 'Tenants | ByteSwarm Admin',
+  description: 'View, search, and manage all tenant organizations on the platform.',
+}
 
 interface TenantsPageProps {
   searchParams: Promise<{ page?: string; search?: string }>

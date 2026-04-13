@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getWorkspaceById, getWorkspaceAgents } from '@/lib/workspace/queries'
 import { readSharedMemory } from '@/lib/workspace/shared-memory'
 import { WorkspaceDetailClient } from './workspace-detail-client'
+
+export const metadata: Metadata = {
+  title: 'Workspace | ByteSwarm',
+  description: 'View and manage agents, shared memory, and settings for this workspace.',
+}
 
 interface WorkspaceDetailPageProps {
   params: Promise<{ slug: string; workspaceId: string }>

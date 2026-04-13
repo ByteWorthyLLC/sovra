@@ -84,7 +84,7 @@ export async function handleWebhookEvent(
     }
 
     default:
-      console.log(`[billing] unhandled webhook event: ${event.type}`)
+      // Unhandled event types are expected — Stripe sends many event types
       break
   }
 }

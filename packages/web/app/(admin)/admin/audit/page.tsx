@@ -1,5 +1,11 @@
+import type { Metadata } from 'next'
 import { getAuditLogs } from '@/lib/admin/queries'
 import { AuditLogTableWrapper } from './AuditLogTableWrapper'
+
+export const metadata: Metadata = {
+  title: 'Audit Log | ByteSwarm Admin',
+  description: 'Review platform-wide audit events, security actions, and change history.',
+}
 
 interface AuditPageProps {
   searchParams: Promise<{ page?: string; severity?: string }>

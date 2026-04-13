@@ -8,7 +8,16 @@ export async function getMcpClient(): Promise<Client> {
 
   const url = new URL(process.env.WORKER_MCP_URL ?? 'http://worker:3001/mcp')
   const client = new Client({ name: 'byteswarm-web', version: '1.0.0' })
-  const transport = new StreamableHTTPClientTransport(url)
+
+  const headers: Record<string, string> = {}
+  const secret = process.env.INTERNAL_API_SECRET
+  if (secret) {
+    headers['Authorization'] = `Bearer ${secret}`
+  }
+
+  const transport = new StreamableHTTPClientTransport(url, {
+    requestInit: { headers },
+  })
 
   try {
     await client.connect(transport)

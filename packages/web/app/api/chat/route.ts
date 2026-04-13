@@ -71,8 +71,8 @@ export async function POST(req: Request) {
     agentTools = getAgentTools(allTools, (agent.tools as string[]) ?? []) as
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Record<string, CoreTool<any, any>>
-  } catch {
-    console.warn('MCP client unavailable, streaming without tools')
+  } catch (mcpError) {
+    console.warn('MCP client unavailable, streaming without tools:', mcpError instanceof Error ? mcpError.message : mcpError)
   }
 
   const hasTools = Object.keys(agentTools).length > 0

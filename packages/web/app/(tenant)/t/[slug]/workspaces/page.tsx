@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getWorkspaces } from '@/lib/workspace/queries'
 import { listAgents } from '@/lib/agent/queries'
 import { WorkspacesListClient } from './workspaces-list-client'
 import type { Workspace } from '@/lib/workspace/types'
+
+export const metadata: Metadata = {
+  title: 'Workspaces | ByteSwarm',
+  description: 'Organize agents into collaborative workspaces with shared memory.',
+}
 
 interface WorkspacesPageProps {
   params: Promise<{ slug: string }>

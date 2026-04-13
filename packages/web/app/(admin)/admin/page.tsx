@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import { LayoutDashboard, Users, Bot, Activity } from 'lucide-react'
 import { getPlatformStats } from '@/lib/admin/queries'
 import { AdminStatCard } from '@/components/admin/AdminStatCard'
 import { HealthCheckRow } from '@/components/admin/HealthCheckRow'
+
+export const metadata: Metadata = {
+  title: 'Admin Overview | ByteSwarm',
+  description: 'Platform-wide statistics, health checks, and admin controls.',
+}
 
 export default async function AdminOverviewPage() {
   let stats = { totalTenants: 0, activeUsers: 0, totalAgents: 0, apiCallsToday: 0 }
