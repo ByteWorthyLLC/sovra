@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import {
   Bot,
   Database,
@@ -71,6 +72,7 @@ export default function HomePage() {
           <nav className="flex items-center space-x-6 text-sm font-medium ml-auto">
             <Link href="#features" className="transition-colors hover:text-foreground/80 text-muted-foreground">Features</Link>
             <Link href="#stack" className="transition-colors hover:text-foreground/80 text-muted-foreground">Stack</Link>
+            <ThemeToggle />
             <Link href="#get-started">
               <Button variant="gradient" size="sm">Get Started</Button>
             </Link>

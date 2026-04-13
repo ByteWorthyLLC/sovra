@@ -5,6 +5,7 @@ import { Bot, LogOut, Menu, X } from 'lucide-react'
 import { createSupabaseBrowserClient } from '@/lib/auth/client'
 import { useTenant } from '@/lib/tenant/context'
 import { Avatar } from '@/components/ui/avatar'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { TenantSwitcher } from './tenant-switcher'
 import { SidebarNav } from './sidebar-nav'
 
@@ -52,6 +53,7 @@ function UserSection() {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold truncate">Account</p>
         </div>
+        <ThemeToggle />
         <button
           onClick={handleSignOut}
           disabled={signingOut}
