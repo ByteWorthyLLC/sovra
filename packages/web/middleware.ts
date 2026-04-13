@@ -4,6 +4,14 @@ import { createClient } from '@supabase/supabase-js'
 import { createTenantResolver } from '@/lib/tenant/resolver'
 import { PUBLIC_ROUTES } from '@/lib/rbac/constants'
 
+function setSecurityHeaders(res: NextResponse): void {
+  res.headers.set('X-Frame-Options', 'DENY')
+  res.headers.set('X-Content-Type-Options', 'nosniff')
+  res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  res.headers.set('X-DNS-Prefetch-Control', 'on')
+  res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
@@ -71,6 +79,7 @@ export async function middleware(request: NextRequest) {
     }
 
     response.headers.set('Cache-Control', 'private, no-store')
+    setSecurityHeaders(response)
     return response
   }
 
@@ -79,15 +88,15 @@ export async function middleware(request: NextRequest) {
 
   if (!user && !isPublicRoute) {
     const loginUrl = request.nextUrl.clone()
-    loginUrl.pathname = '/login'
+    loginUrl.pathname = '/auth/login'
     loginUrl.searchParams.set('next', pathname)
     return NextResponse.redirect(loginUrl)
   }
 
   // 7. Redirect authenticated users away from login/signup to dashboard
-  if (user && (pathname === '/login' || pathname === '/signup')) {
+  if (user && (pathname === '/auth/login' || pathname === '/auth/signup')) {
     const dashUrl = request.nextUrl.clone()
-    dashUrl.pathname = '/dashboard'
+    dashUrl.pathname = '/onboarding'
     return NextResponse.redirect(dashUrl)
   }
 
@@ -101,6 +110,7 @@ export async function middleware(request: NextRequest) {
     response.headers.set('Cache-Control', 'private, no-store')
   }
 
+  setSecurityHeaders(response)
   return response
 }
 
