@@ -126,7 +126,7 @@ export default function ForgotPasswordPage() {
         )}
 
         <p className="text-sm text-muted-foreground text-center">
-          <Link href="/login" className="text-primary hover:text-primary/80 transition-colors">
+          <Link href="/auth/login" className="text-primary hover:text-primary/80 transition-colors">
             Back to sign in
           </Link>
         </p>

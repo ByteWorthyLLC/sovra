@@ -58,7 +58,7 @@ export default function ResetPasswordPage() {
         return
       }
 
-      router.push('/login?success=Password+updated.+Sign+in+with+your+new+password.')
+      router.push('/auth/login?success=Password+updated.+Sign+in+with+your+new+password.')
     } finally {
       setLoading(false)
     }
@@ -113,7 +113,7 @@ export default function ResetPasswordPage() {
         </Button>
 
         <p className="text-sm text-muted-foreground text-center">
-          <Link href="/login" className="text-primary hover:text-primary/80 transition-colors">
+          <Link href="/auth/login" className="text-primary hover:text-primary/80 transition-colors">
             Back to sign in
           </Link>
         </p>
