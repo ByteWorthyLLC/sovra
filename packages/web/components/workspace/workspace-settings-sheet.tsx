@@ -166,7 +166,7 @@ export function WorkspaceSettingsSheet({
           <h2 className="text-xl font-semibold">Workspace settings</h2>
           <button
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-zinc-800 transition-colors text-muted-foreground hover:text-foreground"
+            className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-surface-3 transition-colors text-muted-foreground hover:text-foreground"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -241,15 +241,15 @@ export function WorkspaceSettingsSheet({
         {/* Footer */}
         <div className="px-6 py-4 border-t border-border shrink-0 flex items-center gap-3">
           {isDirty && (
-            <span className="text-xs text-amber-400 mr-auto">Unsaved changes</span>
+            <span className="text-xs text-status-warning mr-auto">Unsaved changes</span>
           )}
           {error && (
-            <span className="text-xs text-red-400 mr-auto">{error}</span>
+            <span className="text-xs text-status-error mr-auto">{error}</span>
           )}
           <div className="flex gap-2 ml-auto">
             <button
               onClick={onClose}
-              className="h-9 px-4 rounded-md text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-zinc-800 transition-colors"
+              className="h-9 px-4 rounded-md text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface-3 transition-colors"
               disabled={saving}
             >
               Cancel
@@ -299,7 +299,7 @@ function GeneralTab({
           required
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
-          className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           placeholder="Workspace name"
         />
       </div>
@@ -314,7 +314,7 @@ function GeneralTab({
           rows={3}
           value={description}
           onChange={(e) => onDescriptionChange(e.target.value)}
-          className="w-full px-3 py-2 rounded-md bg-zinc-900 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+          className="w-full px-3 py-2 rounded-md bg-surface-2 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
           placeholder="Describe what this workspace is for..."
         />
       </div>
@@ -328,7 +328,7 @@ function GeneralTab({
             {availableAgents.map((agent) => (
               <label
                 key={agent.id}
-                className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-zinc-800/50 transition-colors cursor-pointer"
+                className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-surface-3/50 transition-colors cursor-pointer"
               >
                 <input
                   type="checkbox"
@@ -337,7 +337,7 @@ function GeneralTab({
                   className="rounded border-border"
                 />
                 <span className="text-sm font-semibold flex-1">{agent.name}</span>
-                <span className="text-xs text-muted-foreground bg-zinc-800 px-2 py-0.5 rounded font-mono">
+                <span className="text-xs text-muted-foreground bg-surface-3 px-2 py-0.5 rounded font-mono">
                   {agent.model_provider}/{agent.model_name}
                 </span>
               </label>
@@ -378,7 +378,7 @@ function CollaborationTab({
           id="collab-mode"
           value={collabMode}
           onChange={(e) => onCollabModeChange(e.target.value as CollaborationMode)}
-          className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         >
           {COLLAB_MODE_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -400,7 +400,7 @@ function CollaborationTab({
             id="conflict-res"
             value={conflictResolution}
             onChange={(e) => onConflictResolutionChange(e.target.value as ConflictResolution)}
-            className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           >
             {CONFLICT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -423,7 +423,7 @@ function CollaborationTab({
             max={20}
             value={maxConcurrent}
             onChange={(e) => onMaxConcurrentChange(Number(e.target.value))}
-            className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
       )}
@@ -456,7 +456,7 @@ function MemoryTab({
           id="memory-strategy"
           value={memoryStrategy}
           onChange={(e) => onMemoryStrategyChange(e.target.value as MemoryStrategy)}
-          className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         >
           {MEMORY_STRATEGY_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -481,7 +481,7 @@ function MemoryTab({
           aria-checked={compressionEnabled}
           onClick={() => onCompressionEnabledChange(!compressionEnabled)}
           className={`relative w-10 h-6 rounded-full transition-colors ${
-            compressionEnabled ? 'bg-primary' : 'bg-zinc-700'
+            compressionEnabled ? 'bg-primary' : 'bg-surface-3'
           }`}
         >
           <span
@@ -505,7 +505,7 @@ function MemoryTab({
             max={100}
             value={compressionThreshold}
             onChange={(e) => onCompressionThresholdChange(Number(e.target.value))}
-            className="w-full h-9 px-3 rounded-md bg-zinc-900 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
           <p className="text-xs text-muted-foreground mt-1.5">
             Context compresses when {compressionThreshold}% of the model's token limit is used

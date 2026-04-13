@@ -58,8 +58,7 @@ function ActivityFeedItem({ event, agentNames }: ActivityFeedItemProps) {
           </span>
         </div>
         <p
-          className="text-sm leading-6 text-foreground"
-          style={{ background: '#131316', borderRadius: '0.375rem', padding: '0.5rem 0.75rem' }}
+          className="text-sm leading-6 text-foreground bg-surface-2 rounded-md px-3 py-2"
         >
           {event.content}
         </p>
@@ -86,7 +85,7 @@ function ActivityFeedItem({ event, agentNames }: ActivityFeedItemProps) {
 
     return (
       <motion.div className="py-3 px-4" {...VARIANTS.messageEnter}>
-        <span className="text-sm text-amber-400">{event.content}</span>
+        <span className="text-sm text-status-warning">{event.content}</span>
       </motion.div>
     )
   }
@@ -95,8 +94,7 @@ function ActivityFeedItem({ event, agentNames }: ActivityFeedItemProps) {
     return (
       <motion.div className="py-3 px-4" {...VARIANTS.messageEnter}>
         <span
-          className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-mono"
-          style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', color: '#93C5FD' }}
+          className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-mono bg-primary/10 border border-primary/20 text-primary/80"
         >
           {event.content}
         </span>
@@ -121,8 +119,7 @@ function StreamingItem({ agentName, chunks }: StreamingItemProps) {
         <span className="text-xs text-muted-foreground/60">streaming...</span>
       </div>
       <p
-        className="text-sm leading-6 text-foreground"
-        style={{ background: '#131316', borderRadius: '0.375rem', padding: '0.5rem 0.75rem' }}
+        className="text-sm leading-6 text-foreground bg-surface-2 rounded-md px-3 py-2"
       >
         {chunks}
         <span className="streaming-cursor ml-0.5 inline-block w-0.5 h-3.5 bg-current align-middle" />

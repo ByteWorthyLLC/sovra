@@ -41,8 +41,8 @@ export function SidebarNav() {
         className={cn(
           'relative flex h-10 items-center gap-2 rounded-md px-3 text-sm font-semibold transition-colors duration-150',
           isActive
-            ? "bg-accent/10 text-primary before:content-[''] before:absolute before:left-0 before:h-5 before:w-0.5 before:rounded-full before:bg-primary"
-            : 'text-muted-foreground hover:bg-zinc-800/50 hover:text-foreground'
+            ? "bg-primary/8 text-primary before:content-[''] before:absolute before:left-0 before:h-5 before:w-0.5 before:rounded-full before:bg-primary before:shadow-[0_0_6px_hsl(var(--glow-primary)/0.6)]"
+            : 'text-muted-foreground hover:bg-surface-3/70 hover:text-foreground'
         )}
       >
         <Icon className="h-4 w-4" />

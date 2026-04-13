@@ -79,7 +79,7 @@ export function TenantSwitcher() {
     <>
       <DropdownMenu.Root open={open} onOpenChange={setOpen}>
         <DropdownMenu.Trigger asChild>
-          <button className="flex items-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-md hover:bg-zinc-800/50 transition-colors text-left">
+          <button className="flex items-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-md hover:bg-surface-3/70 transition-colors text-left">
             <span className="truncate flex-1">{tenant.name}</span>
             <ChevronsUpDown className="h-4 w-4 text-muted-foreground shrink-0" />
           </button>
@@ -97,7 +97,7 @@ export function TenantSwitcher() {
                     <DropdownMenu.Item
                       key={t.id}
                       onSelect={() => router.push(`/t/${t.slug}/dashboard`)}
-                      className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-zinc-800/50 transition-colors duration-100 text-sm outline-none"
+                      className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-surface-3/70 transition-colors duration-100 text-sm outline-none"
                     >
                       {t.id === tenant.id ? (
                         <Check className="h-4 w-4 text-primary" />
@@ -112,7 +112,7 @@ export function TenantSwitcher() {
 
                   <DropdownMenu.Item
                     onSelect={() => setDialogOpen(true)}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer text-muted-foreground hover:text-foreground hover:bg-zinc-800/50 transition-colors duration-100 text-sm outline-none"
+                    className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer text-muted-foreground hover:text-foreground hover:bg-surface-3/70 transition-colors duration-100 text-sm outline-none"
                   >
                     <PlusCircle className="h-4 w-4" />
                     New workspace

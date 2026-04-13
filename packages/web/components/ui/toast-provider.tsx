@@ -6,9 +6,9 @@ import { X, CheckCircle2, AlertCircle, Info } from 'lucide-react'
 import { ToastContext, useToastState, type ToastVariant } from '@/lib/toast'
 
 const variantStyles: Record<ToastVariant, string> = {
-  success: 'border-l-4 border-[#22C55E] bg-[#22C55E]/10',
-  error: 'border-l-4 border-[#EF4444] bg-[#EF4444]/10',
-  info: 'border-l-4 border-[#3B82F6] bg-[#3B82F6]/10',
+  success: 'border-l-4 border-status-online bg-status-online/10',
+  error: 'border-l-4 border-status-error bg-status-error/10',
+  info: 'border-l-4 border-primary bg-primary/10',
 }
 
 const variantIcons: Record<ToastVariant, typeof CheckCircle2> = {

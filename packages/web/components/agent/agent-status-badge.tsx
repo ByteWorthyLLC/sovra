@@ -12,18 +12,18 @@ interface AgentStatusBadgeProps {
 const STATUS_CONFIG: Record<AgentStatus, { label: string; dotClass: string; badgeClass: string }> = {
   idle: {
     label: 'Idle',
-    dotClass: 'bg-zinc-500',
+    dotClass: 'status-dot-idle',
     badgeClass: '',
   },
   running: {
     label: 'Running',
-    dotClass: 'bg-blue-500 agent-status-running',
-    badgeClass: 'text-blue-400 border-blue-500/30 bg-blue-500/10',
+    dotClass: 'status-dot-online agent-status-running',
+    badgeClass: 'text-status-online border-status-online/30 bg-status-online/10',
   },
   error: {
     label: 'Error',
-    dotClass: 'bg-red-500',
-    badgeClass: 'border-red-500/30 bg-red-500/10 text-red-400',
+    dotClass: 'status-dot-error',
+    badgeClass: 'border-status-error/30 bg-status-error/10 text-status-error',
   },
 }
 

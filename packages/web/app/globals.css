@@ -24,8 +24,25 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
-    --surface-elevated: 244 4% 95%;
-    --border-subtle: 240 5% 94%;
+
+    /* Surface layering system */
+    --surface-1: 0 0% 100%;
+    --surface-2: 240 5% 96%;
+    --surface-3: 240 4% 92%;
+    --surface-4: 240 5% 88%;
+
+    /* Glow */
+    --glow-primary: 221 83% 53%;
+
+    /* Status semantic colors */
+    --status-online: 142 71% 45%;
+    --status-warning: 38 92% 50%;
+    --status-error: 0 84% 60%;
+    --status-idle: 240 5% 60%;
+
+    /* Admin accent */
+    --admin-accent: 38 92% 50%;
+
     --success: 142 71% 45%;
   }
 
@@ -49,8 +66,25 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
-    --surface-elevated: 240 6% 10%;
-    --border-subtle: 240 4% 11%;
+
+    /* Surface layering — OLED-friendly */
+    --surface-1: 222 25% 5%;
+    --surface-2: 222 20% 8%;
+    --surface-3: 222 18% 11%;
+    --surface-4: 222 16% 14%;
+
+    /* Glow */
+    --glow-primary: 217 91% 60%;
+
+    /* Status semantic colors */
+    --status-online: 142 71% 45%;
+    --status-warning: 38 92% 50%;
+    --status-error: 0 63% 50%;
+    --status-idle: 220 9% 45%;
+
+    /* Admin accent */
+    --admin-accent: 38 92% 50%;
+
     --success: 142 71% 45%;
   }
 }
@@ -69,6 +103,7 @@
 }
 
 @layer utilities {
+  /* ── Auth background gradient ── */
   .auth-bg-gradient {
     background:
       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.12), transparent),
@@ -76,73 +111,145 @@
       hsl(var(--background));
   }
 
+  /* ── Glass card — semantic, works in light + dark ── */
   .glass-card {
-    background: rgba(17, 17, 19, 0.8);
+    background: hsl(var(--surface-2) / 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(39, 39, 42, 0.8);
+    border: 1px solid hsl(var(--surface-3) / 0.9);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      0 4px 6px -1px rgba(0, 0, 0, 0.4),
-      0 2px 4px -2px rgba(0, 0, 0, 0.4),
-      0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      0 0 0 1px hsl(var(--foreground) / 0.03),
+      0 4px 6px -1px hsl(var(--background) / 0.4),
+      0 2px 4px -2px hsl(var(--background) / 0.4),
+      0 20px 25px -5px hsl(var(--background) / 0.3);
   }
 
+  /* ── Gradient border on hover ── */
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glow-primary) / 0.4) 0%,
+      transparent 50%,
+      hsl(var(--glow-primary) / 0.1) 100%
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+
+  /* ── Noise texture overlay ── */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Text glow ── */
+  .text-glow {
+    text-shadow: 0 0 12px hsl(var(--glow-primary) / 0.5);
+  }
+
+  /* ── Button gradient border top ── */
   .btn-gradient-border {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  /* ── Input focus glow ── */
+  .input-focus-glow:focus-within {
+    box-shadow: 0 0 0 1px hsl(var(--ring)),
+                0 0 12px hsl(var(--glow-primary) / 0.15);
+  }
+
+  /* ── Status dot semantic classes ── */
+  .status-dot-online  { background-color: hsl(var(--status-online)); }
+  .status-dot-warning { background-color: hsl(var(--status-warning)); }
+  .status-dot-error   { background-color: hsl(var(--status-error)); }
+  .status-dot-idle    { background-color: hsl(var(--status-idle)); }
+
+  /* ── Collaboration mode badges ── */
+  .mode-round-robin  { background: hsl(270 70% 50% / 0.15); color: hsl(270 70% 70%); }
+  .mode-parallel     { background: hsl(142 71% 45% / 0.12); color: hsl(142 71% 60%); }
+  .mode-sequential   { background: hsl(38 92% 50% / 0.12);  color: hsl(38 92% 65%); }
+  .mode-hierarchical { background: hsl(25 95% 53% / 0.12);  color: hsl(25 95% 65%); }
+  .mode-democratic   { background: hsl(217 91% 60% / 0.12); color: hsl(217 91% 70%); }
+
+  /* ── Memory strategy badges ── */
+  .memory-conversation { background: hsl(217 91% 60% / 0.10); color: hsl(217 91% 75%); }
+  .memory-summary      { background: hsl(270 70% 50% / 0.10); color: hsl(270 70% 75%); }
+  .memory-vector       { background: hsl(142 71% 45% / 0.10); color: hsl(142 71% 65%); }
+  .memory-hybrid       { background: hsl(38 92% 50% / 0.10);  color: hsl(38 92% 70%); }
+
+  /* ── Plan tier badges ── */
+  .plan-free       { background: hsl(var(--surface-3) / 0.6); color: hsl(var(--muted-foreground)); }
+  .plan-pro        { background: hsl(217 91% 60% / 0.15); color: hsl(217 91% 70%); }
+  .plan-enterprise { background: hsl(270 70% 50% / 0.15); color: hsl(270 70% 70%); }
+
+  /* ── Enterprise plan glow ── */
+  .plan-enterprise-glow {
+    box-shadow: 0 0 14px hsl(270 70% 50% / 0.25),
+                inset 0 0 14px hsl(270 70% 50% / 0.08);
+  }
+
+  /* ── Streaming cursor ── */
   .streaming-cursor {
-    animation: blink 1s step-end infinite;
+    animation: blink 0.9s step-end infinite;
   }
 
+  /* ── Agent status running pulse ── */
   .agent-status-running {
-    animation: pulse-dot 1.5s ease-in-out infinite;
+    animation: statusPulse 2s ease-in-out infinite;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  /* ── Status flash ── */
+  .status-flash {
+    animation: statusFlash 0.6s ease-out;
   }
 
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
+  /* ── Status pulse (reconnecting) ── */
+  .status-pulse {
+    animation: statusPulse 1.2s ease-in-out infinite;
+  }
+
+  /* ── API key reveal flash ── */
+  .key-reveal-highlight {
+    animation: keyReveal 0.4s ease-out;
   }
 }
 
+/* ── Keyframes ── */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
-}
-.streaming-cursor {
-  animation: blink 0.9s step-end infinite;
 }
 
 @keyframes statusPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(0.85); }
 }
-.agent-status-running {
-  animation: statusPulse 2s ease-in-out infinite;
-}
 
 @keyframes statusFlash {
   0% { border-color: rgba(59, 130, 246, 0.8); }
   100% { border-color: var(--border); }
 }
-.status-flash {
-  animation: statusFlash 0.6s ease-out;
-}
 
-.status-pulse {
-  animation: statusPulse 1.2s ease-in-out infinite;
-}
-
-/* API key reveal -- highlight copy target */
-.key-reveal-highlight {
-  animation: keyReveal 0.4s ease-out;
-}
 @keyframes keyReveal {
   0%  { background-color: rgba(59, 130, 246, 0.2); }
   100% { background-color: transparent; }

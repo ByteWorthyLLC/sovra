@@ -39,7 +39,7 @@ export default async function TenantLayout({ children, params }: TenantLayoutPro
           <Sidebar />
           <div className="flex-1 flex flex-col min-h-screen">
             {/* Sticky header */}
-            <header className="h-14 sticky top-0 z-10 flex items-center justify-between px-6 border-b border-border backdrop-blur-sm bg-background/80">
+            <header className="h-14 sticky top-0 z-10 flex items-center justify-between px-6 shadow-[0_1px_0_hsl(var(--border))] backdrop-blur-sm bg-background/80">
               <div className="flex items-center gap-3">
                 <MobileSidebar />
                 <span className="text-sm font-semibold">Dashboard</span>

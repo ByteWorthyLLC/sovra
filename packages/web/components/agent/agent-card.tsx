@@ -34,7 +34,7 @@ export function AgentCard({ agent, tenantSlug, onEdit, onDelete }: AgentCardProp
         href={chatHref}
         className={cn(
           'block min-h-[88px] bg-card border border-border rounded-xl p-4 cursor-pointer',
-          'hover:border-zinc-700 hover:bg-zinc-900/80 transition-all duration-150',
+          'hover:border-primary/20 hover:bg-surface-2 hover:shadow-glow-sm transition-all duration-150',
           'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
           'group relative'
         )}
@@ -55,7 +55,7 @@ export function AgentCard({ agent, tenantSlug, onEdit, onDelete }: AgentCardProp
             <DropdownMenu.Trigger asChild>
               <button
                 onClick={(e) => e.preventDefault()}
-                className="h-7 w-7 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-zinc-800"
+                className="h-7 w-7 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-surface-3"
                 aria-label="Agent actions"
               >
                 <MoreHorizontal className="h-4 w-4 text-muted-foreground" />

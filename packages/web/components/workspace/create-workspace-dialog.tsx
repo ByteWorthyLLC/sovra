@@ -157,7 +157,7 @@ export function CreateWorkspaceDialog({
                   </Dialog.Title>
                   <Dialog.Close asChild>
                     <button
-                      className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-zinc-800 transition-colors"
+                      className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-surface-3 transition-colors"
                       aria-label="Close"
                     >
                       <X className="h-4 w-4" />
@@ -187,7 +187,7 @@ export function CreateWorkspaceDialog({
                       placeholder="What is this workspace for?"
                       value={form.description}
                       onChange={(e) => updateField('description', e.target.value)}
-                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-zinc-600 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-primary/20 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
                     />
                   </FormField>
 
@@ -197,7 +197,7 @@ export function CreateWorkspaceDialog({
                       value={form.collaboration_mode}
                       onValueChange={(v) => updateField('collaboration_mode', v as CollaborationMode)}
                     >
-                      <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-zinc-600 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
+                      <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-primary/20 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
                         <Select.Value />
                         <Select.Icon>
                           <ChevronDown className="h-4 w-4 text-muted-foreground" />
@@ -254,7 +254,7 @@ export function CreateWorkspaceDialog({
                               onClick={() => toggleAgent(agent.id)}
                               className={cn(
                                 'w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors',
-                                'hover:bg-zinc-800/50 border-b border-border/50 last:border-b-0'
+                                'hover:bg-surface-3/50 border-b border-border/50 last:border-b-0'
                               )}
                             >
                               {/* Checkbox */}
@@ -271,7 +271,7 @@ export function CreateWorkspaceDialog({
                               {/* Agent name */}
                               <span className="text-sm text-foreground flex-1">{agent.name}</span>
                               {/* Model chip */}
-                              <span className="text-xs text-muted-foreground bg-zinc-800 px-2 py-0.5 rounded shrink-0">
+                              <span className="text-xs text-muted-foreground bg-surface-3 px-2 py-0.5 rounded shrink-0">
                                 {agent.model_name}
                               </span>
                             </button>

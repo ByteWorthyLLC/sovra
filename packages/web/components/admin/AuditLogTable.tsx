@@ -25,9 +25,9 @@ const SEVERITY_ICON: Record<string, React.ElementType> = {
 }
 
 const SEVERITY_COLOR: Record<string, string> = {
-  info: 'text-zinc-400',
-  warning: 'text-amber-400',
-  critical: 'text-red-500',
+  info: 'text-muted-foreground',
+  warning: 'text-status-warning',
+  critical: 'text-status-error',
 }
 
 function formatTimestamp(iso: string) {
@@ -71,7 +71,7 @@ export function AuditLogTable({
               className={[
                 'h-7 px-3 rounded-full text-xs font-medium transition-colors',
                 isActive
-                  ? 'bg-zinc-700 text-foreground'
+                  ? 'bg-surface-3 text-foreground'
                   : 'text-muted-foreground hover:text-foreground',
               ].join(' ')}
             >
@@ -85,7 +85,7 @@ export function AuditLogTable({
       <div className="border border-border rounded-xl overflow-hidden">
         {logs.map((log, i) => {
           const SeverityIcon = SEVERITY_ICON[log.severity] ?? Info
-          const severityColor = SEVERITY_COLOR[log.severity] ?? 'text-zinc-400'
+          const severityColor = SEVERITY_COLOR[log.severity] ?? 'text-muted-foreground'
           const isExpanded = expandedId === log.id
 
           return (
@@ -93,7 +93,7 @@ export function AuditLogTable({
               <motion.div
                 {...VARIANTS.messageEnter}
                 transition={{ ...VARIANTS.messageEnter.transition, delay: i * 0.02 }}
-                className="py-3 px-4 flex items-center gap-3 border-b border-border/50 last:border-b-0 hover:bg-zinc-900/30 cursor-pointer transition-colors duration-100"
+                className="py-3 px-4 flex items-center gap-3 border-b border-border/50 last:border-b-0 hover:bg-surface-2/30 cursor-pointer transition-colors duration-100"
                 onClick={() => setExpandedId(isExpanded ? null : log.id)}
               >
                 <SeverityIcon className={['h-3.5 w-3.5 shrink-0', severityColor].join(' ')} />
@@ -123,7 +123,7 @@ export function AuditLogTable({
                     transition={{ duration: 0.15 }}
                     className="overflow-hidden border-b border-border/50"
                   >
-                    <pre className="bg-zinc-900/60 p-3 text-xs font-mono text-foreground overflow-x-auto">
+                    <pre className="bg-surface-2/60 p-3 text-xs font-mono text-foreground overflow-x-auto">
                       {JSON.stringify(log.metadata ?? {}, null, 2)}
                     </pre>
                   </motion.div>
@@ -148,14 +148,14 @@ export function AuditLogTable({
             <button
               disabled={page <= 1}
               onClick={() => onPageChange(page - 1)}
-              className="h-8 px-3 rounded-md border border-border hover:bg-zinc-800/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="h-8 px-3 rounded-md border border-border hover:bg-surface-3/60 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Prev
             </button>
             <button
               disabled={page >= totalPages}
               onClick={() => onPageChange(page + 1)}
-              className="h-8 px-3 rounded-md border border-border hover:bg-zinc-800/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="h-8 px-3 rounded-md border border-border hover:bg-surface-3/60 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Next
             </button>

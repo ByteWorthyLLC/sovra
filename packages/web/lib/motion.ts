@@ -7,6 +7,7 @@ export const TRANSITIONS = {
   spring: { type: 'spring' as const, stiffness: 400, damping: 30 } satisfies Transition,
   springFast: { type: 'spring' as const, stiffness: 500, damping: 35 } satisfies Transition,
   slow: { duration: 0.4, ease } satisfies Transition,
+  smooth: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } satisfies Transition,
 }
 
 export const VARIANTS = {
@@ -57,5 +58,22 @@ export const VARIANTS = {
     animate: { opacity: 1, y: 0, scale: 1 },
     exit: { opacity: 0, y: 12, scale: 0.98 },
     transition: { duration: 0.25, ease } satisfies Transition,
+  },
+  hoverLift: {
+    whileHover: { y: -2 },
+    transition: { type: 'spring' as const, stiffness: 400, damping: 20 },
+  },
+  scaleIn: {
+    initial: { opacity: 0, scale: 0.94 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.22, ease: [0.16, 1, 0.3, 1] },
+  },
+  fadeUp: {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+  },
+  staggerContainer: {
+    animate: { transition: { staggerChildren: 0.06 } },
   },
 }

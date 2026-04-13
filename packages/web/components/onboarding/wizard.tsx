@@ -101,7 +101,7 @@ export function OnboardingWizard() {
           <div
             key={s}
             className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-              s === step ? 'bg-primary' : 'bg-zinc-700'
+              s === step ? 'bg-primary' : 'bg-surface-3'
             }`}
           />
         ))}

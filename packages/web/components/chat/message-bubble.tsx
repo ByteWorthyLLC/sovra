@@ -46,7 +46,7 @@ function renderInlineCode(text: string) {
   return parts.map((part, i) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
-        <code key={i} className="bg-zinc-800 rounded px-2 py-1 font-mono text-sm text-foreground/90">
+        <code key={i} className="bg-surface-3 rounded px-2 py-1 font-mono text-sm text-foreground/90">
           {part.slice(1, -1)}
         </code>
       )
@@ -65,16 +65,16 @@ function CodeBlockRenderer({ language, code }: CodeBlock) {
   }, [code])
 
   return (
-    <div className="relative bg-[#0D0D0F] border border-border rounded-lg my-2 overflow-hidden">
+    <div className="relative bg-surface-1 border border-border rounded-lg my-2 overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 border-b border-border">
         <span className="text-xs text-muted-foreground/60 uppercase">{language}</span>
         <button
           onClick={handleCopy}
-          className="p-1 rounded hover:bg-zinc-800 transition-colors"
+          className="p-1 rounded hover:bg-surface-3 transition-colors"
           aria-label="Copy code"
         >
           {copied ? (
-            <Check className="h-3.5 w-3.5 text-green-500" />
+            <Check className="h-3.5 w-3.5 text-status-online" />
           ) : (
             <Copy className="h-3.5 w-3.5 text-muted-foreground" />
           )}
@@ -97,7 +97,7 @@ export function MessageBubble({ message, isStreaming }: MessageBubbleProps) {
       className={cn('group flex', isUser ? 'justify-end' : 'justify-start')}
     >
       {isUser ? (
-        <div className="bg-[#1E3A5F] text-foreground rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[80%]">
+        <div className="bg-primary/15 border border-primary/20 text-foreground rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[80%]">
           {renderInlineCode(message.content)}
         </div>
       ) : (

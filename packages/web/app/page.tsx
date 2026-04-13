@@ -58,34 +58,43 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-surface-1">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-surface-1/80 backdrop-blur-md">
         <div className="container flex h-14 items-center mx-auto px-4 max-w-6xl">
           <div className="mr-4 flex">
             <Link href="/" className="mr-6 flex items-center space-x-2">
-              <Bot className="h-6 w-6" />
+              <Bot className="h-6 w-6 text-primary drop-shadow-[0_0_8px_hsl(var(--glow-primary)/0.6)]" />
               <span className="font-bold text-xl">ByteSwarm</span>
             </Link>
           </div>
           <nav className="flex items-center space-x-6 text-sm font-medium ml-auto">
-            <Link href="#features" className="transition-colors hover:text-foreground/80">Features</Link>
-            <Link href="#stack" className="transition-colors hover:text-foreground/80">Stack</Link>
+            <Link href="#features" className="transition-colors hover:text-foreground/80 text-muted-foreground">Features</Link>
+            <Link href="#stack" className="transition-colors hover:text-foreground/80 text-muted-foreground">Stack</Link>
             <Link href="#get-started">
-              <Button>Get Started</Button>
+              <Button variant="gradient" size="sm">Get Started</Button>
             </Link>
           </nav>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="py-24 md:py-32">
+      <section className="relative py-28 md:py-40 overflow-hidden">
+        {/* Animated gradient mesh background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,hsl(var(--glow-primary)/0.12),transparent_70%)] blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,hsl(270_70%_50%/0.08),transparent_70%)] blur-3xl" />
+        </div>
+
+        {/* Floating grid lines */}
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(hsl(var(--surface-3)/0.3)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--surface-3)/0.3)_1px,transparent_1px)] bg-[size:64px_64px]" />
+
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Open Source • MIT License</Badge>
+            <Badge variant="secondary" className="mb-4 border-primary/20 bg-primary/10 text-primary">Open Source &middot; MIT License</Badge>
             <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
               Ship AI products.<br />
-              <span className="text-primary">Not infrastructure.</span>
+              <span className="text-primary text-glow">Not infrastructure.</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               The open-source platform that gives you multi-tenant auth, MCP-native agents,
@@ -94,12 +103,12 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button variant="gradient" size="lg" className="w-full sm:w-auto">
                   View on GitHub <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/docs">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto hover:shadow-glow-sm">
                   Read the Docs
                 </Button>
               </Link>
@@ -109,14 +118,16 @@ export default function HomePage() {
       </section>
 
       {/* Stack */}
-      <section id="stack" className="py-16 bg-muted/50">
+      <section id="stack" className="py-16 bg-surface-2/50">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12">Built On</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stack.map((item) => (
-              <Card key={item.name} className="text-center">
+              <Card key={item.name} variant="glass" className="text-center hover:shadow-glow-sm transition-all duration-200 cursor-default">
                 <CardHeader className="pb-2">
-                  <item.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mx-auto mb-2">
+                    <item.icon className="h-6 w-6 text-primary" />
+                  </div>
                   <CardTitle className="text-sm">{item.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -137,9 +148,11 @@ export default function HomePage() {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature) => (
-              <Card key={feature.title} className="hover:shadow-lg transition-shadow">
+              <Card key={feature.title} variant="glass" className="hover:shadow-glow-sm transition-all duration-200 cursor-default group">
                 <CardHeader>
-                  <feature.icon className="h-10 w-10 mb-3 text-primary" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mb-3 group-hover:bg-primary/15 transition-colors">
+                    <feature.icon className="h-6 w-6 text-primary" />
+                  </div>
                   <CardTitle>{feature.title}</CardTitle>
                   <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
@@ -150,7 +163,7 @@ export default function HomePage() {
       </section>
 
       {/* What's Included */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-16 bg-surface-2/40">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12">What&apos;s Included</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -159,7 +172,7 @@ export default function HomePage() {
               <ul className="space-y-2">
                 {['Email/password signup & login', 'Magic link authentication', 'OAuth (Google, GitHub)', 'Session management with JWT', 'Password reset & email verification'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <CheckCircle2 className="h-4 w-4 text-status-online shrink-0" />
                     <span className="text-sm">{item}</span>
                   </li>
                 ))}
@@ -170,7 +183,7 @@ export default function HomePage() {
               <ul className="space-y-2">
                 {['Tenant creation & management', 'Subdomain-based routing', 'Role-based access control', 'Tenant-scoped queries', 'RLS policies enforced'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <CheckCircle2 className="h-4 w-4 text-status-online shrink-0" />
                     <span className="text-sm">{item}</span>
                   </li>
                 ))}
@@ -181,7 +194,7 @@ export default function HomePage() {
               <ul className="space-y-2">
                 {['MCP client & server', 'Built-in tools (file, web, DB)', 'Streaming via Vercel AI SDK', 'Vector memory with pgvector', 'Tool usage cost tracking'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <CheckCircle2 className="h-4 w-4 text-status-online shrink-0" />
                     <span className="text-sm">{item}</span>
                   </li>
                 ))}
@@ -190,9 +203,9 @@ export default function HomePage() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Production</h3>
               <ul className="space-y-2">
-                {['Billing (Lemon Squeezy)', 'Admin dashboard', 'API keys with rate limiting', 'Sentry + PostHog integration', 'CI/CD with GitHub Actions'].map((item) => (
+                {['Billing (Stripe)', 'Admin dashboard', 'API keys with rate limiting', 'Sentry + PostHog integration', 'CI/CD with GitHub Actions'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <CheckCircle2 className="h-4 w-4 text-status-online shrink-0" />
                     <span className="text-sm">{item}</span>
                   </li>
                 ))}
@@ -203,33 +216,40 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section id="get-started" className="py-24">
-        <div className="container mx-auto px-4 max-w-6xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Stop building plumbing. Start building product.</h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            One command. Full AI agent platform. Running locally in under 2 minutes.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
-              <Button size="lg">
-                <Terminal className="mr-2 h-4 w-4" />
-                git clone byteswarm
-              </Button>
-            </Link>
+      <section id="get-started" className="relative py-24 overflow-hidden">
+        {/* Background mesh */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,hsl(var(--glow-primary)/0.08),transparent_70%)] blur-3xl" />
+        </div>
+
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="glass-card rounded-2xl p-12 text-center noise-overlay">
+            <h2 className="text-3xl font-bold mb-4 relative z-10">Stop building plumbing. Start building product.</h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto relative z-10">
+              One command. Full AI agent platform. Running locally in under 2 minutes.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+              <Link href="https://github.com/byteswarm/byteswarm" target="_blank">
+                <Button variant="gradient" size="lg">
+                  <Terminal className="mr-2 h-4 w-4" />
+                  git clone byteswarm
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t">
+      <footer className="py-8 border-t border-border/40">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <Bot className="h-5 w-5" />
+              <Bot className="h-5 w-5 text-primary" />
               <span className="font-semibold">ByteSwarm</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              MIT License • Open Source
+              MIT License &middot; Open Source
             </p>
           </div>
         </div>

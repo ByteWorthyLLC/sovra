@@ -61,7 +61,7 @@ export function ChatInput({
           onKeyDown={handleKeyDown}
           placeholder={`Message ${agentName}...`}
           rows={1}
-          className="min-h-[56px] max-h-[200px] w-full resize-none rounded-xl bg-[#0D0D0F] border border-input px-4 py-3 pr-14 text-sm placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring focus:outline-none transition-colors"
+          className="min-h-[56px] max-h-[200px] w-full resize-none rounded-xl bg-surface-1 border border-border/60 px-4 py-3 pr-14 text-sm placeholder:text-muted-foreground/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 focus:outline-none focus:shadow-glow-sm transition-all duration-150"
         />
         <button
           type={isLoading ? 'button' : 'submit'}

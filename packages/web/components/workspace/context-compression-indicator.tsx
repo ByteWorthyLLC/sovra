@@ -7,9 +7,9 @@ interface ContextCompressionIndicatorProps {
 }
 
 function getBarColor(pct: number): string {
-  if (pct > 0.8) return 'bg-red-500'
-  if (pct > 0.6) return 'bg-amber-400'
-  return 'bg-blue-500'
+  if (pct > 0.8) return 'bg-status-error'
+  if (pct > 0.6) return 'bg-status-warning'
+  return 'bg-primary'
 }
 
 export function ContextCompressionIndicator({
@@ -32,10 +32,10 @@ export function ContextCompressionIndicator({
       title={isWarning ? 'Context compression active. Older messages condensed to stay within token limits.' : undefined}
       aria-label="Context usage indicator"
     >
-      <span className={`text-sm font-mono ${isWarning ? 'text-amber-400' : 'text-foreground'}`}>
+      <span className={`text-sm font-mono ${isWarning ? 'text-status-warning' : 'text-foreground'}`}>
         {usedK}K / {maxK}K tokens
       </span>
-      <div className="w-[80px] h-1 rounded-full bg-zinc-800" role="progressbar" aria-valuenow={usedK} aria-valuemax={maxK}>
+      <div className="w-[80px] h-1 rounded-full bg-surface-3" role="progressbar" aria-valuenow={usedK} aria-valuemax={maxK}>
         <div
           className={`h-full rounded-full transition-[width] duration-400 ease-out ${getBarColor(pct)}`}
           style={{ width: `${barWidth}%` }}

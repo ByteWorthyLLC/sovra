@@ -36,7 +36,7 @@ export function BillingPortalButton() {
     <button
       onClick={handleOpen}
       disabled={loading}
-      className="flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-semibold text-foreground hover:border-zinc-600 hover:bg-zinc-800/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-semibold text-foreground hover:border-primary/20 hover:bg-surface-3/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {loading ? (
         <span className="h-4 w-4 rounded-full border-2 border-muted-foreground/30 border-t-muted-foreground animate-spin" />

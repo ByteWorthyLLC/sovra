@@ -11,7 +11,7 @@ export function SocketStatusIndicator() {
         className="flex items-center gap-2"
         aria-label="Connection status: connected"
       >
-        <span className="w-2 h-2 rounded-full bg-green-500" />
+        <span className="w-2 h-2 rounded-full status-dot-online" />
         <span className="text-xs text-muted-foreground hidden sm:inline">Live</span>
       </div>
     )
@@ -23,8 +23,8 @@ export function SocketStatusIndicator() {
         className="flex items-center gap-2"
         aria-label="Connection status: reconnecting"
       >
-        <span className="w-2 h-2 rounded-full bg-amber-400 status-pulse" />
-        <span className="text-xs text-amber-400">Reconnecting...</span>
+        <span className="w-2 h-2 rounded-full status-dot-warning status-pulse" />
+        <span className="text-xs text-status-warning">Reconnecting...</span>
       </div>
     )
   }
@@ -34,8 +34,8 @@ export function SocketStatusIndicator() {
       className="flex items-center gap-2"
       aria-label="Connection status: disconnected"
     >
-      <span className="w-2 h-2 rounded-full bg-red-500" />
-      <span className="text-xs text-red-400">Offline</span>
+      <span className="w-2 h-2 rounded-full status-dot-error" />
+      <span className="text-xs text-status-error">Offline</span>
     </div>
   )
 }

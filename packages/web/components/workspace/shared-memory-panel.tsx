@@ -6,11 +6,11 @@ import { ChevronDown } from 'lucide-react'
 import { ContextCompressionIndicator } from './context-compression-indicator'
 import type { Workspace, SharedMemoryEntry, MemoryStrategy } from '@/lib/workspace/types'
 
-const MEMORY_STRATEGY_STYLES: Record<MemoryStrategy, { bg: string; text: string; label: string }> = {
-  conversation: { bg: 'bg-blue-500/10', text: 'text-blue-300', label: 'Conversation' },
-  summary: { bg: 'bg-violet-500/10', text: 'text-violet-300', label: 'Summary' },
-  vector: { bg: 'bg-green-500/10', text: 'text-green-300', label: 'Vector' },
-  hybrid: { bg: 'bg-amber-500/10', text: 'text-amber-300', label: 'Hybrid' },
+const MEMORY_STRATEGY_STYLES: Record<MemoryStrategy, { className: string; label: string }> = {
+  conversation: { className: 'memory-conversation', label: 'Conversation' },
+  summary: { className: 'memory-summary', label: 'Summary' },
+  vector: { className: 'memory-vector', label: 'Vector' },
+  hybrid: { className: 'memory-hybrid', label: 'Hybrid' },
 }
 
 interface MemoryEntryItemProps {
@@ -35,7 +35,7 @@ function MemoryEntryItem({ entry, strategy }: MemoryEntryItemProps) {
         <span className="text-xs font-semibold text-muted-foreground">
           {entry.updated_by ?? 'System'}
         </span>
-        <span className={`text-xs px-2 py-0.5 rounded ${style.bg} ${style.text}`}>
+        <span className={`text-xs px-2 py-0.5 rounded ${style.className}`}>
           {style.label}
         </span>
         <span className="ml-auto text-xs text-muted-foreground/60">
@@ -82,7 +82,7 @@ export function SharedMemoryPanel({
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-2 border-b border-border/60">
         <span className="text-sm font-semibold">Shared Memory</span>
-        <span className={`text-xs px-2 py-0.5 rounded ${style.bg} ${style.text}`}>
+        <span className={`text-xs px-2 py-0.5 rounded ${style.className}`}>
           {style.label}
         </span>
         <div className="ml-auto flex items-center gap-2">
@@ -93,7 +93,7 @@ export function SharedMemoryPanel({
           />
           <button
             onClick={() => setCollapsed((v) => !v)}
-            className="flex items-center justify-center w-6 h-6 rounded hover:bg-zinc-800 transition-colors text-muted-foreground hover:text-foreground"
+            className="flex items-center justify-center w-6 h-6 rounded hover:bg-surface-3 transition-colors text-muted-foreground hover:text-foreground"
             aria-label={collapsed ? 'Expand shared memory' : 'Collapse shared memory'}
           >
             <ChevronDown

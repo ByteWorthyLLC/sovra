@@ -151,7 +151,7 @@ export function InviteForm({ expanded, onToggle }: { expanded: boolean; onToggle
                         />
                         <button
                           onClick={handleCopyLink}
-                          className="h-10 w-10 flex items-center justify-center rounded-md border border-input hover:bg-zinc-800/50 transition-colors"
+                          className="h-10 w-10 flex items-center justify-center rounded-md border border-input hover:bg-surface-3/70 transition-colors"
                           aria-label="Copy link"
                         >
                           {copied ? (

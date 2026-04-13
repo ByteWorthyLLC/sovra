@@ -27,25 +27,24 @@ export function ConflictResolutionCard({
 
   const [a, b] = proposals
 
-  const containerStyle = resolved
-    ? { background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '0.5rem' }
-    : { background: 'rgba(251,191,36,0.04)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: '0.5rem' }
+  const containerClass = resolved
+    ? 'bg-status-online/5 border border-status-online/20 rounded-lg'
+    : 'bg-status-warning/4 border border-status-warning/20 rounded-lg'
 
   return (
     <motion.div
-      className="p-4 my-1"
-      style={containerStyle}
+      className={`p-4 my-1 ${containerClass}`}
       {...VARIANTS.conflictEnter}
     >
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold uppercase tracking-wide text-amber-400">
+        <span className="text-xs font-semibold uppercase tracking-wide text-status-warning">
           Conflict resolution
         </span>
         <span
           className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
             resolved
-              ? 'bg-green-500/15 text-green-400'
-              : 'bg-amber-500/12 text-amber-400'
+              ? 'bg-status-online/15 text-status-online'
+              : 'bg-status-warning/12 text-status-warning'
           }`}
         >
           {resolved ? 'Resolved' : 'Pending'}
@@ -72,18 +71,18 @@ export function ConflictResolutionCard({
         <span className="text-xs text-muted-foreground">Votes:</span>
         <span
           key={`a-${a.votes}`}
-          className="px-2 py-1 rounded bg-zinc-800 text-xs font-semibold text-foreground"
+          className="px-2 py-1 rounded bg-surface-3 text-xs font-semibold text-foreground"
         >
           A: {a.votes}
         </span>
         <span
           key={`b-${b.votes}`}
-          className="px-2 py-1 rounded bg-zinc-800 text-xs font-semibold text-foreground"
+          className="px-2 py-1 rounded bg-surface-3 text-xs font-semibold text-foreground"
         >
           B: {b.votes}
         </span>
         {pendingVotes > 0 && (
-          <span className="px-2 py-1 rounded bg-zinc-800/60 text-xs font-semibold text-muted-foreground">
+          <span className="px-2 py-1 rounded bg-surface-3/60 text-xs font-semibold text-muted-foreground">
             Pending: {pendingVotes}
           </span>
         )}
@@ -96,7 +95,7 @@ export function ConflictResolutionCard({
       </div>
 
       {resolved && (
-        <p className="text-xs text-green-400 mt-2">Conflict resolved.</p>
+        <p className="text-xs text-status-online mt-2">Conflict resolved.</p>
       )}
     </motion.div>
   )

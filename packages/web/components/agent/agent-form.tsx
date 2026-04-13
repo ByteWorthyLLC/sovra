@@ -118,7 +118,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
   const providerSelect = (
     <FormField label="Provider" id="provider" error={errors.model_provider}>
       <Select.Root value={form.model_provider} onValueChange={(v) => handleProviderChange(v as SupportedProvider)}>
-        <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-zinc-600 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
+        <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-ring/50 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
           <Select.Value />
           <Select.Icon><ChevronDown className="h-4 w-4 text-muted-foreground" /></Select.Icon>
         </Select.Trigger>
@@ -141,7 +141,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
   const modelSelect = (
     <FormField label="Model" id="model" error={errors.model_name}>
       <Select.Root value={form.model_name} onValueChange={(v) => updateField('model_name', v)}>
-        <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-zinc-600 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
+        <Select.Trigger className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 text-sm hover:border-ring/50 transition-colors focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring">
           <Select.Value />
           <Select.Icon><ChevronDown className="h-4 w-4 text-muted-foreground" /></Select.Icon>
         </Select.Trigger>
@@ -165,7 +165,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
     <div className="flex items-center justify-between pt-4 border-t border-border">
       <div>
         {isDirty && (
-          <span className="text-xs text-amber-400">Unsaved changes</span>
+          <span className="text-xs text-status-warning">Unsaved changes</span>
         )}
       </div>
       <div className="flex gap-2">
@@ -193,7 +193,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                 <div className="flex items-center justify-between mb-6">
                   <Dialog.Title className="text-lg font-semibold">Create agent</Dialog.Title>
                   <Dialog.Close asChild>
-                    <button className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-zinc-800 transition-colors" aria-label="Close">
+                    <button className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-surface-3 transition-colors" aria-label="Close">
                       <X className="h-4 w-4" />
                     </button>
                   </Dialog.Close>
@@ -218,7 +218,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                       placeholder="What does this agent do?"
                       value={form.description}
                       onChange={(e) => updateField('description', e.target.value)}
-                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-zinc-600 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-ring/50 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
                     />
                   </FormField>
 
@@ -232,7 +232,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                       placeholder="You are a helpful assistant..."
                       value={form.system_prompt}
                       onChange={(e) => updateField('system_prompt', e.target.value)}
-                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-zinc-600 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                      className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-ring/50 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
                     />
                   </FormField>
                 </div>
@@ -258,7 +258,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
             <h2 className="text-lg font-semibold">Edit agent</h2>
             <button
               onClick={onCancel}
-              className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-zinc-800 transition-colors"
+              className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-surface-3 transition-colors"
               aria-label="Close"
             >
               <X className="h-4 w-4" />
@@ -300,7 +300,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                   rows={3}
                   value={form.description}
                   onChange={(e) => updateField('description', e.target.value)}
-                  className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-zinc-600 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                  className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm placeholder:text-muted-foreground/60 hover:border-ring/50 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
                 />
               </FormField>
 
@@ -332,7 +332,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                     step={0.1}
                     value={form.temperature}
                     onChange={(e) => updateField('temperature', parseFloat(e.target.value))}
-                    className="w-full h-1.5 rounded-full appearance-none bg-zinc-800 accent-primary cursor-pointer"
+                    className="w-full h-1.5 rounded-full appearance-none bg-surface-3 accent-primary cursor-pointer"
                   />
                 </div>
               </FormField>
@@ -367,7 +367,7 @@ export function AgentForm({ mode, agent, tenantId, onSuccess, onCancel }: AgentF
                     rows={10}
                     value={form.system_prompt}
                     onChange={(e) => updateField('system_prompt', e.target.value)}
-                    className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm font-mono placeholder:text-muted-foreground/60 hover:border-zinc-600 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                    className="w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm font-mono placeholder:text-muted-foreground/60 hover:border-ring/50 transition-colors focus-visible:outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring resize-none"
                   />
                   <span className="absolute bottom-2 right-2 text-xs text-muted-foreground tabular-nums">
                     {form.system_prompt.length} / 10,000

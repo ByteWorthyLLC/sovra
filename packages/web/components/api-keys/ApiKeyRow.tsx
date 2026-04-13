@@ -30,9 +30,9 @@ function getStatus(apiKey: ApiKeyData): BadgeVariant {
 }
 
 const STATUS_BADGE: Record<BadgeVariant, string> = {
-  active: 'bg-green-500/[0.12] text-green-400',
-  expired: 'bg-zinc-500/[0.12] text-zinc-400',
-  revoked: 'bg-red-500/[0.12] text-red-400',
+  active: 'bg-green-500/[0.12] text-status-online',
+  expired: 'bg-surface-3/60 text-muted-foreground',
+  revoked: 'bg-red-500/[0.12] text-status-error',
 }
 
 function formatExpiry(expiresAt: string | null): string {
@@ -80,7 +80,7 @@ export function ApiKeyRow({ apiKey, onRevoke }: ApiKeyRowProps) {
   return (
     <>
       <div
-        className="group h-[64px] flex items-center px-4 border-b border-border last:border-b-0 bg-card hover:bg-zinc-900/40 transition-colors duration-100 relative"
+        className="group h-[64px] flex items-center px-4 border-b border-border last:border-b-0 bg-card hover:bg-surface-2/60 transition-colors duration-100 relative"
         onMouseLeave={() => setMenuOpen(false)}
       >
         {/* Left: name + masked */}
@@ -108,30 +108,30 @@ export function ApiKeyRow({ apiKey, onRevoke }: ApiKeyRowProps) {
         <div className="relative">
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="h-7 w-7 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-zinc-800/60 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="h-7 w-7 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-surface-3/60 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
             aria-label="Key actions"
           >
             <MoreHorizontal className="h-4 w-4" />
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-8 z-20 w-44 rounded-lg border border-border bg-zinc-900 shadow-xl py-1">
+            <div className="absolute right-0 top-8 z-20 w-44 rounded-lg border border-border bg-surface-2 shadow-xl py-1">
               <button
                 onClick={handleCopyId}
-                className="w-full px-3 py-2 text-left text-sm hover:bg-zinc-800/60 transition-colors"
+                className="w-full px-3 py-2 text-left text-sm hover:bg-surface-3/60 transition-colors"
               >
                 Copy key ID
               </button>
               <button
                 onClick={handleRevealLast4}
-                className="w-full px-3 py-2 text-left text-sm hover:bg-zinc-800/60 transition-colors"
+                className="w-full px-3 py-2 text-left text-sm hover:bg-surface-3/60 transition-colors"
               >
                 Reveal last 4
               </button>
               <div className="my-1 h-px bg-border" />
               <button
                 onClick={() => { setConfirmOpen(true); setMenuOpen(false) }}
-                className="w-full px-3 py-2 text-left text-sm text-red-400 hover:bg-zinc-800/60 transition-colors"
+                className="w-full px-3 py-2 text-left text-sm text-status-error hover:bg-surface-3/60 transition-colors"
                 disabled={status === 'revoked'}
               >
                 Revoke key
@@ -145,7 +145,7 @@ export function ApiKeyRow({ apiKey, onRevoke }: ApiKeyRowProps) {
       {confirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setConfirmOpen(false)} />
-          <div className="relative z-10 max-w-[400px] w-full mx-4 rounded-xl border border-border bg-zinc-900 p-6 shadow-xl">
+          <div className="relative z-10 max-w-[400px] w-full mx-4 rounded-xl border border-border bg-surface-2 p-6 shadow-xl">
             <h2 className="text-base font-semibold mb-2">Revoke this API key?</h2>
             <p className="text-sm text-muted-foreground mb-6">
               Revoke this API key? Applications using it will stop working immediately.
@@ -153,7 +153,7 @@ export function ApiKeyRow({ apiKey, onRevoke }: ApiKeyRowProps) {
             <div className="flex items-center gap-3 justify-end">
               <button
                 onClick={() => setConfirmOpen(false)}
-                className="px-4 py-2 text-sm font-semibold rounded-md border border-border hover:border-zinc-600 transition-colors"
+                className="px-4 py-2 text-sm font-semibold rounded-md border border-border hover:border-primary/20 transition-colors"
               >
                 Keep key
               </button>

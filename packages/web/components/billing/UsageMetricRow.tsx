@@ -11,9 +11,9 @@ interface UsageMetricRowProps {
 }
 
 function getBarColor(pct: number): string {
-  if (pct > 90) return 'bg-red-500'
-  if (pct > 70) return 'bg-amber-400'
-  return 'bg-blue-500'
+  if (pct > 90) return 'bg-status-error'
+  if (pct > 70) return 'bg-status-warning'
+  return 'bg-primary'
 }
 
 function formatValue(n: number, unit?: string): string {
@@ -63,21 +63,21 @@ export function UsageMetricRow({ label, used, limit, unit }: UsageMetricRowProps
 
         {!isUnlimited && (
           <div className="relative group">
-            <div className="w-[160px] h-2 rounded-full bg-zinc-800 overflow-hidden">
+            <div className="w-[160px] h-2 rounded-full bg-surface-3 overflow-hidden">
               <div
                 className={cn('h-full rounded-full transition-all duration-[600ms] ease-out', getBarColor(pct))}
                 style={{ width: `${barWidth}%` }}
               />
             </div>
             {/* Tooltip */}
-            <div className="absolute bottom-full right-0 mb-1.5 px-2 py-1 rounded bg-zinc-800 border border-border text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+            <div className="absolute bottom-full right-0 mb-1.5 px-2 py-1 rounded bg-surface-3 border border-border text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
               {tooltipText}
             </div>
           </div>
         )}
 
         {isNearLimit && (
-          <span className="text-xs text-red-400 max-w-[200px] text-right">
+          <span className="text-xs text-status-error max-w-[200px] text-right">
             Approaching limit. Upgrade your plan to increase your quota.
           </span>
         )}

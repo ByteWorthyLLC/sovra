@@ -45,7 +45,7 @@ export function OAuthButton({ provider, loading, disabled, onClick }: OAuthButto
       disabled={disabled || loading}
       className={cn(
         'h-10 w-full flex items-center justify-center gap-2 text-sm font-semibold rounded-md border border-border bg-background/50',
-        'hover:bg-zinc-800/50 hover:border-zinc-600 transition-all duration-150',
+        'hover:bg-surface-3 hover:border-ring/40 transition-all duration-150',
         loading && 'opacity-60 cursor-wait',
         (disabled && !loading) && 'pointer-events-none opacity-70'
       )}

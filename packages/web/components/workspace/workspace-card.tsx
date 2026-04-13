@@ -14,55 +14,19 @@ interface WorkspaceCardProps {
   staggerIndex?: number
 }
 
-const MODE_BADGE: Record<CollaborationMode, { bg: string; text: string; label: string }> = {
-  round_robin: {
-    bg: 'bg-violet-500/15',
-    text: 'text-violet-400',
-    label: 'Round robin',
-  },
-  parallel: {
-    bg: 'bg-green-500/[0.12]',
-    text: 'text-green-400',
-    label: 'Parallel',
-  },
-  sequential: {
-    bg: 'bg-amber-500/[0.12]',
-    text: 'text-amber-400',
-    label: 'Sequential',
-  },
-  hierarchical: {
-    bg: 'bg-orange-500/[0.12]',
-    text: 'text-orange-400',
-    label: 'Hierarchical',
-  },
-  democratic: {
-    bg: 'bg-blue-500/[0.12]',
-    text: 'text-blue-400',
-    label: 'Democratic',
-  },
+const MODE_BADGE: Record<CollaborationMode, { className: string; label: string }> = {
+  round_robin:  { className: 'mode-round-robin',   label: 'Round robin' },
+  parallel:     { className: 'mode-parallel',      label: 'Parallel' },
+  sequential:   { className: 'mode-sequential',    label: 'Sequential' },
+  hierarchical: { className: 'mode-hierarchical',  label: 'Hierarchical' },
+  democratic:   { className: 'mode-democratic',    label: 'Democratic' },
 }
 
-const MEMORY_TAG: Record<MemoryStrategy, { bg: string; text: string; label: string }> = {
-  conversation: {
-    bg: 'bg-blue-500/10',
-    text: 'text-blue-300',
-    label: 'Conversation',
-  },
-  summary: {
-    bg: 'bg-violet-500/10',
-    text: 'text-violet-300',
-    label: 'Summary',
-  },
-  vector: {
-    bg: 'bg-green-500/10',
-    text: 'text-green-300',
-    label: 'Vector',
-  },
-  hybrid: {
-    bg: 'bg-amber-500/10',
-    text: 'text-amber-300',
-    label: 'Hybrid',
-  },
+const MEMORY_TAG: Record<MemoryStrategy, { className: string; label: string }> = {
+  conversation: { className: 'memory-conversation', label: 'Conversation' },
+  summary:      { className: 'memory-summary',      label: 'Summary' },
+  vector:       { className: 'memory-vector',       label: 'Vector' },
+  hybrid:       { className: 'memory-hybrid',       label: 'Hybrid' },
 }
 
 export function WorkspaceCard({ workspace, agentCount, tenantSlug, staggerIndex = 0 }: WorkspaceCardProps) {
@@ -78,7 +42,7 @@ export function WorkspaceCard({ workspace, agentCount, tenantSlug, staggerIndex 
         href={`/t/${tenantSlug}/workspaces/${workspace.id}`}
         className={cn(
           'group block bg-card border border-border rounded-xl p-4',
-          'hover:border-zinc-700 hover:bg-zinc-900/80 transition-all duration-150',
+          'hover:border-primary/20 hover:bg-surface-2 hover:shadow-glow-sm transition-all duration-150',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
         )}
       >
@@ -90,8 +54,7 @@ export function WorkspaceCard({ workspace, agentCount, tenantSlug, staggerIndex 
           <span
             className={cn(
               'shrink-0 px-2 py-1 rounded-full text-xs font-semibold',
-              mode.bg,
-              mode.text
+              mode.className
             )}
           >
             {mode.label}
@@ -111,8 +74,7 @@ export function WorkspaceCard({ workspace, agentCount, tenantSlug, staggerIndex 
           <span
             className={cn(
               'px-2 py-1 rounded text-xs',
-              memory.bg,
-              memory.text
+              memory.className
             )}
           >
             {memory.label}

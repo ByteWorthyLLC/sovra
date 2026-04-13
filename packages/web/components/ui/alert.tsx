@@ -13,7 +13,7 @@ interface AlertProps {
 
 const variantStyles: Record<AlertVariant, string> = {
   destructive: 'border-destructive bg-destructive/10 text-destructive',
-  success: 'border-green-500 bg-green-500/10 text-green-500',
+  success: 'border-status-online bg-status-online/10 text-status-online',
   info: 'border-primary bg-primary/10 text-primary',
 }
 

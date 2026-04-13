@@ -78,7 +78,7 @@ export function ChatContainer({
           <AgentStatusBadge status={isLoading ? 'running' : agentStatus} />
         </div>
         <button
-          className="p-2 rounded-lg hover:bg-zinc-800 transition-colors text-muted-foreground"
+          className="p-2 rounded-lg hover:bg-surface-3 transition-colors text-muted-foreground"
           aria-label="Agent settings"
         >
           <Settings className="h-4 w-4" />

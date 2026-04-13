@@ -46,7 +46,7 @@ export function MemberRow({ member, canManage, onRemove, onRoleChange }: MemberR
           {...VARIANTS.listItem}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.25 }}
-          className="flex items-center gap-3 px-4 h-14 hover:bg-zinc-800/30 transition-colors duration-100 rounded-md"
+          className="flex items-center gap-3 px-4 h-14 hover:bg-surface-3/60 transition-colors duration-100 rounded-md"
         >
           <Avatar name={member.name} src={member.avatarUrl} size="md" />
 
@@ -64,7 +64,7 @@ export function MemberRow({ member, canManage, onRemove, onRoleChange }: MemberR
           {canManage && !confirmingRemove && (
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
-                <button className="h-8 w-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-zinc-800/50 transition-colors">
+                <button className="h-8 w-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-surface-3/70 transition-colors">
                   <MoreHorizontal className="h-4 w-4" />
                 </button>
               </DropdownMenu.Trigger>
@@ -75,7 +75,7 @@ export function MemberRow({ member, canManage, onRemove, onRoleChange }: MemberR
                   className="z-50 min-w-[160px] rounded-lg border border-border bg-card p-1 shadow-lg"
                 >
                   <DropdownMenu.Sub>
-                    <DropdownMenu.SubTrigger className="flex items-center px-2 py-1.5 rounded-md text-sm cursor-pointer hover:bg-zinc-800/50 outline-none">
+                    <DropdownMenu.SubTrigger className="flex items-center px-2 py-1.5 rounded-md text-sm cursor-pointer hover:bg-surface-3/70 outline-none">
                       Change role
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.Portal>
@@ -87,7 +87,7 @@ export function MemberRow({ member, canManage, onRemove, onRoleChange }: MemberR
                           <DropdownMenu.Item
                             key={role}
                             onSelect={() => onRoleChange(member.userId, role)}
-                            className="flex items-center px-2 py-1.5 rounded-md text-sm cursor-pointer hover:bg-zinc-800/50 outline-none capitalize"
+                            className="flex items-center px-2 py-1.5 rounded-md text-sm cursor-pointer hover:bg-surface-3/70 outline-none capitalize"
                           >
                             {role}
                           </DropdownMenu.Item>

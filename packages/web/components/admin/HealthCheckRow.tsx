@@ -6,9 +6,9 @@ interface HealthCheckRowProps {
 }
 
 const STATUS_DOT_COLOR: Record<HealthCheckRowProps['status'], string> = {
-  healthy: 'bg-green-500',
-  degraded: 'bg-amber-400',
-  down: 'bg-red-500',
+  healthy: 'status-dot-online',
+  degraded: 'status-dot-warning',
+  down: 'status-dot-error',
 }
 
 const STATUS_LABEL: Record<HealthCheckRowProps['status'], string> = {

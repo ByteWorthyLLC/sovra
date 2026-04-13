@@ -16,17 +16,20 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1, ease: [0.32, 0.72, 0, 1] }}
-        className="bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-border/50 rounded-xl p-8"
+        className="relative overflow-hidden bg-gradient-to-br from-primary/8 via-surface-2 to-violet-500/8 border border-border/50 rounded-2xl p-8"
       >
-        <h1 className="text-2xl font-semibold tracking-tight">
+        {/* Decorative top gradient line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+        <h1 className="text-2xl font-semibold tracking-tight relative z-10">
           Welcome to {tenant.name}
         </h1>
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-sm text-muted-foreground mt-2 relative z-10">
           Get started by creating your first agent or inviting your team.
         </p>
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-3 mt-6 relative z-10">
           <Button
-            variant="ghost"
+            variant="ghost-premium"
             disabled
             className="opacity-50 cursor-not-allowed"
             title="Coming in next release"
@@ -35,7 +38,7 @@ export default function DashboardPage() {
             <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
           <Link href={`/t/${tenantSlug}/members`}>
-            <Button variant="ghost">
+            <Button variant="ghost-premium">
               Invite team members
               <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
@@ -50,7 +53,11 @@ export default function DashboardPage() {
           { title: 'Workspaces', value: '0' },
           { title: 'Conversations', value: '0' },
         ].map(({ title, value }) => (
-          <div key={title} className="bg-card rounded-xl border border-border p-6">
+          <div
+            key={title}
+            className="bg-surface-2 rounded-xl border border-border/60 p-6 relative overflow-hidden hover:border-primary/20 hover:shadow-glow-sm transition-all duration-200 group"
+          >
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <p className="text-sm text-muted-foreground">{title}</p>
             <p className="text-2xl font-semibold mt-1">{value}</p>
             <p className="text-xs text-muted-foreground mt-1">Coming soon</p>

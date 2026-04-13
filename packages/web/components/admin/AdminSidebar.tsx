@@ -31,7 +31,7 @@ export function AdminSidebar() {
                 'flex items-center gap-2.5 h-[36px] px-3 rounded-md text-sm transition-colors duration-100',
                 isActive
                   ? 'bg-amber-500/15 text-amber-400'
-                  : 'text-muted-foreground hover:bg-zinc-800/40 hover:text-foreground',
+                  : 'text-muted-foreground hover:bg-surface-3/60 hover:text-foreground',
               ].join(' ')}
             >
               <Icon className="h-4 w-4 shrink-0" />

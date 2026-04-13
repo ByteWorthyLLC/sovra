@@ -32,7 +32,7 @@ const PLAN_FEATURES: Record<PlanId, string[]> = {
 }
 
 const BADGE_CLASSES: Record<PlanId, string> = {
-  free: 'bg-zinc-500/15 text-zinc-400',
+  free: 'plan-free',
   pro: 'bg-blue-500/15 text-blue-400',
   enterprise: 'bg-violet-500/15 text-violet-400',
 }
@@ -68,7 +68,7 @@ export function PlanCard({ plan, isCurrent, currentPlan, onSelect, index = 0 }: 
       return (
         <a
           href="mailto:sales@byteswarm.io"
-          className="mt-auto w-full rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground hover:border-zinc-600 transition-colors text-center block"
+          className="mt-auto w-full rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground hover:border-primary/20 transition-colors text-center block"
         >
           Contact sales
         </a>
@@ -87,7 +87,7 @@ export function PlanCard({ plan, isCurrent, currentPlan, onSelect, index = 0 }: 
     return (
       <button
         onClick={() => onSelect?.(plan)}
-        className="mt-auto w-full rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground hover:border-zinc-600 transition-colors"
+        className="mt-auto w-full rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground hover:border-primary/20 transition-colors"
       >
         Downgrade to {display.name}
       </button>
@@ -103,7 +103,8 @@ export function PlanCard({ plan, isCurrent, currentPlan, onSelect, index = 0 }: 
         'flex flex-col rounded-xl border p-6 min-h-[240px] transition-colors duration-150',
         isCurrent
           ? 'bg-blue-500/[0.06] border-blue-500/30'
-          : 'bg-card border-border hover:border-zinc-700'
+          : 'bg-card border-border hover:border-primary/20',
+        isEnterprise && 'plan-enterprise-glow'
       )}
     >
       {/* Header */}
@@ -130,7 +131,7 @@ export function PlanCard({ plan, isCurrent, currentPlan, onSelect, index = 0 }: 
       <ul className="flex flex-col gap-2 flex-1">
         {features.map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-sm">
-            <Check className="h-4 w-4 text-green-400 shrink-0" />
+            <Check className="h-4 w-4 text-status-online shrink-0" />
             {feature}
           </li>
         ))}

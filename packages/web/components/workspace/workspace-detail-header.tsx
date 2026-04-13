@@ -5,12 +5,12 @@ import { ArrowLeft, Settings } from 'lucide-react'
 import { SocketStatusIndicator } from './socket-status-indicator'
 import type { Workspace } from '@/lib/workspace/types'
 
-const COLLAB_MODE_STYLES: Record<string, { bg: string; text: string; label: string }> = {
-  round_robin: { bg: 'bg-violet-500/15', text: 'text-violet-400', label: 'Round robin' },
-  parallel: { bg: 'bg-green-500/12', text: 'text-green-400', label: 'Parallel' },
-  sequential: { bg: 'bg-amber-500/12', text: 'text-amber-400', label: 'Sequential' },
-  hierarchical: { bg: 'bg-orange-500/12', text: 'text-orange-400', label: 'Hierarchical' },
-  democratic: { bg: 'bg-blue-500/12', text: 'text-blue-400', label: 'Democratic' },
+const COLLAB_MODE_STYLES: Record<string, { className: string; label: string }> = {
+  round_robin: { className: 'mode-round-robin', label: 'Round robin' },
+  parallel: { className: 'mode-parallel', label: 'Parallel' },
+  sequential: { className: 'mode-sequential', label: 'Sequential' },
+  hierarchical: { className: 'mode-hierarchical', label: 'Hierarchical' },
+  democratic: { className: 'mode-democratic', label: 'Democratic' },
 }
 
 interface WorkspaceDetailHeaderProps {
@@ -49,7 +49,7 @@ export function WorkspaceDetailHeader({
 
       {modeStyle && (
         <span
-          className={`px-2 py-1 rounded-full text-xs font-semibold shrink-0 ${modeStyle.bg} ${modeStyle.text}`}
+          className={`px-2 py-1 rounded-full text-xs font-semibold shrink-0 ${modeStyle.className}`}
         >
           {modeStyle.label}
         </span>
@@ -62,7 +62,7 @@ export function WorkspaceDetailHeader({
         {onViewAgents && (
           <button
             onClick={onViewAgents}
-            className="md:hidden flex items-center justify-center w-8 h-8 rounded-md hover:bg-zinc-800 transition-colors text-muted-foreground hover:text-foreground"
+            className="md:hidden flex items-center justify-center w-8 h-8 rounded-md hover:bg-surface-3 transition-colors text-muted-foreground hover:text-foreground"
             aria-label="View agents"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,7 +73,7 @@ export function WorkspaceDetailHeader({
 
         <button
           onClick={onSettingsOpen}
-          className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-zinc-800 transition-colors text-muted-foreground hover:text-foreground"
+          className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-surface-3 transition-colors text-muted-foreground hover:text-foreground"
           aria-label="Workspace settings"
         >
           <Settings className="w-4 h-4" />

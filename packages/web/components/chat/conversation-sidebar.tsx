@@ -62,7 +62,7 @@ export function ConversationSidebar({
   }
 
   return (
-    <div className="hidden md:flex w-[280px] bg-zinc-900/50 border-r border-border h-full flex-col">
+    <div className="hidden md:flex w-[280px] bg-surface-2/50 border-r border-border h-full flex-col">
       <div className="p-3 border-b border-border">
         <Button
           variant="ghost"
@@ -86,8 +86,8 @@ export function ConversationSidebar({
               className={cn(
                 'relative w-full text-left px-3 py-2 rounded-lg cursor-pointer h-14 flex items-center transition-colors duration-100',
                 conv.id === activeConversationId
-                  ? 'bg-zinc-800 text-foreground before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:h-5 before:w-0.5 before:rounded-full before:bg-primary'
-                  : 'hover:bg-zinc-800/50 text-muted-foreground'
+                  ? 'bg-surface-3 text-foreground before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:h-5 before:w-0.5 before:rounded-full before:bg-primary'
+                  : 'hover:bg-surface-3/50 text-muted-foreground'
               )}
             >
               <span className="text-sm font-semibold truncate pr-8">
@@ -127,7 +127,7 @@ export function ConversationSidebar({
                       setConfirmDeleteId(null)
                     }
                   }}
-                  className="p-1 rounded hover:bg-zinc-700 transition-colors"
+                  className="p-1 rounded hover:bg-surface-3 transition-colors"
                 >
                   <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
                 </button>
@@ -135,13 +135,13 @@ export function ConversationSidebar({
             </div>
 
             {menuOpenId === conv.id && confirmDeleteId !== conv.id && (
-              <div className="absolute right-2 top-full z-10 mt-1 bg-zinc-800 border border-border rounded-lg shadow-lg py-1 min-w-[120px]">
+              <div className="absolute right-2 top-full z-10 mt-1 bg-surface-2 border border-border rounded-lg shadow-lg py-1 min-w-[120px]">
                 <button
                   onClick={() => {
                     setConfirmDeleteId(conv.id)
                     setMenuOpenId(null)
                   }}
-                  className="w-full text-left px-3 py-2 text-sm text-destructive hover:bg-zinc-700/50 flex items-center gap-2 transition-colors"
+                  className="w-full text-left px-3 py-2 text-sm text-destructive hover:bg-surface-3/50 flex items-center gap-2 transition-colors"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                   Delete

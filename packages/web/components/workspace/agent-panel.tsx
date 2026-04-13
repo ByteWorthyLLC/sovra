@@ -28,16 +28,16 @@ interface AgentPanelProps {
 function AgentStatusDot({ agentId }: { agentId: string }) {
   const status = useWorkspaceStore((s) => s.agentStatuses.get(agentId) ?? 'idle')
 
-  const dotColor =
+  const dotClass =
     status === 'running'
-      ? 'bg-blue-500'
+      ? 'status-dot-online'
       : status === 'error'
-      ? 'bg-red-500'
-      : 'bg-zinc-500'
+      ? 'status-dot-error'
+      : 'status-dot-idle'
 
   return (
     <span
-      className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColor} ${status === 'running' ? 'agent-status-running' : ''}`}
+      className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotClass} ${status === 'running' ? 'agent-status-running' : ''}`}
       aria-label={`Agent status: ${status}`}
     />
   )
@@ -67,8 +67,7 @@ function WorkspaceAgentCard({
 
   return (
     <div
-      className={`group relative h-[72px] px-4 py-3 border-b border-border last:border-b-0 flex items-center gap-3 hover:bg-zinc-800/30 transition-colors duration-100 ${flashing ? 'status-flash' : ''}`}
-      style={isActive ? { borderLeft: '2px solid #3B82F6' } : undefined}
+      className={`group relative h-[72px] px-4 py-3 border-b border-border last:border-b-0 flex items-center gap-3 hover:bg-surface-3/40 transition-colors duration-100 ${isActive ? 'border-l-2 border-primary' : ''} ${flashing ? 'status-flash' : ''}`}
     >
       <AgentStatusDot agentId={agent.agent_id} />
 
@@ -81,7 +80,7 @@ function WorkspaceAgentCard({
 
       <button
         onClick={onRemove}
-        className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-6 h-6 rounded hover:bg-zinc-700 transition-all text-muted-foreground hover:text-foreground shrink-0"
+        className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-6 h-6 rounded hover:bg-surface-3 transition-all text-muted-foreground hover:text-foreground shrink-0"
         aria-label={`Remove ${agent.agents.name} from workspace`}
       >
         <X className="w-3.5 h-3.5" />

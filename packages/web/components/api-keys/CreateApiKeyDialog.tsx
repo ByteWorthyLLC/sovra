@@ -178,7 +178,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                       placeholder="e.g. Production app"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full rounded-md border border-border bg-zinc-900/60 px-3 py-2 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                      className="w-full rounded-md border border-border bg-surface-2/60 px-3 py-2 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                     />
                   </div>
 
@@ -191,7 +191,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                       id="key-expiration"
                       value={expiration}
                       onChange={(e) => setExpiration(e.target.value as ExpirationOption)}
-                      className="w-full rounded-md border border-border bg-zinc-900/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none"
+                      className="w-full rounded-md border border-border bg-surface-2/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors appearance-none"
                     >
                       <option value="none">No expiration</option>
                       <option value="30d">30 days</option>
@@ -205,7 +205,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                         value={customDate}
                         onChange={(e) => setCustomDate(e.target.value)}
                         min={new Date().toISOString().split('T')[0]}
-                        className="mt-2 w-full rounded-md border border-border bg-zinc-900/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
+                        className="mt-2 w-full rounded-md border border-border bg-surface-2/60 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-colors"
                       />
                     )}
                   </div>
@@ -220,7 +220,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                             type="checkbox"
                             checked={permissions.includes(perm)}
                             onChange={() => togglePermission(perm)}
-                            className="h-4 w-4 rounded border-border bg-zinc-900 accent-primary cursor-pointer"
+                            className="h-4 w-4 rounded border-border bg-surface-2 accent-primary cursor-pointer"
                           />
                           <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors font-mono">
                             {perm}
@@ -235,7 +235,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="px-4 py-2 text-sm font-semibold rounded-md border border-border hover:border-zinc-600 transition-colors"
+                      className="px-4 py-2 text-sm font-semibold rounded-md border border-border hover:border-primary/20 transition-colors"
                     >
                       Cancel
                     </button>
@@ -269,7 +269,7 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                   {/* Key reveal */}
                   <div
                     ref={keyRef}
-                    className="flex items-center gap-3 rounded-md border border-border bg-zinc-900/60 px-3 py-2 mb-6"
+                    className="flex items-center gap-3 rounded-md border border-border bg-surface-2/60 px-3 py-2 mb-6"
                   >
                     <span className="flex-1 text-sm font-mono text-foreground break-all select-all">
                       {rawKey}
@@ -279,8 +279,8 @@ export function CreateApiKeyDialog({ onCreated }: CreateApiKeyDialogProps) {
                       className={cn(
                         'shrink-0 h-7 w-7 flex items-center justify-center rounded-md transition-colors',
                         copied
-                          ? 'text-green-400'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-800/60'
+                          ? 'text-status-online'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-surface-3/60'
                       )}
                       aria-label="Copy API key"
                     >
