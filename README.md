@@ -50,6 +50,16 @@ docker-compose up
 
 That's it. Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally in under 2 minutes.
 
+### Environment Setup
+
+```bash
+cp packages/web/.env.example packages/web/.env.local
+# Fill in your Supabase project URL and keys
+# Optional: Stripe, PostHog, Sentry keys for full features
+```
+
+See `packages/web/.env.example` for all available configuration options with descriptions.
+
 ## What You Get
 
 ### The SaaS Layer (so you never think about plumbing again)
@@ -60,7 +70,7 @@ That's it. Multi-tenant auth, vector database, agent runtime, real-time collabor
 | **Tenant isolation** | Row-level security at the database level. Not middleware. Not application logic. Postgres enforces it. User A cannot see User B's data. Period. |
 | **Roles and permissions** | Owner, admin, member, viewer out of the box. Need custom roles? The permission system is database-backed and tenant-configurable. No forking required. |
 | **Invite system** | Email invitations AND shareable invite links. Works with or without SMTP configured. |
-| **Billing ready** | Lemon Squeezy integration with plan definitions, usage tracking, and customer portal. |
+| **Billing ready** | Stripe integration with plan definitions, usage tracking, and customer portal. |
 | **API keys** | Scoped API key generation with rate limiting and audit logging. |
 
 ### The AI Layer (the part nobody else ships)
@@ -92,7 +102,7 @@ Database     Supabase PostgreSQL + pgvector + Row Level Security
 Auth         Supabase Auth (swappable via AuthAdapter interface)
 Real-time    Socket.IO
 AI SDK       Vercel AI SDK + MCP SDK
-Billing      Lemon Squeezy
+Billing      Stripe
 Monitoring   Sentry + PostHog
 ```
 
@@ -139,12 +149,12 @@ Monitoring   Sentry + PostHog
 
 | Phase | Status | What Ships |
 |-------|--------|-----------|
-| Foundation | ✅ Complete | Monorepo, database, Docker, testing |
-| Core Infrastructure | 🔧 In Progress | Auth, multi-tenancy, RBAC, invitations |
-| Agent Core | Planned | Agent CRUD, chat UI, streaming |
-| AI Features | Planned | MCP integration, vector search, built-in tools |
-| Multi-Agent | Planned | Workspaces, collaboration, shared memory |
-| Production Ready | Planned | Billing, admin, deployment, monitoring |
+| Foundation | Done | Monorepo, database schema, Docker, dev environment |
+| Core Infrastructure | Done | Supabase auth, multi-tenancy, RBAC, invitations |
+| Agent Core | Done | Agent CRUD, chat interface, streaming, AI provider adapters |
+| AI Features | Done | MCP client/server, built-in tools, vector storage, tool tracking |
+| Multi-Agent | Done | Workspaces, 5 collaboration modes, 4 memory strategies, Socket.IO |
+| Production Ready | Done | Stripe billing, admin dashboard, API keys, Sentry + PostHog, CI/CD |
 
 ## Deploy
 
