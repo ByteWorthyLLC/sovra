@@ -42,6 +42,16 @@ export async function POST(req: Request) {
 
   if (!agent) return new Response('Agent not found', { status: 404 })
 
+  // Verify user belongs to agent's tenant
+  const { data: membership } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', agent.tenant_id)
+    .single()
+
+  if (!membership) return new Response('Forbidden', { status: 403 })
+
   await supabase.from('agents').update({ status: 'running' }).eq('id', agentId)
 
   initProviders()
