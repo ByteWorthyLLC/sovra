@@ -5,6 +5,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { PostHogProvider } from '@/components/providers/PostHogProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { MotionProvider } from '@/components/providers/MotionProvider';
 
 export const metadata: Metadata = {
   title: 'ByteSwarm - AI-Native SaaS Boilerplate',
@@ -22,7 +23,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn(GeistSans.variable, GeistMono.variable, 'min-h-screen bg-background font-sans antialiased')}>
         <ThemeProvider>
-          <PostHogProvider>{children}</PostHogProvider>
+          <MotionProvider>
+            <PostHogProvider>{children}</PostHogProvider>
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

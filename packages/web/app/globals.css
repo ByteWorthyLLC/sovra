@@ -254,3 +254,22 @@
   0%  { background-color: rgba(59, 130, 246, 0.2); }
   100% { background-color: transparent; }
 }
+
+/* ── Respect user motion preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-gradient-shift,
+  .animate-glow-pulse,
+  .agent-status-running,
+  .status-pulse,
+  .streaming-cursor {
+    animation: none !important;
+  }
+
+  .transition-all,
+  .transition-colors,
+  .transition-opacity,
+  .transition-transform {
+    transition-duration: 0.01ms !important;
+  }
+}
