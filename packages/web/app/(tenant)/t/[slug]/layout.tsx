@@ -47,7 +47,7 @@ export default async function TenantLayout({ children, params }: TenantLayoutPro
             </header>
 
             {/* Page content */}
-            <main className="p-6 max-w-5xl flex-1">{children}</main>
+            <main id="main-content" className="p-6 max-w-5xl flex-1">{children}</main>
           </div>
         </div>
       </ToastProvider>
