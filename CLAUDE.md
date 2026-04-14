@@ -1,23 +1,21 @@
 # Sovra - Claude Code Instructions
 
-This file provides project-specific guidance for Claude Code when working on Sovra.
-
 ## Project Overview
 
-**Sovra** is an open-source AI-native SaaS boilerplate for building multi-tenant AI applications with MCP, vector database, and multi-agent collaboration.
+**Sovra** is an open-source AI-native SaaS platform for building multi-tenant AI agent applications with MCP, vector search, and multi-agent collaboration.
+
+- **GitHub:** github.com/byteworthy/sovra
+- **Stack:** Next.js 15 + Go 1.22+ + Supabase + Tailwind + shadcn/ui
+- **Built by:** ByteWorthy (byteworthy.io)
 
 ## Quick Start
 
 ```bash
-# Local development
-docker-compose up
-
-# Build and test
-npm run build
-go build ./...
-
-# View project state
-/gsd-progress
+pnpm install
+supabase start
+cp .env.example .env.local && cp packages/web/.env.example packages/web/.env.local
+cd packages/web && pnpm dev          # http://localhost:3000
+cd packages/worker && go run ./cmd/worker  # Agent worker (optional)
 ```
 
 ## Directory Structure
@@ -25,85 +23,48 @@ go build ./...
 ```
 sovra/
 ├── packages/
-│   ├── web/           # Next.js frontend + API
-│   ├── worker/       # Go agent worker service
-│   └── shared/       # Shared types and schemas
+│   ├── web/           # Next.js frontend + API routes
+│   ├── worker/        # Go agent worker (MCP, Socket.IO, gRPC)
+│   └── shared/        # Shared TypeScript types and schemas
 ├── supabase/
-│   └── migrations/    # Database migrations
-├── docker/           # Docker configs
-├── platform/         # Per-platform deployment
-└── .planning/        # GSD planning artifacts
+│   └── migrations/    # 7 database migrations
+├── docker/            # Docker Compose (dev + prod)
+├── platform/          # Deployment configs (AWS, GCP, Railway)
+└── docs/              # Deployment guide, env var reference
 ```
 
-## Key Commands
-
-| Command | Description |
-|---------|-------------|
-| `/gsd-progress` | Show project status |
-| `/gsd-discuss-phase 1` | Start Phase 1 discussion |
-| `/gsd-plan-phase 1` | Plan Phase 1 |
-| `/gsd-execute-phase 1` | Execute Phase 1 |
-
-## Phase Roadmap
-
-| Phase | Name | Status |
-|-------|------|--------|
-| 1 | Foundation | Pending |
-| 2 | Core Infrastructure | Pending |
-| 3 | Agent Core | Pending |
-| 4 | AI Features | Pending |
-| 5 | Multi-Agent | Pending |
-| 6 | Production Ready | Pending |
-
-## Important Patterns
-
-### From Claude Code from Source
-
-1. **AsyncGenerator agent loop** - Streams responses naturally
-2. **Speculative tool execution** - Start read-only tools during streaming
-3. **4-layer context compression** - snip → microcompact → collapse → autocompact
-4. **Fork agents** - Cache sharing saves ~95% tokens
+## Key Patterns
 
 ### Multi-Tenancy
-
-- Always use tenant-scoped queries
-- Test RLS policies with multiple tenants
+- All database queries MUST be tenant-scoped
+- Row-level security enforced at Postgres level
 - Never bypass RLS in application code
 
-### Security Requirements
+### Security
+- All API routes check authentication
+- All server actions verify user + tenant membership
+- Audit log sensitive operations
+- CSP, HSTS, rate limiting, JWT verification in middleware
 
-- 🔒 Extremely hardened - no shortcuts
-- All API routes must check authentication
-- All database queries must be tenant-scoped
-- Audit log all sensitive operations
-
-## Reading Before Work
-
-Always read before making changes:
-- `.planning/PROJECT.md` - Current project context
-- `.planning/REQUIREMENTS.md` - v1 requirements
-- `.planning/ROADMAP.md` - Current phase details
+### npm Scope
+- Shared types: `@sovra/shared`
+- Web package: `@sovra/web`
+- Go module: `github.com/byteworthy/sovra-worker`
 
 ## Quality Gates
 
-Before claiming any work complete:
+Before claiming work complete:
 
-1. **Test** - Tests pass
-2. **Lint** - ESLint/ruff clean
-3. **Type Check** - TypeScript/Go compilation clean
-4. **Security** - NoSecrets check
-5. **Build** - Production build succeeds
+1. `pnpm test` — 308 tests must pass
+2. `pnpm lint` — zero errors/warnings
+3. `npx tsc --noEmit` — TypeScript clean
+4. `cd packages/worker && go test ./...` — Go tests pass
+5. `pnpm build` — production build succeeds
 
-## Shipping
+## Commit Convention
 
-After every coding task:
-```bash
-npm run test && npm run lint && npm run type-check
-go build ./... && go test ./...
-git add -A && git commit -m "type(scope): message"
-git push
+```
+type(scope): message
 ```
 
----
-
-*This file maintained by GSD workflow*
+Types: `feat`, `fix`, `chore`, `refactor`, `test`, `docs`, `perf`
