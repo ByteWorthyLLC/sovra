@@ -52,7 +52,8 @@ describe('agentFormSchema', () => {
   })
 
   it('defaults tools to empty array', () => {
-    const { tools, ...withoutTools } = validData
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { tools: _tools, ...withoutTools } = validData
     const result = agentFormSchema.parse(withoutTools)
     expect(result.tools).toEqual([])
   })

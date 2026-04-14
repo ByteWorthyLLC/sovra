@@ -9,7 +9,8 @@ Thanks for your interest in contributing! ByteSwarm is an open-source project an
 - **Node.js** 18+ (recommend using [fnm](https://github.com/Schniz/fnm) or nvm)
 - **pnpm** 8+ (`npm install -g pnpm`)
 - **Go** 1.22+ (for the worker service)
-- **Docker** (for local Supabase and full-stack development)
+- **Docker** (for local Supabase)
+- **Supabase CLI** (`brew install supabase/tap/supabase`)
 
 ### Setup
 
@@ -21,15 +22,19 @@ cd byteswarm
 # Install dependencies
 pnpm install
 
+# Start local Supabase (requires Docker running)
+supabase start
+
 # Set up environment
+cp .env.example .env.local
 cp packages/web/.env.example packages/web/.env.local
-# Fill in your Supabase credentials
+# Fill in the Supabase keys from 'supabase status' output
 
-# Start the development stack
-docker compose -f docker/compose.dev.yaml up
-
-# In a separate terminal, start the web app
+# Start the web app
 cd packages/web && pnpm dev
+
+# (Optional) Start the Go worker in a separate terminal
+cd packages/worker && go run ./cmd/worker
 ```
 
 ### Project Structure

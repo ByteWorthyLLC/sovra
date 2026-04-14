@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { SupabasePermissionChecker, hasPermission } from '@/lib/rbac/checker'
 
 function makeQueryChain(returnValue: { data: unknown; error: unknown }) {

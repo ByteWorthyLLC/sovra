@@ -99,7 +99,7 @@ describe('updateWorkspace', () => {
     }
     vi.mocked(createSupabaseServerClient).mockResolvedValue(supabase as never)
 
-    const result = await updateWorkspace('ws-1', { name: 'Updated' })
+    await updateWorkspace('ws-1', { name: 'Updated' })
 
     expect(supabase.from).toHaveBeenCalledWith('workspaces')
     expect(updateFn).toHaveBeenCalled()

@@ -59,7 +59,15 @@ export async function POST(req: Request) {
   await supabase.from('agents').update({ status: 'running' }).eq('id', agentId)
 
   initProviders()
-  const adapter = getProvider(agent.model_provider)
+  let adapter
+  try {
+    adapter = getProvider(agent.model_provider)
+  } catch {
+    return new Response(
+      JSON.stringify({ error: `AI provider "${agent.model_provider}" is not configured. Check your API keys.` }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
   const model = adapter.getModel(agent.model_name)
 
   // Load MCP tools with graceful degradation
@@ -125,9 +133,15 @@ export async function POST(req: Request) {
       .from('agents')
       .update({ status: 'error' })
       .eq('id', agentId)
-    const message = error instanceof Error ? error.message : 'Stream failed'
+    const rawMessage = error instanceof Error ? error.message : 'Stream failed'
+    // Sanitize: don't leak provider URLs or API key details to client
+    const isMissingKey = rawMessage.includes('401') || rawMessage.includes('Unauthorized') || rawMessage.includes('API key')
+    const message = isMissingKey
+      ? `AI provider not configured. Add the API key for "${agent.model_provider}" to your environment.`
+      : 'An error occurred while streaming the response.'
+    console.error('Chat stream error:', rawMessage)
     return new Response(JSON.stringify({ error: message }), {
-      status: 500,
+      status: isMissingKey ? 503 : 500,
       headers: { 'Content-Type': 'application/json' },
     })
   }

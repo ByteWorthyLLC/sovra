@@ -37,6 +37,7 @@ describe('AI Provider Registry', () => {
   })
 
   it('registerProvider adds a custom adapter', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const custom = { provider: 'custom', getModel: () => ({}) as any }
     registryModule.registerProvider(custom)
     const result = registryModule.getProvider('custom')

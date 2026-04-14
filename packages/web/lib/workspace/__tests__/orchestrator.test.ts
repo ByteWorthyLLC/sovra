@@ -34,7 +34,6 @@ import { getProvider, initProviders } from '@/lib/ai/registry'
 import { buildContextMessages } from '@/lib/memory/types'
 import {
   broadcastAgentStatus,
-  broadcastAgentMessage,
 } from '../broadcast'
 import { upsertSharedMemory } from '../shared-memory'
 import { generateText } from 'ai'
@@ -51,51 +50,6 @@ const mockAdapter = {
   getModel: vi.fn().mockReturnValue(mockModel),
 }
 
-function buildSupabaseMock(workspace: object, agents: object[]) {
-  const agentUpdate = vi.fn().mockReturnValue({
-    eq: vi.fn().mockResolvedValue({ error: null }),
-  })
-
-  const fromMock = vi.fn().mockImplementation((table: string) => {
-    if (table === 'workspaces') {
-      return {
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockResolvedValue({ data: workspace, error: null }),
-          }),
-        }),
-      }
-    }
-    if (table === 'workspace_agents') {
-      return {
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            order: vi.fn().mockResolvedValue({ data: agents, error: null }),
-          }),
-        }),
-      }
-    }
-    if (table === 'agents') {
-      return {
-        select: vi.fn().mockReturnValue({
-          eq: vi.fn().mockReturnValue({
-            single: vi.fn().mockImplementation(async () => {
-              const agentRow = agents.find(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (a: any) => a.agent_id === (a as any).agent_id
-              )
-              return { data: agentRow ?? agents[0], error: null }
-            }),
-          }),
-        }),
-        update: agentUpdate,
-      }
-    }
-    return {}
-  })
-
-  return { from: fromMock }
-}
 
 describe('broadcastAgentStatus', () => {
   it('broadcasts running then idle around agent execution', async () => {

@@ -1,7 +1,4 @@
 import { AuthCard } from '@/components/auth/auth-card'
-import { OAuthButton } from '@/components/auth/oauth-button'
-import { Separator } from '@/components/ui/separator'
-import { LoginForm } from '@/components/auth/login-form'
 import { Alert } from '@/components/ui/alert'
 import { LoginPageClient } from './client'
 

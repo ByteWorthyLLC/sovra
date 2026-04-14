@@ -45,8 +45,10 @@ function buildMockSupabase(overrides: Record<string, unknown> = {}) {
     return { ...chain, eq: eqFn, resolve: result }
   }
 
-  const insertChain = chainable(insertResult)
-  const updateChain = chainable(updateResult)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _insertChain = chainable(insertResult)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _updateChain = chainable(updateResult)
   const deleteChain = chainable(deleteResult)
 
   // Make delete resolve from eq without needing single()
@@ -90,6 +92,7 @@ describe('createAgent', () => {
 
   it('returns agent on success with valid data and permission', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
     vi.mocked(hasPermission).mockResolvedValue(true)
 
@@ -103,6 +106,7 @@ describe('createAgent', () => {
 
   it('returns error when not authenticated', async () => {
     const mockSb = buildMockSupabase({ user: null })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
 
     const result = await createAgent(tenantId, validFormData)
@@ -112,6 +116,7 @@ describe('createAgent', () => {
 
   it('returns error when missing agent:create permission', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
     vi.mocked(hasPermission).mockResolvedValue(false)
 
@@ -128,6 +133,7 @@ describe('updateAgent', () => {
 
   it('updates agent with valid data and permission', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
     vi.mocked(hasPermission).mockResolvedValue(true)
 
@@ -145,6 +151,7 @@ describe('deleteAgent', () => {
 
   it('checks agent:delete permission', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
     vi.mocked(hasPermission).mockResolvedValue(true)
 

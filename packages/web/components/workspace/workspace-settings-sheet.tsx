@@ -508,7 +508,7 @@ function MemoryTab({
             className="w-full h-9 px-3 rounded-md bg-surface-2 border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
           <p className="text-xs text-muted-foreground mt-1.5">
-            Context compresses when {compressionThreshold}% of the model's token limit is used
+            Context compresses when {compressionThreshold}% of the model&apos;s token limit is used
           </p>
         </div>
       )}

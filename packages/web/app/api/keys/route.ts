@@ -9,6 +9,7 @@ const createKeySchema = z.object({
   expires_at: z.string().datetime().optional(),
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(_req: Request) {
   const supabase = await createSupabaseServerClient()
   const {

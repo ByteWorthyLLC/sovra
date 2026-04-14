@@ -15,6 +15,7 @@ const mockTenant: Tenant = {
 }
 
 function wrapper({ children }: { children: React.ReactNode }) {
+  // eslint-disable-next-line react/no-children-prop
   return React.createElement(TenantProvider, { tenant: mockTenant, children })
 }
 

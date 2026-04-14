@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { buildConversationMemory } from '../conversation'
 import type { MemoryBuildParams } from '../types'
 
@@ -9,7 +9,8 @@ function makeSupabase(rows: Array<{ role: string; content: string }>) {
     select: vi.fn(),
     from: vi.fn(),
   }
-  chain.eq.mockImplementation((field: string, value: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  chain.eq.mockImplementation((field: string, _value: string) => {
     if (field === 'tenant_id' || field === 'conversation_id') return chain
     return chain
   })

@@ -59,6 +59,7 @@ describe('createConversation', () => {
 
   it('returns conversation with agent_id set', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
 
     const result = await createConversation({
@@ -73,6 +74,7 @@ describe('createConversation', () => {
 
   it('returns error when not authenticated', async () => {
     const mockSb = buildMockSupabase({ user: null })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
 
     const result = await createConversation({
@@ -89,6 +91,7 @@ describe('deleteConversation', () => {
 
   it('removes conversation', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
 
     const result = await deleteConversation('conv-1')
@@ -102,6 +105,7 @@ describe('saveMessage', () => {
 
   it('inserts message with correct role and content', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
 
     const result = await saveMessage({
@@ -118,6 +122,7 @@ describe('saveMessage', () => {
 describe('listConversations', () => {
   it('returns conversations for agent within tenant', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = await listConversations(mockSb as any, 'tenant-1', 'agent-1')
     expect(result.data).toBeTruthy()
     expect(mockSb.from).toHaveBeenCalledWith('conversations')
@@ -127,6 +132,7 @@ describe('listConversations', () => {
 describe('getMessages', () => {
   it('returns messages ordered by created_at ascending', async () => {
     const mockSb = buildMockSupabase()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = await getMessages(mockSb as any, 'conv-1')
     expect(result.data).toBeTruthy()
     expect(mockSb.from).toHaveBeenCalledWith('messages')

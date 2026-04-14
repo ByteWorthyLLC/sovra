@@ -41,24 +41,42 @@ ByteSwarm is the full stack. Auth to agents. Database to deployment. One repo, o
 
 ## Quick Start
 
+### Prerequisites
+
+- **Node.js** 18+ and **pnpm** 8+ (`npm install -g pnpm`)
+- **Go** 1.22+ (for the worker service)
+- **Docker** (for local Supabase)
+- **Supabase CLI** (`brew install supabase/tap/supabase` or [install docs](https://supabase.com/docs/guides/cli/getting-started))
+
+### Setup
+
 ```bash
+# 1. Clone and install
 git clone https://github.com/byteswarm/byteswarm.git
 cd byteswarm
-docker compose -f docker/compose.dev.yaml up
-# Open http://localhost:3000
-```
+pnpm install
 
-That's it. Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally in under 2 minutes.
+# 2. Start local Supabase (Postgres + Auth + pgvector)
+supabase start
+# Note the API URL and anon/service_role keys from the output
 
-### Environment Setup
-
-```bash
+# 3. Configure environment
+cp .env.example .env.local
 cp packages/web/.env.example packages/web/.env.local
-# Fill in your Supabase project URL and keys
-# Optional: Stripe, PostHog, Sentry keys for full features
+# Fill in the Supabase keys from step 2
+# At minimum: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+
+# 4. Start the web app
+cd packages/web && pnpm dev
+# Open http://localhost:3000
+
+# 5. (Optional) Start the Go worker for agent features
+cd packages/worker && go run ./cmd/worker
 ```
 
-See `packages/web/.env.example` for all available configuration options with descriptions.
+### Environment Variables
+
+See `.env.example` for the full list. Only Supabase keys are required — all other integrations (Stripe, Sentry, PostHog, Upstash) are optional and gracefully disabled when not configured.
 
 ## What You Get
 
@@ -160,18 +178,20 @@ Monitoring   Sentry + PostHog
 
 ### Docker (self-hosted)
 ```bash
-docker-compose -f docker/compose.prod.yaml up -d
+# Build and run production containers
+docker compose -f docker/compose.prod.yaml up -d
 ```
 
-### Railway
-```bash
-# Connect your GitHub repo. Railway auto-deploys.
-```
+> **Note:** You'll need a running Supabase instance (hosted or self-hosted) with your migrations applied. See `supabase/migrations/` for the full schema.
 
-### AWS / GCP
-```bash
-# Container deployment configs included for ECS and Cloud Run.
-```
+### Railway / Vercel / Fly.io
+Deploy the Next.js web app to any platform that supports Node.js. Deploy the Go worker as a separate service. Point both at your Supabase project.
+
+### Environment Variables for Production
+All required and optional variables are documented in `.env.example` with descriptions. At minimum you need:
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server-side only)
+- `DATABASE_URL` (for the Go worker)
 
 ## Contributing
 

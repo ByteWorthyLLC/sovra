@@ -10,7 +10,7 @@ import { TenantSwitcher } from './tenant-switcher'
 import { SidebarNav } from './sidebar-nav'
 
 export function Sidebar() {
-  const { tenant } = useTenant()
+  useTenant()
 
   return (
     <aside className="hidden md:flex flex-col w-60 bg-surface-2 border-r border-border min-h-screen relative">

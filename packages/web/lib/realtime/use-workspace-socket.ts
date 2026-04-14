@@ -78,6 +78,7 @@ export function useWorkspaceSocket(tenantId: string, workspaceId: string) {
       socket.emit('workspace:leave', tenantId, workspaceId)
       socket.disconnect()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tenantId, workspaceId])
 
   return socketRef

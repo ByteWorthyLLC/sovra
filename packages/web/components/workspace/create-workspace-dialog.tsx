@@ -27,7 +27,7 @@ interface Agent {
 
 interface CreateWorkspaceDialogProps {
   tenantId: string
-  tenantSlug: string
+  tenantSlug?: string
   agents: Agent[]
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -67,7 +67,8 @@ function getInitialForm(): FormState {
 
 export function CreateWorkspaceDialog({
   tenantId,
-  tenantSlug,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  tenantSlug: _tenantSlug,
   agents,
   open,
   onOpenChange,

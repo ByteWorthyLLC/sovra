@@ -263,8 +263,6 @@ describe('withApiKeyAuth', () => {
   it('returns 401 when no Authorization header', async () => {
     const { withApiKeyAuth } = await import('../middleware')
     const handler = vi.fn()
-    // Pass a no-op supabase factory so no real client is created
-    const fakeSupabase = { from: vi.fn() } as unknown as Parameters<typeof withApiKeyAuth>[1] extends (() => infer R) ? () => R : never
     const wrapped = withApiKeyAuth(handler, () => ({ from: vi.fn() }) as never)
 
     const request = new Request('https://example.com/api/test', { method: 'GET' })

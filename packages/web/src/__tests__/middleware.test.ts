@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
 // Mock next/server
 vi.mock('next/server', async () => {
@@ -8,7 +8,8 @@ vi.mock('next/server', async () => {
     ...actual,
     NextResponse: {
       ...actual.NextResponse,
-      next: vi.fn().mockImplementation(({ request } = {}) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      next: vi.fn().mockImplementation(({ request: _request } = {}) => {
         const response = {
           headers: new Map<string, string>(),
           cookies: { set: vi.fn(), getAll: vi.fn().mockReturnValue([]) },
@@ -31,8 +32,10 @@ vi.mock('next/server', async () => {
 
 // Mock @supabase/ssr
 const mockGetUser = vi.fn()
-const mockGetAll = vi.fn().mockReturnValue([])
-const mockSetAll = vi.fn()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _mockGetAll = vi.fn().mockReturnValue([])
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _mockSetAll = vi.fn()
 
 vi.mock('@supabase/ssr', () => ({
   createServerClient: vi.fn().mockReturnValue({
@@ -56,7 +59,8 @@ vi.mock('@/lib/rbac/constants', () => ({
   TENANT_FREE_ROUTES: ['/auth/login', '/auth/signup', '/auth/forgot-password', '/auth/reset-password', '/auth/verify-email', '/auth/callback', '/invite', '/onboarding'],
 }))
 
-function makeRequest(pathname: string, headers: Record<string, string> = {}) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function makeRequest(pathname: string, _headers: Record<string, string> = {}) {
   const url = `http://localhost${pathname}`
   const req = new NextRequest(url)
   return req

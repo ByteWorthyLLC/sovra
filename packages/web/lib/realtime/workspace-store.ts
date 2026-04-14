@@ -42,7 +42,8 @@ interface WorkspaceStoreState {
   reset: () => void
 }
 
-export const useWorkspaceStore = create<WorkspaceStoreState>((set, get) => ({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const useWorkspaceStore = create<WorkspaceStoreState>((set, _get) => ({
   connectionStatus: 'disconnected',
   agentStatuses: new Map(),
   activityFeed: [],

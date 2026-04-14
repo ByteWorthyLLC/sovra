@@ -3,8 +3,6 @@ import {
   workspaceFormSchema,
   COLLABORATION_MODES,
   MEMORY_STRATEGIES,
-  CollaborationMode,
-  MemoryStrategy,
 } from '../types'
 
 describe('workspaceFormSchema', () => {

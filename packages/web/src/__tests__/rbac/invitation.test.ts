@@ -85,7 +85,6 @@ describe('createInvitation', () => {
   it('sets expires_at to 7 days from now by default', async () => {
     mockGetUser.mockResolvedValue({ data: { user: { id: 'admin-1' } }, error: null })
 
-    const insertFn = vi.fn().mockReturnThis()
     const insertPayloadCapture: unknown[] = []
     mockFrom.mockReturnValue({
       insert: vi.fn().mockImplementation((payload: unknown) => {
@@ -227,7 +226,6 @@ describe('acceptInvitation', () => {
     }
 
     const tuInsertFn = vi.fn().mockResolvedValue({ data: null, error: null })
-    const updateFn = vi.fn().mockReturnThis()
     const updateEq = vi.fn().mockResolvedValue({ data: null, error: null })
 
     let fromCallCount = 0

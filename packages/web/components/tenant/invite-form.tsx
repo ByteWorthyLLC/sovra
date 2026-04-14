@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Copy, CheckCircle2 } from 'lucide-react'
-import * as Select from '@radix-ui/react-select'
 import { usePermission } from '@/lib/rbac/hooks'
 import { useTenant } from '@/lib/tenant/context'
 import { createInvitation, createInviteLink } from '@/lib/rbac/invitation'

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getSubscriptionForTenant, getUsageForTenant } from '@/lib/billing/actions'
-import { getPlanLimits, PLANS } from '@/lib/billing/plans'
+import { getPlanLimits } from '@/lib/billing/plans'
 import type { PlanId } from '@/lib/billing/plans'
 import { PlanCard } from '@/components/billing/PlanCard'
 import { UsageMetricRow } from '@/components/billing/UsageMetricRow'

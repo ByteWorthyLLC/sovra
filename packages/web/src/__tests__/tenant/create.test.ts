@@ -10,10 +10,6 @@ vi.mock('next/headers', () => ({
 
 // Mock createSupabaseServerClient
 const mockRpc = vi.fn()
-const mockSingle = vi.fn()
-const mockSelect = vi.fn()
-const mockInsert = vi.fn()
-const mockEq = vi.fn()
 const mockFrom = vi.fn()
 const mockGetUser = vi.fn()
 
@@ -75,7 +71,6 @@ describe('createTenant', () => {
       insert: vi.fn().mockResolvedValue({ data: null, error: null }),
     }
 
-    let callCount = 0
     mockFrom.mockImplementation((table: string) => {
       if (table === 'tenants') return tenantChain
       if (table === 'roles') return rolesChain

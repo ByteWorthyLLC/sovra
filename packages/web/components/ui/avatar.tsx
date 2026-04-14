@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 const AVATAR_COLORS = [
@@ -43,9 +44,11 @@ interface AvatarProps {
 export function Avatar({ name, src, size = 'md', className }: AvatarProps) {
   if (src) {
     return (
-      <img
+      <Image
         src={src}
         alt={name}
+        width={40}
+        height={40}
         className={cn('rounded-full object-cover', SIZE_MAP[size], className)}
       />
     )
