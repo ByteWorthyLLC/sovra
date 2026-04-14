@@ -2,6 +2,7 @@
 
 import { randomBytes } from 'crypto'
 import { createSupabaseServerClient } from '@/lib/auth/server'
+import { hasPermission } from '@/lib/rbac/checker'
 import type { Invitation, InviteType } from '@sovra/shared'
 
 interface CreateInvitationInput {
@@ -24,6 +25,9 @@ export async function createInvitation(input: CreateInvitationInput): Promise<In
     data: { user },
   } = await supabase.auth.getUser()
   if (!user) return { invitation: null, error: 'Not authenticated' }
+
+  const allowed = await hasPermission(supabase, user.id, input.tenantId, 'tenant:invite')
+  if (!allowed) return { invitation: null, error: 'Forbidden: insufficient permissions' }
 
   const token = randomBytes(32).toString('hex')
   const expiresAt = new Date()

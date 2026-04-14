@@ -146,7 +146,7 @@ func isPrivateIP(ip net.IP) bool {
 	if ip.Equal(net.IPv6loopback) {
 		return true
 	}
-	if len(ip) == net.IPv6len && ip[0] == 0xfc || ip[0] == 0xfd {
+	if len(ip) == net.IPv6len && (ip[0] == 0xfc || ip[0] == 0xfd) {
 		return true
 	}
 

@@ -56,7 +56,17 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json({ error: 'No Stripe customer linked' }, { status: 404 })
   }
 
-  const returnUrl = req.headers.get('referer') ?? process.env.NEXT_PUBLIC_APP_URL ?? ''
+  // Validate return URL to prevent open redirect
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
+  let returnUrl = appUrl
+  const referer = req.headers.get('referer')
+  if (referer) {
+    try {
+      const refUrl = new URL(referer)
+      const appHost = new URL(appUrl).hostname
+      if (refUrl.hostname === appHost) returnUrl = referer
+    } catch { /* invalid URL, use default */ }
+  }
   const portalUrl = await createPortalSession(customerId, returnUrl)
   if (!portalUrl) {
     return Response.json({ error: 'Could not create portal session' }, { status: 500 })

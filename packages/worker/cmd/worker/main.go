@@ -18,6 +18,10 @@ import (
 func main() {
 	cfg := config.Load()
 
+	if cfg.InternalAPISecret == "" {
+		log.Println("WARNING: INTERNAL_API_SECRET not set — internal endpoints are unauthenticated")
+	}
+
 	log.Printf("starting sovra worker (env=%s)", cfg.Environment)
 
 	// Connect to database.

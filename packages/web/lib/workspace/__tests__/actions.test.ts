@@ -158,10 +158,15 @@ describe('addAgentToWorkspace', () => {
     const eqFn = vi.fn().mockReturnValue({ single: singleFn })
     const selectFn = vi.fn().mockReturnValue({ eq: eqFn })
     const agentInsertFn = vi.fn().mockResolvedValue({ data: { id: 'wa-1' }, error: null })
+    const memSingle = vi.fn().mockResolvedValue({ data: { id: 'tu-1' }, error: null })
+    const memEq2 = vi.fn().mockReturnValue({ single: memSingle })
+    const memEq1 = vi.fn().mockReturnValue({ eq: memEq2 })
+    const memSelect = vi.fn().mockReturnValue({ eq: memEq1 })
 
     const supabase = {
       auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: 'user-1' } } }) },
       from: vi.fn().mockImplementation((table: string) => {
+        if (table === 'tenant_users') return { select: memSelect }
         if (table === 'workspaces') return { select: selectFn }
         return { insert: agentInsertFn }
       }),

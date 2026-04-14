@@ -55,6 +55,13 @@ export async function POST(
     )
   }
 
+  if (prompt.trim().length > 50000) {
+    return new Response(
+      JSON.stringify({ error: 'prompt exceeds maximum length (50000 characters)' }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
+
   try {
     const result = await runWorkspace(id, prompt.trim())
     return new Response(JSON.stringify({ result }), {
@@ -62,10 +69,9 @@ export async function POST(
       headers: { 'Content-Type': 'application/json' },
     })
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : 'Orchestration failed'
+    console.error('Workspace run error:', error instanceof Error ? error.message : error)
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'An error occurred during orchestration.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     )
   }

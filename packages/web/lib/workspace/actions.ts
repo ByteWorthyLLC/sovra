@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { workspaceFormSchema, type WorkspaceFormData, type AgentRole } from './types'
+import { hasPermission } from '@/lib/rbac/checker'
 
 interface WorkspaceResult {
   data: Record<string, unknown> | null
@@ -25,6 +26,9 @@ export async function createWorkspace(
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { data: null, error: 'Not authenticated' }
+
+  const allowed = await hasPermission(supabase, user.id, tenantId, 'workspace:create')
+  if (!allowed) return { data: null, error: 'Forbidden' }
 
   const parsed = workspaceFormSchema.parse(formData)
   const { agent_ids, ...workspaceFields } = parsed
@@ -184,9 +188,19 @@ export async function addAgentToWorkspace(
     .eq('id', workspaceId)
     .single()
 
-  if (workspaceError) return { data: null, error: workspaceError.message }
+  if (workspaceError || !workspace) return { data: null, error: 'Workspace not found' }
 
   const tenantId = (workspace as Record<string, unknown>).tenant_id as string
+
+  // Verify tenant membership
+  const { data: mem } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', tenantId)
+    .single()
+
+  if (!mem) return { data: null, error: 'Forbidden' }
 
   const { data, error } = await supabase
     .from('workspace_agents')

@@ -30,24 +30,44 @@ func textResult(msg string) (*mcp.CallToolResult, error) {
 
 // resolveSandboxedPath validates and resolves a path within the workspace root.
 // Returns an error if the resolved path escapes the workspace.
+// Symlinks are resolved before the prefix check to prevent symlink escape attacks.
 func resolveSandboxedPath(workspacePath, userPath string) (string, error) {
-	cleaned := filepath.Clean(userPath)
-	resolved := filepath.Join(workspacePath, cleaned)
 	absWorkspace, err := filepath.Abs(workspacePath)
 	if err != nil {
-		return "", fmt.Errorf("invalid workspace path: %w", err)
+		return "", fmt.Errorf("invalid workspace path")
 	}
-	absResolved, err := filepath.Abs(resolved)
+	absWorkspace, err = filepath.EvalSymlinks(absWorkspace)
 	if err != nil {
-		return "", fmt.Errorf("invalid path: %w", err)
+		return "", fmt.Errorf("invalid workspace path")
 	}
+
+	absPath, err := filepath.Abs(filepath.Join(absWorkspace, userPath))
+	if err != nil {
+		return "", fmt.Errorf("invalid path")
+	}
+
+	// Resolve symlinks BEFORE the prefix check to prevent symlink escape.
+	resolved, err := filepath.EvalSymlinks(absPath)
+	if err != nil {
+		// File might not exist yet (write case) — check parent directory instead.
+		parent := filepath.Dir(absPath)
+		resolvedParent, err2 := filepath.EvalSymlinks(parent)
+		if err2 != nil {
+			return "", fmt.Errorf("invalid path")
+		}
+		if resolvedParent != absWorkspace && !strings.HasPrefix(resolvedParent, absWorkspace+string(filepath.Separator)) {
+			return "", fmt.Errorf("path escapes workspace")
+		}
+		return absPath, nil
+	}
+
 	// Ensure the resolved path is exactly the workspace or a child of it.
 	// The separator check prevents /tmp/agent-workspace2/evil from matching
 	// when workspace is /tmp/agent-workspace.
-	if absResolved != absWorkspace && !strings.HasPrefix(absResolved, absWorkspace+string(filepath.Separator)) {
-		return "", fmt.Errorf("path traversal blocked: %s escapes workspace root", userPath)
+	if resolved != absWorkspace && !strings.HasPrefix(resolved, absWorkspace+string(filepath.Separator)) {
+		return "", fmt.Errorf("path escapes workspace")
 	}
-	return absResolved, nil
+	return resolved, nil
 }
 
 // RegisterFileTools registers file_read, file_write, and file_list tools on the MCP server.

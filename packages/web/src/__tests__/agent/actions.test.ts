@@ -62,8 +62,10 @@ function buildMockSupabase(overrides: Record<string, unknown> = {}) {
     }),
     update: vi.fn().mockReturnValue({
       eq: vi.fn().mockReturnValue({
-        select: vi.fn().mockReturnValue({
-          single: vi.fn().mockResolvedValue(updateResult),
+        eq: vi.fn().mockReturnValue({
+          select: vi.fn().mockReturnValue({
+            single: vi.fn().mockResolvedValue(updateResult),
+          }),
         }),
       }),
     }),

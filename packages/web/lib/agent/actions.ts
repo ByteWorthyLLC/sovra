@@ -77,6 +77,7 @@ export async function updateAgent(
       tools: parsed.tools,
     })
     .eq('id', agentId)
+    .eq('tenant_id', tenantId)
     .select('*')
     .single()
 

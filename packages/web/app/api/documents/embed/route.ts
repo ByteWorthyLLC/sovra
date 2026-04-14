@@ -82,7 +82,8 @@ export async function POST(req: Request) {
     .single()
 
   if (insertError) {
-    return NextResponse.json({ error: insertError.message }, { status: 500 })
+    console.error('Document embed insert error:', insertError.message)
+    return NextResponse.json({ error: 'Failed to store document' }, { status: 500 })
   }
 
   return NextResponse.json(doc, { status: 201 })

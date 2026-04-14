@@ -20,6 +20,11 @@ export async function createTenant(input: CreateTenantInput): Promise<CreateTena
   } = await supabase.auth.getUser()
   if (!user) return { tenant: null, error: 'Not authenticated' }
 
+  // Validate slug format (URL-safe, lowercase alphanumeric + hyphens)
+  if (!/^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(input.slug) || input.slug.length < 2 || input.slug.length > 50) {
+    return { tenant: null, error: 'Slug must be 2-50 characters, lowercase alphanumeric and hyphens only' }
+  }
+
   // Insert tenant row
   const { data: tenant, error: tenantError } = await supabase
     .from('tenants')

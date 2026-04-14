@@ -17,6 +17,10 @@ vi.mock('@/lib/auth/server', () => ({
   }),
 }))
 
+vi.mock('@/lib/rbac/checker', () => ({
+  hasPermission: vi.fn().mockResolvedValue(true),
+}))
+
 // We mock the crypto module to get deterministic tokens
 vi.mock('crypto', async () => {
   const actual = await vi.importActual<typeof import('crypto')>('crypto')

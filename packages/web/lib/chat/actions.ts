@@ -36,6 +36,16 @@ export async function createConversation(
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { conversation: null, error: 'Not authenticated' }
 
+  // Verify tenant membership before creating conversation
+  const { data: membership } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', input.tenantId)
+    .single()
+
+  if (!membership) return { conversation: null, error: 'Forbidden' }
+
   const { data: conversation, error } = await supabase
     .from('conversations')
     .insert({
@@ -92,6 +102,16 @@ export async function saveMessage(
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { message: null, error: 'Not authenticated' }
+
+  // Verify tenant membership before saving message
+  const { data: membership } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', input.tenantId)
+    .single()
+
+  if (!membership) return { message: null, error: 'Forbidden' }
 
   const { data: message, error } = await supabase
     .from('messages')

@@ -15,7 +15,7 @@ import { createSupabaseServerClient } from '@/lib/auth/server'
 const mockUser = { id: 'user-1', email: 'test@test.com' }
 
 function buildMockSupabase(overrides: Record<string, unknown> = {}) {
-  const from = vi.fn().mockReturnValue({
+  const defaultChain = {
     insert: vi.fn().mockReturnValue({
       select: vi.fn().mockReturnValue({
         single: vi.fn().mockResolvedValue({
@@ -25,7 +25,9 @@ function buildMockSupabase(overrides: Record<string, unknown> = {}) {
       }),
     }),
     delete: vi.fn().mockReturnValue({
-      eq: vi.fn().mockResolvedValue({ data: null, error: null }),
+      eq: vi.fn().mockReturnValue({
+        eq: vi.fn().mockResolvedValue({ data: null, error: null }),
+      }),
     }),
     select: vi.fn().mockReturnValue({
       eq: vi.fn().mockReturnValue({
@@ -34,13 +36,37 @@ function buildMockSupabase(overrides: Record<string, unknown> = {}) {
             data: [{ id: 'conv-1' }],
             error: null,
           }),
+          single: vi.fn().mockResolvedValue({
+            data: { tenant_id: 'tenant-1' },
+            error: null,
+          }),
         }),
         order: vi.fn().mockResolvedValue({
           data: [{ id: 'msg-1', role: 'user', content: 'hello' }],
           error: null,
         }),
+        single: vi.fn().mockResolvedValue({
+          data: { tenant_id: 'tenant-1' },
+          error: null,
+        }),
       }),
     }),
+  }
+
+  // tenant_users membership check returns success
+  const membershipChain = {
+    select: vi.fn().mockReturnValue({
+      eq: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          single: vi.fn().mockResolvedValue({ data: { id: 'tu-1' }, error: null }),
+        }),
+      }),
+    }),
+  }
+
+  const from = vi.fn().mockImplementation((table: string) => {
+    if (table === 'tenant_users') return membershipChain
+    return defaultChain
   })
 
   return {
