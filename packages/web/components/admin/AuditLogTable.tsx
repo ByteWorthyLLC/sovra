@@ -102,8 +102,8 @@ export function AuditLogTable({
                     {log.severity}
                   </span>
                   <span className="text-sm">{log.action}</span>
-                  {log.actor_id && (
-                    <span className="text-xs text-muted-foreground ml-2">by {log.actor_id}</span>
+                  {log.user_id && (
+                    <span className="text-xs text-muted-foreground ml-2">by {log.user_id}</span>
                   )}
                   {log.tenant_id && (
                     <span className="text-xs text-muted-foreground/60 ml-1">{log.tenant_id}</span>

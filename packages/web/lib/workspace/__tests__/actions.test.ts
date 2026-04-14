@@ -91,11 +91,26 @@ describe('updateWorkspace', () => {
   it('calls supabase update with correct fields', async () => {
     const singleFn = vi.fn().mockResolvedValue({ data: { id: 'ws-1', name: 'Updated' }, error: null })
     const selectFn = vi.fn().mockReturnValue({ single: singleFn })
-    const eqFn = vi.fn().mockReturnValue({ select: selectFn })
+    const eq2Fn = vi.fn().mockReturnValue({ select: selectFn })
+    const eqFn = vi.fn().mockReturnValue({ eq: eq2Fn })
     const updateFn = vi.fn().mockReturnValue({ eq: eqFn })
+
+    // Mock for workspace lookup (tenant_id) and tenant_users membership check
+    const wsSingle = vi.fn().mockResolvedValue({ data: { tenant_id: 'tenant-1' }, error: null })
+    const wsEq = vi.fn().mockReturnValue({ single: wsSingle })
+    const wsSelect = vi.fn().mockReturnValue({ eq: wsEq })
+    const memSingle = vi.fn().mockResolvedValue({ data: { id: 'tu-1' }, error: null })
+    const memEq2 = vi.fn().mockReturnValue({ single: memSingle })
+    const memEq1 = vi.fn().mockReturnValue({ eq: memEq2 })
+    const memSelect = vi.fn().mockReturnValue({ eq: memEq1 })
+
     const supabase = {
       auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: 'user-1' } } }) },
-      from: vi.fn().mockReturnValue({ update: updateFn }),
+      from: vi.fn().mockImplementation((table: string) => {
+        if (table === 'tenant_users') return { select: memSelect }
+        // First call to workspaces = lookup, second = update
+        return { select: wsSelect, update: updateFn }
+      }),
     }
     vi.mocked(createSupabaseServerClient).mockResolvedValue(supabase as never)
 
@@ -108,11 +123,24 @@ describe('updateWorkspace', () => {
 
 describe('deleteWorkspace', () => {
   it('calls supabase delete', async () => {
-    const eqFn = vi.fn().mockResolvedValue({ error: null })
-    const deleteFn = vi.fn().mockReturnValue({ eq: eqFn })
+    const deleteEq2 = vi.fn().mockResolvedValue({ error: null })
+    const deleteEq1 = vi.fn().mockReturnValue({ eq: deleteEq2 })
+    const deleteFn = vi.fn().mockReturnValue({ eq: deleteEq1 })
+
+    const wsSingle = vi.fn().mockResolvedValue({ data: { tenant_id: 'tenant-1' }, error: null })
+    const wsEq = vi.fn().mockReturnValue({ single: wsSingle })
+    const wsSelect = vi.fn().mockReturnValue({ eq: wsEq })
+    const memSingle = vi.fn().mockResolvedValue({ data: { id: 'tu-1' }, error: null })
+    const memEq2 = vi.fn().mockReturnValue({ single: memSingle })
+    const memEq1 = vi.fn().mockReturnValue({ eq: memEq2 })
+    const memSelect = vi.fn().mockReturnValue({ eq: memEq1 })
+
     const supabase = {
       auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: 'user-1' } } }) },
-      from: vi.fn().mockReturnValue({ delete: deleteFn }),
+      from: vi.fn().mockImplementation((table: string) => {
+        if (table === 'tenant_users') return { select: memSelect }
+        return { select: wsSelect, delete: deleteFn }
+      }),
     }
     vi.mocked(createSupabaseServerClient).mockResolvedValue(supabase as never)
 
@@ -152,9 +180,22 @@ describe('removeAgentFromWorkspace', () => {
     const eq2Fn = vi.fn().mockResolvedValue({ error: null })
     const eq1Fn = vi.fn().mockReturnValue({ eq: eq2Fn })
     const deleteFn = vi.fn().mockReturnValue({ eq: eq1Fn })
+
+    const wsSingle = vi.fn().mockResolvedValue({ data: { tenant_id: 'tenant-1' }, error: null })
+    const wsEq = vi.fn().mockReturnValue({ single: wsSingle })
+    const wsSelect = vi.fn().mockReturnValue({ eq: wsEq })
+    const memSingle = vi.fn().mockResolvedValue({ data: { id: 'tu-1' }, error: null })
+    const memEq2 = vi.fn().mockReturnValue({ single: memSingle })
+    const memEq1 = vi.fn().mockReturnValue({ eq: memEq2 })
+    const memSelect = vi.fn().mockReturnValue({ eq: memEq1 })
+
     const supabase = {
       auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: 'user-1' } } }) },
-      from: vi.fn().mockReturnValue({ delete: deleteFn }),
+      from: vi.fn().mockImplementation((table: string) => {
+        if (table === 'tenant_users') return { select: memSelect }
+        if (table === 'workspaces') return { select: wsSelect }
+        return { delete: deleteFn }
+      }),
     }
     vi.mocked(createSupabaseServerClient).mockResolvedValue(supabase as never)
 

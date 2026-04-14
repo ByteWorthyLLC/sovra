@@ -58,10 +58,29 @@ export async function deleteConversation(
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated' }
 
+  // Verify ownership: conversation must belong to a tenant the user is a member of
+  const { data: conversation } = await supabase
+    .from('conversations')
+    .select('tenant_id')
+    .eq('id', conversationId)
+    .single()
+
+  if (!conversation) return { error: 'Conversation not found' }
+
+  const { data: membership } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', conversation.tenant_id)
+    .single()
+
+  if (!membership) return { error: 'Forbidden' }
+
   const { error } = await supabase
     .from('conversations')
     .delete()
     .eq('id', conversationId)
+    .eq('tenant_id', conversation.tenant_id)
 
   if (error) return { error: error.message }
   return { error: null }

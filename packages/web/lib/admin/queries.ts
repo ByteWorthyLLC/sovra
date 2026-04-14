@@ -26,7 +26,7 @@ export interface AuditLog {
   id: string
   tenant_id?: string
   action: string
-  actor_id?: string
+  user_id?: string
   metadata?: Record<string, unknown>
   severity: 'info' | 'warning' | 'critical'
   created_at: string
@@ -88,7 +88,7 @@ export async function getAuditLogs(
 
   let query = client
     .from('audit_logs')
-    .select('id, tenant_id, action, actor_id, metadata, severity, created_at', { count: 'exact' })
+    .select('id, tenant_id, action, user_id, metadata, severity, created_at', { count: 'exact' })
     .order('created_at', { ascending: false })
 
   if (severity) {

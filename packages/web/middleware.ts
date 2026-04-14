@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
 
   // 1. Public routes: skip auth entirely for fast response
   if (isPublicRoute(pathname)) {
-    const response = NextResponse.next({ request })
+    let response = NextResponse.next({ request })
 
     // Still refresh session cookies if present (non-blocking for the user)
     const supabase = createServerClient(
@@ -35,6 +35,8 @@ export async function middleware(request: NextRequest) {
         cookies: {
           getAll: () => request.cookies.getAll(),
           setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+            response = NextResponse.next({ request })
             cookiesToSet.forEach(({ name, value, options }) =>
               response.cookies.set(name, value, options)
             )

@@ -77,10 +77,29 @@ export async function updateWorkspace(
 
   const { agent_ids, ...workspaceFields } = data
 
+  // Verify tenant membership before update
+  const { data: existing } = await supabase
+    .from('workspaces')
+    .select('tenant_id')
+    .eq('id', id)
+    .single()
+
+  if (!existing) return { data: null, error: 'Workspace not found' }
+
+  const { data: mem } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', (existing as Record<string, unknown>).tenant_id as string)
+    .single()
+
+  if (!mem) return { data: null, error: 'Forbidden' }
+
   const { data: workspace, error } = await supabase
     .from('workspaces')
     .update(workspaceFields)
     .eq('id', id)
+    .eq('tenant_id', (existing as Record<string, unknown>).tenant_id as string)
     .select('*')
     .single()
 
@@ -119,10 +138,29 @@ export async function deleteWorkspace(id: string): Promise<DeleteResult> {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated' }
 
+  // Verify tenant membership before delete
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('tenant_id')
+    .eq('id', id)
+    .single()
+
+  if (!workspace) return { error: 'Workspace not found' }
+
+  const { data: mem } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', (workspace as Record<string, unknown>).tenant_id as string)
+    .single()
+
+  if (!mem) return { error: 'Forbidden' }
+
   const { error } = await supabase
     .from('workspaces')
     .delete()
     .eq('id', id)
+    .eq('tenant_id', (workspace as Record<string, unknown>).tenant_id as string)
 
   if (error) return { error: error.message }
 
@@ -172,6 +210,24 @@ export async function removeAgentFromWorkspace(
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated' }
+
+  // Verify tenant membership
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('tenant_id')
+    .eq('id', workspaceId)
+    .single()
+
+  if (!workspace) return { error: 'Workspace not found' }
+
+  const { data: mem } = await supabase
+    .from('tenant_users')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('tenant_id', (workspace as Record<string, unknown>).tenant_id as string)
+    .single()
+
+  if (!mem) return { error: 'Forbidden' }
 
   const { error } = await supabase
     .from('workspace_agents')
