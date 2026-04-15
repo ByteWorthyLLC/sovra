@@ -1,8 +1,14 @@
+# Build context: repo root (required — resolves @sovra/shared workspace dependency)
+# docker build -f packages/web/Dockerfile .
+
 # Dependencies
 FROM node:20-alpine AS deps
 RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* ./
+# Copy monorepo manifests first for layer caching
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+COPY packages/shared/package.json ./packages/shared/
+COPY packages/web/package.json ./packages/web/
 RUN pnpm install --frozen-lockfile --prod=false
 
 # Build
@@ -10,12 +16,15 @@ FROM node:20-alpine AS builder
 RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY --from=deps /app/packages/web/node_modules ./packages/web/node_modules
+COPY packages/shared ./packages/shared
+COPY packages/web ./packages/web
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-RUN pnpm build
+RUN pnpm --filter @sovra/web build
 
 # Runtime
 FROM node:20-alpine AS runner
@@ -27,9 +36,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/packages/web/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/packages/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/packages/web/.next/static ./packages/web/.next/static
 
 USER nextjs
 
@@ -38,4 +47,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["node", "packages/web/server.js"]
