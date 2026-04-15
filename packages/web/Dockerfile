@@ -3,7 +3,7 @@
 
 # Dependencies
 FROM node:20-alpine AS deps
-RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
 WORKDIR /app
 # Copy monorepo manifests first for layer caching
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
@@ -13,7 +13,7 @@ RUN pnpm install --frozen-lockfile --prod=false
 
 # Build
 FROM node:20-alpine AS builder
-RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/packages/web/node_modules ./packages/web/node_modules
