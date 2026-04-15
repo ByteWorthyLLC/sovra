@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 import { Copy, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { VARIANTS } from '@/lib/motion'
-import type { Message } from 'ai'
+import type { UIMessage } from 'ai'
 
 interface MessageBubbleProps {
-  message: Message
+  message: UIMessage
   isStreaming?: boolean
 }
 
@@ -89,7 +89,11 @@ function CodeBlockRenderer({ language, code }: CodeBlock) {
 
 export function MessageBubble({ message, isStreaming }: MessageBubbleProps) {
   const isUser = message.role === 'user'
-  const parts = parseContent(message.content)
+  const textContent = message.parts
+    .filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join('\n')
+  const parts = parseContent(textContent)
 
   return (
     <motion.div
@@ -98,7 +102,7 @@ export function MessageBubble({ message, isStreaming }: MessageBubbleProps) {
     >
       {isUser ? (
         <div className="bg-primary/15 border border-primary/20 text-foreground rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[80%]">
-          {renderInlineCode(message.content)}
+          {renderInlineCode(textContent)}
         </div>
       ) : (
         <div className="text-sm leading-7 text-foreground max-w-[80%]">

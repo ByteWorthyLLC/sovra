@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { VARIANTS } from '@/lib/motion'
 import { MessageBubble } from './message-bubble'
-import type { Message } from 'ai'
+import type { UIMessage } from 'ai'
 
 interface MessageListProps {
-  messages: Message[]
+  messages: UIMessage[]
   isLoading: boolean
 }
 

@@ -1,4 +1,4 @@
-import { tool } from 'ai'
+import { tool, type ToolSet } from 'ai'
 import { z } from 'zod'
 import type { Client } from '@modelcontextprotocol/sdk/client'
 
@@ -39,7 +39,7 @@ function convertJsonSchemaToZod(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AiTool = ReturnType<typeof tool<any, any>>
+type AiTool = ReturnType<typeof tool>
 
 export async function buildAiToolsFromMcp(
   client: Client
@@ -50,10 +50,10 @@ export async function buildAiToolsFromMcp(
     t.name,
     tool({
       description: t.description ?? '',
-      parameters: convertJsonSchemaToZod(
+      inputSchema: convertJsonSchemaToZod(
         t.inputSchema as { properties?: Record<string, JsonSchemaProperty>; required?: string[] }
       ),
-      execute: async (args) => {
+      execute: async (args: unknown) => {
         const result = await client.callTool(
           { name: t.name, arguments: args as Record<string, unknown> },
           undefined,
@@ -70,10 +70,10 @@ export async function buildAiToolsFromMcp(
 export function getAgentTools(
   allTools: Record<string, unknown>,
   agentToolNames: string[]
-): Record<string, unknown> {
+): ToolSet {
   return Object.fromEntries(
     agentToolNames
       .map((name) => [name, allTools[name]])
       .filter(([, v]) => v != null)
-  )
+  ) as ToolSet
 }

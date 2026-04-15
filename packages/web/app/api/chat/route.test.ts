@@ -12,6 +12,7 @@ const { mockStreamText, mockGetUser, mockSupabaseFrom, mockGetMcpClient, mockBui
 
 vi.mock('ai', () => ({
   streamText: mockStreamText,
+  convertToModelMessages: vi.fn().mockImplementation((messages) => messages),
 }))
 
 vi.mock('@/lib/auth/server', () => ({
@@ -122,7 +123,7 @@ describe('POST /api/chat', () => {
       if (typeof opts.onFinish === 'function') {
         opts.onFinish({ steps: [] })
       }
-      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+      return { toUIMessageStreamResponse: () => new Response('stream', { status: 200 }) }
     })
   })
 
@@ -144,7 +145,7 @@ describe('POST /api/chat', () => {
     expect(Object.keys(callArgs.tools)).not.toContain('file_write')
   })
 
-  it('sets maxSteps=10 in streamText call', async () => {
+  it('passes core generation settings to streamText', async () => {
     const req = makeRequest({
       agentId: 'agent-1',
       conversationId: 'conv-1',
@@ -154,7 +155,8 @@ describe('POST /api/chat', () => {
     await POST(req)
 
     const callArgs = mockStreamText.mock.calls[0][0]
-    expect(callArgs.maxSteps).toBe(10)
+    expect(callArgs.maxOutputTokens).toBe(4096)
+    expect(callArgs.temperature).toBe(0.7)
   })
 
   it('onFinish inserts tool_executions rows for each tool call in steps', async () => {
@@ -164,24 +166,24 @@ describe('POST /api/chat', () => {
           steps: [
             {
               toolCalls: [
-                { toolCallId: 'tc-1', toolName: 'web_search', args: { query: 'test' } },
+                { toolCallId: 'tc-1', toolName: 'web_search', input: { query: 'test' } },
               ],
               toolResults: [
-                { toolCallId: 'tc-1', result: 'search results' },
+                { toolCallId: 'tc-1', output: 'search results' },
               ],
             },
             {
               toolCalls: [
-                { toolCallId: 'tc-2', toolName: 'file_read', args: { path: '/tmp/f.txt' } },
+                { toolCallId: 'tc-2', toolName: 'file_read', input: { path: '/tmp/f.txt' } },
               ],
               toolResults: [
-                { toolCallId: 'tc-2', result: 'file content' },
+                { toolCallId: 'tc-2', output: 'file content' },
               ],
             },
           ],
         })
       }
-      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+      return { toUIMessageStreamResponse: () => new Response('stream', { status: 200 }) }
     })
 
     const req = makeRequest({
@@ -210,12 +212,12 @@ describe('POST /api/chat', () => {
       if (typeof opts.onFinish === 'function') {
         opts.onFinish({
           steps: [{
-            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', args: {} }],
-            toolResults: [{ toolCallId: 'tc-1', result: 'ok' }],
+            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', input: {} }],
+            toolResults: [{ toolCallId: 'tc-1', output: 'ok' }],
           }],
         })
       }
-      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+      return { toUIMessageStreamResponse: () => new Response('stream', { status: 200 }) }
     })
 
     const req = makeRequest({
@@ -234,12 +236,12 @@ describe('POST /api/chat', () => {
       if (typeof opts.onFinish === 'function') {
         opts.onFinish({
           steps: [{
-            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', args: {} }],
-            toolResults: [{ toolCallId: 'tc-1', result: 'ok' }],
+            toolCalls: [{ toolCallId: 'tc-1', toolName: 'web_search', input: {} }],
+            toolResults: [{ toolCallId: 'tc-1', output: 'ok' }],
           }],
         })
       }
-      return { toDataStreamResponse: () => new Response('stream', { status: 200 }) }
+      return { toUIMessageStreamResponse: () => new Response('stream', { status: 200 }) }
     })
 
     const req = makeRequest({
