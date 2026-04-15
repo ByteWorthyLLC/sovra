@@ -1,0 +1,70 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+      directory: /
+          schedule:
+                interval: weekly
+                      day: monday
+                            time: "09:00"
+                                open-pull-requests-limit: 10
+                                    labels:
+                                          - dependencies
+                                                - javascript
+                                                    groups:
+                                                          dev-dependencies:
+                                                                  dependency-type: development
+                                                                        production-dependencies:
+                                                                                dependency-type: production
+                                                                                        update-types:
+                                                                                                  - patch
+                                                                                                            - minor
+                                                                                                            
+                                                                                                              - package-ecosystem: npm
+                                                                                                                  directory: /packages/web
+                                                                                                                      schedule:
+                                                                                                                            interval: weekly
+                                                                                                                                  day: monday
+                                                                                                                                        time: "09:00"
+                                                                                                                                            open-pull-requests-limit: 10
+                                                                                                                                                labels:
+                                                                                                                                                      - dependencies
+                                                                                                                                                            - javascript
+                                                                                                                                                                  - web
+                                                                                                                                                                  
+                                                                                                                                                                    - package-ecosystem: gomod
+                                                                                                                                                                        directory: /packages/worker
+                                                                                                                                                                            schedule:
+                                                                                                                                                                                  interval: weekly
+                                                                                                                                                                                        day: monday
+                                                                                                                                                                                              time: "09:00"
+                                                                                                                                                                                                  open-pull-requests-limit: 5
+                                                                                                                                                                                                      labels:
+                                                                                                                                                                                                            - dependencies
+                                                                                                                                                                                                                  - go
+                                                                                                                                                                                                                        - worker
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                          - package-ecosystem: github-actions
+                                                                                                                                                                                                                              directory: /
+                                                                                                                                                                                                                                  schedule:
+                                                                                                                                                                                                                                        interval: weekly
+                                                                                                                                                                                                                                              day: monday
+                                                                                                                                                                                                                                                    time: "09:00"
+                                                                                                                                                                                                                                                        labels:
+                                                                                                                                                                                                                                                              - dependencies
+                                                                                                                                                                                                                                                                    - ci
+                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                      - package-ecosystem: docker
+                                                                                                                                                                                                                                                                          directory: /packages/web
+                                                                                                                                                                                                                                                                              schedule:
+                                                                                                                                                                                                                                                                                    interval: weekly
+                                                                                                                                                                                                                                                                                        labels:
+                                                                                                                                                                                                                                                                                              - dependencies
+                                                                                                                                                                                                                                                                                                    - docker
+                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                      - package-ecosystem: docker
+                                                                                                                                                                                                                                                                                                          directory: /packages/worker
+                                                                                                                                                                                                                                                                                                              schedule:
+                                                                                                                                                                                                                                                                                                                    interval: weekly
+                                                                                                                                                                                                                                                                                                                        labels:
+                                                                                                                                                                                                                                                                                                                              - dependencies
+                                                                                                                                                                                                                                                                                                                                    - docker
