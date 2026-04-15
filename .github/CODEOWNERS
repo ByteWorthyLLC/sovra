@@ -1,0 +1,16 @@
+# Default owner for every file in the repo.
+* @byteworthy/maintainers
+
+# Critical security surfaces require explicit security review.
+/SECURITY.md @byteworthy/security
+/packages/web/middleware.ts @byteworthy/security
+/packages/web/lib/security/** @byteworthy/security
+/packages/web/lib/auth/** @byteworthy/security
+/packages/web/app/api/stripe/** @byteworthy/security
+/supabase/migrations/** @byteworthy/security @byteworthy/maintainers
+/.github/workflows/** @byteworthy/security @byteworthy/maintainers
+
+# Docs
+/docs/** @byteworthy/maintainers
+/README.md @byteworthy/maintainers
+/CLAUDE.md @byteworthy/maintainers
