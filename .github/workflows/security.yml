@@ -62,6 +62,10 @@ jobs:
     with:
       scan-args: |-
         --recursive
+        # Temporary suppressions:
+        # - GO-2026-4771 / GO-2026-4772: no upstream fix available in pgx/v5 yet.
+        # - GHSA-rwvc-j5jr-mgvh: low severity in ai@4.x; tracked for planned AI SDK v5 migration.
+        --ignore-vulns=GO-2026-4771,GO-2026-4772,GHSA-rwvc-j5jr-mgvh
         ./
       fail-on-vuln: true
 
