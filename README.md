@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/byteworthy/sovra/main/.github/logo.svg" width="80" alt="Sovra — open-source AI agent platform" />
+  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/main/.github/logo.svg" width="80" alt="Sovra — open-source AI agent platform" />
 </p>
 
 <h1 align="center">Sovra</h1>
@@ -23,10 +23,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/byteworthy/sovra/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
-  <a href="https://github.com/byteworthy/sovra/issues"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" /></a>
-  <a href="https://github.com/byteworthy/sovra"><img src="https://img.shields.io/github/stars/byteworthy/sovra?style=flat-square" alt="GitHub Stars" /></a>
-  <a href="https://github.com/byteworthy/sovra"><img src="https://img.shields.io/github/last-commit/byteworthy/sovra?style=flat-square" alt="Last Commit" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/issues"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=flat-square" alt="GitHub Stars" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/last-commit/ByteWorthyLLC/sovra?style=flat-square" alt="Last Commit" /></a>
 </p>
 
 <br/>
@@ -50,7 +50,7 @@ Sovra eliminates that. Clone it, run it, build on it. What takes teams 3+ months
 ## &#x1f680; Quick Start
 
 ```bash
-git clone https://github.com/byteworthy/sovra.git
+git clone https://github.com/ByteWorthyLLC/sovra.git
 cd sovra && pnpm install
 supabase start              # Local Postgres + Auth + pgvector
 cp .env.example .env.local  # Add Supabase keys from output
@@ -73,7 +73,7 @@ cd packages/web && pnpm dev # Open http://localhost:3000
 
 ```bash
 # 1. Clone and install dependencies
-git clone https://github.com/byteworthy/sovra.git
+git clone https://github.com/ByteWorthyLLC/sovra.git
 cd sovra
 pnpm install
 
@@ -296,6 +296,17 @@ Contributions welcome! Read the [contributing guide](CONTRIBUTING.md) before ope
 
 <br/>
 
+## &#x1f9f9; Maintenance Cadence
+
+Sovra ships with automated maintenance reminders via GitHub Actions:
+
+- **Weekly health check**: monitors latest `CI`, `Security`, `Deploy` runs and open security alert counts; opens an issue automatically if the repo is unhealthy.
+- **Monthly checklist**: opens a recurring issue with a maintainer checklist for dependency reviews, security posture, and routine validation.
+
+You can also run the cadence workflow manually from the Actions tab (`Maintenance Cadence`).
+
+<br/>
+
 ## &#x1f4dc; License
 
 [MIT](LICENSE) — use it for anything. Commercial, personal, educational. No strings.
@@ -310,7 +321,7 @@ Contributions welcome! Read the [contributing guide](CONTRIBUTING.md) before ope
 </p>
 
 <p align="center">
-  <a href="https://github.com/byteworthy/sovra">
-    <img src="https://img.shields.io/github/stars/byteworthy/sovra?style=social" alt="Star Sovra on GitHub" />
+  <a href="https://github.com/ByteWorthyLLC/sovra">
+    <img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=social" alt="Star Sovra on GitHub" />
   </a>
 </p>
