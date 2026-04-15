@@ -1,4 +1,4 @@
-import { streamText, type CoreTool } from 'ai'
+import { convertToModelMessages, streamText, type ToolSet, type UIMessage } from 'ai'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getProvider, initProviders } from '@/lib/ai/registry'
 import { getMcpClient } from '@/lib/mcp/client'
@@ -26,9 +26,9 @@ export async function POST(req: Request) {
   const rl = await checkSessionRateLimit(getChatLimiter(), user.id)
   if (!rl.success) return rateLimitResponse(rl.retryAfter!)
 
-  const { messages, agentId, conversationId } = await req.json()
+  const { messages: rawMessages, agentId, conversationId } = await req.json()
 
-  if (!agentId || !messages?.length) {
+  if (!agentId || !Array.isArray(rawMessages) || rawMessages.length === 0) {
     return new Response('Bad request: agentId and messages required', {
       status: 400,
     })
@@ -37,6 +37,25 @@ export async function POST(req: Request) {
   if (!conversationId) {
     return new Response('Bad request: conversationId required', { status: 400 })
   }
+
+  const messages: UIMessage[] = rawMessages.map((message: unknown) => {
+    const value = message as {
+      id?: string
+      role?: UIMessage['role']
+      parts?: UIMessage['parts']
+      content?: string
+    }
+
+    const parts: UIMessage['parts'] = Array.isArray(value.parts)
+      ? value.parts
+      : [{ type: 'text', text: value.content ?? '' }]
+
+    return {
+      id: value.id ?? crypto.randomUUID(),
+      role: value.role ?? 'user',
+      parts,
+    }
+  })
 
   const { data: agent } = await supabase
     .from('agents')
@@ -72,13 +91,11 @@ export async function POST(req: Request) {
 
   // Load MCP tools with graceful degradation
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let agentTools: Record<string, CoreTool<any, any>> = {}
+  let agentTools: ToolSet = {}
   try {
     const mcpClient = await getMcpClient()
     const allTools = await buildAiToolsFromMcp(mcpClient)
-    agentTools = getAgentTools(allTools, (agent.tools as string[]) ?? []) as
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Record<string, CoreTool<any, any>>
+    agentTools = getAgentTools(allTools, (agent.tools as string[]) ?? []) as ToolSet
   } catch (mcpError) {
     console.warn('MCP client unavailable, streaming without tools:', mcpError instanceof Error ? mcpError.message : mcpError)
   }
@@ -89,23 +106,32 @@ export async function POST(req: Request) {
     const result = await streamText({
       model,
       system: agent.system_prompt ?? undefined,
-      messages,
+      messages: convertToModelMessages(
+        messages.map(({ id: _id, ...rest }) => rest),
+        hasTools ? { tools: agentTools } : undefined
+      ),
       tools: hasTools ? agentTools : undefined,
-      maxSteps: 10,
       temperature: Number(agent.temperature) || 0.7,
-      maxTokens: agent.max_tokens ?? 4096,
-      onFinish: async ({ steps }: { steps: Array<{
-        toolCalls?: Array<{ toolCallId: string; toolName: string; args: unknown }>;
-        toolResults?: Array<{ toolCallId: string; result: unknown }>;
-      }> }) => {
+      maxOutputTokens: agent.max_tokens ?? 4096,
+      onFinish: async ({ steps }) => {
         await supabase
           .from('agents')
           .update({ status: 'idle' })
           .eq('id', agentId)
 
         for (const step of steps) {
-          for (const toolCall of step.toolCalls ?? []) {
-            const toolResult = step.toolResults?.find(
+          const toolCalls = (step.toolCalls ?? []) as Array<{
+            toolCallId: string
+            toolName: string
+            input?: unknown
+          }>
+          const toolResults = (step.toolResults ?? []) as Array<{
+            toolCallId: string
+            output?: unknown
+          }>
+
+          for (const toolCall of toolCalls) {
+            const toolResult = toolResults.find(
               (r) => r.toolCallId === toolCall.toolCallId
             )
             await supabase.from('tool_executions').insert({
@@ -113,8 +139,8 @@ export async function POST(req: Request) {
               agent_id: agentId,
               conversation_id: conversationId,
               tool_name: toolCall.toolName,
-              input: toolCall.args as Json,
-              output: (toolResult?.result ?? null) as Json,
+              input: (toolCall.input ?? null) as Json,
+              output: (toolResult?.output ?? null) as Json,
               status: toolResult ? 'success' : 'error',
               error_message: toolResult
                 ? null
@@ -127,7 +153,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return result.toDataStreamResponse()
+    return result.toUIMessageStreamResponse()
   } catch (error) {
     await supabase
       .from('agents')

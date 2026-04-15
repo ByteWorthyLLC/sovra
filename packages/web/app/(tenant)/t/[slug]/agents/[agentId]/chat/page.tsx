@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from '@/lib/auth/server'
 import { getAgent } from '@/lib/agent/queries'
 import { listConversations, getMessages } from '@/lib/chat/queries'
 import { ChatPageClient } from './chat-page-client'
-import type { Message } from 'ai'
+import type { UIMessage } from 'ai'
 
 export const metadata: Metadata = {
   title: 'Agent Chat | Sovra',
@@ -57,10 +57,10 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   const { data: messagesRaw } = await getMessages(supabase, activeConversationId)
 
-  const initialMessages: Message[] = (messagesRaw ?? []).map((m) => ({
+  const initialMessages: UIMessage[] = (messagesRaw ?? []).map((m) => ({
     id: m.id,
-    role: m.role as Message['role'],
-    content: m.content,
+    role: m.role as UIMessage['role'],
+    parts: [{ type: 'text', text: m.content }],
   }))
 
   return (

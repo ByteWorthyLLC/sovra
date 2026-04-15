@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { ConversationSidebar } from '@/components/chat/conversation-sidebar'
 import { ChatContainer } from '@/components/chat/chat-container'
-import type { Message } from 'ai'
+import type { UIMessage } from 'ai'
 
 interface Conversation {
   id: string
@@ -20,7 +20,7 @@ interface ChatPageClientProps {
   tenantSlug: string
   conversations: Conversation[]
   activeConversationId: string
-  initialMessages: Message[]
+  initialMessages: UIMessage[]
 }
 
 export function ChatPageClient({

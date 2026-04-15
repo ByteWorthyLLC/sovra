@@ -1,20 +1,20 @@
 'use client'
 
-import { type FormEvent } from 'react'
-import { useChat } from 'ai/react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useChat } from '@ai-sdk/react'
 import { Settings } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { saveMessage } from '@/lib/chat/actions'
 import { MessageList } from './message-list'
 import { ChatInput } from './chat-input'
-import type { Message } from 'ai'
+import { DefaultChatTransport, type UIMessage } from 'ai'
 
 interface ChatContainerProps {
   agentId: string
   conversationId: string
   agentName: string
   agentStatus: string
-  initialMessages: Message[]
+  initialMessages: UIMessage[]
   tenantId: string
 }
 
@@ -42,32 +42,54 @@ export function ChatContainer({
   initialMessages,
   tenantId,
 }: ChatContainerProps) {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
-    useChat({
+  const [input, setInput] = useState('')
+  const { messages, sendMessage, status, stop } = useChat({
+    id: conversationId,
+    messages: initialMessages,
+    transport: new DefaultChatTransport({
       api: '/api/chat',
-      id: conversationId,
-      initialMessages,
       body: { agentId, conversationId },
-      onFinish: async (message) => {
-        await saveMessage({
-          conversationId,
-          tenantId,
-          role: 'assistant',
-          content: message.content,
-        })
-      },
-    })
+    }),
+    onFinish: async ({ message }) => {
+      const content = message.parts
+        .filter((part) => part.type === 'text')
+        .map((part) => part.text)
+        .join('\n')
+
+      if (!content.trim()) return
+
+      await saveMessage({
+        conversationId,
+        tenantId,
+        role: 'assistant',
+        content,
+      })
+    },
+  })
+
+  const isLoading = status === 'submitted' || status === 'streaming'
+
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value)
+  }
+
+  const handleStop = () => {
+    void stop()
+  }
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
+    const text = input.trim()
+    if (!text) return
+
     await saveMessage({
       conversationId,
       tenantId,
       role: 'user',
-      content: input,
+      content: text,
     })
-    handleSubmit(e)
+    setInput('')
+    await sendMessage({ text })
   }
 
   return (
@@ -92,7 +114,7 @@ export function ChatContainer({
         isLoading={isLoading}
         onInputChange={handleInputChange}
         onSubmit={onSubmit}
-        onStop={stop}
+        onStop={handleStop}
         agentName={agentName}
       />
     </div>
