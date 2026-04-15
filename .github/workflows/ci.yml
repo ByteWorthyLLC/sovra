@@ -8,6 +8,8 @@ on:
       - "packages/web/**"
       - "packages/shared/**"
       - "packages/worker/**"
+      - ".github/dependabot.yml"
+      - ".github/workflows/security.yml"
       - ".github/workflows/ci.yml"
 
 concurrency:
