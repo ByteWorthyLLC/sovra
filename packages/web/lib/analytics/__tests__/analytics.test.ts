@@ -4,6 +4,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 vi.mock('@sentry/nextjs', () => ({
   init: vi.fn(),
   captureRequestError: vi.fn(),
+  captureRouterTransitionStart: vi.fn(),
 }))
 
 // ─── posthog-node mock ────────────────────────────────────────────────────────
@@ -18,7 +19,7 @@ vi.mock('posthog-node', () => {
 })
 
 // ─── Sentry config tests ──────────────────────────────────────────────────────
-describe('Sentry client config', () => {
+describe('Sentry client instrumentation config', () => {
   beforeEach(() => {
     vi.resetModules()
   })
@@ -26,7 +27,7 @@ describe('Sentry client config', () => {
   it('calls Sentry.init when NEXT_PUBLIC_SENTRY_DSN is set', async () => {
     vi.stubEnv('NEXT_PUBLIC_SENTRY_DSN', 'https://key@sentry.io/123')
     const Sentry = await import('@sentry/nextjs')
-    await import('../../../sentry.client.config')
+    await import('../../../instrumentation-client')
     expect(Sentry.init).toHaveBeenCalledWith(
       expect.objectContaining({ dsn: 'https://key@sentry.io/123' }),
     )
@@ -35,7 +36,7 @@ describe('Sentry client config', () => {
 
   it('does not throw when NEXT_PUBLIC_SENTRY_DSN is absent', async () => {
     vi.stubEnv('NEXT_PUBLIC_SENTRY_DSN', '')
-    await expect(import('../../../sentry.client.config')).resolves.not.toThrow()
+    await expect(import('../../../instrumentation-client')).resolves.not.toThrow()
     vi.unstubAllEnvs()
   })
 })
