@@ -8,7 +8,7 @@ pre-commit:
         if [ -z "$files" ]; then
           exit 0
         fi
-        pnpm --filter @sovra/web exec next lint --file $files
+        pnpm --filter @sovra/web exec eslint --max-warnings=0 $files
     typecheck:
       glob: "packages/web/**/*.{ts,tsx}"
       run: pnpm --filter @sovra/web type-check
