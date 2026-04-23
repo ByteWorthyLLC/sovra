@@ -4,6 +4,9 @@ Sovra is an open source AI SaaS boilerplate for multi tenant AI products.
 
 - Repository: https://github.com/ByteWorthyLLC/sovra
 - Project page: https://byteworthyllc.github.io/sovra/
+- Quickstart page: https://byteworthyllc.github.io/sovra/quickstart.html
+- MCP page: https://byteworthyllc.github.io/sovra/mcp-boilerplate.html
+- Comparison page: https://byteworthyllc.github.io/sovra/compare.html
 - License: MIT
 - Maintainer: ByteWorthy (https://byteworthy.io)
 

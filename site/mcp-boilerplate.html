@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCP Boilerplate Guide | Sovra</title>
+    <meta
+      name="description"
+      content="Use Sovra as an MCP boilerplate with tenant-safe tools, worker orchestration, schema validated inputs, and production-ready release gates."
+    />
+    <meta
+      name="keywords"
+      content="MCP boilerplate, model context protocol starter, multi tenant MCP server template, open source MCP SaaS"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://byteworthyllc.github.io/sovra/mcp-boilerplate.html" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MCP Boilerplate Guide | Sovra" />
+    <meta property="og:description" content="Build MCP-native AI products with multi tenant SaaS foundations." />
+    <meta property="og:url" content="https://byteworthyllc.github.io/sovra/mcp-boilerplate.html" />
+    <meta property="og:image" content="https://byteworthyllc.github.io/sovra/assets/sovra-social-card.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MCP Boilerplate Guide | Sovra" />
+    <meta name="twitter:description" content="MCP native SaaS boilerplate with secure tool registration and worker execution." />
+    <meta name="twitter:image" content="https://byteworthyllc.github.io/sovra/assets/sovra-social-card.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell shell-page">
+      <header class="hero hero-page">
+        <nav class="top-nav" aria-label="Primary">
+          <a class="logo-link" href="./index.html">
+            <img src="assets/brand-mark.svg" alt="Sovra" width="184" height="48" />
+          </a>
+          <div class="top-links">
+            <a href="./index.html">Home</a>
+            <a href="./quickstart.html">Quickstart</a>
+            <a href="./mcp-boilerplate.html">MCP</a>
+            <a href="./compare.html">Compare</a>
+          </div>
+        </nav>
+        <div class="hero-copy">
+          <p class="eyebrow">MCP Boilerplate</p>
+          <h1>Ship MCP-native products without rewriting SaaS fundamentals.</h1>
+          <p class="lede">Sovra combines Model Context Protocol workflows with multi tenant auth, billing, and deployment controls.</p>
+        </div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>MCP patterns included</h2>
+        </div>
+        <ul class="checklist">
+          <li>Explicit registration APIs for tools, prompts, and resources</li>
+          <li>Schema validated request and response contracts</li>
+          <li>Worker execution boundaries with tenant-safe routing</li>
+          <li>Secure internal endpoints and production auth checks</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Recommended production flow</h2>
+        </div>
+        <ol class="ordered-list">
+          <li>Prototype tools locally with Supabase and worker service.</li>
+          <li>Harden schemas and tenant authorization checks.</li>
+          <li>Run CI, security, release-readiness, and fuzz gates.</li>
+          <li>Deploy web and worker separately with locked internal routes.</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Canonical references</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/worker.md">Worker architecture</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/architecture.md">System architecture</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/migration-guides.md">Migration guidance</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/testing.md">Testing and quality gates</a>
+          <a href="./quickstart.html">Quickstart path</a>
+          <a href="./compare.html">Boilerplate comparison</a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          <a href="https://github.com/ByteWorthyLLC/sovra">GitHub</a>
+          <a href="./index.html">Main page</a>
+          <a href="./quickstart.html">Quickstart</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
