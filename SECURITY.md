@@ -69,6 +69,7 @@ Sovra ships scheduled security checks for:
 - OSV dependency scan
 - `govulncheck`
 - semgrep
+- Go fuzzing targets (`.github/workflows/fuzz.yml`)
 - OpenSSF Scorecard
 
 See `.github/workflows/security.yml`.

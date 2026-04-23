@@ -1,0 +1,36 @@
+name: Fuzz
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  schedule:
+    - cron: "0 9 * * 2"
+
+concurrency:
+  group: fuzz-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  worker-go-fuzz:
+    name: Worker Go Fuzz
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Setup Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
+        with:
+          go-version-file: packages/worker/go.mod
+          cache-dependency-path: packages/worker/go.sum
+
+      - name: Run fuzz targets (bounded)
+        working-directory: packages/worker
+        run: |
+          go test ./internal/config -run=^$ -fuzz=^FuzzIsProduction$ -fuzztime=15s
+          go test ./internal/config -run=^$ -fuzz=^FuzzValidateAuthConfig$ -fuzztime=15s

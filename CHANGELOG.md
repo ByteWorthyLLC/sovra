@@ -7,6 +7,7 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 ## [Unreleased]
 
 ### Added
+- Dedicated fuzzing workflow (`.github/workflows/fuzz.yml`) and worker fuzz tests for config/auth validation invariants.
 - Customer onboarding DX guide and reusable launch/cutover/upgrade templates (`docs/customer-onboarding-dx.md`, `templates/*`).
 - Migration and upgrade path documentation for Sovra -> Klienta/Clynova (`docs/migration-guides.md`, `docs/upgrade-paths.md`).
 - Open-source packaging/licensing boundary and compatibility contract documentation (`docs/open-source-packaging.md`).
