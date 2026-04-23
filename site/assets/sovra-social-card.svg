@@ -1,0 +1,47 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Sovra social preview card</title>
+  <desc id="desc">Open source AI SaaS boilerplate by ByteWorthy with product line references.</desc>
+  <defs>
+    <linearGradient id="bg" x1="60" y1="30" x2="1100" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8FFF4" />
+      <stop offset="0.45" stop-color="#EBF5FF" />
+      <stop offset="1" stop-color="#F8FBFF" />
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0F7A63" />
+      <stop offset="1" stop-color="#0C6654" />
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="1168" height="598" rx="34" fill="url(#bg)" stroke="#D7E2EF" stroke-width="2" />
+
+  <circle cx="184" cy="134" r="64" fill="#FFFFFF" stroke="#D7E2EF" stroke-width="2" />
+  <path d="M151.5 143.5V114.8C151.5 109.41 155.9 105 161.3 105H205.2C210.58 105 215 109.41 215 114.8V154.8C215 160.18 210.58 164.6 205.2 164.6H169.6L157 177.2C154.9 179.3 151.5 177.8 151.5 174.8V143.5Z" fill="#0F7A63"/>
+  <path d="M170 128H197" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <path d="M170 142H189" stroke="white" stroke-width="5" stroke-linecap="round"/>
+
+  <text x="270" y="135" font-family="Space Grotesk, Manrope, Arial, sans-serif" font-weight="700" font-size="66" fill="#111318">Sovra</text>
+  <text x="270" y="186" font-family="Manrope, Arial, sans-serif" font-weight="600" font-size="30" fill="#2A3344">Open Source AI SaaS Boilerplate by ByteWorthy</text>
+
+  <rect x="270" y="224" width="670" height="58" rx="29" fill="url(#chip)" />
+  <text x="304" y="261" font-family="Manrope, Arial, sans-serif" font-weight="700" font-size="26" fill="white">Multi tenant auth + MCP tooling + worker orchestration + deployment guardrails</text>
+
+  <rect x="88" y="334" width="310" height="192" rx="22" fill="#FFFFFF" stroke="#D7E2EF" stroke-width="2"/>
+  <rect x="442" y="334" width="310" height="192" rx="22" fill="#FFFFFF" stroke="#D7E2EF" stroke-width="2"/>
+  <rect x="796" y="334" width="310" height="192" rx="22" fill="#FFFFFF" stroke="#D7E2EF" stroke-width="2"/>
+
+  <text x="114" y="383" font-family="Space Grotesk, Arial, sans-serif" font-size="34" font-weight="700" fill="#111318">Sovra</text>
+  <text x="114" y="419" font-family="Manrope, Arial, sans-serif" font-size="24" fill="#2A3344">Open source base</text>
+  <text x="114" y="455" font-family="Manrope, Arial, sans-serif" font-size="22" fill="#5A6780">MIT licensed and production ready</text>
+
+  <text x="468" y="383" font-family="Space Grotesk, Arial, sans-serif" font-size="34" font-weight="700" fill="#111318">Klienta</text>
+  <text x="468" y="419" font-family="Manrope, Arial, sans-serif" font-size="24" fill="#2A3344">Agency vertical</text>
+  <text x="468" y="455" font-family="Manrope, Arial, sans-serif" font-size="22" fill="#5A6780">Client delivery acceleration</text>
+
+  <text x="822" y="383" font-family="Space Grotesk, Arial, sans-serif" font-size="34" font-weight="700" fill="#111318">Clynova</text>
+  <text x="822" y="419" font-family="Manrope, Arial, sans-serif" font-size="24" fill="#2A3344">Healthcare vertical</text>
+  <text x="822" y="455" font-family="Manrope, Arial, sans-serif" font-size="22" fill="#5A6780">Interop and compliance scaffolding</text>
+
+  <text x="88" y="573" font-family="Manrope, Arial, sans-serif" font-size="24" fill="#2A3344">github.com/ByteWorthyLLC/sovra</text>
+  <text x="820" y="573" font-family="Manrope, Arial, sans-serif" font-size="24" fill="#2A3344">byteworthy.io</text>
+</svg>

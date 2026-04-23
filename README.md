@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/main/.github/logo.svg" width="80" alt="Sovra — open-source AI agent platform" />
+  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/master/.github/logo.svg" width="80" alt="Sovra - open-source AI agent platform" />
 </p>
 
 <h1 align="center">Sovra</h1>
@@ -10,7 +10,7 @@
 
 <p align="center">
   Open-source platform for building multi-tenant AI agent applications.<br/>
-  Auth, billing, MCP tools, vector search, multi-agent collaboration — in one repo.
+  Auth, billing, MCP tools, vector search, multi-agent collaboration - in one repo.
 </p>
 
 <p align="center">
@@ -30,9 +30,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ByteWorthyLLC/sovra/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/ci.yml?branch=main&style=flat-square&label=ci" alt="CI Status" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/security.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/security.yml?branch=main&style=flat-square&label=security" alt="Security Status" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/ci.yml?branch=master&style=flat-square&label=ci" alt="CI Status" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/security.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/security.yml?branch=master&style=flat-square&label=security" alt="Security Status" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/ByteWorthyLLC/sovra"><img src="https://api.scorecard.dev/projects/github.com/ByteWorthyLLC/sovra/badge" alt="OpenSSF Scorecard" /></a>
   <a href="https://github.com/ByteWorthyLLC/sovra/issues"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" /></a>
   <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=flat-square" alt="GitHub Stars" /></a>
@@ -138,7 +138,7 @@ go run ./cmd/worker
 
 ### Environment Variables
 
-See [`.env.example`](.env.example) for all options. Only Supabase keys are required — Stripe, Sentry, PostHog, and Upstash are optional and gracefully disabled when not configured.
+See [`.env.example`](.env.example) for all options. Only Supabase keys are required - Stripe, Sentry, PostHog, and Upstash are optional and gracefully disabled when not configured.
 
 </details>
 
@@ -154,6 +154,7 @@ Production onboarding is documented end-to-end:
 - [`templates/onboarding/first-run-checklist-template.md`](templates/onboarding/first-run-checklist-template.md) for day-0 builder onboarding
 - [`templates/migrations/cutover-checklist-template.md`](templates/migrations/cutover-checklist-template.md) for controlled cutovers
 - [`templates/upgrade/boilerplate-evaluation-template.md`](templates/upgrade/boilerplate-evaluation-template.md) for Sovra -> Klienta/Clynova upgrade decisions
+- [`templates/marketing/seo-aeo-geo-brief-template.md`](templates/marketing/seo-aeo-geo-brief-template.md) for discoverability-focused launch content planning
 
 <br/>
 
@@ -166,10 +167,10 @@ Everything you'd spend months building before writing a single AI feature:
 | | Feature | Details |
 |-|---------|---------|
 | &#x1f512; | **Multi-tenant auth** | Email, magic links, OAuth (Google, GitHub). Swappable via `AuthAdapter` interface. |
-| &#x1f6e1; | **Tenant isolation** | Row-level security at the database. Postgres enforces it — not middleware, not app logic. |
+| &#x1f6e1; | **Tenant isolation** | Row-level security at the database. Postgres enforces it - not middleware, not app logic. |
 | &#x1f465; | **Roles & permissions** | Owner, admin, member, viewer. Database-backed, tenant-configurable. |
 | &#x1f4e8; | **Invite system** | Email invitations + shareable links. Works with or without SMTP. |
-| &#x1f4b3; | **Billing** | Stripe integration — plans, usage tracking, customer portal. |
+| &#x1f4b3; | **Billing** | Stripe integration - plans, usage tracking, customer portal. |
 | &#x1f511; | **API keys** | Scoped generation with rate limiting and audit logging. |
 
 ### AI Layer
@@ -302,9 +303,9 @@ All required and optional variables are documented in [`.env.example`](.env.exam
 
 ## &#x1f91d; Who This Is For
 
-- **Indie hackers** building AI-powered SaaS — skip 3 months of infrastructure work
+- **Indie hackers** building AI-powered SaaS - skip 3 months of infrastructure work
 - **Startups** that need multi-tenant AI agents on day one
-- **Agencies** building white-label AI solutions with tenant isolation — see [**Klienta**](https://github.com/ByteWorthyLLC/klienta), a paid agency-vertical boilerplate built on Sovra
+- **Agencies** building white-label AI solutions with tenant isolation - see [**Klienta**](https://github.com/ByteWorthyLLC/klienta), a paid agency-vertical boilerplate built on Sovra
 - **Enterprise teams** evaluating self-hosted alternatives to closed-source agent platforms
 - **Open-source contributors** looking for a solid, extensible AI platform foundation
 
@@ -340,18 +341,21 @@ Sovra is the open-source AI platform foundation and the shared base layer for By
 
 **Practical workflow:** start on Sovra, validate product demand, then move to Klienta/Clynova when vertical-specific speed matters more than custom build-out.
 
+**Commercial checkout:** paid product purchase and licensing are managed through [byteworthy.io](https://byteworthy.io). This repo does not store commercial billing secrets.
+
 Upgrade/packaging references:
 
 - [`docs/upgrade-paths.md`](docs/upgrade-paths.md)
 - [`docs/open-source-packaging.md`](docs/open-source-packaging.md)
 
-## &#x1f50e; SEO + GEO Discoverability
+## &#x1f50e; SEO + AEO + GEO Discoverability
 
-Sovra is optimized for both search engines and generative discovery systems:
+Sovra is optimized for search engines, answer engines, and generative discovery systems:
 
 - **Primary search intent keywords**: AI SaaS boilerplate, open-source AI platform, multi-tenant SaaS starter, MCP boilerplate, Next.js SaaS template, Go worker boilerplate, Supabase RLS boilerplate, pgvector SaaS template.
 - **Geo-intent coverage**: deployment-ready for US, EU, and APAC operator footprints via self-hosted infra choices and tenant isolation patterns.
-- **AI/GEO indexing document**: [`llms.txt`](llms.txt) provides canonical links for LLM retrieval and answer synthesis.
+- **AI/GEO indexing document**: [`llms.txt`](llms.txt) provides canonical links for retrieval and answer synthesis.
+- **Publishing playbook**: [`docs/seo-aeo-geo-guidelines.md`](docs/seo-aeo-geo-guidelines.md) includes page standards, FAQ strategy, and metadata templates.
 
 <br/>
 
@@ -368,6 +372,8 @@ Sovra is optimized for both search engines and generative discovery systems:
 | [`docs/migration-guides.md`](docs/migration-guides.md) | Migration tracks into Sovra and from Sovra to paid vertical products |
 | [`docs/upgrade-paths.md`](docs/upgrade-paths.md) | Sovra -> Klienta/Clynova decision matrix and rollout checklists |
 | [`docs/open-source-packaging.md`](docs/open-source-packaging.md) | OSS/commercial packaging boundaries and license/compatibility model |
+| [`docs/commercial-checkout-and-billing.md`](docs/commercial-checkout-and-billing.md) | Secure billing channel and Stripe secret handling policy |
+| [`docs/seo-aeo-geo-guidelines.md`](docs/seo-aeo-geo-guidelines.md) | SEO, AEO, and GEO publishing standards for discoverability |
 | [`llms.txt`](llms.txt) | Canonical AI retrieval index for LLM/GEO discoverability |
 | [`docs/environment-variables.md`](docs/environment-variables.md) | Full env var reference with production requirements |
 | [`docs/testing.md`](docs/testing.md) | Test strategy and required quality gates |
@@ -375,6 +381,8 @@ Sovra is optimized for both search engines and generative discovery systems:
 | [`docs/operations-runbook.md`](docs/operations-runbook.md) | Daily/weekly/monthly production operations checklist |
 | [`docs/production-readiness.md`](docs/production-readiness.md) | Pre-release checklist for production promotion |
 | [`docs/release-process.md`](docs/release-process.md) | Versioning, release, and rollback protocol |
+| [`templates/marketing/seo-aeo-geo-brief-template.md`](templates/marketing/seo-aeo-geo-brief-template.md) | Reusable brief for discoverability-focused page planning |
+| [`templates/marketing/product-page-copy-template.md`](templates/marketing/product-page-copy-template.md) | Product page copy structure for launch and conversion |
 
 <br/>
 
@@ -428,7 +436,7 @@ You can also run the cadence workflow manually from the Actions tab (`Maintenanc
 
 ## &#x1f4dc; License
 
-[MIT](LICENSE) — use it for anything. Commercial, personal, educational. No strings.
+[MIT](LICENSE) - use it for anything. Commercial, personal, educational. No strings.
 
 <br/>
 

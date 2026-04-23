@@ -1,30 +1,39 @@
 # Sovra
 
-Sovra is an open-source AI SaaS boilerplate for building multi-tenant AI agent products.
+Sovra is an open source AI SaaS boilerplate for multi tenant AI products.
 
 - Repository: https://github.com/ByteWorthyLLC/sovra
 - Project page: https://byteworthyllc.github.io/sovra/
 - License: MIT
-- Stack: Next.js, Go worker, Supabase/Postgres + pgvector, MCP, Stripe
+- Maintainer: ByteWorthy (https://byteworthy.io)
 
-## Primary docs
+## Canonical docs
 
 - Quickstart and overview: https://github.com/ByteWorthyLLC/sovra#-quick-start
-- Architecture: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/architecture.md
-- Deployment: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/deployment.md
-- Environment variables: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/environment-variables.md
-- Production readiness: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/production-readiness.md
-- Security policy: https://github.com/ByteWorthyLLC/sovra/blob/main/SECURITY.md
+- Architecture: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/architecture.md
+- Deployment: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/deployment.md
+- Environment variables: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/environment-variables.md
+- Worker runtime: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/worker.md
+- Production readiness: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/production-readiness.md
+- Security policy: https://github.com/ByteWorthyLLC/sovra/blob/master/SECURITY.md
 
-## Onboarding and migration
+## Onboarding, migration, and packaging
 
-- Customer onboarding DX: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/customer-onboarding-dx.md
-- Migration guides: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/migration-guides.md
-- Upgrade paths (Sovra -> Klienta/Clynova): https://github.com/ByteWorthyLLC/sovra/blob/main/docs/upgrade-paths.md
-- Open-source packaging: https://github.com/ByteWorthyLLC/sovra/blob/main/docs/open-source-packaging.md
+- Customer onboarding DX: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/customer-onboarding-dx.md
+- Migration guides: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/migration-guides.md
+- Upgrade paths: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/upgrade-paths.md
+- Open source packaging and licensing: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/open-source-packaging.md
+- Commercial checkout and billing: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/commercial-checkout-and-billing.md
+- SEO AEO GEO guidelines: https://github.com/ByteWorthyLLC/sovra/blob/master/docs/seo-aeo-geo-guidelines.md
 
-## Search-intent keywords
+## Product line
 
-AI SaaS boilerplate, open-source AI platform, multi-tenant SaaS starter, MCP boilerplate,
+- Sovra (open source core): https://github.com/ByteWorthyLLC/sovra
+- Klienta (paid agency vertical): https://github.com/ByteWorthyLLC/klienta
+- Clynova (paid healthcare vertical): https://github.com/ByteWorthyLLC/clynova
+
+## Search intent keywords
+
+AI SaaS boilerplate, open source AI platform, multi tenant SaaS starter, MCP boilerplate,
 Next.js SaaS template, Go worker boilerplate, Supabase RLS boilerplate, pgvector SaaS template,
-agent orchestration platform, self-hosted AI app foundation.
+self hosted AI app foundation, agent orchestration platform.
