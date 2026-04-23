@@ -22,17 +22,14 @@ This guide standardizes onboarding for teams adopting Sovra in production.
    ```bash
    git clone https://github.com/ByteWorthyLLC/sovra.git
    cd sovra
-   pnpm install
+   pnpm setup:local
    ```
 2. Start local Supabase:
    ```bash
    supabase start
    ```
 3. Configure environment:
-   ```bash
-   cp .env.example .env.local
-   cp packages/web/.env.example packages/web/.env.local
-   ```
+   Fill in Supabase keys in `.env.local` and `packages/web/.env.local`.
 4. Run web:
    ```bash
    cd packages/web
@@ -87,6 +84,7 @@ Reference:
 Use templates in this repository when onboarding customers:
 
 - `templates/onboarding/customer-launch-plan-template.md`
+- `templates/onboarding/first-run-checklist-template.md`
 - `templates/migrations/cutover-checklist-template.md`
 - `templates/upgrade/boilerplate-evaluation-template.md`
 

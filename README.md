@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/master/.github/logo.svg" width="80" alt="Sovra — open-source AI agent platform" />
+  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/main/.github/logo.svg" width="80" alt="Sovra — open-source AI agent platform" />
 </p>
 
 <h1 align="center">Sovra</h1>
@@ -19,6 +19,7 @@
 
 <p align="center">
   <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#-project-site">Project Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-customer-onboarding-dx">Onboarding DX</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-what-you-get">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-launch-paths">Launch Paths</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -29,9 +30,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/ci.yml?branch=master&style=flat-square&label=ci" alt="CI Status" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/security.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/security.yml?branch=master&style=flat-square&label=security" alt="Security Status" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/ci.yml?branch=main&style=flat-square&label=ci" alt="CI Status" /></a>
+  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/security.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/security.yml?branch=main&style=flat-square&label=security" alt="Security Status" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/ByteWorthyLLC/sovra"><img src="https://api.scorecard.dev/projects/github.com/ByteWorthyLLC/sovra/badge" alt="OpenSSF Scorecard" /></a>
   <a href="https://github.com/ByteWorthyLLC/sovra/issues"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" /></a>
   <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=flat-square" alt="GitHub Stars" /></a>
@@ -70,17 +71,33 @@ Sovra is a complete open-source base you can run in production under MIT.
 
 <br/>
 
+## &#x1f310; Project Site
+
+Marketing site (GitHub Pages):
+
+- https://byteworthyllc.github.io/sovra/
+
+This page is optimized for search/snippet indexing and maps directly to the canonical project docs.
+
+<br/>
+
 ## &#x1f680; Quick Start
 
 ```bash
 git clone https://github.com/ByteWorthyLLC/sovra.git
-cd sovra && pnpm install
-supabase start              # Local Postgres + Auth + pgvector
-cp .env.example .env.local  # Add Supabase keys from output
+cd sovra
+pnpm setup:local           # Prereqs check + deps + env bootstrap
+supabase start             # Local Postgres + Auth + pgvector
 cd packages/web && pnpm dev # Open http://localhost:3000
 ```
 
 **That's it.** Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally.
+
+Want a single command that checks prerequisites and boots dependencies + web app?
+
+```bash
+pnpm setup:local:start
+```
 
 <details>
 <summary><strong>Full setup guide</strong> (prerequisites + Go worker)</summary>
@@ -98,16 +115,16 @@ cd packages/web && pnpm dev # Open http://localhost:3000
 # 1. Clone and install dependencies
 git clone https://github.com/ByteWorthyLLC/sovra.git
 cd sovra
-pnpm install
+pnpm setup:local
 
 # 2. Start local Supabase (Postgres + Auth + pgvector)
 supabase start
 # Copy the API URL and anon/service_role keys from the output
 
 # 3. Configure environment
-cp .env.example .env.local
-cp packages/web/.env.example packages/web/.env.local
-# Fill in the Supabase keys from step 2
+# Fill in the Supabase keys in:
+# - .env.local
+# - packages/web/.env.local
 
 # 4. Start the web app
 cd packages/web && pnpm dev
@@ -134,6 +151,7 @@ Production onboarding is documented end-to-end:
 - [`docs/customer-onboarding-dx.md`](docs/customer-onboarding-dx.md) for a repeatable launch process
 - [`docs/migration-guides.md`](docs/migration-guides.md) for migration tracks and rollback rules
 - [`templates/onboarding/customer-launch-plan-template.md`](templates/onboarding/customer-launch-plan-template.md) for implementation planning
+- [`templates/onboarding/first-run-checklist-template.md`](templates/onboarding/first-run-checklist-template.md) for day-0 builder onboarding
 - [`templates/migrations/cutover-checklist-template.md`](templates/migrations/cutover-checklist-template.md) for controlled cutovers
 - [`templates/upgrade/boilerplate-evaluation-template.md`](templates/upgrade/boilerplate-evaluation-template.md) for Sovra -> Klienta/Clynova upgrade decisions
 
@@ -327,6 +345,14 @@ Upgrade/packaging references:
 - [`docs/upgrade-paths.md`](docs/upgrade-paths.md)
 - [`docs/open-source-packaging.md`](docs/open-source-packaging.md)
 
+## &#x1f50e; SEO + GEO Discoverability
+
+Sovra is optimized for both search engines and generative discovery systems:
+
+- **Primary search intent keywords**: AI SaaS boilerplate, open-source AI platform, multi-tenant SaaS starter, MCP boilerplate, Next.js SaaS template, Go worker boilerplate, Supabase RLS boilerplate, pgvector SaaS template.
+- **Geo-intent coverage**: deployment-ready for US, EU, and APAC operator footprints via self-hosted infra choices and tenant isolation patterns.
+- **AI/GEO indexing document**: [`llms.txt`](llms.txt) provides canonical links for LLM retrieval and answer synthesis.
+
 <br/>
 
 ## &#x1f4dc; Docs
@@ -342,6 +368,7 @@ Upgrade/packaging references:
 | [`docs/migration-guides.md`](docs/migration-guides.md) | Migration tracks into Sovra and from Sovra to paid vertical products |
 | [`docs/upgrade-paths.md`](docs/upgrade-paths.md) | Sovra -> Klienta/Clynova decision matrix and rollout checklists |
 | [`docs/open-source-packaging.md`](docs/open-source-packaging.md) | OSS/commercial packaging boundaries and license/compatibility model |
+| [`llms.txt`](llms.txt) | Canonical AI retrieval index for LLM/GEO discoverability |
 | [`docs/environment-variables.md`](docs/environment-variables.md) | Full env var reference with production requirements |
 | [`docs/testing.md`](docs/testing.md) | Test strategy and required quality gates |
 | [`docs/premium-benchmark.md`](docs/premium-benchmark.md) | Quality framework benchmarked against leading OSS templates and security/governance standards |
