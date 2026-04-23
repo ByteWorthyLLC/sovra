@@ -20,6 +20,7 @@
 <p align="center">
   <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-project-site">Project Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#-launch-foundation">Launch Foundation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-customer-onboarding-dx">Onboarding DX</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-what-you-get">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-launch-paths">Launch Paths</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -82,6 +83,7 @@ This page is optimized for search/snippet indexing and maps directly to canonica
 Deep links:
 
 - Quickstart page: https://byteworthyllc.github.io/sovra/quickstart.html
+- Foundation page: https://byteworthyllc.github.io/sovra/foundation.html
 - MCP page: https://byteworthyllc.github.io/sovra/mcp-boilerplate.html
 - Comparison page: https://byteworthyllc.github.io/sovra/compare.html
 
@@ -150,14 +152,25 @@ See [`.env.example`](.env.example) for all options. Only Supabase keys are requi
 
 <br/>
 
+## &#x1f4cd; Launch Foundation
+
+Use the launch foundation path when you need a clear order of operations from setup to production:
+
+- [`docs/launch-foundation.md`](docs/launch-foundation.md)
+- https://byteworthyllc.github.io/sovra/foundation.html
+
+<br/>
+
 ## &#x1f91d; Customer Onboarding DX
 
 Production onboarding is documented end-to-end:
 
 - [`docs/customer-onboarding-dx.md`](docs/customer-onboarding-dx.md) for a repeatable launch process
+- [`docs/launch-foundation.md`](docs/launch-foundation.md) for phased execution from local bootstrap through rollout
 - [`docs/migration-guides.md`](docs/migration-guides.md) for migration tracks and rollback rules
 - [`templates/onboarding/customer-launch-plan-template.md`](templates/onboarding/customer-launch-plan-template.md) for implementation planning
 - [`templates/onboarding/first-run-checklist-template.md`](templates/onboarding/first-run-checklist-template.md) for day-0 builder onboarding
+- [`templates/onboarding/production-launch-scorecard-template.md`](templates/onboarding/production-launch-scorecard-template.md) for final gate scoring and signoff
 - [`templates/migrations/cutover-checklist-template.md`](templates/migrations/cutover-checklist-template.md) for controlled cutovers
 - [`templates/upgrade/boilerplate-evaluation-template.md`](templates/upgrade/boilerplate-evaluation-template.md) for Sovra -> Klienta/Clynova upgrade decisions
 - [`templates/marketing/seo-aeo-geo-brief-template.md`](templates/marketing/seo-aeo-geo-brief-template.md) for discoverability-focused launch content planning

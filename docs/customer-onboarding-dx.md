@@ -8,6 +8,8 @@ This guide defines how to onboard a new team from first clone to production laun
 - A team can stand up a secure staging environment in under 2 business days.
 - Release readiness checks and production runbooks are complete before go live.
 
+Start with `docs/launch-foundation.md` for the full phase sequence and launch artifact requirements.
+
 ## Onboarding tracks
 
 | Track | Target user | Output |
@@ -92,6 +94,7 @@ Reference docs:
 
 - `templates/onboarding/customer-launch-plan-template.md`
 - `templates/onboarding/first-run-checklist-template.md`
+- `templates/onboarding/production-launch-scorecard-template.md`
 - `templates/migrations/cutover-checklist-template.md`
 - `templates/upgrade/boilerplate-evaluation-template.md`
 - `templates/marketing/seo-aeo-geo-brief-template.md`

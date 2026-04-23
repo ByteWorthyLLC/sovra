@@ -19,6 +19,8 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 - Commercial checkout and billing security policy doc for paid product routing and Stripe key handling (`docs/commercial-checkout-and-billing.md`).
 - Premium visual assets for GitHub Pages marketing surface (`site/assets/*`).
 - Multi-page SEO marketing surface for quickstart, MCP-specific intent, and build-vs-buy comparison (`site/quickstart.html`, `site/mcp-boilerplate.html`, `site/compare.html`).
+- Launch foundation execution guide and production launch scorecard template (`docs/launch-foundation.md`, `templates/onboarding/production-launch-scorecard-template.md`).
+- Dedicated launch foundation page for onboarding and release gating discoverability (`site/foundation.html`).
 - PNG social preview asset for broader unfurl compatibility (`site/assets/sovra-social-card.png`).
 - Release-readiness gate workflow with docs/trust integrity checks.
 - Enterprise operations documentation set (`architecture`, `worker`, `testing`, `operations-runbook`, `production-readiness`, `release-process`).
@@ -45,6 +47,7 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 - GitHub Pages metadata now points to PNG social preview URLs for Open Graph and Twitter cards.
 - README hero branding now uses a local repo asset to avoid broken external logo references.
 - Sitemap expanded to include multi-page marketing routes for stronger crawl coverage.
+- README, llms index, and Pages navigation now route to the launch foundation path.
 - Worker startup now validates auth secrets in production and rejects wildcard Socket.IO origins.
 - Worker servers (health, gRPC, MCP, Socket.IO) now support graceful shutdown with a 30 second drain window.
 - Internal worker routes (`/internal/broadcast`, `/mcp`) now fail closed in production when `INTERNAL_API_SECRET` is missing.
