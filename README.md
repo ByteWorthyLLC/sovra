@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ByteWorthyLLC/sovra/master/.github/logo.svg" width="80" alt="Sovra - open-source AI agent platform" />
+  <img src="site/assets/brand-mark.svg" width="160" alt="Sovra open-source AI agent platform" />
 </p>
 
 <h1 align="center">Sovra</h1>
@@ -77,7 +77,13 @@ Marketing site (GitHub Pages):
 
 - https://byteworthyllc.github.io/sovra/
 
-This page is optimized for search/snippet indexing and maps directly to the canonical project docs.
+This page is optimized for search/snippet indexing and maps directly to canonical docs.
+
+Deep links:
+
+- Quickstart page: https://byteworthyllc.github.io/sovra/quickstart.html
+- MCP page: https://byteworthyllc.github.io/sovra/mcp-boilerplate.html
+- Comparison page: https://byteworthyllc.github.io/sovra/compare.html
 
 <br/>
 
