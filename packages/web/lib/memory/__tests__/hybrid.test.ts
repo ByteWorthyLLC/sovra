@@ -30,8 +30,7 @@ function makeSupabase() {
   chain.eq.mockImplementation(() => chain)
   chain.select.mockReturnValue(chain)
   chain.from.mockReturnValue(chain)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return chain as any
+  return chain as unknown as MemoryBuildParams['supabase']
 }
 
 describe('buildHybridMemory', () => {
@@ -41,7 +40,7 @@ describe('buildHybridMemory', () => {
 
     const supabase = makeSupabase()
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'hybrid',
@@ -58,7 +57,7 @@ describe('buildHybridMemory', () => {
   it('places summary messages before vector context messages', async () => {
     const supabase = makeSupabase()
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'hybrid',
@@ -75,7 +74,7 @@ describe('buildHybridMemory', () => {
   it('returns a merged CoreMessage[] array', async () => {
     const supabase = makeSupabase()
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'hybrid',
@@ -98,7 +97,7 @@ describe('buildHybridMemory', () => {
   it('deduplicates conversation messages', async () => {
     const supabase = makeSupabase()
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'hybrid',

@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import type { LanguageModel } from 'ai'
 
 // Use dynamic import to reset module state between tests
 let registryModule: typeof import('@/lib/ai/registry')
@@ -43,8 +44,10 @@ describe('AI Provider Registry', () => {
   })
 
   it('registerProvider adds a custom adapter', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const custom = { provider: 'custom', getModel: () => ({}) as any }
+    const custom = {
+      provider: 'custom',
+      getModel: () => ({} as unknown as LanguageModel),
+    }
     registryModule.registerProvider(custom)
     const result = registryModule.getProvider('custom')
     expect(result.provider).toBe('custom')
