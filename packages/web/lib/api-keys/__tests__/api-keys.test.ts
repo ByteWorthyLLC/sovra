@@ -253,12 +253,14 @@ describe('getRateLimiter', () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake.upstash.io'
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token'
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.doMock('@upstash/redis', () => ({ Redis: function FakeRedis(this: any) { return this } }))
+    class FakeRedis {}
+    vi.doMock('@upstash/redis', () => ({ Redis: FakeRedis }))
     vi.doMock('@upstash/ratelimit', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      function MockRatelimit(this: any) { this.limit = vi.fn() }
-      MockRatelimit.slidingWindow = vi.fn().mockReturnValue({})
+      class MockRatelimit {
+        static slidingWindow = vi.fn().mockReturnValue({})
+
+        limit = vi.fn()
+      }
       return { Ratelimit: MockRatelimit }
     })
 
@@ -292,12 +294,14 @@ describe('checkRateLimit', () => {
 
     const mockLimit = vi.fn().mockResolvedValue({ success: false, reset: 1700000000000 })
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.doMock('@upstash/redis', () => ({ Redis: function FakeRedis(this: any) { return this } }))
+    class FakeRedis {}
+    vi.doMock('@upstash/redis', () => ({ Redis: FakeRedis }))
     vi.doMock('@upstash/ratelimit', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      function MockRatelimit(this: any) { this.limit = mockLimit }
-      MockRatelimit.slidingWindow = vi.fn().mockReturnValue({})
+      class MockRatelimit {
+        static slidingWindow = vi.fn().mockReturnValue({})
+
+        limit = mockLimit
+      }
       return { Ratelimit: MockRatelimit }
     })
 

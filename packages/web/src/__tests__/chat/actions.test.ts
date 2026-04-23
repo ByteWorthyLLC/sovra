@@ -13,6 +13,7 @@ import { listConversations, getMessages } from '@/lib/chat/queries'
 import { createSupabaseServerClient } from '@/lib/auth/server'
 
 const mockUser = { id: 'user-1', email: 'test@test.com' }
+type ServerSupabaseClient = Awaited<ReturnType<typeof createSupabaseServerClient>>
 
 function buildMockSupabase(overrides: Record<string, unknown> = {}) {
   const defaultChain = {
@@ -85,8 +86,9 @@ describe('createConversation', () => {
 
   it('returns conversation with agent_id set', async () => {
     const mockSb = buildMockSupabase()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
+    vi.mocked(createSupabaseServerClient).mockResolvedValue(
+      mockSb as unknown as ServerSupabaseClient
+    )
 
     const result = await createConversation({
       tenantId: 'tenant-1',
@@ -100,8 +102,9 @@ describe('createConversation', () => {
 
   it('returns error when not authenticated', async () => {
     const mockSb = buildMockSupabase({ user: null })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
+    vi.mocked(createSupabaseServerClient).mockResolvedValue(
+      mockSb as unknown as ServerSupabaseClient
+    )
 
     const result = await createConversation({
       tenantId: 'tenant-1',
@@ -137,8 +140,9 @@ describe('deleteConversation', () => {
       auth: { getUser: vi.fn().mockResolvedValue({ data: { user: mockUser }, error: null }) },
       from: mockFrom,
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
+    vi.mocked(createSupabaseServerClient).mockResolvedValue(
+      mockSb as unknown as ServerSupabaseClient
+    )
 
     const result = await deleteConversation('conv-1')
     expect(result.error).toBeNull()
@@ -151,8 +155,9 @@ describe('saveMessage', () => {
 
   it('inserts message with correct role and content', async () => {
     const mockSb = buildMockSupabase()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(createSupabaseServerClient).mockResolvedValue(mockSb as any)
+    vi.mocked(createSupabaseServerClient).mockResolvedValue(
+      mockSb as unknown as ServerSupabaseClient
+    )
 
     const result = await saveMessage({
       conversationId: 'conv-1',
@@ -168,8 +173,11 @@ describe('saveMessage', () => {
 describe('listConversations', () => {
   it('returns conversations for agent within tenant', async () => {
     const mockSb = buildMockSupabase()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await listConversations(mockSb as any, 'tenant-1', 'agent-1')
+    const result = await listConversations(
+      mockSb as unknown as ServerSupabaseClient,
+      'tenant-1',
+      'agent-1'
+    )
     expect(result.data).toBeTruthy()
     expect(mockSb.from).toHaveBeenCalledWith('conversations')
   })
@@ -178,8 +186,10 @@ describe('listConversations', () => {
 describe('getMessages', () => {
   it('returns messages ordered by created_at ascending', async () => {
     const mockSb = buildMockSupabase()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await getMessages(mockSb as any, 'conv-1')
+    const result = await getMessages(
+      mockSb as unknown as ServerSupabaseClient,
+      'conv-1'
+    )
     expect(result.data).toBeTruthy()
     expect(mockSb.from).toHaveBeenCalledWith('messages')
   })

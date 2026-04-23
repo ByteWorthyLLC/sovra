@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { renderHook } from '@testing-library/react'
-import React from 'react'
+import type { ReactNode } from 'react'
 import { TenantProvider, useTenant } from '@/lib/tenant/context'
 import type { Tenant } from '@sovra/shared'
 
@@ -15,9 +15,8 @@ const mockTenant: Tenant = {
   updatedAt: '2026-01-01T00:00:00Z',
 }
 
-function wrapper({ children }: { children: React.ReactNode }) {
-  // eslint-disable-next-line react/no-children-prop
-  return React.createElement(TenantProvider, { tenant: mockTenant, children })
+function wrapper({ children }: { children: ReactNode }) {
+  return <TenantProvider tenant={mockTenant}>{children}</TenantProvider>
 }
 
 describe('TenantProvider render', () => {

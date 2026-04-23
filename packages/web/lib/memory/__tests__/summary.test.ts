@@ -12,8 +12,7 @@ function makeSupabase(rows: Array<{ role: string; content: string }>) {
   chain.eq.mockImplementation(() => chain)
   chain.select.mockReturnValue(chain)
   chain.from.mockReturnValue(chain)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return chain as any
+  return chain as unknown as MemoryBuildParams['supabase']
 }
 
 vi.mock('ai', () => ({
@@ -40,7 +39,7 @@ describe('buildSummaryMemory', () => {
     const supabase = makeSupabase(rows)
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'summary',
@@ -67,7 +66,7 @@ describe('buildSummaryMemory', () => {
     const supabase = makeSupabase(rows)
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'summary',
@@ -98,7 +97,7 @@ describe('buildSummaryMemory', () => {
     const supabase = makeSupabase(rows)
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'summary',

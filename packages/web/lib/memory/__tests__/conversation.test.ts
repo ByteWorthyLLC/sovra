@@ -9,15 +9,10 @@ function makeSupabase(rows: Array<{ role: string; content: string }>) {
     select: vi.fn(),
     from: vi.fn(),
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  chain.eq.mockImplementation((field: string, _value: string) => {
-    if (field === 'tenant_id' || field === 'conversation_id') return chain
-    return chain
-  })
+  chain.eq.mockImplementation(() => chain)
   chain.select.mockReturnValue(chain)
   chain.from.mockReturnValue(chain)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return chain as any
+  return chain as unknown as MemoryBuildParams['supabase']
 }
 
 describe('buildConversationMemory', () => {
@@ -30,7 +25,7 @@ describe('buildConversationMemory', () => {
     const supabase = makeSupabase(rows)
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'conversation',
@@ -51,7 +46,7 @@ describe('buildConversationMemory', () => {
     const supabase = makeSupabase(rows)
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'conversation',
@@ -71,7 +66,7 @@ describe('buildConversationMemory', () => {
     const supabase = makeSupabase([])
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'conversation',
@@ -90,7 +85,7 @@ describe('buildConversationMemory', () => {
     const supabase = makeSupabase([])
 
     const params: MemoryBuildParams = {
-      supabase: supabase as unknown as MemoryBuildParams['supabase'],
+      supabase,
       conversationId: 'conv-1',
       tenantId: 'tenant-1',
       strategy: 'conversation',
