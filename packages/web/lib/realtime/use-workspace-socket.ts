@@ -14,8 +14,17 @@ export function useWorkspaceSocket(tenantId: string, workspaceId: string) {
   const clearChunks = useWorkspaceStore((state) => state.clearChunks)
 
   useEffect(() => {
+    const socketUrl =
+      process.env.NEXT_PUBLIC_WORKER_SOCKET_URL ||
+      process.env.NEXT_PUBLIC_WORKER_URL
+
+    if (!socketUrl) {
+      setConnectionStatus('disconnected')
+      return
+    }
+
     const socket = io(
-      process.env.NEXT_PUBLIC_WORKER_SOCKET_URL || 'http://localhost:3002',
+      socketUrl,
       {
         reconnection: true,
         reconnectionAttempts: 5,
@@ -44,6 +53,11 @@ export function useWorkspaceSocket(tenantId: string, workspaceId: string) {
     socket.on('disconnect', () => setConnectionStatus('disconnected'))
 
     socket.io.on('reconnect_attempt', () => setConnectionStatus('reconnecting'))
+    socket.io.on('reconnect_failed', () => setConnectionStatus('disconnected'))
+
+    socket.on('connect_error', () => {
+      setConnectionStatus(socket.active ? 'reconnecting' : 'disconnected')
+    })
 
     socket.on('workspace:joined', () => {
       // Room joined confirmation. Connection status already set on connect event.
