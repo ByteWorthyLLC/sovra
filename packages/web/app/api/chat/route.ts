@@ -100,7 +100,6 @@ export async function POST(req: Request) {
   }
 
   // Load MCP tools with graceful degradation
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let agentTools: ToolSet = {}
   try {
     const mcpClient = await getMcpClient()
