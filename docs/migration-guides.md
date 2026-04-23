@@ -1,88 +1,84 @@
 # Migration Guides
 
-This document covers the most common migrations into and beyond Sovra.
+This document covers high confidence migration tracks into and beyond Sovra.
 
 ## Migration tracks
 
 | Track | Source | Destination |
 |---|---|---|
 | A | Existing Next.js SaaS app | Sovra OSS foundation |
-| B | Single-tenant app | Multi-tenant Sovra deployment |
-| C | Sovra OSS | Klienta (agency vertical) |
-| D | Sovra OSS | Clynova (healthcare vertical) |
+| B | Single tenant app | Multi tenant Sovra deployment |
+| C | Sovra OSS | Klienta vertical |
+| D | Sovra OSS | Clynova vertical |
 
 ## Track A: Existing SaaS to Sovra
 
-1. Stand up Sovra in parallel (do not cut over in-place first).
-2. Map your current auth model to Sovra auth + tenant membership.
-3. Port domain entities into tenant-scoped tables.
-4. Move AI routes/tool execution to Sovra agent/runtime boundaries.
-5. Migrate observability and run release checks.
+1. Stand up Sovra in parallel. Do not perform in place cutover first.
+2. Map current identity model to Sovra auth plus tenant membership.
+3. Move domain entities into tenant scoped tables.
+4. Move AI route and tool execution logic into Sovra runtime boundaries.
+5. Align observability and release checks.
 
-Recommended sequence:
+Recommended order:
 
 1. Identity and tenant model
-2. Core entities and RLS policies
-3. Billing and metering
-4. AI/chat and tool execution
-5. Admin/reporting
+2. Core entities and row level security policies
+3. Billing and metering paths
+4. AI chat and tool execution
+5. Admin and reporting
 
-## Track B: Single-tenant to multi-tenant
+## Track B: Single tenant to multi tenant
 
-1. Add tenant identifier columns.
-2. Backfill tenant IDs for existing rows.
-3. Add and validate RLS policies.
-4. Add tenant context to API requests and background jobs.
-5. Re-run integration tests with cross-tenant negative cases.
+1. Add `tenant_id` columns.
+2. Backfill tenant ids for existing rows.
+3. Add and validate row level security policies.
+4. Add tenant context to APIs and worker jobs.
+5. Re run integration tests with cross tenant negative cases.
 
 Minimum test gate:
 
-- user A cannot read/write tenant B resources
-- API key scope is tenant-bound
-- worker broadcast and MCP operations enforce tenant boundaries
+- user A cannot read or write tenant B resources
+- API key scope stays tenant bound
+- worker broadcasts and MCP operations enforce tenant boundaries
 
-## Track C and D: Sovra to paid vertical boilerplates
+## Track C and D: Sovra to paid verticals
 
-Sovra remains your core platform contract. Klienta and Clynova add vertical modules.
+Sovra remains the base contract.
 
-- Klienta adds: client portal patterns, multi-brand/agency workflows, white-label operational packaging.
-- Clynova adds: healthcare-specific interoperability and compliance scaffolding.
+- Klienta adds agency workflows, white label packaging, and client delivery defaults.
+- Clynova adds healthcare interoperability and compliance scaffolding.
 
 Upgrade policy:
 
-- Preserve existing Sovra tenant IDs and user IDs.
-- Preserve existing auth/session boundaries.
-- Add vertical modules incrementally by feature flag where possible.
-- Keep data export path available during every migration phase.
+- preserve existing `tenant_id` and `user_id` values
+- preserve existing auth and session boundaries
+- add vertical modules incrementally, preferably behind flags
+- keep export and rollback paths available during each phase
 
-## MCP SDK migration (legacy to current API)
+## MCP SDK migration guidance
 
-If internal extensions still use old MCP registration helpers, migrate to explicit registration calls:
+For custom extensions, follow current SDK APIs:
 
-- `tool(...)` -> `registerTool(...)`
-- `prompt(...)` -> `registerPrompt(...)`
-- `resource(...)` -> `registerResource(...)`
+- use `registerTool`, `registerPrompt`, `registerResource`
+- avoid removed variadic registration helpers
+- enforce schema validated inputs with `z.object(...)`
 
-And enforce schema-wrapped inputs:
+## Cutover template
 
-- legacy raw object schemas -> `z.object(...)`
+Use `templates/migrations/cutover-checklist-template.md`.
 
-This aligns with current MCP TypeScript SDK migration guidance.
+Recommended staged cutover:
 
-## Cutover plan template
-
-Use `templates/migrations/cutover-checklist-template.md` and run a staged cutover:
-
-1. Dry run migration in staging with production-like data volume.
+1. Dry run in staging with production like volume.
 2. Freeze writes for final sync window.
 3. Execute migration and verification checks.
-4. Shift traffic gradually.
-5. Keep rollback window and snapshot ready.
+4. Shift traffic in measured stages.
+5. Keep rollback window and snapshots ready.
 
 ## Rollback rules
 
-Always define rollback before production cutover:
+Every production migration must define rollback first:
 
-- point-in-time snapshot before schema/data move
-- reversible config toggles for traffic routing
-- defined owner and escalation path
+- snapshot before schema and data changes
+- reversible routing and feature toggle controls
+- named owner with escalation path

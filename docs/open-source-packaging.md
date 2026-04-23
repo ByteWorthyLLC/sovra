@@ -1,63 +1,65 @@
-# Open-Source Packaging and Licensing
+# Open Source Packaging and Licensing
 
-This document defines how Sovra OSS and paid ByteWorthy boilerplates fit together.
+This document defines the packaging model across Sovra, Klienta, and Clynova.
 
-## Product packaging model
+## Product model
 
-| Product | Distribution | License | Positioning |
+| Product | Distribution | License | Intended use |
 |---|---|---|---|
-| Sovra | Public GitHub repo | MIT | Open core platform for multi-tenant AI SaaS |
-| Klienta | Commercial distribution | Commercial | Agency-focused vertical built on Sovra |
-| Clynova | Commercial distribution | Commercial | Healthcare-focused vertical built on Sovra |
+| Sovra | Public GitHub repository | MIT | Open source foundation for multi tenant AI SaaS |
+| Klienta | Commercial distribution | Commercial license | Agency oriented vertical built on Sovra core |
+| Clynova | Commercial distribution | Commercial license | Healthcare oriented vertical built on Sovra core |
 
-## What MIT covers in Sovra
+## MIT scope for Sovra
 
-MIT license in this repo allows:
+The MIT license in this repository allows:
 
-- commercial and personal use
+- commercial use
+- private deployment
 - modification and redistribution
-- private/self-hosted deployment
 
-MIT does not grant:
+The MIT license does not grant:
 
-- rights to proprietary code in separate paid products
-- rights to protected marks/branding in other products
+- rights to proprietary code in paid vertical repositories
+- rights to product trademarks or brand marks outside this repository
 
-## Boundaries between OSS and paid verticals
+## Open source best practices baseline
 
-Sovra should remain fully usable as a standalone foundation.
+Sovra follows these baseline practices:
 
-Paid verticals should:
+- clear `LICENSE`, `SECURITY.md`, `CONTRIBUTING.md`, and `CODE_OF_CONDUCT.md`
+- reproducible setup scripts and environment templates
+- changelog and release process with rollback paths
+- CI and security checks required before production promotion
 
-- extend Sovra with domain modules
-- avoid breaking Sovra core contracts
-- document added data models and migration steps
+## Compatibility contract across product line
 
-## Compatibility contract
+To preserve upgrade safety:
 
-To keep upgrade paths stable:
+1. Keep tenant and user identity contracts stable (`tenant_id`, `user_id`).
+2. Keep auth and API key semantics compatible across variants.
+3. Prefer additive schema evolution.
+4. Document all breaking changes in `CHANGELOG.md` and migration guides.
+5. Ship migration templates and rollback instructions with every major release.
 
-1. Preserve core identifiers (`tenant_id`, `user_id`) across variants.
-2. Keep API key and auth semantics consistent.
-3. Ship additive schema changes where possible.
-4. Document every breaking change in `CHANGELOG.md`.
+## Upgrade policy
 
-## Release and upgrade channels
+- Validate core behavior in Sovra first.
+- Promote stable core changes into Klienta and Clynova.
+- Publish migration guidance before release promotion.
+- Never force an upgrade path without reversible cutover steps.
 
-- Sovra OSS: GitHub tags/releases, public changelog.
-- Paid verticals: managed release notes and migration packs.
+## Security and supply chain policy
 
-Recommended process:
+All variants should inherit this minimum standard:
 
-1. Validate changes in Sovra first.
-2. Promote stable core changes to vertical products.
-3. Publish migration guidance for each vertical release.
+- least privilege GitHub Actions permissions
+- pinned workflow actions
+- dependency and code scanning enabled
+- release readiness checks before production tags
 
-## Security baseline requirements
+## Branding boundaries
 
-All packaged variants should inherit:
-
-- least-privilege CI token permissions
-- pinned Actions and base images
-- code scanning and dependency scanning
-- production release gates (`release-readiness`, `security`, `ci`)
+- Sovra references may be used as allowed by MIT and trademark policy.
+- Klienta and Clynova brand assets remain under their commercial terms.
+- Forks should rename clearly to avoid user confusion in support or security channels.

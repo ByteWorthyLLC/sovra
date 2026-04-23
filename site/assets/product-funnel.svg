@@ -1,0 +1,38 @@
+<svg width="980" height="420" viewBox="0 0 980 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ByteWorthy product funnel</title>
+  <desc id="desc">Sovra open source foundation with upgrade paths to Klienta and Clynova.</desc>
+  <rect width="980" height="420" rx="18" fill="#F8FBFF" />
+
+  <rect x="54" y="115" width="280" height="190" rx="16" fill="#FFFFFF" stroke="#CFE0F3" stroke-width="2" />
+  <text x="84" y="167" font-family="Space Grotesk, Arial, sans-serif" font-size="34" font-weight="700" fill="#111318">Sovra</text>
+  <text x="84" y="202" font-family="Manrope, Arial, sans-serif" font-size="21" fill="#2A3344">Open source base</text>
+  <text x="84" y="233" font-family="Manrope, Arial, sans-serif" font-size="21" fill="#2A3344">Full code ownership</text>
+  <text x="84" y="264" font-family="Manrope, Arial, sans-serif" font-size="21" fill="#2A3344">MIT licensed</text>
+
+  <rect x="388" y="62" width="248" height="132" rx="16" fill="#FFFFFF" stroke="#CFE0F3" stroke-width="2" />
+  <text x="416" y="106" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700" fill="#111318">Klienta</text>
+  <text x="416" y="136" font-family="Manrope, Arial, sans-serif" font-size="19" fill="#2A3344">Agency vertical</text>
+  <text x="416" y="163" font-family="Manrope, Arial, sans-serif" font-size="19" fill="#2A3344">White label delivery</text>
+
+  <rect x="388" y="226" width="248" height="132" rx="16" fill="#FFFFFF" stroke="#CFE0F3" stroke-width="2" />
+  <text x="416" y="270" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700" fill="#111318">Clynova</text>
+  <text x="416" y="300" font-family="Manrope, Arial, sans-serif" font-size="19" fill="#2A3344">Healthcare vertical</text>
+  <text x="416" y="327" font-family="Manrope, Arial, sans-serif" font-size="19" fill="#2A3344">Interop scaffolding</text>
+
+  <rect x="690" y="96" width="236" height="226" rx="16" fill="#FFFFFF" stroke="#CFE0F3" stroke-width="2" />
+  <text x="718" y="143" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700" fill="#111318">Outcome</text>
+  <text x="718" y="176" font-family="Manrope, Arial, sans-serif" font-size="20" fill="#2A3344">Faster launch path</text>
+  <text x="718" y="206" font-family="Manrope, Arial, sans-serif" font-size="20" fill="#2A3344">Shared core contracts</text>
+  <text x="718" y="236" font-family="Manrope, Arial, sans-serif" font-size="20" fill="#2A3344">Predictable upgrades</text>
+  <text x="718" y="266" font-family="Manrope, Arial, sans-serif" font-size="20" fill="#2A3344">Domain acceleration</text>
+
+  <path d="M334 159H388" stroke="#0F7A63" stroke-width="4" stroke-linecap="round" />
+  <path d="M334 256H388" stroke="#0F7A63" stroke-width="4" stroke-linecap="round" />
+  <path d="M636 128H690" stroke="#0F7A63" stroke-width="4" stroke-linecap="round" />
+  <path d="M636 292H690" stroke="#0F7A63" stroke-width="4" stroke-linecap="round" />
+
+  <polygon points="384,151 398,159 384,167" fill="#0F7A63" />
+  <polygon points="384,248 398,256 384,264" fill="#0F7A63" />
+  <polygon points="686,120 700,128 686,136" fill="#0F7A63" />
+  <polygon points="686,284 700,292 686,300" fill="#0F7A63" />
+</svg>

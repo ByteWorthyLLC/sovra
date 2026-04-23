@@ -1,56 +1,56 @@
-# Upgrade Paths: Sovra -> Klienta / Clynova
+# Upgrade Paths: Sovra to Klienta or Clynova
 
-This guide helps teams move from Sovra OSS to the paid vertical boilerplates without re-platforming.
+This guide helps teams move from Sovra OSS to paid ByteWorthy verticals without replatforming.
 
 ## Decision matrix
 
-| If you need... | Stay on Sovra | Move to Klienta | Move to Clynova |
+| Requirement | Sovra | Klienta | Clynova |
 |---|---|---|---|
-| General AI SaaS foundation | Yes | Optional | Optional |
-| Agency/client operating model | Partial custom build | Yes | No |
-| Healthcare interoperability/compliance scaffolding | No | No | Yes |
+| Flexible general AI SaaS foundation | Yes | Optional | Optional |
+| Agency and client delivery model | Partial custom work | Yes | No |
+| Healthcare interoperability and compliance scaffolding | No | No | Yes |
 
 ## Upgrade principles
 
-1. Keep Sovra core intact; add vertical modules incrementally.
-2. Preserve tenant identity contracts and auth boundaries.
-3. Use staged rollouts with feature flags.
-4. Keep rollback and data export paths available throughout migration.
+1. Keep Sovra core contracts intact while adding vertical modules.
+2. Preserve tenant and user identity semantics.
+3. Roll out changes with feature flags where possible.
+4. Define rollback before any production cutover.
 
-## Path 1: Sovra -> Klienta
-
-Recommended sequence:
-
-1. Baseline current Sovra environment (tests, health endpoints, security gates).
-2. Add Klienta modules in staging.
-3. Map existing tenant structure to agency/client account model.
-4. Validate branded surfaces and permission boundaries.
-5. Run pilot tenants before full rollout.
-
-## Path 2: Sovra -> Clynova
+## Path A: Sovra to Klienta
 
 Recommended sequence:
 
-1. Baseline current Sovra environment.
-2. Add Clynova domain modules in staging.
-3. Validate healthcare data boundaries and audit logging requirements.
-4. Validate integration interfaces and operational controls.
-5. Run pilot with non-production data before regulated go-live.
+1. Baseline current Sovra deployment with tests and health checks.
+2. Stand up Klienta modules in staging.
+3. Map tenant structures to agency account structures.
+4. Validate permission boundaries and white label surfaces.
+5. Pilot with selected tenants before full rollout.
+
+## Path B: Sovra to Clynova
+
+Recommended sequence:
+
+1. Baseline current Sovra deployment.
+2. Add Clynova modules in staging.
+3. Validate healthcare data boundaries and audit requirements.
+4. Validate integration interfaces and operations runbooks.
+5. Pilot with non production data before regulated launch.
 
 ## Shared pre-upgrade checklist
 
 - `ci`, `security`, and `release-readiness` workflows green
 - no unresolved critical or high security findings
-- current schema and data snapshots captured
-- clear owner for go-live and rollback decision
+- schema snapshot and data backup completed
+- go live owner and rollback owner assigned
 
 ## Shared post-upgrade checklist
 
-- tenant isolation regression tests pass
-- worker + web health checks pass
-- background jobs, billing, and audit events validated
-- runbook updates published to support/on-call teams
+- tenant isolation tests pass
+- web and worker health checks pass
+- billing, audit logs, and background jobs validated
+- support and on call runbooks updated
 
 ## Planning template
 
-Use `templates/upgrade/boilerplate-evaluation-template.md` to score readiness, risk, and migration complexity before committing to a path.
+Use `templates/upgrade/boilerplate-evaluation-template.md` to score readiness, risk, and migration complexity.

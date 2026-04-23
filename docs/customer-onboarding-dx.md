@@ -1,22 +1,22 @@
 # Customer Onboarding DX
 
-This guide standardizes onboarding for teams adopting Sovra in production.
+This guide defines how to onboard a new team from first clone to production launch.
 
-## Outcomes
+## Onboarding outcomes
 
-- A new team can run Sovra locally in under 30 minutes.
-- A production-ready environment can be staged in under 2 business days.
-- Security, tenancy, and observability baselines are validated before go-live.
+- A new developer can run Sovra locally in under 30 minutes.
+- A team can stand up a secure staging environment in under 2 business days.
+- Release readiness checks and production runbooks are complete before go live.
 
 ## Onboarding tracks
 
-| Track | Target user | Goal |
+| Track | Target user | Output |
 |---|---|---|
-| Builder Quickstart | Developer evaluating Sovra | Local app + worker + Supabase up and running |
-| Production Bootstrapping | Engineering team | Staging deployment with secure env config and health checks |
-| Upgrade Planning | Teams growing beyond core OSS | Clear path to Klienta or Clynova without re-platforming |
+| Builder quickstart | Individual developer | Running local app with auth and workspace flows |
+| Team bootstrap | Product engineering team | Shared staging environment with validated secrets |
+| Production launch | Operator and tech lead | Release gate pass, runbooks, rollback owner |
 
-## 30-minute builder quickstart
+## Builder quickstart
 
 1. Clone and install:
    ```bash
@@ -24,74 +24,74 @@ This guide standardizes onboarding for teams adopting Sovra in production.
    cd sovra
    pnpm setup:local
    ```
-2. Start local Supabase:
+2. Start local data services:
    ```bash
    supabase start
    ```
-3. Configure environment:
-   Fill in Supabase keys in `.env.local` and `packages/web/.env.local`.
-4. Run web:
+3. Add Supabase keys to:
+   - `.env.local`
+   - `packages/web/.env.local`
+4. Start web app:
    ```bash
    cd packages/web
    pnpm dev
    ```
-5. Run worker (optional but recommended for full agent flows):
+5. Start worker (recommended):
    ```bash
    cd ../../packages/worker
    go run ./cmd/worker
    ```
 
-## Production bootstrapping checklist
+## Team bootstrap checklist
 
-Use this sequence for first customer environments:
-
-1. Create isolated infra per environment (`dev`, `staging`, `prod`).
-2. Configure required secrets:
+1. Create isolated environments: `dev`, `staging`, `prod`.
+2. Set required secrets:
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `SUPABASE_JWT_SECRET`
    - `INTERNAL_API_SECRET`
-   - provider keys (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `HUGGINGFACE_API_KEY`) as needed
-3. Configure tenant-safe worker settings:
-   - `SOCKETIO_ALLOWED_ORIGINS` must not be wildcard in production
-   - `WORKER_INTERNAL_URL` must be private/internal
-4. Deploy web and worker separately.
-5. Validate:
-   - web health: `/api/health`
-   - worker health: `/health`
-   - authenticated request path
-   - tenant isolation behavior
-6. Run release gate:
+   - provider keys (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `HUGGINGFACE_API_KEY`) only when needed
+3. Lock worker ingress and origin policy:
+   - `SOCKETIO_ALLOWED_ORIGINS` must use explicit host lists in production.
+   - `WORKER_INTERNAL_URL` must stay private to trusted network routes.
+4. Deploy web and worker as separate services.
+5. Validate health and auth paths:
+   - web: `/api/health`
+   - worker: `/health`
+   - tenant creation and workspace creation
+6. Run gate scripts:
    ```bash
    ./scripts/ci/release-readiness-checks.sh
+   pnpm go:test
    ```
 
-## MCP production guidance (Context7-aligned)
+## Production launch gate
 
-Sovra follows current MCP SDK guidance for production:
+Launch only after all items are complete:
 
-- Prefer explicit MCP registration APIs (`registerTool`, `registerPrompt`, `registerResource`) over legacy helpers.
-- Use strict schemas (`z.object(...)`) for tool inputs and outputs.
-- Use Streamable HTTP transport for remote MCP communication where applicable.
-- Protect HTTP MCP endpoints with auth and host validation.
+- CI and security workflows are green on the target commit.
+- `docs/production-readiness.md` is fully checked.
+- `docs/operations-runbook.md` owner and escalation path are filled.
+- Rollback owner and snapshot reference are recorded.
 
-Reference:
+## MCP implementation guidance
+
+Sovra follows current MCP TypeScript SDK guidance:
+
+- Prefer explicit registration APIs: `registerTool`, `registerPrompt`, `registerResource`.
+- Validate tool input/output with strict schemas (`z.object(...)`).
+- Prefer Streamable HTTP transport for remote MCP integration.
+- Require endpoint auth and host validation for HTTP exposed MCP routes.
+
+Reference docs:
+
 - `docs/architecture.md`
 - `docs/worker.md`
-- `docs/migration-guides.md` (MCP API migration section)
+- `docs/migration-guides.md`
 
-## Reusable templates
-
-Use templates in this repository when onboarding customers:
+## Onboarding artifacts in this repo
 
 - `templates/onboarding/customer-launch-plan-template.md`
 - `templates/onboarding/first-run-checklist-template.md`
 - `templates/migrations/cutover-checklist-template.md`
 - `templates/upgrade/boilerplate-evaluation-template.md`
-
-## Exit criteria
-
-Onboarding is complete only when:
-
-1. CI, Security, and Release Readiness workflows are green on target commit.
-2. Production readiness checklist is complete (`docs/production-readiness.md`).
-3. Incident escalation owner is named and runbook links are shared with operators.
+- `templates/marketing/seo-aeo-geo-brief-template.md`

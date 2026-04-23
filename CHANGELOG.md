@@ -15,6 +15,9 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 - Customer onboarding DX guide and reusable launch/cutover/upgrade templates (`docs/customer-onboarding-dx.md`, `templates/*`).
 - Migration and upgrade path documentation for Sovra -> Klienta/Clynova (`docs/migration-guides.md`, `docs/upgrade-paths.md`).
 - Open-source packaging/licensing boundary and compatibility contract documentation (`docs/open-source-packaging.md`).
+- SEO/AEO/GEO publishing playbook and marketing templates for launch content operations (`docs/seo-aeo-geo-guidelines.md`, `templates/marketing/*`).
+- Commercial checkout and billing security policy doc for paid product routing and Stripe key handling (`docs/commercial-checkout-and-billing.md`).
+- Premium visual assets for GitHub Pages marketing surface (`site/assets/*`).
 - Release-readiness gate workflow with docs/trust integrity checks.
 - Enterprise operations documentation set (`architecture`, `worker`, `testing`, `operations-runbook`, `production-readiness`, `release-process`).
 - Broadcast client tests for private worker URL routing and failure handling.
@@ -35,6 +38,8 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 - Workflow token permissions are scoped more tightly (top-level read defaults, job-level write only where required).
 - Dockerfiles now pin base images by digest for reproducible and safer supply-chain builds.
 - README expanded with onboarding DX, migration, upgrade-path, and packaging references.
+- README and `llms.txt` now point to canonical `master` branch docs and include SEO/AEO/GEO plus checkout policy references.
+- GitHub Pages site redesigned with richer product-line storytelling, structured FAQ data, and launch-focused resource routing.
 - Worker startup now validates auth secrets in production and rejects wildcard Socket.IO origins.
 - Worker servers (health, gRPC, MCP, Socket.IO) now support graceful shutdown with a 30 second drain window.
 - Internal worker routes (`/internal/broadcast`, `/mcp`) now fail closed in production when `INTERNAL_API_SECRET` is missing.
