@@ -31,6 +31,7 @@ Sovra follows these baseline practices:
 - reproducible setup scripts and environment templates
 - changelog and release process with rollback paths
 - CI and security checks required before production promotion
+- launch foundation guidance and scored release artifacts (`docs/launch-foundation.md`, onboarding templates)
 
 ## Compatibility contract across product line
 

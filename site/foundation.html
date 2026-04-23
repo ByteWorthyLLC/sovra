@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sovra Launch Foundation | Onboarding, Security, and Production Gates</title>
+    <meta
+      name="description"
+      content="Launch Sovra with a clear foundation: onboarding sequence, security controls, migration safety, and production release gates."
+    />
+    <meta
+      name="keywords"
+      content="Sovra launch foundation, AI SaaS onboarding framework, production release checklist, open source SaaS launch guide"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://byteworthyllc.github.io/sovra/foundation.html" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sovra Launch Foundation" />
+    <meta
+      property="og:description"
+      content="Use this foundation path to run Sovra from first clone through production rollout."
+    />
+    <meta property="og:url" content="https://byteworthyllc.github.io/sovra/foundation.html" />
+    <meta property="og:image" content="https://byteworthyllc.github.io/sovra/assets/sovra-social-card.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sovra Launch Foundation" />
+    <meta
+      name="twitter:description"
+      content="Onboarding, migration, release gates, and upgrade readiness for AI SaaS teams."
+    />
+    <meta name="twitter:image" content="https://byteworthyllc.github.io/sovra/assets/sovra-social-card.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell shell-page">
+      <header class="hero hero-page">
+        <nav class="top-nav" aria-label="Primary">
+          <a class="logo-link" href="./index.html">
+            <img src="assets/brand-mark.svg" alt="Sovra" width="184" height="48" />
+          </a>
+          <div class="top-links">
+            <a href="./index.html">Home</a>
+            <a href="./quickstart.html">Quickstart</a>
+            <a href="./foundation.html">Foundation</a>
+            <a href="./mcp-boilerplate.html">MCP</a>
+            <a href="./compare.html">Compare</a>
+          </div>
+        </nav>
+        <div class="hero-copy">
+          <p class="eyebrow">Launch foundation</p>
+          <h1>From first clone to production with fewer unknowns.</h1>
+          <p class="lede">
+            This path gives teams a practical sequence for onboarding, hardening, release gating, and safe upgrades
+            across the Sovra, Klienta, and Clynova product line.
+          </p>
+        </div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Execution sequence</h2>
+          <p>Use these phases in order and attach evidence at each gate.</p>
+        </div>
+        <ol class="ordered-list">
+          <li>Day 0 setup: bootstrap local services and verify health endpoints.</li>
+          <li>Team staging baseline: enforce secrets, tenant boundaries, and route controls.</li>
+          <li>Release hardening: pass CI, test, security, and readiness gates.</li>
+          <li>Controlled launch: execute staged rollout with rollback ownership.</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Core command gates</h2>
+        </div>
+        <pre><code>./scripts/ci/release-readiness-checks.sh
+pnpm --filter @sovra/web lint
+pnpm --filter @sovra/web typecheck
+pnpm --filter @sovra/web test
+pnpm --filter @sovra/web build
+pnpm go:test</code></pre>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Required launch artifacts</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/launch-foundation.md">Launch foundation doc</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/customer-onboarding-dx.md">Customer onboarding DX</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/migration-guides.md">Migration guides</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/production-readiness.md">Production readiness checklist</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/templates/onboarding/production-launch-scorecard-template.md">Launch scorecard template</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/templates/migrations/cutover-checklist-template.md">Cutover template</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/open-source-packaging.md">Open source packaging policy</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/docs/upgrade-paths.md">Upgrade paths</a>
+          <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/templates/upgrade/boilerplate-evaluation-template.md">Upgrade evaluation template</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Product line choices</h2>
+        </div>
+        <ul class="checklist">
+          <li>Sovra: open source core for full control and self hosted flexibility.</li>
+          <li>Klienta: paid agency vertical for multi-client delivery workflows.</li>
+          <li>Clynova: paid healthcare vertical for interoperability and compliance-first programs.</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <p>Built by <a href="https://byteworthy.io">ByteWorthy</a>.</p>
+        <p>
+          <a href="https://github.com/ByteWorthyLLC/sovra">GitHub</a>
+          <a href="https://github.com/ByteWorthyLLC/klienta">Klienta</a>
+          <a href="https://github.com/ByteWorthyLLC/clynova">Clynova</a>
+          <a href="./index.html">Main page</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
