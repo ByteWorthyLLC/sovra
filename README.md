@@ -85,13 +85,19 @@ This page is optimized for search/snippet indexing and maps directly to the cano
 
 ```bash
 git clone https://github.com/ByteWorthyLLC/sovra.git
-cd sovra && pnpm install
-supabase start              # Local Postgres + Auth + pgvector
-cp .env.example .env.local  # Add Supabase keys from output
+cd sovra
+pnpm setup:local           # Prereqs check + deps + env bootstrap
+supabase start             # Local Postgres + Auth + pgvector
 cd packages/web && pnpm dev # Open http://localhost:3000
 ```
 
 **That's it.** Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally.
+
+Want a single command that checks prerequisites and boots dependencies + web app?
+
+```bash
+pnpm setup:local:start
+```
 
 <details>
 <summary><strong>Full setup guide</strong> (prerequisites + Go worker)</summary>
@@ -109,16 +115,16 @@ cd packages/web && pnpm dev # Open http://localhost:3000
 # 1. Clone and install dependencies
 git clone https://github.com/ByteWorthyLLC/sovra.git
 cd sovra
-pnpm install
+pnpm setup:local
 
 # 2. Start local Supabase (Postgres + Auth + pgvector)
 supabase start
 # Copy the API URL and anon/service_role keys from the output
 
 # 3. Configure environment
-cp .env.example .env.local
-cp packages/web/.env.example packages/web/.env.local
-# Fill in the Supabase keys from step 2
+# Fill in the Supabase keys in:
+# - .env.local
+# - packages/web/.env.local
 
 # 4. Start the web app
 cd packages/web && pnpm dev
@@ -145,6 +151,7 @@ Production onboarding is documented end-to-end:
 - [`docs/customer-onboarding-dx.md`](docs/customer-onboarding-dx.md) for a repeatable launch process
 - [`docs/migration-guides.md`](docs/migration-guides.md) for migration tracks and rollback rules
 - [`templates/onboarding/customer-launch-plan-template.md`](templates/onboarding/customer-launch-plan-template.md) for implementation planning
+- [`templates/onboarding/first-run-checklist-template.md`](templates/onboarding/first-run-checklist-template.md) for day-0 builder onboarding
 - [`templates/migrations/cutover-checklist-template.md`](templates/migrations/cutover-checklist-template.md) for controlled cutovers
 - [`templates/upgrade/boilerplate-evaluation-template.md`](templates/upgrade/boilerplate-evaluation-template.md) for Sovra -> Klienta/Clynova upgrade decisions
 

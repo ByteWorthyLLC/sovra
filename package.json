@@ -17,6 +17,8 @@
     "go:lint": "cd packages/worker && go vet ./...",
     "db:generate": "supabase gen types typescript --local > packages/shared/types/database.ts",
     "db:reset": "supabase db reset",
+    "setup:local": "./scripts/setup/bootstrap-local.sh",
+    "setup:local:start": "./scripts/setup/bootstrap-local.sh --start",
     "prepare": "lefthook install || true"
   },
   "packageManager": "pnpm@10.33.0",
