@@ -18,6 +18,10 @@
 </p>
 
 <p align="center">
+  <sub>Built by the ByteWorthy software studio and dev shop · <a href="https://byteworthy.io/services">custom builds</a> · <a href="https://byteworthy.io/services/consulting">AI consulting</a></sub>
+</p>
+
+<p align="center">
   <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-project-site">Project Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-launch-foundation">Launch Foundation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -74,18 +78,23 @@ Sovra is a complete open-source base you can run in production under MIT.
 
 ## &#x1f310; Project Site
 
-Marketing site (GitHub Pages):
+Canonical ByteWorthy route:
+
+- https://byteworthy.io/boilerplates/sovra
+
+Related routes in the same product family:
+
+- Sovra (open source): https://byteworthy.io/boilerplates/sovra
+- Klienta (commercial): https://byteworthy.io/boilerplates/klienta
+- Clynova (commercial): https://byteworthy.io/boilerplates/clynova
+- Boilerplates hub: https://byteworthy.io/boilerplates
+- Services: https://byteworthy.io/services
+- Contact: https://byteworthy.io/contact
+- GitHub overview: https://byteworthy.io/github
+
+GitHub Pages mirror (secondary):
 
 - https://byteworthyllc.github.io/sovra/
-
-This page is optimized for search/snippet indexing and maps directly to canonical docs.
-
-Deep links:
-
-- Quickstart page: https://byteworthyllc.github.io/sovra/quickstart.html
-- Foundation page: https://byteworthyllc.github.io/sovra/foundation.html
-- MCP page: https://byteworthyllc.github.io/sovra/mcp-boilerplate.html
-- Comparison page: https://byteworthyllc.github.io/sovra/compare.html
 
 <br/>
 
@@ -157,7 +166,7 @@ See [`.env.example`](.env.example) for all options. Only Supabase keys are requi
 Use the launch foundation path when you need a clear order of operations from setup to production:
 
 - [`docs/launch-foundation.md`](docs/launch-foundation.md)
-- https://byteworthyllc.github.io/sovra/foundation.html
+- https://byteworthy.io/boilerplates/sovra
 
 <br/>
 
