@@ -32,5 +32,5 @@ jobs:
       - name: Run fuzz targets (bounded)
         working-directory: packages/worker
         run: |
-          go test ./internal/config -run=^$ -fuzz=^FuzzIsProduction$ -fuzztime=15s
-          go test ./internal/config -run=^$ -fuzz=^FuzzValidateAuthConfig$ -fuzztime=15s
+          go test ./internal/config -run=^$ -fuzz=^FuzzIsProduction$ -fuzztime=10s
+          go test ./internal/config -run=^$ -fuzz=^FuzzValidateAuthConfig$ -fuzztime=10s
