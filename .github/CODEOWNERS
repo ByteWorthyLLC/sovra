@@ -1,16 +1,16 @@
-# Default owner for every file in the repo.
-* @byteworthy/maintainers
+# ByteWorthy repos are maintained by Kevin Richards (founder, solo developer).
+# Brand kit + product configs require kit maintainer approval.
 
-# Critical security surfaces require explicit security review.
-/SECURITY.md @byteworthy/security
-/packages/web/middleware.ts @byteworthy/security
-/packages/web/lib/security/** @byteworthy/security
-/packages/web/lib/auth/** @byteworthy/security
-/packages/web/app/api/stripe/** @byteworthy/security
-/supabase/migrations/** @byteworthy/security @byteworthy/maintainers
-/.github/workflows/** @byteworthy/security @byteworthy/maintainers
+# Default owner for everything
+*                       @byteworthyllc/founders
 
-# Docs
-/docs/** @byteworthy/maintainers
-/README.md @byteworthy/maintainers
-/CLAUDE.md @byteworthy/maintainers
+# Brand assets require kit consistency review
+/public/brand/          @byteworthyllc/founders
+/docs/brand/            @byteworthyllc/founders
+/.github/               @byteworthyllc/founders
+README.md               @byteworthyllc/founders
+byteworthy.config.yaml  @byteworthyllc/founders
+
+# Security-sensitive paths
+/SECURITY.md            @byteworthyllc/founders
+/security/              @byteworthyllc/founders

@@ -1,33 +1,45 @@
-<!-- Thanks for contributing to Sovra. -->
+<!-- Thanks for contributing to ByteWorthy! Please complete this template to help us review your PR efficiently. -->
 
-## Summary
+## What does this PR do?
 
-<!-- One or two sentences: what does this PR do and why? -->
+<!-- One-paragraph summary of the change. -->
 
-## Type of change
+## Why?
 
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation / chore
-- [ ] Refactor
-- [ ] Security
+<!-- Link to issue, discussion, or describe the motivation. -->
+
+Closes #
+
+## How was this tested?
+
+<!-- Describe how you tested this. Include automated test coverage where applicable. -->
+
+- [ ] Unit tests pass (`pnpm test` / `pytest`)
+- [ ] Type check passes (`pnpm typecheck` / `mypy`)
+- [ ] Lint passes (`pnpm lint` / `ruff`)
+- [ ] Manual smoke test on local dev
 
 ## Checklist
 
-- [ ] I ran `pnpm lint` and it passes.
-- [ ] I ran `pnpm type-check` and it passes.
-- [ ] I ran `pnpm test` and all tests pass.
-- [ ] I ran `pnpm build` and the production build succeeds.
-- [ ] If touching the Go worker, I ran `pnpm go:test` and `pnpm go:lint`.
-- [ ] I added or updated tests for my change.
-- [ ] I updated documentation where relevant.
-- [ ] I verified my change respects tenant isolation (RLS) and does not log secrets.
+- [ ] Code follows project style guide
+- [ ] Self-review completed
+- [ ] No secrets, API keys, or `.env` files committed
+- [ ] Documentation updated (README, docs/, code comments)
+- [ ] Migrations are backward-compatible (if database schema changed)
+- [ ] No breaking changes to public API (or documented if intentional)
+- [ ] PR title follows [conventional commits](https://www.conventionalcommits.org/) format
 
-## How to test
+## Screenshots / demos (if UI change)
 
-<!-- Steps a reviewer can take to verify locally. -->
+<!-- Drop screenshots, GIFs, or Loom links here. Required for any UI/UX change. -->
 
-## Related issues
+## Additional context
 
-<!-- Fixes #123 -->
+<!-- Anything else reviewers should know? -->
+
+---
+
+By submitting this pull request, I confirm:
+- My contributions are made under the project license
+- I have read the [Contributing Guide](./CONTRIBUTING.md)
+- I'm happy to iterate on review feedback
