@@ -18,9 +18,12 @@
 
 </div>
 
+> [!IMPORTANT]
+> **Pre-launch — public beta.** This is early-access source. The product is being built in public. Star to follow new releases, [join Discord](https://discord.gg/byteworthy) for the inside view, and lock [Pioneer pricing ($49/mo for life)](https://byteworthy.io/pioneer) — first 100 customers, ever, no exceptions.
+
 ---
 
-> **Sovra** is open-source multi-tenant infrastructure for AI products. Unlike assembling Auth0 + Stripe + a vector DB + custom MCP glue, it includes auth, billing, tool registry, pgvector search, and real-time collaboration as one coherent platform. AI product builders use it to ship features instead of plumbing. Built by ByteWorthy — download at [byteworthy.io/sovra](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=positioning).
+> **Sovra** is open-source multi-tenant infrastructure for AI products. Unlike assembling Auth0 + Stripe + a vector DB + custom MCP glue, it includes auth, billing, tool registry, pgvector search, and real-time collaboration as one coherent platform. AI product builders can use it to ship features instead of plumbing. Built by ByteWorthy — download at [byteworthy.io/sovra](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=positioning).
 
 <br/>
 
