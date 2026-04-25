@@ -12,7 +12,7 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/byteworthyllc/sovra/ci.yml?style=for-the-badge&color=2563EB&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/actions)
 [![License](https://img.shields.io/badge/license-MIT-2563EB?style=for-the-badge&labelColor=0F172A)](./LICENSE)
 [![Stars](https://img.shields.io/github/stars/byteworthyllc/sovra?style=for-the-badge&color=5B7C99&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/stargazers)
-[![Discord](https://img.shields.io/discord/byteworthy?style=for-the-badge&label=discord&color=2563EB&labelColor=0F172A)](https://discord.gg/byteworthy)
+[![Pioneer Waitlist](https://img.shields.io/badge/Pioneer_waitlist-_$49%2Fmo_for_life-2563EB?style=for-the-badge&labelColor=0F172A)](https://byteworthy.io/pioneer)
 
 [**Try the demo →**](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-cta) &nbsp;·&nbsp; [Read the docs](https://byteworthy.io/sovra/docs?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-docs) &nbsp;·&nbsp; [Self-host →](https://github.com/byteworthyllc/sovra#quick-start)
 
@@ -20,6 +20,17 @@
 
 > [!IMPORTANT]
 > **Pre-launch — public beta.** This is early-access source. The product is being built in public. Star to follow new releases, [join Discord](https://discord.gg/byteworthy) for the inside view, and lock [Pioneer pricing ($49/mo for life)](https://byteworthy.io/pioneer) — first 100 customers, ever, no exceptions.
+
+---
+
+## Get launch access
+
+> **First 100 customers get $49/mo locked for life.** No exceptions.
+> The other 99 will pay 3-7× that for the same product. The cap exists; the math doesn't bend.
+
+- ⭐ **Star this repo** so GitHub notifies you on releases
+- 👁️ **Watch → Custom → Releases** for direct alerts
+- 📬 **[Lock Pioneer pricing](https://byteworthy.io/pioneer)** — gets you the Discord invite + early-access drops
 
 ---
 
@@ -197,7 +208,7 @@ See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1). Rec
 
 ## Community
 
-- 💬 **[Discord](https://discord.gg/byteworthy)** — stargazer-only channel
+- 🪙 **[Pioneer waitlist](https://byteworthy.io/pioneer)** — $49/mo locked for life + Discord invite at launch
 - 🐛 **[GitHub Issues](https://github.com/byteworthyllc/sovra/issues)**
 - 📬 **[Newsletter](https://byteworthy.io/subscribe?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=newsletter)**
 - 🐦 **[@byteworthyllc](https://twitter.com/byteworthyllc)**
@@ -227,6 +238,17 @@ PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md). All commits require DCO
 ## Security
 
 Found a security issue? Email security@byteworthy.io. See [`SECURITY.md`](./SECURITY.md).
+
+## Share this
+
+If you know someone building [r/MachineLearning / r/programming], share this — it's the kind of thing that compounds for both of us.
+
+[![Tweet](https://img.shields.io/badge/Share_on_X-2563EB?style=flat-square&logo=x&logoColor=white&labelColor=0F172A)](https://twitter.com/intent/tweet?text=Sovra%20-%20open-source%20multi-tenant%20infra%20for%20AI%20products.%20Replaces%20Auth0%20%2B%20Stripe%20%2B%20Pinecone%20%2B%20custom%20MCP%20glue.%20Pre-launch.&url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra)
+[![Submit to HN](https://img.shields.io/badge/Submit_to_HN-FF6600?style=flat-square&logo=ycombinator&logoColor=white&labelColor=0F172A)](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra&t=Show%20HN%3A%20Sovra%20%E2%80%94%20Open-source%20multi-tenant%20infrastructure%20for%20AI%20products)
+[![Submit to Reddit](https://img.shields.io/badge/Submit_to_Reddit-FF4500?style=flat-square&logo=reddit&logoColor=white&labelColor=0F172A)](https://reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra&title=Show%20HN%3A%20Sovra%20%E2%80%94%20Open-source%20multi-tenant%20infrastructure%20for%20AI%20products)
+[![Share on LinkedIn](https://img.shields.io/badge/Share_on_LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white&labelColor=0F172A)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra)
+
+Or just star the repo. That alone helps more than you'd think when GitHub trending picks this up.
 
 ## License
 
