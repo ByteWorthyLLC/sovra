@@ -1,486 +1,272 @@
-<p align="center">
-  <img src="site/assets/brand-mark.svg" width="160" alt="Sovra open-source AI agent platform" />
-</p>
+<div align="center">
 
-<h1 align="center">Sovra</h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/hero-light.png">
+  <img alt="Sovra — open-source multi-tenant AI infrastructure" src="./public/brand/hero-light.png" width="100%">
+</picture>
 
-<p align="center">
-  <strong>Ship AI products. Not infrastructure.</strong>
-</p>
+# Sovra
 
-<p align="center">
-  Open-source platform for building multi-tenant AI agent applications.<br/>
-  Auth, billing, MCP tools, vector search, multi-agent collaboration - in one repo.
-</p>
+**Open-source multi-tenant infrastructure for AI products. Auth, billing, MCP tools, vector search — one platform.**
 
-<p align="center">
-  <sub>A <a href="https://byteworthy.io"><b>ByteWorthy</b></a> product · <a href="https://byteworthy.io">byteworthy.io</a></sub>
-</p>
+[![Build](https://img.shields.io/github/actions/workflow/status/byteworthyllc/sovra/ci.yml?style=for-the-badge&color=2563EB&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/actions)
+[![License](https://img.shields.io/badge/license-MIT-2563EB?style=for-the-badge&labelColor=0F172A)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/byteworthyllc/sovra?style=for-the-badge&color=5B7C99&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/stargazers)
+[![Discord](https://img.shields.io/discord/byteworthy?style=for-the-badge&label=discord&color=2563EB&labelColor=0F172A)](https://discord.gg/byteworthy)
 
-<p align="center">
-  <sub>Built by the ByteWorthy software studio and dev shop · <a href="https://byteworthy.io/services">custom builds</a> · <a href="https://byteworthy.io/services/consulting">AI consulting</a></sub>
-</p>
+[**Try the demo →**](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-cta) &nbsp;·&nbsp; [Read the docs](https://byteworthy.io/sovra/docs?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-docs) &nbsp;·&nbsp; [Self-host →](https://github.com/byteworthyllc/sovra#quick-start)
 
-<p align="center">
-  <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-project-site">Project Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-launch-foundation">Launch Foundation</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-customer-onboarding-dx">Onboarding DX</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-what-you-get">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-launch-paths">Launch Paths</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-the-stack">Stack</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-architecture">Architecture</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-deploy">Deploy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-contributing">Contribute</a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/ByteWorthyLLC/sovra/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/ci.yml?branch=master&style=flat-square&label=ci" alt="CI Status" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/actions/workflows/security.yml"><img src="https://img.shields.io/github/actions/workflow/status/ByteWorthyLLC/sovra/security.yml?branch=master&style=flat-square&label=security" alt="Security Status" /></a>
-  <a href="https://scorecard.dev/viewer/?uri=github.com/ByteWorthyLLC/sovra"><img src="https://api.scorecard.dev/projects/github.com/ByteWorthyLLC/sovra/badge" alt="OpenSSF Scorecard" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra/issues"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=flat-square" alt="GitHub Stars" /></a>
-  <a href="https://github.com/ByteWorthyLLC/sovra"><img src="https://img.shields.io/github/last-commit/ByteWorthyLLC/sovra?style=flat-square" alt="Last Commit" /></a>
-</p>
-
-<br/>
-
-> **Every AI SaaS boilerplate gives you auth and billing. None give you the AI infrastructure.**
-> Every agent framework gives you LLM orchestration. None give you the SaaS wrapper.
-> Sovra is both. One repo. One command. Production-ready.
-
-<br/>
-
-## Why Sovra?
-
-You want to build an AI agent product. So you start wiring up auth, multi-tenancy, vector search, MCP tools, real-time collaboration, billing...
-
-**Three months later, you still haven't shipped a single AI feature.**
-
-Sovra eliminates that. Clone it, run it, build on it. What takes teams 3+ months, you get in one `git clone`.
-
-### Start Free, Upgrade When Needed
-
-Sovra is a complete open-source base you can run in production under MIT.
-
-- Start with **Sovra** if you want a flexible foundation and full control.
-- Upgrade to **Klienta** when you need an agency-focused commercial stack (multi-client portals, white-label workflows, monetization defaults).
-- Upgrade to **Clynova** when you need healthcare-grade product scaffolding (interoperability, PHI-oriented controls, compliance-first architecture).
-
-<p>
-  <a href="https://github.com/ByteWorthyLLC/sovra"><b>Use Sovra (Free)</b></a> ·
-  <a href="https://github.com/ByteWorthyLLC/klienta"><b>Explore Klienta (Paid)</b></a> ·
-  <a href="https://github.com/ByteWorthyLLC/clynova"><b>Explore Clynova (Paid)</b></a>
-</p>
-
-<br/>
-
-## &#x1f310; Project Site
-
-Canonical ByteWorthy route:
-
-- https://byteworthy.io/boilerplates/sovra
-
-Related routes in the same product family:
-
-- Sovra (open source): https://byteworthy.io/boilerplates/sovra
-- Klienta (commercial): https://byteworthy.io/boilerplates/klienta
-- Clynova (commercial): https://byteworthy.io/boilerplates/clynova
-- Boilerplates hub: https://byteworthy.io/boilerplates
-- Services: https://byteworthy.io/services
-- Contact: https://byteworthy.io/contact
-- GitHub overview: https://byteworthy.io/github
-
-GitHub Pages mirror (secondary):
-
-- https://byteworthyllc.github.io/sovra/
-
-<br/>
-
-## &#x1f680; Quick Start
-
-```bash
-git clone https://github.com/ByteWorthyLLC/sovra.git
-cd sovra
-pnpm setup:local           # Prereqs check + deps + env bootstrap
-supabase start             # Local Postgres + Auth + pgvector
-cd packages/web && pnpm dev # Open http://localhost:3000
-```
-
-**That's it.** Multi-tenant auth, vector database, agent runtime, real-time collaboration. Running locally.
-
-Want a single command that checks prerequisites and boots dependencies + web app?
-
-```bash
-pnpm setup:local:start
-```
-
-<details>
-<summary><strong>Full setup guide</strong> (prerequisites + Go worker)</summary>
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) 20+ and [pnpm](https://pnpm.io/) 10+
-- [Go](https://go.dev/) 1.22+ (for the agent worker service)
-- [Docker](https://www.docker.com/) (for local Supabase)
-- [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started)
-
-### Step-by-step
-
-```bash
-# 1. Clone and install dependencies
-git clone https://github.com/ByteWorthyLLC/sovra.git
-cd sovra
-pnpm setup:local
-
-# 2. Start local Supabase (Postgres + Auth + pgvector)
-supabase start
-# Copy the API URL and anon/service_role keys from the output
-
-# 3. Configure environment
-# Fill in the Supabase keys in:
-# - .env.local
-# - packages/web/.env.local
-
-# 4. Start the web app
-cd packages/web && pnpm dev
-# Open http://localhost:3000
-
-# 5. (Optional) Start the Go worker for agent features
-cd packages/worker
-go mod download
-go run ./cmd/worker
-```
-
-### Environment Variables
-
-See [`.env.example`](.env.example) for all options. Only Supabase keys are required - Stripe, Sentry, PostHog, and Upstash are optional and gracefully disabled when not configured.
-
-</details>
-
-<br/>
-
-## &#x1f4cd; Launch Foundation
-
-Use the launch foundation path when you need a clear order of operations from setup to production:
-
-- [`docs/launch-foundation.md`](docs/launch-foundation.md)
-- https://byteworthy.io/boilerplates/sovra
-
-<br/>
-
-## &#x1f91d; Customer Onboarding DX
-
-Production onboarding is documented end-to-end:
-
-- [`docs/customer-onboarding-dx.md`](docs/customer-onboarding-dx.md) for a repeatable launch process
-- [`docs/launch-foundation.md`](docs/launch-foundation.md) for phased execution from local bootstrap through rollout
-- [`docs/migration-guides.md`](docs/migration-guides.md) for migration tracks and rollback rules
-- [`templates/onboarding/customer-launch-plan-template.md`](templates/onboarding/customer-launch-plan-template.md) for implementation planning
-- [`templates/onboarding/first-run-checklist-template.md`](templates/onboarding/first-run-checklist-template.md) for day-0 builder onboarding
-- [`templates/onboarding/production-launch-scorecard-template.md`](templates/onboarding/production-launch-scorecard-template.md) for final gate scoring and signoff
-- [`templates/migrations/cutover-checklist-template.md`](templates/migrations/cutover-checklist-template.md) for controlled cutovers
-- [`templates/upgrade/boilerplate-evaluation-template.md`](templates/upgrade/boilerplate-evaluation-template.md) for Sovra -> Klienta/Clynova upgrade decisions
-- [`templates/marketing/seo-aeo-geo-brief-template.md`](templates/marketing/seo-aeo-geo-brief-template.md) for discoverability-focused launch content planning
-- [`templates/growth/`](templates/growth/) for measurable weekly growth and launch-review operations
-
-<br/>
-
-## &#x2728; What You Get
-
-### SaaS Layer
-
-Everything you'd spend months building before writing a single AI feature:
-
-| | Feature | Details |
-|-|---------|---------|
-| &#x1f512; | **Multi-tenant auth** | Email, magic links, OAuth (Google, GitHub). Swappable via `AuthAdapter` interface. |
-| &#x1f6e1; | **Tenant isolation** | Row-level security at the database. Postgres enforces it - not middleware, not app logic. |
-| &#x1f465; | **Roles & permissions** | Owner, admin, member, viewer. Database-backed, tenant-configurable. |
-| &#x1f4e8; | **Invite system** | Email invitations + shareable links. Works with or without SMTP. |
-| &#x1f4b3; | **Billing** | Stripe integration - plans, usage tracking, customer portal. |
-| &#x1f511; | **API keys** | Scoped generation with rate limiting and audit logging. |
-
-### AI Layer
-
-The part nobody else ships:
-
-| | Feature | Details |
-|-|---------|---------|
-| &#x1f9e9; | **MCP native** | Full Model Context Protocol client AND server. Your agents use tools the ecosystem way. |
-| &#x1f50d; | **Vector search** | pgvector inside your existing Postgres. Semantic search, hybrid search, tenant-scoped. |
-| &#x1f916; | **Agent runtime** | Custom models, system prompts, tool assignments. Streaming via Vercel AI SDK. |
-| &#x1f917; | **Hugging Face open models** | Optional third provider via HF router (`router.huggingface.co/v1`) with routing policies (`fastest`/`cheapest`/`preferred`). |
-| &#x1f91d; | **Multi-agent workspaces** | 5 collaboration modes (round-robin, hierarchical, democratic, parallel, debate). Shared memory. Conflict resolution. |
-| &#x1f9e0; | **Memory strategies** | Full history, summary compression, vector retrieval, or hybrid. |
-| &#x1f6e0; | **Built-in tools** | File ops, web search, URL fetch, DB query, semantic search. All MCP-compliant. All tenant-scoped. |
-
-### Production Layer
-
-Ship it, don't just demo it:
-
-| | Feature | Details |
-|-|---------|---------|
-| &#x2601; | **Deploy anywhere** | Docker, Railway, AWS, GCP. Self-hosted. Your data, your infrastructure. |
-| &#x1f4ca; | **Admin dashboard** | Tenant management, user management, system health, audit logs. |
-| &#x1f6a8; | **Monitoring** | Sentry for errors, PostHog for analytics. Pre-wired. |
-| &#x1f50f; | **Security hardened** | CSP, HSTS, rate limiting, JWT verification, input validation. Production-ready. |
-
-<br/>
-
-## &#x1f527; The Stack
-
-```
-Frontend       Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
-Agent Worker   Go 1.22+ with Gin + gRPC
-Database       Supabase PostgreSQL + pgvector + Row Level Security
-Auth           Supabase Auth (swappable via AuthAdapter)
-Real-time      Socket.IO (Go server + React client)
-AI SDK         Vercel AI SDK + MCP SDK
-Billing        Stripe
-Monitoring     Sentry + PostHog
-```
-
-<details>
-<summary><strong>Why these choices?</strong></summary>
-
-**Why Go for the worker?** Agent orchestration is I/O bound with bursts of CPU. Go's goroutines handle thousands of concurrent agent sessions on a single node. Python can't.
-
-**Why Supabase?** Postgres + pgvector + auth + real-time + RLS in one service. No separate vector database bill. No separate auth service. Everything in one place, and you own the data.
-
-**Why not NextAuth/Clerk/Auth0?** Sovra ships with Supabase Auth by default (zero config). But the `AuthAdapter` interface means you can swap to any provider by implementing 5 methods. No lock-in.
-
-</details>
-
-<br/>
-
-## &#x1f3d7; Architecture
-
-```
-                    ┌─────────────────────────────────┐
-                    │        Next.js Frontend          │
-                    │     (App Router, AI SDK, UI)     │
-                    └──────────┬──────────┬────────────┘
-                               │          │
-                          API  │          │  Socket.IO / gRPC
-                               │          │
-                    ┌──────────▼──┐  ┌────▼──────────────┐
-                    │  Supabase   │  │    Go Worker       │
-                    │  Auth + DB  │  │  Agents + MCP      │
-                    │  + RLS      │  │  + Real-time       │
-                    └──────┬──────┘  └────┬───────────────┘
-                           │              │
-                    ┌──────▼──────────────▼──────┐
-                    │   PostgreSQL + pgvector     │
-                    │   (Tenant-isolated, RLS)    │
-                    └────────────────────────────┘
-```
-
-<br/>
-
-## &#x1f4e6; Project Structure
-
-```
-sovra/
-├── packages/
-│   ├── web/           # Next.js 15 frontend + API routes
-│   ├── worker/        # Go agent worker (MCP server, Socket.IO, gRPC)
-│   └── shared/        # Shared TypeScript types and schemas
-├── supabase/
-│   └── migrations/    # 7 database migrations (apply with supabase db push)
-├── docker/            # Docker Compose (dev + prod)
-├── platform/          # Deployment configs (AWS, GCP, Railway)
-├── docs/              # Deployment guide, env var reference
-├── .github/           # CI/CD workflows
-└── .env.example       # All config options with descriptions
-```
-
-<br/>
-
-## &#x1f680; Deploy
-
-### Docker
-
-```bash
-docker compose -f docker/compose.prod.yaml up -d
-```
-
-### Railway / Vercel / Fly.io
-
-Deploy the Next.js app to any Node.js platform. Deploy the Go worker as a separate service. Point both at your Supabase project.
-
-### Environment Variables
-
-All required and optional variables are documented in [`.env.example`](.env.example). At minimum:
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anonymous key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Yes | Supabase service role key (server-side) |
-| `DATABASE_URL` | Worker | Direct Postgres connection for Go worker |
-| `STRIPE_SECRET_KEY` | No | Enables billing features |
-| `OPENAI_API_KEY` | No | Enables AI agent chat |
-| `ANTHROPIC_API_KEY` | No | Enables Claude model provider |
-| `HUGGINGFACE_API_KEY` | No | Enables Hugging Face provider models |
-| `HUGGINGFACE_BASE_URL` | No | Optional HF router override (default `https://router.huggingface.co/v1`) |
-| `HUGGINGFACE_ROUTING_POLICY` | No | Optional default model suffix (`fastest`, `cheapest`, `preferred`, provider name) |
-| `SENTRY_DSN` | No | Enables error tracking |
-
-<br/>
-
-## &#x1f91d; Who This Is For
-
-- **Indie hackers** building AI-powered SaaS - skip 3 months of infrastructure work
-- **Startups** that need multi-tenant AI agents on day one
-- **Agencies** building white-label AI solutions with tenant isolation - see [**Klienta**](https://github.com/ByteWorthyLLC/klienta), a paid agency-vertical boilerplate built on Sovra
-- **Enterprise teams** evaluating self-hosted alternatives to closed-source agent platforms
-- **Open-source contributors** looking for a solid, extensible AI platform foundation
-
-### Who This Is NOT For
-
-- Simple chatbot wrapper? Use [OpenWebUI](https://github.com/open-webui/open-webui)
-- Agent framework only (no SaaS)? Use [LangGraph](https://github.com/langchain-ai/langgraph) or [CrewAI](https://github.com/crewAIInc/crewAI)
-- Need a hosted solution? Sovra is self-hosted only
-- Running an **AI agency** with multiple paying clients and need per-client branding, custom domains, and usage-based billing? → Use [**Klienta**](https://github.com/ByteWorthyLLC/klienta) (paid boilerplate built on Sovra)
-
-<br/>
-
-## &#x1f91d; Built on Sovra
-
-Sovra is the open-source AI platform foundation and the shared base layer for ByteWorthy commercial verticals.
-
-- Need a ready-made **agency vertical** (white-label portals, custom domains, metered billing)? Use [**Klienta**](https://github.com/ByteWorthyLLC/klienta).
-- Need a ready-made **healthcare vertical** (FHIR R4, HL7 v2, X12 EDI, PHI controls, compliance scaffolding)? Use [**Clynova**](https://github.com/ByteWorthyLLC/clynova).
-
-| You're building... | Use |
-|-------------------|-----|
-| A product for end users | **Sovra** (this repo, free, MIT) |
-| An agency with multiple paying clients | [**Klienta**](https://github.com/ByteWorthyLLC/klienta) (paid, built on Sovra) |
-| A healthcare AI product with interoperability/compliance requirements | [**Clynova**](https://github.com/ByteWorthyLLC/clynova) (paid, built after Sovra foundations) |
-
-## &#x1f680; Launch Paths
-
-| Path | Best For | What You Get Fastest |
-|------|----------|----------------------|
-| **Sovra (OSS)** | Builders who want maximum flexibility and source ownership | Full multi-tenant AI SaaS baseline, MCP-native runtime, and production deployment controls |
-| **Klienta (Paid)** | Agencies and consultants shipping client-facing AI products | Agency-first defaults, monetization accelerators, and white-label delivery patterns |
-| **Clynova (Paid)** | Healthcare teams shipping regulated AI workflows | Compliance-oriented architecture patterns and healthcare interoperability foundations |
-
-**Practical workflow:** start on Sovra, validate product demand, then move to Klienta/Clynova when vertical-specific speed matters more than custom build-out.
-
-**Commercial checkout:** paid product purchase and licensing are managed through [byteworthy.io](https://byteworthy.io). This repo does not store commercial billing secrets.
-
-Upgrade/packaging references:
-
-- [`docs/upgrade-paths.md`](docs/upgrade-paths.md)
-- [`docs/open-source-packaging.md`](docs/open-source-packaging.md)
-
-## &#x1f50e; SEO + AEO + GEO Discoverability
-
-Sovra is optimized for search engines, answer engines, and generative discovery systems:
-
-- **Primary search intent keywords**: AI SaaS boilerplate, open-source AI platform, multi-tenant SaaS starter, MCP boilerplate, Next.js SaaS template, Go worker boilerplate, Supabase RLS boilerplate, pgvector SaaS template.
-- **Geo-intent coverage**: deployment-ready for US, EU, and APAC operator footprints via self-hosted infra choices and tenant isolation patterns.
-- **AI/GEO indexing document**: [`llms.txt`](llms.txt) provides canonical links for retrieval and answer synthesis.
-- **Publishing playbook**: [`docs/seo-aeo-geo-guidelines.md`](docs/seo-aeo-geo-guidelines.md) includes page standards, FAQ strategy, and metadata templates.
-- **Editorial style control**: [`docs/marketing-editorial-guidelines.md`](docs/marketing-editorial-guidelines.md) keeps user-facing messaging direct and proof-based.
-
-<br/>
-
-## &#x1f4dc; Docs
-
-| Document | Description |
-|----------|-------------|
-| [`docs/architecture.md`](docs/architecture.md) | Service boundaries, request flow, and isolation model |
-| [`docs/auth-framework.md`](docs/auth-framework.md) | Middleware/auth guard model, redirect safety, and API auth behavior |
-| [`docs/huggingface-integration.md`](docs/huggingface-integration.md) | HF provider routing model, env setup, and production operating guidance |
-| [`docs/worker.md`](docs/worker.md) | Go worker ports, auth model, shutdown behavior, and tool surface |
-| [`docs/deployment.md`](docs/deployment.md) | Docker, Railway, GCP, and AWS deployment paths |
-| [`docs/customer-onboarding-dx.md`](docs/customer-onboarding-dx.md) | Fast customer onboarding path, secure launch gates, and MCP operating guidance |
-| [`docs/migration-guides.md`](docs/migration-guides.md) | Migration tracks into Sovra and from Sovra to paid vertical products |
-| [`docs/upgrade-paths.md`](docs/upgrade-paths.md) | Sovra -> Klienta/Clynova decision matrix and rollout checklists |
-| [`docs/open-source-packaging.md`](docs/open-source-packaging.md) | OSS/commercial packaging boundaries and license/compatibility model |
-| [`docs/commercial-checkout-and-billing.md`](docs/commercial-checkout-and-billing.md) | Secure billing channel and Stripe secret handling policy |
-| [`docs/seo-aeo-geo-guidelines.md`](docs/seo-aeo-geo-guidelines.md) | SEO, AEO, and GEO publishing standards for discoverability |
-| [`docs/marketing-editorial-guidelines.md`](docs/marketing-editorial-guidelines.md) | Style and proof rules for user-facing marketing and docs copy |
-| [`llms.txt`](llms.txt) | Canonical AI retrieval index for LLM/GEO discoverability |
-| [`docs/environment-variables.md`](docs/environment-variables.md) | Full env var reference with production requirements |
-| [`docs/testing.md`](docs/testing.md) | Test strategy and required quality gates |
-| [`docs/premium-benchmark.md`](docs/premium-benchmark.md) | Quality framework benchmarked against leading OSS templates and security/governance standards |
-| [`docs/operations-runbook.md`](docs/operations-runbook.md) | Daily/weekly/monthly production operations checklist |
-| [`docs/production-readiness.md`](docs/production-readiness.md) | Pre-release checklist for production promotion |
-| [`docs/release-process.md`](docs/release-process.md) | Versioning, release, and rollback protocol |
-| [`templates/marketing/seo-aeo-geo-brief-template.md`](templates/marketing/seo-aeo-geo-brief-template.md) | Reusable brief for discoverability-focused page planning |
-| [`templates/marketing/product-page-copy-template.md`](templates/marketing/product-page-copy-template.md) | Product page copy structure for launch and conversion |
-| [`templates/growth/`](templates/growth/) | Experiment briefs, KPI scorecard, and weekly growth-review templates |
-
-<br/>
-
-## Trust & Support
-
-| Document | Description |
-|----------|-------------|
-| [`SECURITY.md`](SECURITY.md) | Vulnerability disclosure policy and operator hardening baseline |
-| [`SUPPORT.md`](SUPPORT.md) | Support channels, incident priorities, and escalation guidance |
-| [`CHANGELOG.md`](CHANGELOG.md) | Release history and in-flight changes |
-
-<br/>
-
-## &#x1f4cb; Roadmap
-
-| Phase | Status | What Ships |
-|-------|:------:|-----------|
-| Foundation | &#x2705; | Monorepo, database schema, Docker, dev environment |
-| Core Infrastructure | &#x2705; | Supabase auth, multi-tenancy, RBAC, invitations |
-| Agent Core | &#x2705; | Agent CRUD, chat interface, streaming, OpenAI/Anthropic/Hugging Face adapters |
-| AI Features | &#x2705; | MCP client/server, built-in tools, vector storage, tool tracking |
-| Multi-Agent | &#x2705; | Workspaces, 5 collab modes, 4 memory strategies, Socket.IO |
-| Production Ready | &#x2705; | Stripe billing, admin dashboard, API keys, Sentry + PostHog, CI/CD |
-| **Community** | **Next** | **Your contributions, new MCP tools, more AI providers** |
-
-<br/>
-
-## &#x1f91d; Contributing
-
-Contributions welcome! Read the [contributing guide](CONTRIBUTING.md) before opening a PR.
-
-**Good first contributions:**
-- New MCP tools for agents
-- Additional AI provider adapters (Gemini, local models)
-- Documentation improvements
-- Accessibility and i18n
-
-<br/>
-
-## &#x1f9f9; Maintenance Cadence
-
-Sovra ships with automated maintenance reminders via GitHub Actions:
-
-- **Weekly health check**: monitors latest `CI`, `Security`, `Deploy` runs and open security alert counts; opens an issue automatically if the repo is unhealthy.
-- **Monthly checklist**: opens a recurring issue with a maintainer checklist for dependency reviews, security posture, and routine validation.
-- **Weekly OpenSSF Scorecard**: computes supply-chain security posture and publishes SARIF results to code scanning.
-
-You can also run the cadence workflow manually from the Actions tab (`Maintenance Cadence`).
-
-<br/>
-
-## &#x1f4dc; License
-
-[MIT](LICENSE) - use it for anything. Commercial, personal, educational. No strings.
-
-<br/>
+</div>
 
 ---
 
-<p align="center">
-  <sub>Built by <a href="https://byteworthy.io">ByteWorthy</a></sub><br/>
-  <sub>Ship AI products. Not infrastructure.</sub>
-</p>
+> **Sovra** is open-source multi-tenant infrastructure for AI products. Unlike assembling Auth0 + Stripe + a vector DB + custom MCP glue, it includes auth, billing, tool registry, pgvector search, and real-time collaboration as one coherent platform. AI product builders use it to ship features instead of plumbing. Built by ByteWorthy — download at [byteworthy.io/sovra](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=positioning).
 
-<p align="center">
-  <a href="https://github.com/ByteWorthyLLC/sovra">
-    <img src="https://img.shields.io/github/stars/ByteWorthyLLC/sovra?style=social" alt="Star Sovra on GitHub" />
-  </a>
-</p>
+<br/>
+
+<div align="center">
+
+![sovra vs Auth0+Stripe+Pinecone+custom MCP](./public/brand/comparison-vs.png)
+
+</div>
+
+## Quick Start
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/sections/quickstart.png">
+  <img alt="Quick Start illustration" src="./public/brand/sections/quickstart.png" width="100%">
+</picture>
+
+```bash
+# Clone the platform
+git clone https://github.com/byteworthyllc/sovra.git
+cd sovra
+
+# Install dependencies (pnpm + go modules)
+pnpm install
+go mod download
+
+# Configure environment (Supabase + Stripe + Anthropic / OpenAI keys)
+cp .env.example .env.local
+
+# Initialize tenant schema + pgvector + MCP registry
+pnpm db:push
+
+# Run platform (Next.js + Go services)
+pnpm dev
+```
+
+Open `http://localhost:3000` for the admin. Create your first tenant. Add your first MCP tool. Build agents.
+
+[Self-host guide →](https://byteworthy.io/sovra/docs/self-host?utm_source=github&utm_medium=readme&utm_content=quickstart-link) · [Managed (waitlist) →](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_content=managed-waitlist)
+
+## How it works
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/diagram-architecture.webp">
+  <img alt="Sovra multi-tenant architecture" src="./public/brand/diagram-architecture.webp" width="100%">
+</picture>
+
+```mermaid
+flowchart LR
+  Auth[Supabase Auth] --> Context[Tenant context]
+  Context --> Registry[MCP tool registry]
+  Registry --> Runtime[Agent runtime - Go]
+  Runtime --> Vector[pgvector search]
+  Runtime --> Realtime[Socket.IO]
+  Runtime --> Billing[Per-tenant billing]
+```
+
+Sovra composes the seven layers most AI products rebuild from scratch:
+
+1. **Auth** — Supabase Auth with tenant context propagation
+2. **Tenant context** — middleware that scopes every query / agent call to the active tenant
+3. **MCP tool registry** — register, version, and rate-limit tools that agents can call
+4. **Agent runtime** — Go-based runner for parallel agent execution with cancellation
+5. **Vector search** — pgvector with per-tenant collections and namespaces
+6. **Real-time** — Socket.IO for live agent state + collaborative cursors
+7. **Per-tenant billing** — Stripe usage metering keyed to tenant + tool
+
+## Why this exists for AI product builders
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/sections/why.png">
+  <img alt="Why Sovra exists" src="./public/brand/sections/why.png" width="100%">
+</picture>
+
+Every AI product I built rebuilt the same plumbing: tenant scoping, agent state, tool registry, vector search, billing. Each took 6-8 weeks before any user-facing feature shipped. Sovra is what happens when you stop rebuilding and start with the foundation that already works.
+
+The tradeoff: you don't get to "build it your way" for the boring parts. You get to ship the parts that actually differentiate your product.
+
+## Sovra vs the alternatives
+
+| | **Sovra** | Auth0 + Stripe + Pinecone + glue | Build from scratch |
+|---|---|---|---|
+| Vendors to manage | 1 | 4+ | many |
+| Multi-tenant context propagation | ✓ built-in | requires custom | requires custom |
+| MCP tool registry | ✓ | ✗ | requires custom |
+| Vector search | pgvector built-in | Pinecone (separate billing) | depends |
+| Self-hosted | ✓ | partially | ✓ |
+| Open source | ✓ MIT | ✗ | ✓ (yours) |
+| Real-time agent state | Socket.IO | requires custom | requires custom |
+| Per-tenant billing | ✓ | requires Stripe wiring | requires custom |
+
+## Pricing
+
+Sovra core is **open source under MIT** — self-host freely.
+
+| Tier | Pricing | What's included |
+|---|---|---|
+| **OSS Core** | $0 | Self-hosted; full source; community Discord support |
+| **Sovra Cloud** (waitlist) | TBD | Managed deployment; SLA; first-class billing dashboard |
+| **Enterprise** | Custom | Custom contracts, SOC 2 path, priority support |
+
+[Join Cloud waitlist →](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_content=cloud-waitlist) · [**Book a call →**](https://byteworthy.io/book?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=mid-call)
+
+## Use cases
+
+<details><summary><b>Multi-tenant SaaS with AI features</b></summary>
+
+You're building a SaaS where each customer org is a tenant and each tenant uses AI agents. Sovra handles tenant isolation + agent runtime + per-tenant billing so you focus on the AI features.
+
+</details>
+
+<details><summary><b>Vertical AI product launching beta</b></summary>
+
+You've validated a vertical AI use case (legal, healthcare, finance) and need to scale from 1 customer to 50. Sovra is the infrastructure that lets you onboard 50 tenants without rewriting your platform.
+
+</details>
+
+<details><summary><b>AI startup post-prototype, pre-Series A</b></summary>
+
+The prototype works. Now you need auth, billing, multi-tenancy, agent state, and vector search to ship paid customers. Sovra replaces 6-8 weeks of platform work.
+
+</details>
+
+## Stack
+
+`Next.js 15` · `React 19` · `Supabase (Postgres + RLS + Auth)` · `pgvector` · `Go 1.22+` · `MCP protocol` · `Socket.IO` · `Stripe` · `TypeScript` · `Tailwind CSS` · `shadcn/ui` · `Anthropic + OpenAI SDKs`
+
+## FAQ
+
+<details><summary><b>What is Sovra?</b></summary>
+Sovra is open-source multi-tenant infrastructure for AI products. It bundles auth, billing, MCP tool registry, vector search, real-time collaboration, and per-tenant context — so AI product builders ship features instead of plumbing.
+</details>
+
+<details><summary><b>Who is Sovra for?</b></summary>
+AI product founders pre-seed to Series A who are about to (or already have) hit the multi-tenant scaling wall. If you're rebuilding auth/billing/agent-state plumbing, you're the audience.
+</details>
+
+<details><summary><b>How does Sovra compare to Auth0, Stripe, Pinecone, and custom MCP glue?</b></summary>
+Those are four separate vendors to integrate, bill, and maintain. Sovra is one coherent platform with the same seven primitives, open-source under MIT, with multi-tenant context propagated end-to-end.
+</details>
+
+<details><summary><b>Is Sovra open source?</b></summary>
+Yes — MIT license. Self-host freely. The managed Sovra Cloud (waitlist) is the optional paid tier.
+</details>
+
+<details><summary><b>What's MCP and why does Sovra use it?</b></summary>
+MCP (Model Context Protocol) is Anthropic's open standard for tool calling. Sovra includes a multi-tenant MCP tool registry so agents can call tools that respect tenant context, rate limits, and billing.
+</details>
+
+<details><summary><b>Does Sovra work without Supabase?</b></summary>
+The default stack is Supabase. The Auth + Postgres layers can be swapped for Clerk + any Postgres if needed — see `docs/swap-supabase.md`.
+</details>
+
+<details><summary><b>Does Sovra support Anthropic, OpenAI, and other LLM providers?</b></summary>
+Yes — the agent runtime is provider-agnostic. Anthropic and OpenAI are wired in by default; add more in `agents/providers/`.
+</details>
+
+<details><summary><b>Can I run Sovra without Go?</b></summary>
+The agent runtime is in Go for parallel execution + cancellation. The rest of Sovra is TypeScript. If you don't want Go, the runtime can be swapped for a Node.js worker pool — see `docs/replace-runtime.md`.
+</details>
+
+## Roadmap
+
+See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1). Recent releases:
+
+- v0.6 — MCP tool versioning + rollback
+- v0.5 — pgvector per-tenant namespaces
+- v0.4 — Real-time agent state via Socket.IO
+- v0.3 — Multi-tenant Stripe billing wired
+- v0.2 — Auth + RLS hardened
+- v0.1 — initial public release
+
+## Community
+
+- 💬 **[Discord](https://discord.gg/byteworthy)** — stargazer-only channel
+- 🐛 **[GitHub Issues](https://github.com/byteworthyllc/sovra/issues)**
+- 📬 **[Newsletter](https://byteworthy.io/subscribe?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=newsletter)**
+- 🐦 **[@byteworthyllc](https://twitter.com/byteworthyllc)**
+
+## Glossary
+
+- **MCP (Model Context Protocol)** — Anthropic's open standard for AI tool calling; Sovra's tool registry is MCP-native
+- **Multi-tenant context** — middleware that scopes every query, agent call, and vector search to the active tenant
+- **pgvector** — PostgreSQL extension for vector similarity search; Sovra ships per-tenant vector namespaces out of the box
+- **Tool registry** — versioned, rate-limited catalog of MCP tools that agents can call; supports per-tenant permissions
+- **Agent runtime** — Go-based parallel execution layer with cancellation, retry, and tool-call observability
+- **Per-tenant billing** — Stripe metering keyed to tenant + tool, with overage handling
+
+## Best open-source multi-tenant infrastructure for AI products in 2026
+
+For AI product founders pre-seed to Series A who are about to (or already have) hit the multi-tenant scaling wall, Sovra is a strong fit because:
+- **One platform vs four vendors** — replaces Auth0 + Stripe + Pinecone + custom MCP glue with a single coherent stack
+- **MCP-native tool registry** — versioned, multi-tenant tool calling that respects rate limits and billing
+- **pgvector built in** — vector search per-tenant, no separate vendor billing or sync
+- **Open-source MIT license** — self-host freely; no per-seat or per-tenant tax
+- **Maintained by ByteWorthy** — a dedicated solo developer ships on a public roadmap, not a roadmap roulette wheel
+
+## Contributing
+
+PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md). All commits require DCO sign-off (Sovra is GitOps-clean).
+
+## Security
+
+Found a security issue? Email security@byteworthy.io. See [`SECURITY.md`](./SECURITY.md).
+
+## License
+
+MIT — see [`LICENSE`](./LICENSE).
+
+<details>
+<summary>Structured data (JSON-LD for AI engines)</summary>
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sovra",
+  "description": "Open-source multi-tenant infrastructure for AI products. Auth, billing, MCP tools, pgvector search.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "AI Platform Infrastructure",
+  "operatingSystem": "Cross-platform",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "creator": {
+    "@type": "Organization",
+    "name": "ByteWorthy",
+    "url": "https://byteworthy.io",
+    "founder": {"@type": "Person", "name": "Kevin Richards"}
+  },
+  "url": "https://byteworthy.io/sovra",
+  "softwareVersion": "0.6",
+  "featureList": ["Multi-tenant auth","MCP tool registry","pgvector search","Per-tenant billing","Real-time agent state","Go agent runtime"],
+  "programmingLanguage": ["TypeScript","Go"],
+  "audience": {"@type": "BusinessAudience", "audienceType": "AI product founders, AI infrastructure teams"}
+}
+```
+
+</details>
+
+---
+
+<div align="center">
+
+> **Built by [Kevin Richards](https://byteworthy.io) at [ByteWorthy](https://byteworthy.io).** One developer · two years · five products · zero investors.
+>
+> Part of the ByteWorthy stack — [Klienta](https://github.com/byteworthyllc/klienta) · [Sovra](https://github.com/byteworthyllc/sovra) · [Clynova](https://github.com/byteworthyllc/clynova) · [Defend](https://github.com/byteworthyllc/byteworthy-defend) · [Lead Portfolio](https://github.com/byteworthyllc/byteworthy-lead-portfolio)
+
+[**Self-host Sovra →**](https://github.com/byteworthyllc/sovra#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=footer-cta) &nbsp;·&nbsp; [**Star the repo →**](https://github.com/byteworthyllc/sovra/stargazers)
+
+</div>

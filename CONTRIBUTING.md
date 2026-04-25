@@ -1,126 +1,85 @@
-# Contributing to Sovra
+# Contributing to ByteWorthy
 
-Thanks for your interest in contributing! Sovra is an open-source project and we welcome contributions of all kinds.
+Thanks for considering a contribution! ByteWorthy is a one-developer studio, so contributions matter.
 
-## Getting Started
+## Quick start
 
-### Prerequisites
+1. **Search [existing issues](../issues)** — your idea may already be discussed
+2. **Open an issue first** for non-trivial changes — saves time vs surprise PRs
+3. **Fork, branch, commit, PR** — standard workflow
 
-- **Node.js** 20+ (recommend using [fnm](https://github.com/Schniz/fnm) or nvm)
-- **pnpm** 10+ (`npm install -g pnpm`)
-- **Go** 1.22+ (for the worker service)
-- **Docker** (for local Supabase)
-- **Supabase CLI** (`brew install supabase/tap/supabase`)
+## Branch + commit conventions
 
-### Setup
+- Branch naming: `feature/short-desc`, `fix/short-desc`, `chore/short-desc`
+- Commit format: [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, `refactor:`, etc.)
+- Keep PRs focused on one logical change
 
-```bash
-# Clone the repo
-git clone https://github.com/ByteWorthyLLC/sovra.git
-cd sovra
+## Code style
 
-# Install dependencies
-pnpm install
+| Stack | Tools |
+|---|---|
+| TypeScript / JavaScript | `pnpm lint`, `pnpm typecheck`, Prettier |
+| Python | `ruff format`, `ruff check`, `mypy` |
+| Go | `gofmt`, `golangci-lint` |
+| Markdown | `pnpm lint:md` (markdownlint) |
 
-# Start local Supabase (requires Docker running)
-supabase start
+PRs must pass CI (lint + typecheck + tests) before review.
 
-# Set up environment
-cp .env.example .env.local
-cp packages/web/.env.example packages/web/.env.local
-# Fill in the Supabase keys from 'supabase status' output
+## Testing
 
-# Start the web app
-cd packages/web && pnpm dev
+- New features need tests
+- Bug fixes need a regression test
+- Integration tests over unit tests for critical paths
+- See `__tests__/` or `tests/` for examples
 
-# (Optional) Start the Go worker in a separate terminal
-cd packages/worker && go run ./cmd/worker
-```
+## What we accept
 
-### Project Structure
+✅ Bug fixes (always welcome)
+✅ Documentation improvements
+✅ Test coverage additions
+✅ Performance improvements with benchmarks
+✅ Accessibility improvements
+✅ Translations (when product supports i18n)
 
-```
-sovra/
-  packages/
-    web/          # Next.js 15 frontend + API routes
-    worker/       # Go agent worker (MCP, Socket.IO)
-    shared/       # Shared TypeScript types and schemas
-  supabase/
-    migrations/   # Database migrations
-  docker/         # Docker Compose configs
-```
+## What we don't accept (without prior discussion)
 
-## Development Workflow
+❌ Major architecture changes — discuss in an Issue first
+❌ New dependencies without justification
+❌ Style-only changes (rename variables, reformat) without functional purpose
+❌ Removal of telemetry/analytics (we use it minimally for product improvement)
+❌ Vendor swaps (e.g., replacing Supabase with X) — these need product-level alignment
 
-### Branching
+## DCO sign-off
 
-- `master` is the release branch.
-- `feature/short-desc` for new features
-- `fix/short-desc` for bug fixes
-- `chore/short-desc` for maintenance
-
-### Commits
-
-Use conventional commits:
-
-```
-feat(scope): add new feature
-fix(scope): fix a bug
-chore(scope): maintenance task
-docs(scope): documentation change
-test(scope): add or update tests
-```
-
-### Testing
+All commits require a [Developer Certificate of Origin](https://developercertificate.org/) sign-off:
 
 ```bash
-# Run web tests
-cd packages/web && pnpm test
-
-# Run Go tests
-cd packages/worker && go test ./...
-
-# Type check
-cd packages/web && pnpm tsc --noEmit
+git commit -s -m "feat: add the thing"
 ```
 
-### Code Quality
+Or configure once:
+```bash
+git config --global commit.gpgsign true
+git config --global format.signoff true
+```
 
-- **TypeScript** for all frontend code (strict mode)
-- **Go** for the worker service
-- **Tailwind CSS** with semantic design tokens (see `globals.css`)
-- **Vitest** for frontend tests
-- All PRs must pass CI (tests + type check + lint)
+## Code review
 
-## What to Contribute
+- All PRs reviewed by Kevin (founder)
+- Expect 1-2 round of feedback
+- We aim for ≤7-day review turnaround on community PRs
+- Paid-tier customers get faster review windows
 
-### Good First Issues
+## Recognition
 
-Look for issues labeled [`good first issue`](https://github.com/ByteWorthyLLC/sovra/labels/good%20first%20issue).
+Contributors land in:
+- `CONTRIBUTORS.md` (public list)
+- Release notes (per release that includes their work)
+- ByteWorthy newsletter shoutouts (optional, opt-in)
 
-### Areas We Need Help
+## Questions?
 
-- **Documentation** -- better guides, examples, tutorials
-- **Testing** -- more integration tests, E2E tests
-- **Accessibility** -- screen reader testing, keyboard navigation
-- **Internationalization** -- i18n support
-- **New AI providers** -- adapters for Anthropic, Gemini, local models
-- **MCP tools** -- new built-in tools for agents
+- 💬 [Discord](https://discord.gg/byteworthy) `#contributors` channel
+- 📧 kevin@byteworthy.io for anything sensitive
 
-## Pull Request Process
-
-1. Fork the repo and create your branch from `master`
-2. Make your changes with tests
-3. Ensure all tests pass and there are no TypeScript errors
-4. Update documentation if you changed any public APIs
-5. Open a PR with a clear description of what and why
-
-For discoverability and onboarding experiments, use the `Growth experiment` issue template.
-
-## Code of Conduct
-
-Be kind. Be respectful. We're all here to build something useful.
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the MIT License.
+Built by [Kevin Richards](https://byteworthy.io) at [ByteWorthy](https://byteworthy.io).
