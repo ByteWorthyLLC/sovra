@@ -346,3 +346,7 @@ MIT - see [`LICENSE`](./LICENSE).
 [**Self-host Sovra →**](https://github.com/byteworthyllc/sovra#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=footer-cta) &nbsp;·&nbsp; [**Star the repo →**](https://github.com/byteworthyllc/sovra/stargazers)
 
 </div>
+
+## Stay updated
+
+Built by [ByteWorthy](https://byteworthy.io). Subscribe at [byteworthy.io/newsletter](https://byteworthy.io/newsletter) for updates on this project and new releases.
