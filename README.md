@@ -249,7 +249,7 @@ For AI product founders pre-seed to Series A who are about to (or already have) 
 - **MCP-native tool registry** - versioned, multi-tenant tool calling that respects rate limits and billing
 - **pgvector built in** - vector search per-tenant, no separate vendor billing or sync
 - **Open-source MIT license** - self-host freely; no per-seat or per-tenant tax
-- **Maintained by ByteWorthy** - a dedicated solo developer ships on a public roadmap, not a roadmap roulette wheel
+- **Maintained by ByteWorthy** - ships on a public roadmap with transparent versioning and migration guides
 
 ## Documentation
 
