@@ -1,5 +1,7 @@
 <div align="center">
 
+<img alt="Sovra - open-source multi-tenant infrastructure for AI products" src="./public/brand/hero-light.png" width="100%">
+
 # Sovra
 
 **Open-source multi-tenant infrastructure for AI products. Auth, billing, MCP tools, vector search - one platform.**
@@ -37,10 +39,7 @@
 
 ## Quick Start
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/sections/quickstart.png">
-  <img alt="Quick Start illustration" src="./public/brand/sections/quickstart.png" width="100%">
-</picture>
+<img alt="Quick Start illustration" src="./public/brand/sections/quickstart.png" width="100%">
 
 ```bash
 # Clone the platform
@@ -67,10 +66,7 @@ Open `http://localhost:3000` for the admin. Create your first tenant. Add your f
 
 ## How it works
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/brand/diagram-architecture.webp">
-  <img alt="Sovra multi-tenant architecture" src="./public/brand/diagram-architecture.webp" width="100%">
-</picture>
+<img alt="Sovra multi-tenant architecture" src="./public/brand/diagram-architecture.webp" width="100%">
 
 ```mermaid
 flowchart LR
