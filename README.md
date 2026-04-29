@@ -6,8 +6,6 @@
 
 [![Build](https://img.shields.io/github/actions/workflow/status/byteworthyllc/sovra/ci.yml?style=for-the-badge&color=2563EB&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/actions)
 [![License](https://img.shields.io/badge/license-MIT-2563EB?style=for-the-badge&labelColor=0F172A)](./LICENSE)
-[![Stars](https://img.shields.io/github/stars/byteworthyllc/sovra?style=for-the-badge&color=5B7C99&labelColor=0F172A)](https://github.com/byteworthyllc/sovra/stargazers)
-[![Pioneer Waitlist](https://img.shields.io/badge/Pioneer_waitlist-_$49%2Fmo_for_life-2563EB?style=for-the-badge&labelColor=0F172A)](https://byteworthy.io/pioneer)
 
 [**Try the demo →**](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-cta) &nbsp;·&nbsp; [Read the docs](https://byteworthy.io/sovra/docs?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-docs) &nbsp;·&nbsp; [Self-host →](https://github.com/byteworthyllc/sovra#quick-start)
 
@@ -23,9 +21,7 @@
 > **First 100 customers get $49/mo locked for life.** No exceptions.
 > The other 99 will pay 3-7× that for the same product. The cap exists; the math doesn't bend.
 
-- ⭐ **Star this repo** so GitHub notifies you on releases
-- 👁️ **Watch → Custom → Releases** for direct alerts
-- 📬 **[Lock Pioneer pricing](https://byteworthy.io/pioneer)** - gets you the Discord invite + early-access drops
+- **[Lock Pioneer pricing](https://byteworthy.io/pioneer)** - gets you the Discord invite + early-access drops
 
 ---
 
@@ -137,7 +133,7 @@ const result = await sovra.agents.run({
   <img alt="Why Sovra exists" src="./public/brand/sections/why.png" width="100%">
 </picture>
 
-Every AI product I built rebuilt the same plumbing: tenant scoping, agent state, tool registry, vector search, billing. Each took 6-8 weeks before any user-facing feature shipped. Sovra is what happens when you stop rebuilding and start with the foundation that already works.
+AI products repeatedly rebuild the same plumbing: tenant scoping, agent state, tool registry, vector search, billing. Each rebuild takes 6-8 weeks before any user-facing feature ships. Sovra is the foundation that ships those seven layers solved — so engineering time goes to the features that differentiate the product.
 
 The tradeoff: you don't get to "build it your way" for the boring parts. You get to ship the parts that actually differentiate your product.
 
@@ -237,10 +233,10 @@ See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1). Rec
 
 ## Community
 
-- 🪙 **[Pioneer waitlist](https://byteworthy.io/pioneer)** - $49/mo locked for life + Discord invite at launch
-- 🐛 **[GitHub Issues](https://github.com/byteworthyllc/sovra/issues)**
-- 📬 **[Newsletter](https://byteworthy.io/subscribe?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=newsletter)**
-- 🐦 **[@byteworthyllc](https://twitter.com/byteworthyllc)**
+- → **[Pioneer waitlist](https://byteworthy.io/pioneer)** - $49/mo locked for life + Discord invite at launch
+- → **[GitHub Issues](https://github.com/byteworthyllc/sovra/issues)**
+- → **[Newsletter](https://byteworthy.io/subscribe?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=newsletter)**
+- → **[@byteworthyllc](https://twitter.com/byteworthyllc)**
 
 ## Glossary
 
@@ -285,17 +281,6 @@ PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md). All commits require DCO
 
 Found a security issue? Email security@byteworthy.io. See [`SECURITY.md`](./SECURITY.md).
 
-## Share this
-
-If you know someone building [r/MachineLearning / r/programming], share this - it's the kind of thing that compounds for both of us.
-
-[![Tweet](https://img.shields.io/badge/Share_on_X-2563EB?style=flat-square&logo=x&logoColor=white&labelColor=0F172A)](https://twitter.com/intent/tweet?text=Sovra%20-%20open-source%20multi-tenant%20infra%20for%20AI%20products.%20Replaces%20Auth0%20%2B%20Stripe%20%2B%20Pinecone%20%2B%20custom%20MCP%20glue.%20Pre-launch.&url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra)
-[![Submit to HN](https://img.shields.io/badge/Submit_to_HN-FF6600?style=flat-square&logo=ycombinator&logoColor=white&labelColor=0F172A)](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra&t=Show%20HN%3A%20Sovra%20%E2%80%94%20Open-source%20multi-tenant%20infrastructure%20for%20AI%20products)
-[![Submit to Reddit](https://img.shields.io/badge/Submit_to_Reddit-FF4500?style=flat-square&logo=reddit&logoColor=white&labelColor=0F172A)](https://reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra&title=Show%20HN%3A%20Sovra%20%E2%80%94%20Open-source%20multi-tenant%20infrastructure%20for%20AI%20products)
-[![Share on LinkedIn](https://img.shields.io/badge/Share_on_LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white&labelColor=0F172A)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fbyteworthyllc%2Fsovra)
-
-Or just star the repo. That alone helps more than you'd think when GitHub trending picks this up.
-
 ## License
 
 MIT - see [`LICENSE`](./LICENSE).
@@ -314,12 +299,7 @@ MIT - see [`LICENSE`](./LICENSE).
   "operatingSystem": "Cross-platform",
   "license": "https://opensource.org/licenses/MIT",
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "creator": {
-    "@type": "Organization",
-    "name": "ByteWorthy",
-    "url": "https://byteworthy.io",
-    "founder": {"@type": "Person", "name": "Kevin Richards"}
-  },
+  "creator": {"@type": "Organization", "name": "ByteWorthy", "url": "https://byteworthy.io"},
   "url": "https://byteworthy.io/sovra",
   "softwareVersion": "0.6",
   "featureList": ["Multi-tenant auth","MCP tool registry","pgvector search","Per-tenant billing","Real-time agent state","Go agent runtime"],
@@ -334,9 +314,7 @@ MIT - see [`LICENSE`](./LICENSE).
 
 <div align="center">
 
-> **Built by [Kevin Richards](https://byteworthy.io) at [ByteWorthy](https://byteworthy.io).** One developer · two years · five products · zero investors.
->
-> Part of the ByteWorthy stack - [Klienta](https://github.com/byteworthyllc/klienta) · [Sovra](https://github.com/byteworthyllc/sovra) · [Clynova](https://github.com/byteworthyllc/clynova) · [Defend](https://github.com/byteworthyllc/byteworthy-defend) · [Lead Portfolio](https://github.com/byteworthyllc/byteworthy-lead-portfolio)
+> **Part of the ByteWorthy stack** — [Klienta](https://github.com/byteworthyllc/klienta) · [Sovra](https://github.com/byteworthyllc/sovra) · [Clynova](https://github.com/byteworthyllc/clynova) · [Defend](https://github.com/byteworthyllc/byteworthy-defend) · [Lead Portfolio](https://github.com/byteworthyllc/byteworthy-lead-portfolio)
 
 [**Self-host Sovra →**](https://github.com/byteworthyllc/sovra#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=footer-cta) &nbsp;·&nbsp; [**Star the repo →**](https://github.com/byteworthyllc/sovra/stargazers)
 
