@@ -11,21 +11,12 @@
 
 </div>
 
-> [!IMPORTANT]
-> **Pre-launch - public beta.** This is early-access source. The product is being built in public. Star to follow new releases, [join Discord](https://discord.gg/byteworthy) for the inside view, and lock [Pioneer pricing ($49/mo for life)](https://byteworthy.io/pioneer) - first 100 customers, ever, no exceptions.
+> [!NOTE]
+> **Public beta.** Sovra is the open-source foundation underneath the ByteWorthy boilerplate family ([Klienta](https://github.com/ByteWorthyLLC/klienta), [Clynova](https://github.com/ByteWorthyLLC/clynova)). Self-host freely under MIT. [Star to follow releases](https://github.com/ByteWorthyLLC/sovra) or [join the Discord](https://discord.gg/byteworthy).
 
 ---
 
-## Get launch access
-
-> **First 100 customers get $49/mo locked for life.** No exceptions.
-> The other 99 will pay 3-7× that for the same product. The cap exists; the math doesn't bend.
-
-- **[Lock Pioneer pricing](https://byteworthy.io/pioneer)** - gets you the Discord invite + early-access drops
-
----
-
-> **Sovra** is open-source multi-tenant infrastructure for AI products. Unlike assembling Auth0 + Stripe + a vector DB + custom MCP glue, it includes auth, billing, tool registry, pgvector search, and real-time collaboration as one coherent platform. AI product builders can use it to ship features instead of plumbing. Built by ByteWorthy - download at [byteworthy.io/sovra](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=positioning).
+> **Sovra** is open-source multi-tenant infrastructure for AI products. Instead of assembling Auth0 + Stripe + a vector DB + custom MCP glue, it bundles auth, billing, an MCP tool registry, pgvector search, and real-time collaboration as one coherent platform. The goal is simple: ship the AI features that differentiate your product, not the platform plumbing every AI app rebuilds.
 
 <br/>
 
@@ -173,7 +164,7 @@ The prototype works. Now you need auth, billing, multi-tenancy, agent state, and
 
 ## Stack
 
-`Next.js 15` · `React 19` · `Supabase (Postgres + RLS + Auth)` · `pgvector` · `Go 1.22+` · `MCP protocol` · `Socket.IO` · `Stripe` · `TypeScript` · `Tailwind CSS` · `shadcn/ui` · `Anthropic + OpenAI SDKs`
+`Next.js 16` · `React 19` · `TypeScript` · `Supabase (Postgres + RLS + Auth)` · `pgvector` · `Go 1.22+ (worker)` · `Model Context Protocol` · `Vercel AI SDK (Anthropic + OpenAI)` · `Socket.IO` · `Stripe` · `Tailwind CSS` · `shadcn/ui` · `Sentry` · `PostHog` · `Upstash Redis`
 
 ## FAQ
 
@@ -222,10 +213,11 @@ See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1). Rec
 
 ## Community
 
-- → **[Pioneer waitlist](https://byteworthy.io/pioneer)** - $49/mo locked for life + Discord invite at launch
-- → **[GitHub Issues](https://github.com/byteworthyllc/sovra/issues)**
-- → **[Newsletter](https://byteworthy.io/subscribe?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=newsletter)**
-- → **[@byteworthyllc](https://twitter.com/byteworthyllc)**
+- → **[Discord](https://discord.gg/byteworthy)** — design chat, releases, support
+- → **[GitHub Discussions](https://github.com/ByteWorthyLLC/sovra/discussions)** — questions and design proposals
+- → **[GitHub Issues](https://github.com/ByteWorthyLLC/sovra/issues)** — bug reports and feature requests
+- → **[Newsletter](https://byteworthy.io/newsletter)** — release notes by email
+- → **[@byteworthyllc](https://twitter.com/byteworthyllc)** — release-day pings
 
 ## Glossary
 
@@ -290,7 +282,7 @@ MIT - see [`LICENSE`](./LICENSE).
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
   "creator": {"@type": "Organization", "name": "ByteWorthy", "url": "https://byteworthy.io"},
   "url": "https://byteworthy.io/sovra",
-  "softwareVersion": "0.6",
+  "softwareVersion": "1.0",
   "featureList": ["Multi-tenant auth","MCP tool registry","pgvector search","Per-tenant billing","Real-time agent state","Go agent runtime"],
   "programmingLanguage": ["TypeScript","Go"],
   "audience": {"@type": "BusinessAudience", "audienceType": "AI product founders, AI infrastructure teams"}
@@ -303,9 +295,13 @@ MIT - see [`LICENSE`](./LICENSE).
 
 <div align="center">
 
-> **Part of the ByteWorthy stack**: [Klienta](https://github.com/byteworthyllc/klienta) · [Sovra](https://github.com/byteworthyllc/sovra) · [Clynova](https://github.com/byteworthyllc/clynova) · [Defend](https://github.com/byteworthyllc/byteworthy-defend) · [Lead Portfolio](https://github.com/byteworthyllc/byteworthy-lead-portfolio)
+> **The ByteWorthy boilerplate family** (same multi-tenant lineage):<br/>
+> **[Sovra](https://github.com/ByteWorthyLLC/sovra)** *(this repo, MIT)* &nbsp;·&nbsp; [Klienta](https://github.com/ByteWorthyLLC/klienta) *(commercial — agency portals)* &nbsp;·&nbsp; [Clynova](https://github.com/ByteWorthyLLC/clynova) *(commercial — HIPAA-ready healthcare)*
 
-[**Self-host Sovra →**](https://github.com/byteworthyllc/sovra#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=footer-cta)
+> **Open-source companions:**
+> [honeypot-med](https://github.com/ByteWorthyLLC/honeypot-med) &nbsp;·&nbsp; [byteworthy-defend](https://github.com/ByteWorthyLLC/byteworthy-defend) &nbsp;·&nbsp; [vqol](https://github.com/ByteWorthyLLC/vqol) &nbsp;·&nbsp; [hightimized](https://github.com/ByteWorthyLLC/hightimized) &nbsp;·&nbsp; [outbreaktinder](https://github.com/ByteWorthyLLC/outbreaktinder)
+
+[**Self-host Sovra →**](https://github.com/ByteWorthyLLC/sovra#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed)
 
 </div>
 
