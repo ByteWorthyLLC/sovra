@@ -27,8 +27,7 @@
 
 > **The goal is simple:** ship the AI features that differentiate your product — not the platform plumbing every AI app rebuilds.
 
-<br/>
-## ⚡ Quick Start
+## Quick Start
 
 ```bash
 # Clone the platform
@@ -51,11 +50,9 @@ Open `http://localhost:3000` · Create your first tenant · Add an MCP tool · S
 
 [Self-host guide →](https://byteworthy.io/sovra/docs/self-host) &nbsp;·&nbsp; [Managed (waitlist) →](https://byteworthy.io/sovra/managed)
 
-<br/>
+## Architecture
 
-## 🏗️ Architecture
-
-![Sovra Architecture](./public/brand/hero-banner.svg)
+![Sovra Architecture Diagram](./public/brand/hero-banner.svg)
 
 Sovra composes the **seven layers** most AI products rebuild from scratch — wired together and multi-tenant-aware from day one:
 
@@ -71,15 +68,15 @@ Sovra composes the **seven layers** most AI products rebuild from scratch — wi
 
 ```mermaid
 flowchart LR
-    subgraph ingress["① Ingress"]
+    subgraph ingress["Ingress"]
         Auth["Supabase Auth"]
     end
-    subgraph core["② – ④ Sovra Core"]
+    subgraph core["Sovra Core"]
         Context["Tenant Context\nMiddleware"]
         Registry["MCP Tool\nRegistry"]
         Runtime["Agent Runtime\n(Go)"]
     end
-    subgraph data["⑤ – ⑦ Data Layer"]
+    subgraph data["Data Layer"]
         Vector["pgvector\nSearch"]
         Realtime["Socket.IO\nRealtime"]
         Billing["Stripe\nMetered"]
@@ -93,8 +90,7 @@ flowchart LR
     style data fill:#0F172A,stroke:#334155,color:#94A3B8
 ```
 
-<br/>
-## 🔧 What it looks like
+## What it looks like
 
 <details open>
 <summary><b>Register an MCP tool</b> — Sovra handles tenant scoping, rate limits, and billing automatically</summary>
@@ -134,20 +130,15 @@ const result = await sovra.agents.run({
 
 </details>
 
-<br/>
-
-## ⚖️ Sovra vs the alternatives
+## Sovra vs the alternatives
 
 ![Comparison Table](./public/brand/comparison-table.svg)
 
-<br/>
-
-## 🧩 Seven layers · zero glue
+## Seven layers · zero glue
 
 ![Feature Grid](./public/brand/feature-grid.svg)
 
-<br/>
-## 💡 Why this exists for AI product builders
+## Why this exists for AI product builders
 
 AI products repeatedly rebuild the same plumbing: tenant scoping, agent state, tool registry, vector search, billing. Each rebuild takes **6–8 weeks** before any user-facing feature ships.
 
@@ -155,9 +146,7 @@ Sovra ships those seven layers solved, so engineering time goes to the features 
 
 > The tradeoff: you don't get to "build it your way" for the boring parts. **You get to ship the parts that actually differentiate your product.**
 
-<br/>
-
-## 💰 Pricing
+## Pricing
 
 Sovra core is **open source under MIT** — self-host freely.
 
@@ -169,9 +158,7 @@ Sovra core is **open source under MIT** — self-host freely.
 
 [Join Cloud waitlist →](https://byteworthy.io/sovra/managed) &nbsp;·&nbsp; [**Book a call →**](https://byteworthy.io/book?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=mid-call)
 
-<br/>
-
-## 🎯 Use cases
+## Use cases
 
 <details><summary><b>Multi-tenant SaaS with AI features</b></summary>
 
@@ -191,14 +178,11 @@ The prototype works. Now you need auth, billing, multi-tenancy, agent state, and
 
 </details>
 
-<br/>
-
-## 🛠️ Stack
+## Stack
 
 `Next.js 16` &nbsp;·&nbsp; `React 19` &nbsp;·&nbsp; `TypeScript` &nbsp;·&nbsp; `Supabase (Postgres + RLS + Auth)` &nbsp;·&nbsp; `pgvector` &nbsp;·&nbsp; `Go 1.22+` &nbsp;·&nbsp; `Model Context Protocol` &nbsp;·&nbsp; `Vercel AI SDK (Anthropic + OpenAI)` &nbsp;·&nbsp; `Socket.IO` &nbsp;·&nbsp; `Stripe` &nbsp;·&nbsp; `Tailwind CSS` &nbsp;·&nbsp; `shadcn/ui` &nbsp;·&nbsp; `Sentry` &nbsp;·&nbsp; `PostHog` &nbsp;·&nbsp; `Upstash Redis`
 
-<br/>
-## 🗺️ Roadmap
+## Roadmap
 
 See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1).
 
@@ -211,9 +195,7 @@ See the [public roadmap](https://github.com/byteworthyllc/sovra/projects/1).
 | **v0.2** | Auth + RLS hardened |
 | **v0.1** | Initial public release |
 
-<br/>
-
-## ❓ FAQ
+## FAQ
 
 <details><summary><b>What is Sovra?</b></summary>
 
@@ -263,8 +245,7 @@ The agent runtime is in Go for parallel execution + cancellation. The rest of So
 
 </details>
 
-<br/>
-## 💬 Community
+## Community
 
 <table>
 <tr>
@@ -289,9 +270,7 @@ The agent runtime is in Go for parallel execution + cancellation. The rest of So
 </tr>
 </table>
 
-<br/>
-
-## 📚 Documentation
+## Documentation
 
 | Doc | Description |
 |-----|-------------|
@@ -303,17 +282,15 @@ The agent runtime is in Go for parallel execution + cancellation. The rest of So
 | [Security policy](./SECURITY.md) | Vulnerability disclosure |
 | [Support](./SUPPORT.md) | How to get help |
 
-<br/>
-
-## 🤝 Contributing
+## Contributing
 
 PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md). All commits require DCO sign-off (Sovra is GitOps-clean).
 
-## 🔒 Security
+## Security
 
 Found a security issue? Email **security@byteworthy.io** — see [`SECURITY.md`](./SECURITY.md).
 
-## 📄 License
+## License
 
 MIT — see [`LICENSE`](./LICENSE).
 
@@ -349,12 +326,10 @@ MIT — see [`LICENSE`](./LICENSE).
 **The ByteWorthy boilerplate family** (same multi-tenant lineage)<br/>
 **[Sovra](https://github.com/ByteWorthyLLC/sovra)** *(this repo, MIT)* &nbsp;·&nbsp; [Klienta](https://github.com/ByteWorthyLLC/klienta) *(commercial — agency portals)* &nbsp;·&nbsp; [Clynova](https://github.com/ByteWorthyLLC/clynova) *(commercial — HIPAA-ready healthcare)*
 
-**Open-source companions**<br/>
+**Open-source companions:**
 [honeypot-med](https://github.com/ByteWorthyLLC/honeypot-med) &nbsp;·&nbsp; [byteworthy-defend](https://github.com/ByteWorthyLLC/byteworthy-defend) &nbsp;·&nbsp; [vqol](https://github.com/ByteWorthyLLC/vqol) &nbsp;·&nbsp; [hightimized](https://github.com/ByteWorthyLLC/hightimized) &nbsp;·&nbsp; [outbreaktinder](https://github.com/ByteWorthyLLC/outbreaktinder)
 
-<br/>
-
-[**⚡ Self-host Sovra →**](#-quick-start) &nbsp;·&nbsp; [**☁️ Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed)
+[**Self-host Sovra →**](#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed)
 
 Built by [ByteWorthy](https://byteworthy.io) &nbsp;·&nbsp; [Subscribe for updates](https://byteworthy.io/newsletter)
 
