@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" width="900" height="240">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020817"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#0D1B2E"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#0F2744"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="240" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.06" stroke="#3B82F6" stroke-width="0.5">
+    <line x1="0" y1="40" x2="900" y2="40"/>
+    <line x1="0" y1="80" x2="900" y2="80"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="160" x2="900" y2="160"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="80" y1="0" x2="80" y2="240"/>
+    <line x1="160" y1="0" x2="160" y2="240"/>
+    <line x1="240" y1="0" x2="240" y2="240"/>
+    <line x1="320" y1="0" x2="320" y2="240"/>
+    <line x1="400" y1="0" x2="400" y2="240"/>
+    <line x1="480" y1="0" x2="480" y2="240"/>
+    <line x1="560" y1="0" x2="560" y2="240"/>
+    <line x1="640" y1="0" x2="640" y2="240"/>
+    <line x1="720" y1="0" x2="720" y2="240"/>
+    <line x1="800" y1="0" x2="800" y2="240"/>
+    <line x1="880" y1="0" x2="880" y2="240"/>
+  </g>
+
+  <!-- Glow orbs in background -->
+  <ellipse cx="120" cy="120" rx="80" ry="80" fill="#2563EB" opacity="0.06"/>
+  <ellipse cx="750" cy="100" rx="100" ry="100" fill="#8B5CF6" opacity="0.05"/>
+  <ellipse cx="450" cy="200" rx="120" ry="60" fill="#3B82F6" opacity="0.04"/>
+
+  <!-- Left: Sovra mark / icon -->
+  <rect x="40" y="80" width="64" height="64" rx="12" fill="#0F172A" stroke="#2563EB" stroke-width="1.5" opacity="0.9"/>
+  <!-- S letterform paths -->
+  <path d="M76 95a14 11 0 0 0-12-6H55a9 7 0 0 0 0 14h5v-5H55a2 2 0 0 1 0-4h9a8 6 0 0 1 8 5z" fill="#3B82F6"/>
+  <path d="M57 109h16a7 6 0 0 1 0 11H57v-4h16a2 2 0 0 0 0-3H57z" fill="#3B82F6" opacity="0.75"/>
+  <path d="M55 127a9 8 0 0 0 10 6h8a9 8 0 0 0 8-12h-5a4 3 0 0 1-3 7H64a7 6 0 0 1-5-3z" fill="#3B82F6" opacity="0.5"/>
+  <!-- Glow on icon -->
+  <rect x="40" y="80" width="64" height="64" rx="12" fill="none" stroke="#3B82F6" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Main title -->
+  <text x="124" y="118" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="52" font-weight="800" letter-spacing="-2" fill="#F8FAFC">sovra</text>
+
+  <!-- Blue accent underline -->
+  <rect x="124" y="126" width="200" height="3" rx="1.5" fill="url(#accentGrad)"/>
+
+  <!-- Tagline -->
+  <text x="124" y="154" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#94A3B8" letter-spacing="0.1">Open-source multi-tenant infrastructure for AI products</text>
+
+  <!-- MIT badge -->
+  <rect x="124" y="170" width="52" height="20" rx="10" fill="#14532d"/>
+  <text x="150" y="184" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="700" fill="#4ADE80" text-anchor="middle">MIT</text>
+
+  <!-- Beta badge -->
+  <rect x="184" y="170" width="56" height="20" rx="10" fill="#1e1b4b"/>
+  <text x="212" y="184" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="600" fill="#A5B4FC" text-anchor="middle">PUBLIC BETA</text>
+
+  <!-- Separator line -->
+  <line x1="400" y1="30" x2="400" y2="210" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Right side: Architecture flow diagram -->
+  <!-- Header -->
+  <text x="440" y="55" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="11" font-weight="600" fill="#475569" letter-spacing="1.5">ARCHITECTURE</text>
+
+  <!-- Node: Auth -->
+  <rect x="440" y="65" width="100" height="32" rx="6" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1"/>
+  <text x="462" y="79" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9" fill="#64748B">AUTH</text>
+  <text x="462" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="600" fill="#93C5FD">Supabase</text>
+
+  <!-- Arrow 1 -->
+  <path d="M540 81 L558 81" stroke="#334155" stroke-width="1" fill="none"/>
+  <polygon points="558,78 564,81 558,84" fill="#334155"/>
+
+  <!-- Node: Context -->
+  <rect x="564" y="65" width="100" height="32" rx="6" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1"/>
+  <text x="586" y="79" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9" fill="#64748B">CONTEXT</text>
+  <text x="586" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="600" fill="#93C5FD">Tenant RLS</text>
+
+  <!-- Arrow 2 -->
+  <path d="M664 81 L682 81" stroke="#334155" stroke-width="1" fill="none"/>
+  <polygon points="682,78 688,81 682,84" fill="#334155"/>
+
+  <!-- Node: MCP Registry -->
+  <rect x="688" y="65" width="100" height="32" rx="6" fill="#162032" stroke="#2563EB" stroke-width="1" stroke-opacity="0.6"/>
+  <text x="710" y="79" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9" fill="#60A5FA">MCP</text>
+  <text x="710" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="600" fill="#93C5FD">Tool Registry</text>
+
+  <!-- Central node: Agent Runtime -->
+  <rect x="564" y="118" width="110" height="38" rx="8" fill="#1e2d3e" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="619" y="133" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9" font-weight="700" fill="#60A5FA" text-anchor="middle">AGENT RUNTIME</text>
+  <text x="619" y="148" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="700" fill="#BFDBFE" text-anchor="middle">Go · parallel</text>
+
+  <!-- Arrows from MCP to Runtime -->
+  <path d="M738 97 L738 108 L674 108 L674 118" stroke="#2563EB" stroke-width="1" fill="none" stroke-opacity="0.5" stroke-dasharray="3,2"/>
+  <!-- Context to Runtime -->
+  <path d="M614 97 L614 118" stroke="#334155" stroke-width="1" fill="none" stroke-dasharray="3,2"/>
+
+  <!-- Output nodes row -->
+  <!-- Vector -->
+  <rect x="440" y="170" width="94" height="30" rx="6" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1"/>
+  <text x="487" y="183" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="8" fill="#64748B" text-anchor="middle">VECTOR</text>
+  <text x="487" y="195" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="9" font-weight="600" fill="#93C5FD" text-anchor="middle">pgvector</text>
+
+  <!-- Realtime -->
+  <rect x="546" y="170" width="94" height="30" rx="6" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1"/>
+  <text x="593" y="183" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="8" fill="#64748B" text-anchor="middle">REALTIME</text>
+  <text x="593" y="195" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="9" font-weight="600" fill="#93C5FD" text-anchor="middle">Socket.IO</text>
+
+  <!-- Billing -->
+  <rect x="652" y="170" width="94" height="30" rx="6" fill="url(#nodeGrad)" stroke="#334155" stroke-width="1"/>
+  <text x="699" y="183" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="8" fill="#64748B" text-anchor="middle">BILLING</text>
+  <text x="699" y="195" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="9" font-weight="600" fill="#93C5FD" text-anchor="middle">Stripe metered</text>
+
+  <!-- Arrows from Runtime to outputs -->
+  <path d="M585 156 L487 170" stroke="#1D4ED8" stroke-width="1" fill="none" stroke-opacity="0.6"/>
+  <path d="M619 156 L593 170" stroke="#1D4ED8" stroke-width="1" fill="none" stroke-opacity="0.6"/>
+  <path d="M650 156 L699 170" stroke="#1D4ED8" stroke-width="1" fill="none" stroke-opacity="0.6"/>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="237" width="900" height="3" rx="0" fill="url(#accentGrad)"/>
+</svg>
