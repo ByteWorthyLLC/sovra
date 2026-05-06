@@ -14,7 +14,7 @@
 
 <br/>
 
-**[🚀 Try the demo](https://byteworthy.io/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-cta)** &nbsp;·&nbsp; **[📖 Read the docs](https://byteworthy.io/sovra/docs?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-docs)** &nbsp;·&nbsp; **[⚡ Self-host →](#-quick-start)** &nbsp;·&nbsp; **[☁️ Cloud waitlist →](https://byteworthy.io/sovra/managed)**
+**[🚀 Try the demo](https://byteworthy.io/blueprints/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=hero-cta)** &nbsp;·&nbsp; **[📖 Read the docs](https://byteworthy.io/blueprints/sovra?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=docs)** &nbsp;·&nbsp; **[⚡ Self-host →](#-quick-start)** &nbsp;·&nbsp; **[☁️ Cloud waitlist →](https://byteworthy.io/blueprints/sovra)**
 
 </div>
 
@@ -48,7 +48,7 @@ pnpm dev
 
 Open `http://localhost:3000` · Create your first tenant · Add an MCP tool · Ship agents.
 
-[Self-host guide →](https://byteworthy.io/sovra/docs/self-host) &nbsp;·&nbsp; [Managed (waitlist) →](https://byteworthy.io/sovra/managed)
+[Self-host guide →](https://byteworthy.io/blueprints/sovra) &nbsp;·&nbsp; [Managed (waitlist) →](https://byteworthy.io/blueprints/sovra)
 
 ## Architecture
 
@@ -156,7 +156,7 @@ Sovra core is **open source under MIT** — self-host freely.
 | **Sovra Cloud** (waitlist) | TBD | Managed deployment; SLA; first-class billing dashboard |
 | **Enterprise** | Custom | Custom contracts, SOC 2 path, priority support |
 
-[Join Cloud waitlist →](https://byteworthy.io/sovra/managed) &nbsp;·&nbsp; [**Book a call →**](https://byteworthy.io/book?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=mid-call)
+[Join Cloud waitlist →](https://byteworthy.io/blueprints/sovra) &nbsp;·&nbsp; [**Book a call →**](https://byteworthy.io/book?utm_source=github&utm_medium=readme&utm_campaign=sovra&utm_content=mid-call)
 
 ## Use cases
 
@@ -329,7 +329,7 @@ MIT — see [`LICENSE`](./LICENSE).
 **Open-source companions:**
 [honeypot-med](https://github.com/ByteWorthyLLC/honeypot-med) &nbsp;·&nbsp; [byteworthy-defend](https://github.com/ByteWorthyLLC/byteworthy-defend) &nbsp;·&nbsp; [vqol](https://github.com/ByteWorthyLLC/vqol) &nbsp;·&nbsp; [hightimized](https://github.com/ByteWorthyLLC/hightimized) &nbsp;·&nbsp; [outbreaktinder](https://github.com/ByteWorthyLLC/outbreaktinder)
 
-[**Self-host Sovra →**](#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/sovra/managed)
+[**Self-host Sovra →**](#quick-start) &nbsp;·&nbsp; [**Sovra Cloud waitlist →**](https://byteworthy.io/blueprints/sovra)
 
 Built by [ByteWorthy](https://byteworthy.io) &nbsp;·&nbsp; [Subscribe for updates](https://byteworthy.io/newsletter)
 
