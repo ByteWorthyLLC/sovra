@@ -309,7 +309,7 @@ MIT — see [`LICENSE`](./LICENSE).
   "license": "https://opensource.org/licenses/MIT",
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
   "creator": {"@type": "Organization", "name": "ByteWorthy", "url": "https://byteworthy.io"},
-  "url": "https://byteworthy.io/sovra",
+  "url": "https://byteworthy.io/blueprints/sovra",
   "softwareVersion": "1.0",
   "featureList": ["Multi-tenant auth","MCP tool registry","pgvector search","Per-tenant billing","Real-time agent state","Go agent runtime"],
   "programmingLanguage": ["TypeScript","Go"],
