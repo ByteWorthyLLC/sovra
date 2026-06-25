@@ -80,56 +80,56 @@ describe('middleware', () => {
   })
 
   it('passes through static asset requests without auth check', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/_next/static/chunk.js')
     // Static assets match the exclusion pattern in config.matcher, not middleware itself
     // But if they do reach middleware, they should not be redirected
     mockGetUser.mockResolvedValue({ data: { user: null }, error: null })
-    const response = await middleware(req)
+    const response = await proxy(req)
     // Should not redirect
     expect(response).toBeDefined()
   })
 
   it('allows public routes without authentication', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/auth/login')
     mockGetUser.mockResolvedValue({ data: { user: null }, error: null })
-    const response = await middleware(req) as unknown as { status?: number; redirectUrl?: string }
+    const response = await proxy(req) as unknown as { status?: number; redirectUrl?: string }
     // Should NOT redirect (it's already a public route)
     expect(response.redirectUrl).toBeUndefined()
   })
 
   it('redirects unauthenticated users on protected routes to /auth/login', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/t/acme/dashboard')
     mockGetUser.mockResolvedValue({ data: { user: null }, error: null })
-    const response = await middleware(req) as unknown as { redirectUrl?: string; status?: number }
+    const response = await proxy(req) as unknown as { redirectUrl?: string; status?: number }
     expect(response.redirectUrl).toContain('/auth/login')
   })
 
   it('resolves tenant slug and sets x-tenant-slug header', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/t/acme/dashboard')
     mockResolve.mockReturnValue('acme')
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } }, error: null })
-    const response = await middleware(req) as unknown as { headers: Map<string, string> }
+    const response = await proxy(req) as unknown as { headers: Map<string, string> }
     expect(response.headers.get('x-tenant-slug')).toBe('acme')
   })
 
   it('sets Cache-Control: private, no-store on authenticated responses', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/dashboard')
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } }, error: null })
-    const response = await middleware(req) as unknown as { headers: Map<string, string> }
+    const response = await proxy(req) as unknown as { headers: Map<string, string> }
     expect(response.headers.get('Cache-Control')).toBe('private, no-store')
   })
 
   it('returns JSON 401 for unauthenticated API routes', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/api/documents/search')
     mockGetUser.mockResolvedValue({ data: { user: null }, error: null })
 
-    const response = await middleware(req) as unknown as {
+    const response = await proxy(req) as unknown as {
       status: number
       body: { error: string }
       headers: Map<string, string>
@@ -143,37 +143,37 @@ describe('middleware', () => {
   })
 
   it('redirects authenticated users on /auth/login to /onboarding', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/auth/login')
     // Simulate existing session cookie so middleware checks auth on public route
     req.cookies.set('sb-localhost-auth-token', 'fake-session')
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } }, error: null })
-    const response = await middleware(req) as unknown as { redirectUrl?: string }
+    const response = await proxy(req) as unknown as { redirectUrl?: string }
     expect(response.redirectUrl).toContain('/onboarding')
   })
 
   it('redirects authenticated users on /auth/login to sanitized next path', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/auth/login?next=/t/acme/dashboard')
     req.cookies.set('sb-localhost-auth-token', 'fake-session')
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } }, error: null })
 
-    const response = await middleware(req) as unknown as { redirectUrl?: string }
+    const response = await proxy(req) as unknown as { redirectUrl?: string }
     expect(response.redirectUrl).toContain('/t/acme/dashboard')
   })
 
   it('sanitizes invalid next path for authenticated /auth/login redirects', async () => {
-    const { middleware } = await import('@/middleware')
+    const { proxy } = await import('@/proxy')
     const req = makeRequest('/auth/login?next=https://evil.example')
     req.cookies.set('sb-localhost-auth-token', 'fake-session')
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } }, error: null })
 
-    const response = await middleware(req) as unknown as { redirectUrl?: string }
+    const response = await proxy(req) as unknown as { redirectUrl?: string }
     expect(response.redirectUrl).toContain('/onboarding')
   })
 
-  it('middleware config exports matcher array', async () => {
-    const { config } = await import('@/middleware')
+  it('proxy config exports matcher array', async () => {
+    const { config } = await import('@/proxy')
     expect(Array.isArray(config.matcher)).toBe(true)
     expect(config.matcher.length).toBeGreaterThan(0)
   })

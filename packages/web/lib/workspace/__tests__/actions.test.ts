@@ -79,7 +79,7 @@ describe('createWorkspace', () => {
       conflict_resolution: 'vote',
       compression_enabled: true,
       compression_threshold: 80,
-      agent_ids: ['00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002'],
+      agent_ids: ['00000000-0000-4000-8000-000000000001', '00000000-0000-4000-8000-000000000002'],
     })
 
     expect(supabase.from).toHaveBeenCalledWith('workspace_agents')

@@ -15,7 +15,7 @@ import {
   Terminal,
   Code2,
   Server,
-  Github,
+  GitFork,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -112,7 +112,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="https://github.com/byteworthy/sovra" target="_blank">
                 <Button variant="gradient" size="lg" className="w-full sm:w-auto">
-                  <Github className="mr-2 h-4 w-4" />
+                  <GitFork className="mr-2 h-4 w-4" />
                   Star on GitHub
                 </Button>
               </Link>

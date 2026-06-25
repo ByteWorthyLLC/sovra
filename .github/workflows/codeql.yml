@@ -8,11 +8,30 @@ on:
   schedule:
     - cron: '0 9 1 * *'  # monthly, 1st 09:00 UTC
 
-permissions:
-  contents: read
-  security-events: write
-  actions: read
+permissions: read-all
 
 jobs:
   analyze:
-    uses: byteworthyllc/.github/.github/workflows/reusable-codeql.yml@main
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["javascript-typescript", "go"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@68bde559dea0fdcac2102bfdf6230c5f70eb485e
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@68bde559dea0fdcac2102bfdf6230c5f70eb485e
+        with:
+          category: "/language:${{ matrix.language }}"

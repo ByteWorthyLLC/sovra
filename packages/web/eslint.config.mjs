@@ -29,10 +29,8 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ['tailwind.config.ts'],
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
-    },
+    files: ['tailwind.config.mjs'],
+    rules: {},
   },
 ])
 

@@ -1,4 +1,3 @@
-import type { NextConfig } from 'next'
 import { withSentryConfig } from '@sentry/nextjs'
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -25,7 +24,7 @@ const securityHeaders = [
   },
 ]
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   transpilePackages: ['@sovra/shared'],

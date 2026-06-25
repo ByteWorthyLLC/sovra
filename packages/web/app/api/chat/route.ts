@@ -5,7 +5,7 @@ import { getProvider, initProviders } from '@/lib/ai/registry'
 import { getMcpClient } from '@/lib/mcp/client'
 import { buildAiToolsFromMcp, getAgentTools } from '@/lib/mcp/tool-registry'
 import { getChatLimiter, checkSessionRateLimit, rateLimitResponse } from '@/lib/rate-limit'
-import type { Json } from '@sovra/shared/types/database'
+import type { Database, Json } from '@sovra/shared/types/database'
 
 const TOOL_COSTS: Record<string, number> = {
   web_search: 0.001,
@@ -16,6 +16,8 @@ const TOOL_COSTS: Record<string, number> = {
   semantic_search: 0.0001,
   database_query: 0.0001,
 }
+
+type ToolExecutionInsert = Database['public']['Tables']['tool_executions']['Insert']
 
 export async function POST(req: Request) {
   const supabase = await createSupabaseServerClient()
@@ -112,13 +114,15 @@ export async function POST(req: Request) {
   const hasTools = Object.keys(agentTools).length > 0
 
   try {
-    const result = await streamText({
+    const modelMessages = await convertToModelMessages(
+      messages.map(({ id: _id, ...rest }) => rest),
+      hasTools ? { tools: agentTools } : undefined
+    )
+
+    const result = streamText({
       model,
       system: agent.system_prompt ?? undefined,
-      messages: convertToModelMessages(
-        messages.map(({ id: _id, ...rest }) => rest),
-        hasTools ? { tools: agentTools } : undefined
-      ),
+      messages: modelMessages,
       tools: hasTools ? agentTools : undefined,
       temperature: Number(agent.temperature) || 0.7,
       maxOutputTokens: agent.max_tokens ?? 4096,
@@ -127,6 +131,8 @@ export async function POST(req: Request) {
           .from('agents')
           .update({ status: 'idle' })
           .eq('id', agentId)
+
+        const executionRows: ToolExecutionInsert[] = []
 
         for (const step of steps) {
           const toolCalls = (step.toolCalls ?? []) as Array<{
@@ -143,7 +149,7 @@ export async function POST(req: Request) {
             const toolResult = toolResults.find(
               (r) => r.toolCallId === toolCall.toolCallId
             )
-            await supabase.from('tool_executions').insert({
+            executionRows.push({
               tenant_id: agent.tenant_id,
               agent_id: agentId,
               conversation_id: conversationId,
@@ -158,6 +164,10 @@ export async function POST(req: Request) {
               completed_at: new Date().toISOString(),
             })
           }
+        }
+
+        if (executionRows.length > 0) {
+          await supabase.from('tool_executions').insert(executionRows)
         }
       },
     })

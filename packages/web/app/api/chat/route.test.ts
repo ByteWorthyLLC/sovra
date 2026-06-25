@@ -75,8 +75,8 @@ describe('POST /api/chat', () => {
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } } })
 
     // Supabase .from() chain mock
-    const mockInsert = vi.fn().mockImplementation((row: Record<string, unknown>) => {
-      insertedRows.push(row)
+    const mockInsert = vi.fn().mockImplementation((row: Record<string, unknown> | Record<string, unknown>[]) => {
+      insertedRows.push(...(Array.isArray(row) ? row : [row]))
       return { error: null }
     })
 

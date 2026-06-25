@@ -7,7 +7,7 @@ import { getEmbedLimiter, checkSessionRateLimit, rateLimitResponse } from '@/lib
 
 const embedRequestSchema = z.object({
   content: z.string().min(1, 'Content is required').max(50000, 'Content exceeds 50000 character limit'),
-  metadata: z.record(z.unknown()).optional().default({}),
+  metadata: z.record(z.string(), z.unknown()).optional().default({}),
   agentId: z.string().uuid().optional(),
 })
 

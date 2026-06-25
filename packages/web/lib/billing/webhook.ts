@@ -2,6 +2,20 @@ import type Stripe from 'stripe'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { getStripe } from './client'
 
+function stripeTimestampToIso(timestamp: number | null | undefined): string | null {
+  return timestamp ? new Date(timestamp * 1000).toISOString() : null
+}
+
+function getSubscriptionPeriodEnd(subscription: Stripe.Subscription): string | null {
+  return stripeTimestampToIso(subscription.items.data[0]?.current_period_end)
+}
+
+function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
+  const subscription = invoice.parent?.subscription_details?.subscription
+  if (!subscription) return null
+  return typeof subscription === 'string' ? subscription : subscription.id
+}
+
 export function verifyWebhookSignature(
   rawBody: string | Buffer,
   signature: string,
@@ -37,9 +51,7 @@ export async function handleWebhookEvent(
         .from('subscriptions')
         .update({
           status: sub.status === 'active' ? 'active' : sub.status,
-          current_period_end: sub.current_period_end
-            ? new Date(sub.current_period_end * 1000).toISOString()
-            : null,
+          current_period_end: getSubscriptionPeriodEnd(sub),
         })
         .eq('stripe_subscription_id', sub.id)
       break
@@ -74,11 +86,12 @@ export async function handleWebhookEvent(
 
     case 'invoice.payment_failed': {
       const invoice = event.data.object as Stripe.Invoice
-      if (invoice.subscription) {
+      const subscriptionId = getInvoiceSubscriptionId(invoice)
+      if (subscriptionId) {
         await supabase
           .from('subscriptions')
           .update({ status: 'past_due' })
-          .eq('stripe_subscription_id', String(invoice.subscription))
+          .eq('stripe_subscription_id', subscriptionId)
       }
       break
     }

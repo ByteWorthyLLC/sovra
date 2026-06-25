@@ -30,18 +30,3 @@ updates:
         update-types: ["minor", "patch"]
       development:
         dependency-type: "development"
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-      day: "monday"
-      time: "06:00"
-      timezone: "America/New_York"
-    labels: ["dependencies", "pip", "auto-merge"]
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-    open-pull-requests-limit: 10
-    groups:
-      python-deps:
-        update-types: ["minor", "patch"]

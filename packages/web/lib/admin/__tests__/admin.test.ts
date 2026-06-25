@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-// server-only is stubbed via vitest.config.ts alias (__mocks__/server-only.ts)
+// server-only is stubbed via vitest config alias (__mocks__/server-only.ts)
 // so we can import server modules directly in tests
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────

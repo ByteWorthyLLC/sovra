@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Bot, ArrowLeft, BookOpen, Github, Terminal, ExternalLink } from 'lucide-react'
+import { Bot, ArrowLeft, BookOpen, GitPullRequest, Terminal, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
@@ -22,7 +22,7 @@ const guides = [
     href: 'https://github.com/byteworthy/sovra#architecture',
   },
   {
-    icon: Github,
+    icon: GitPullRequest,
     title: 'Contributing',
     description: 'Set up your development environment and submit your first pull request.',
     href: 'https://github.com/byteworthy/sovra/blob/main/CONTRIBUTING.md',

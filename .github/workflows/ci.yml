@@ -6,11 +6,12 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: read
+permissions: read-all
 
 jobs:
   ci:
-    uses: byteworthyllc/.github/.github/workflows/reusable-ci.yml@main
+    permissions:
+      contents: read
+    uses: byteworthyllc/.github/.github/workflows/reusable-ci.yml@ff712b79b7139b35f2475928db2c1dd0c85f7477
     with:
       stack: both

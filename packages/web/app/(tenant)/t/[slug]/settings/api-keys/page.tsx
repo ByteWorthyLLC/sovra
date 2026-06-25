@@ -13,21 +13,21 @@ export default function ApiKeysPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchKeys()
-  }, [])
-
-  async function fetchKeys() {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/keys')
-      if (res.ok) {
-        const data = await res.json() as { keys: ApiKeyData[] }
-        setKeys(data.keys)
+    async function fetchKeys() {
+      setLoading(true)
+      try {
+        const res = await fetch('/api/keys')
+        if (res.ok) {
+          const data = await res.json() as { keys: ApiKeyData[] }
+          setKeys(data.keys)
+        }
+      } finally {
+        setLoading(false)
       }
-    } finally {
-      setLoading(false)
     }
-  }
+
+    void fetchKeys()
+  }, [])
 
   function handleCreated(newKey: ApiKeyData) {
     // Add optimistically -- raw_key is stripped from list responses but the
